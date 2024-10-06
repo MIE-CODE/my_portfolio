@@ -1,0 +1,187 @@
+.d-flex {
+  display: flex;
+}
+
+.d-inline-flex {
+  display: inline-flex;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.justify-content-space-between {
+  justify-content: space-between;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.align-items-flex-end {
+  align-items: flex-end;
+}
+
+.padding-left-space-1 {
+  padding-left: $space-1;
+}
+
+.padding-right-space-1 {
+  padding-right: $space-1;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-row-reverse {
+  flex-direction: row-reverse;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-direction-column {
+  flex-direction: column;
+}
+
+.flex-column-reverse {
+  flex-direction: column-reverse;
+}
+
+.gap {
+  gap: var(--gap, 1rem);
+}
+
+.gap-1 {
+  gap: 0.5rem;
+}
+
+.gap-2 {
+  gap: 1rem;
+}
+
+.r-gap {
+  row-gap: var(--gap, 1rem);
+}
+
+.c-gap {
+  column-gap: var(--gap, 1rem);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.container {
+  width: 100%;
+  margin-inline: auto;
+
+  @media screen and (min-width: 1200px) {
+    width: 1140px !important;
+    padding: unset !important;
+  }
+  @media screen and (min-width: 1400px) {
+    width: 1320px !important;
+    padding: unset !important;
+  }
+}
+
+.sr-only {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  position: fixed;
+  left: -100vw;
+}
+
+.white-space-nowrap {
+  white-space: nowrap;
+}
+
+.grid {
+  display: grid;
+}
+
+.text-transform-capitalize {
+  text-transform: capitalize;
+}
+
+.mt-1 {
+  margin-top: 0.5rem;
+}
+
+.mt-2 {
+  margin-top: 1rem;
+}
+
+.px-1 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.p-0 {
+  padding: 0;
+}
+
+.pt-1 {
+  padding-top: 0.5rem;
+}
+
+.p-1 {
+  padding: 0.5rem;
+}
+
+.mt-3 {
+  margin-top: 1.5rem;
+}
+
+.mt-4 {
+  margin-top: 2rem;
+}
+
+@media screen and (min-width: 768px) {
+  .md-align-items-center {
+    align-items: center;
+  }
+  .md-justify-content-space-between {
+    justify-content: space-between;
+  }
+  .md-flex-direction-row {
+    flex-direction: row;
+  }
+}
+
+.error-cell {
+  background-color: #fce9e9;
+  color: #ca1b1b;
+}
+
+.jexcel_dropdown .jdropdown-container,
+.jexcel_dropdown .jdropdown-content {
+  background-color: #ffffff;
+}
+
+.jexcel_dropdown .jdropdown-close {
+  display: none;
+}
+
+.jexcel_dropdown .jdropdown-content {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.jexcel_dropdown .jdropdown-item:hover,
+.jexcel_dropdown .jdropdown-selected,
+.jexcel_dropdown .jdropdown-cursor {
+  background-color: #dcdcdc;
+}
+
+.jdropdown-item {
+  padding: 0.5rem;
+}

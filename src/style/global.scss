@@ -1,0 +1,9 @@
+@import "./core/overwrite";
+@import "./core/variables";
+@import "./core/util";
+
+//components
+@import "./components/navbar";
+@import "./components//modal";
+//pages
+@import "./pages/home.scss";
