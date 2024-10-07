@@ -35,7 +35,12 @@ function Navbar(props: { isOpen: (event: boolean) => void }) {
           <ul className="navlist">
             <NavList />
           </ul>
-          <button className="navlist__button">Contact Me</button>
+          <button
+            onClick={() => (window.location.href = "https://wa.link/ztm32r")}
+            className="navlist__button"
+          >
+            Contact Me
+          </button>
         </div>
 
         <motion.button

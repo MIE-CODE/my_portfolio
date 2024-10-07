@@ -44,19 +44,19 @@ export const Projects = () => {
     },
     {
       img: "",
+      skills: ["Vuejs", "Javascript", "Html", "Css"],
+      tittle: "Todo App",
+      description:
+        "Portfolio app, built with Next.js, showcases my skills as a frontend and mobile developer. It highlights my expertise in technologies like React, TypeScript, JavaScript, and Flutter, along with my ability to manage code using Git.",
+      link: "https://todo-app-vuejs-chi.vercel.app/",
+      githubLink: "https://github.com/MIE-CODE/Todo-App-vuejs",
+    },
+    {
+      img: "",
       skills: ["React", "Tailwindcss"],
       tittle: "Image Galllery",
       description:
         "image gallery application using Next.js, offering fast performance and server-side rendering for optimal image loading. The app features an intuitive drag-and-drop functionality, allowing users to easily organize and interact with their image collections, providing a smooth and dynamic user experience.",
-      link: "",
-      githubLink: "",
-    },
-    {
-      img: "",
-      skills: ["Nextjs", "Sass", "Framer-motion"],
-      tittle: "Portfolio",
-      description:
-        "Portfolio app, built with Next.js, showcases my skills as a frontend and mobile developer. It highlights my expertise in technologies like React, TypeScript, JavaScript, and Flutter, along with my ability to manage code using Git.",
       link: "",
       githubLink: "",
     },
