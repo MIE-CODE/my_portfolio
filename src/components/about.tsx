@@ -41,7 +41,7 @@ export const About = () => {
           {"<Solutions-Oriented Developer>"}
         </motion.p>
         <p className="info-hero-md">
-          software developer with over +2 years of practical experience in web
+          software developer with over +3 years of practical experience in web
           and mobile development
         </p>
       </motion.div>
