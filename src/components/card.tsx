@@ -5,11 +5,11 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import card from "../images/card.png";
 import { DownloadIcon, GithubIcon } from "../svg";
 type AppsData = {
-  img: string;
+  img: StaticImageData;
   skills: string[];
   tittle: string;
   description: string;

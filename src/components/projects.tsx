@@ -9,7 +9,7 @@ export const Projects = () => {
 
   const appsData = [
     {
-      img: "",
+      img: ecommerce,
       skills: ["flutter", "Dart", "C++"],
       tittle: "E-commerce",
       description:
@@ -19,7 +19,7 @@ export const Projects = () => {
       githubLink: "github",
     },
     {
-      img: "",
+      img: ecommerce,
       skills: ["flutter", "Dart", "C++"],
       tittle: "Coffee maker",
       description: "",
@@ -27,7 +27,7 @@ export const Projects = () => {
       githubLink: "",
     },
     {
-      img: "",
+      img: ecommerce,
       skills: ["flutter", "Dart", "C++"],
       tittle: "Geo time app",
       description: "",
@@ -55,7 +55,7 @@ export const Projects = () => {
       githubLink: "https://github.com/MIE-CODE/Todo-App-vuejs",
     },
     {
-      img: "",
+      img: ecommerce,
       skills: ["React", "Tailwindcss"],
       tittle: "Image Galllery",
       description:
