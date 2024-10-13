@@ -55,6 +55,7 @@ export const Card = (props: {
           <Image
             className="projects-card-image"
             src={props.appsData?.img || card}
+            height={194}
             alt="image"
           />
 

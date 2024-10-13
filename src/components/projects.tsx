@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { Card } from "./card";
 import { AnimatePresence, motion } from "framer-motion";
+import todoApp from "../images/todoapp.png";
+import currenttime from "../images/currenttime.png";
+import ecommerce from "../images/ecommerce.png";
 export const Projects = () => {
   const [apps, setApps] = useState(false);
 
@@ -34,20 +37,20 @@ export const Projects = () => {
   ];
   const websitesData = [
     {
-      img: require("../images/card.png"),
-      skills: ["Nextjs", "Sass"],
+      img: ecommerce,
+      skills: ["Reactjs", "Taiwindcss"],
       tittle: "E-commerce",
       description:
         "I built a modern e-commerce application using React for efficient state management, Tailwind CSS for responsive and customizable styling, and Framer Motion to add smooth animations and interactive user experiences. The app offers a seamless shopping experience with dynamic transitions and a visually engaging interface.",
-      link: "live",
+      link: "https://e-commerce-site-five-psi.vercel.app/",
       githubLink: "github",
     },
     {
-      img: "",
-      skills: ["Vuejs", "Javascript", "Html", "Css"],
+      img: todoApp,
+      skills: ["Vuejs", "Javascript", "Taiwindcss"],
       tittle: "Todo App",
       description:
-        "Portfolio app, built with Next.js, showcases my skills as a frontend and mobile developer. It highlights my expertise in technologies like React, TypeScript, JavaScript, and Flutter, along with my ability to manage code using Git.",
+        "This app is built with Vue.js, JavaScript, HTML, and CSS to deliver a seamless and interactive user experience. Leveraging Vue.js for its reactive components, the app is optimized for performance and ease of use. HTML is used to structure the content, while CSS ensures a clean, responsive design. The combination of these technologies enables a dynamic, intuitive interface, making the app both user-friendly and highly efficient.",
       link: "https://todo-app-vuejs-chi.vercel.app/",
       githubLink: "https://github.com/MIE-CODE/Todo-App-vuejs",
     },
@@ -55,6 +58,15 @@ export const Projects = () => {
       img: "",
       skills: ["React", "Tailwindcss"],
       tittle: "Image Galllery",
+      description:
+        "image gallery application using Next.js, offering fast performance and server-side rendering for optimal image loading. The app features an intuitive drag-and-drop functionality, allowing users to easily organize and interact with their image collections, providing a smooth and dynamic user experience.",
+      link: "",
+      githubLink: "",
+    },
+    {
+      img: currenttime,
+      skills: ["Javascript", "HTML", "Css"],
+      tittle: "Current time",
       description:
         "image gallery application using Next.js, offering fast performance and server-side rendering for optimal image loading. The app features an intuitive drag-and-drop functionality, allowing users to easily organize and interact with their image collections, providing a smooth and dynamic user experience.",
       link: "",
