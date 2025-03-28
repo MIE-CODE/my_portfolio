@@ -8,6 +8,7 @@ import {
 import Image, { StaticImageData } from "next/image";
 import card from "../images/card.png";
 import { DownloadIcon, GithubIcon } from "../svg";
+import Link from "next/link";
 type AppsData = {
   img: StaticImageData;
   skills: string[];
@@ -70,7 +71,13 @@ export const Card = (props: {
           <div className="projects-card-info-description">
             <p className="projects-card-info-lg">{props.appsData?.tittle}</p>
             <p className="projects-card-info-md">
-              {props.appsData?.description}
+              {props?.appsData?.description &&
+              props?.appsData?.description.length > 20
+                ? props?.appsData?.description.slice(0, 100)
+                : props?.appsData?.description}{" "}
+              {props?.appsData?.description && (
+                <Link href="#">See more...</Link>
+              )}
             </p>
           </div>
         </div>

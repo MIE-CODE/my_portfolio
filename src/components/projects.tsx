@@ -60,8 +60,8 @@ export const Projects = () => {
       tittle: "Image Galllery",
       description:
         "image gallery application using Next.js, offering fast performance and server-side rendering for optimal image loading. The app features an intuitive drag-and-drop functionality, allowing users to easily organize and interact with their image collections, providing a smooth and dynamic user experience.",
-      link: "",
-      githubLink: "",
+      link: "https://mie-gallery.vercel.app/",
+      githubLink: "https://github.com/MIE-CODE/image-gallery",
     },
     {
       img: currenttime,
