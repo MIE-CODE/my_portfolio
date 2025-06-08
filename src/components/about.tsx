@@ -69,7 +69,9 @@ export const About = () => {
               className="info-about-l__cont"
             >
               {i === 0 && (
-                <p className="info-about-l-lg">I am Menyaga Israel :</p>
+                <p className="info-about-l-lg">
+                  I&apos;m menyaga israel :<br />
+                </p>
               )}
               <motion.span
                 initial={{ opacity: 1 }}

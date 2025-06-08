@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Dev MIE Portfolio",
+  title: "MIE Portfolio",
   description:
     "This portfolio app, built with Next.js, showcases my skills as a frontend and mobile developer. It highlights my expertise in technologies like React, TypeScript, JavaScript, and Flutter, along with my ability to manage code using Git. The app demonstrates both my design and development abilities, featuring projects that span web and mobile platforms, with some backend work using Express.js.",
 };
