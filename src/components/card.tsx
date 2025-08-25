@@ -12,7 +12,7 @@ import Link from "next/link";
 type AppsData = {
   img: StaticImageData;
   skills: string[];
-  tittle: string;
+  title: string;
   description: string;
   link: string;
   githubLink: string;
@@ -69,7 +69,7 @@ export const Card = (props: {
           </p>
 
           <div className="projects-card-info-description">
-            <p className="projects-card-info-lg">{props.appsData?.tittle}</p>
+            <p className="projects-card-info-lg">{props.appsData?.title}</p>
             <p className="projects-card-info-md">
               {props?.appsData?.description &&
               props?.appsData?.description.length > 20

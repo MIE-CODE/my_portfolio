@@ -377,7 +377,7 @@
 
     &-cont {
       display: grid;
-      grid-template-columns: repeat(3, auto);
+      grid-template-columns: repeat(1, auto);
       justify-content: center;
       width: 100%;
       padding: 0 22px 0 22px;
@@ -386,9 +386,7 @@
       //   flex-direction: row;
       //   gap: 10px;
       // }
-      @media screen and (min-width: 350px) {
-        grid-template-columns: repeat(1, auto);
-      }
+
       @media screen and (min-width: 500px) {
         grid-template-columns: repeat(2, auto);
         justify-content: space-between;

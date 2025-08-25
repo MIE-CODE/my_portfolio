@@ -4,6 +4,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import todoApp from "../images/todoapp.png";
 import currenttime from "../images/currenttime.png";
 import ecommerce from "../images/ecommerce.png";
+import trueperk from "../images/trueperk.png";
+import sparkpay from "../images/sparkpay.png";
+import flyverge from "../images/flyverge.png";
 export const Projects = () => {
   const [apps, setApps] = useState(false);
 
@@ -11,7 +14,7 @@ export const Projects = () => {
     {
       img: ecommerce,
       skills: ["flutter", "Dart", "C++"],
-      tittle: "E-commerce",
+      title: "E-commerce",
       description:
         " Our AI technology generates pre-filled answers to grant  application questions based on your business information, saving  you time and ensuring comprehensive responses.",
       //download link
@@ -21,7 +24,7 @@ export const Projects = () => {
     {
       img: ecommerce,
       skills: ["flutter", "Dart", "C++"],
-      tittle: "Coffee maker",
+      title: "Coffee maker",
       description: "",
       link: "",
       githubLink: "",
@@ -29,7 +32,7 @@ export const Projects = () => {
     {
       img: ecommerce,
       skills: ["flutter", "Dart", "C++"],
-      tittle: "Geo time app",
+      title: "Geo time app",
       description: "",
       link: "",
       githubLink: "",
@@ -37,9 +40,36 @@ export const Projects = () => {
   ];
   const websitesData = [
     {
+      img: trueperk,
+      skills: ["Nuxtjs", "Vuejs", "TypeScript", "Tailwindcss"],
+      title: "Trueperk",
+      description:
+        "Trueperk is an AI-driven app that recognizes employee milestones, manages perks, tracks progress, and enables seamless reward redemption.",
+      link: "https://app.trueperk.co/",
+      githubLink: "#",
+    },
+    {
+      img: sparkpay,
+      skills: ["Nextjs", "React", "TypeScript", "scss"],
+      title: "SparkPay",
+      description:
+        "SparkPay is a payroll software as a service solution geared towards bringing ease to the process of processing, creating and running payrolls.",
+      link: "https://www.sparkpayhq.com/",
+      githubLink: "#",
+    },
+    {
+      img: flyverge,
+      skills: ["Nextjs", "React", "TypeScript", "tailwindcss"],
+      title: "Fly-verge",
+      description:
+        "A seamless flight booking app with real-time updates and smooth user experience.",
+      link: "https://flyverge.vercel.app/",
+      githubLink: "https://github.com/MIE-CODE/flyverge",
+    },
+    {
       img: ecommerce,
       skills: ["Reactjs", "Taiwindcss"],
-      tittle: "E-commerce",
+      title: "E-commerce",
       description:
         "I built a modern e-commerce application using React for efficient state management, Tailwind CSS for responsive and customizable styling, and Framer Motion to add smooth animations and interactive user experiences. The app offers a seamless shopping experience with dynamic transitions and a visually engaging interface.",
       link: "https://e-commerce-site-five-psi.vercel.app/",
@@ -48,7 +78,7 @@ export const Projects = () => {
     {
       img: todoApp,
       skills: ["Vuejs", "Javascript", "Taiwindcss"],
-      tittle: "Todo App",
+      title: "Todo App",
       description:
         "This app is built with Vue.js, JavaScript, HTML, and CSS to deliver a seamless and interactive user experience. Leveraging Vue.js for its reactive components, the app is optimized for performance and ease of use. HTML is used to structure the content, while CSS ensures a clean, responsive design. The combination of these technologies enables a dynamic, intuitive interface, making the app both user-friendly and highly efficient.",
       link: "https://todo-app-vuejs-chi.vercel.app/",
@@ -57,7 +87,7 @@ export const Projects = () => {
     {
       img: ecommerce,
       skills: ["React", "Tailwindcss"],
-      tittle: "Image Galllery",
+      title: "Image Galllery",
       description:
         "image gallery application using Next.js, offering fast performance and server-side rendering for optimal image loading. The app features an intuitive drag-and-drop functionality, allowing users to easily organize and interact with their image collections, providing a smooth and dynamic user experience.",
       link: "https://mie-gallery.vercel.app/",
@@ -66,11 +96,11 @@ export const Projects = () => {
     {
       img: currenttime,
       skills: ["Javascript", "HTML", "Css"],
-      tittle: "Current time",
+      title: "Current time",
       description:
         "image gallery application using Next.js, offering fast performance and server-side rendering for optimal image loading. The app features an intuitive drag-and-drop functionality, allowing users to easily organize and interact with their image collections, providing a smooth and dynamic user experience.",
-      link: "",
-      githubLink: "",
+      link: "https://current-time-five.vercel.app/",
+      githubLink: "https://github.com/MIE-CODE/current-time",
     },
   ];
 
