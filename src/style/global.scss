@@ -4,6 +4,25 @@
 
 //components
 @import "./components/navbar";
-@import "./components//modal";
+@import "./components/modal";
 //pages
 @import "./pages/home.scss";
+
+// Skip to content link for accessibility
+.skip-to-content {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  z-index: 1000;
+  padding: 1rem;
+  background: #009c9e;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 0 0 4px 0;
+  transition: top 0.3s;
+
+  &:focus {
+    top: 0;
+  }
+}

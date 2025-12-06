@@ -1,72 +1,173 @@
 .navbar {
-  display: none;
   position: sticky;
-  top: 23px;
-  z-index: 99;
-  backdrop-filter: blur(50px);
+  top: 1.5rem;
+  z-index: 100;
+  backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(2, 0, 14, 0.7);
+  border: 1px solid rgba(0, 231, 234, 0.1);
   display: flex;
   align-items: center;
-  border-radius: 30px;
+  border-radius: 50px;
   justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  margin: 0 auto 2rem;
+  max-width: 1200px;
+  width: calc(100% - 2rem);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  
+  @media screen and (min-width: 768px) {
+    padding: 1rem 2rem;
+  }
+  
+  &__logo {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+  
   &-text {
-    font-weight: 500;
-    font-size: 24px;
-    line-height: 31.49px;
+    font-weight: 700;
+    font-size: 1.5rem;
+    line-height: 1.2;
     color: #00e7ea;
-    margin-left: 12px;
+    margin: 0;
+    letter-spacing: -0.02em;
+    font-family: "JetBrains Mono", monospace;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      color: #00f0f3;
+      text-shadow: 0 0 10px rgba(0, 231, 234, 0.5);
+    }
   }
 }
+
 .navlist {
   display: none;
-  // display: flex;
   align-items: center;
-  gap: 19px;
-  font-size: 14px;
-  line-height: 16.8px;
-  font-weight: 400;
-  color: #d3feff;
+  gap: 2rem;
+  font-size: 0.9375rem;
+  line-height: 1.2;
+  font-weight: 500;
+  
   @media screen and (min-width: 768px) {
     display: flex;
   }
+  
   &-cont {
     display: flex;
     align-items: center;
-    gap: 111px;
+    gap: 3rem;
+    
+    @media screen and (min-width: 1024px) {
+      gap: 4rem;
+    }
   }
+  
   &__button {
     display: none;
     cursor: pointer;
-    background-color: transparent;
-    border: 0.5px solid #00e7ea;
-    border-radius: 30px;
-    width: 163px;
-    height: 48px;
-    font-size: 16px;
-    line-height: 19.2px;
+    background: linear-gradient(135deg, rgba(0, 156, 158, 0.2) 0%, rgba(0, 231, 234, 0.2) 100%);
+    border: 1px solid rgba(0, 231, 234, 0.3);
+    border-radius: 50px;
+    min-width: 140px;
+    height: 44px;
+    padding: 0 1.5rem;
+    font-size: 0.9375rem;
+    line-height: 1.2;
     color: #00e7ea;
-    transition: background-color 0.3s ease-in-out;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    
     @media screen and (min-width: 768px) {
       display: block;
     }
+    
+    &:hover {
+      background: linear-gradient(135deg, rgba(0, 156, 158, 0.3) 0%, rgba(0, 231, 234, 0.3) 100%);
+      border-color: rgba(0, 231, 234, 0.5);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 231, 234, 0.2);
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+    
+    &:focus-visible {
+      outline: 2px solid #00e7ea;
+      outline-offset: 2px;
+    }
   }
-  &__button:hover {
-    background-color: #00e6ea1e;
-  }
-  &__button:active {
-    background-color: transparent;
-  }
+  
   &-item {
-    cursor: pointer;
     a {
-      padding-bottom: 8px;
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      padding: 0.5rem 0;
+      position: relative;
+      transition: color 0.3s ease;
+      
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: #00e7ea;
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+      }
+      
+      &:hover {
+        color: #00e7ea;
+        
+        &::after {
+          transform: scaleX(1);
+        }
+      }
     }
-    a:hover {
-      border-bottom: 1px solid #00e6eaae;
+    
+    .active {
+      color: #00e7ea;
+      
+      &::after {
+        transform: scaleX(1);
+      }
     }
   }
-  &-item .active {
-    transition: border-bottom 1s ease-in-out;
-    border-bottom: 1px solid #00e7ea;
+}
+
+.modal-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(0, 231, 234, 0.1);
+  border: 1px solid rgba(0, 231, 234, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
+  
+  &:hover {
+    background: rgba(0, 231, 234, 0.2);
+    border-color: rgba(0, 231, 234, 0.4);
+  }
+  
+  &:focus-visible {
+    outline: 2px solid #00e7ea;
+    outline-offset: 2px;
+  }
+  
+  svg {
+    width: 24px;
+    height: 24px;
     color: #00e7ea;
   }
 }

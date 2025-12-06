@@ -1,58 +1,54 @@
-import { Link } from "react-scroll";
+"use client";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-export const NavList = (props: { isOpen?: (event: boolean) => void }) => {
+export const NavList = (props: { 
+  isOpen?: (event: boolean) => void;
+  pathname?: string;
+}) => {
+  const routerPathname = usePathname();
+  const pathname = props.pathname || routerPathname;
+  
+  const navItems = [
+    { href: "/", label: "Home" },
+    { href: "/about", label: "About" },
+    { href: "/services", label: "Services" },
+    { href: "/experience", label: "Experience" },
+    { href: "/projects", label: "Projects" },
+    { href: "/blog", label: "Blog" },
+    { href: "/contact", label: "Contact" },
+  ];
+
+  const handleClick = () => {
+    if (props.isOpen) {
+      props.isOpen(false);
+    }
+  };
+
   return (
     <>
-      <li className="navlist-item">
-        <Link
-          to="hero"
-          spy={true}
-          smooth={true}
-          offset={-175}
-          duration={500}
-          onClick={() => props.isOpen && props.isOpen(false)}
-        >
-          Home
-        </Link>
-      </li>
-
-      <li className="navlist-item">
-        <Link
-          to="about"
-          spy={true}
-          smooth={true}
-          offset={-100}
-          duration={500}
-          onClick={() => props.isOpen && props.isOpen(false)}
-        >
-          About Me
-        </Link>
-      </li>
-      <li className="navlist-item">
-        <Link
-          to="skills"
-          spy={true}
-          smooth={true}
-          offset={-150}
-          duration={500}
-          onClick={() => props.isOpen && props.isOpen(false)}
-        >
-          Skills
-        </Link>
-      </li>
-
-      <li className="navlist-item">
-        <Link
-          to="project"
-          spy={true}
-          smooth={true}
-          offset={-90}
-          duration={500}
-          onClick={() => props.isOpen && props.isOpen(false)}
-        >
-          Projects
-        </Link>
-      </li>
+      {navItems.map((item) => {
+        const isActive = pathname === item.href;
+        return (
+          <li key={item.href} className="navlist-item">
+            <Link
+              href={item.href}
+              onClick={handleClick}
+              className={`text-xs md:text-sm font-medium transition-all duration-300 relative pb-1.5 ${
+                isActive
+                  ? "text-primary-600 dark:text-primary-400"
+                  : "text-muted-600 dark:text-muted-400 hover:text-primary-600 dark:hover:text-primary-400"
+              }`}
+            >
+              {item.label}
+              {isActive && (
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary-500 dark:bg-primary-400 rounded-full" />
+              )}
+              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary-500 dark:bg-primary-400 rounded-full scale-x-0 transition-transform duration-300 hover:scale-x-100" />
+            </Link>
+          </li>
+        );
+      })}
     </>
   );
 };

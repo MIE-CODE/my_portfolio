@@ -1,14 +1,9 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+"use client";
 import {
-  CssIcon,
   ExpressIcon,
   FlutterIcon,
   FramerMotionIcon,
-  GithubIcon,
-  GsapIcon,
-  HtmlIcon,
   JavaScriptIcon,
-  MjmlIcon,
   MongoDBIcon,
   NestIcon,
   NextIcon,
@@ -17,145 +12,117 @@ import {
   TailwindcssIcon,
   TypeScriptIcon,
 } from "../svg";
+import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 
 export const Stack = () => {
-  const { scrollYProgress } = useScroll();
-  const scale = useTransform(scrollYProgress, [0.8, 1], [0.9, 1]);
-  const FadeIn = {
-    initial: { opacity: 0, y: 100 },
-    animate: (index: number) => ({
-      opacity: [0, 0.5, 0.8, 1],
-      y: 0,
-      transition: {
-        delay: 0.05 * index,
-        duration: 0.5,
-        times: [0, 0.25, 0.7, 1],
-      },
-    }),
-  };
+  const { ref, isVisible } = useIntersectionObserver();
+  
   const stacks = [
     {
       icon: <NextIcon />,
-      name: "Nextjs",
-      info: "( Prefessional ) in nextjs knowledge and advanced development, providing (SSR), (SSG), and API routes out of the box.",
+      name: "Next.js",
+      level: "Expert",
+      xp: 9500,
     },
     {
       icon: <ReactIcon />,
-      name: "Reactjs",
-      info: "( Prefessional )  react knowledge for building user interfaces, especially single-page applications (SPA).",
+      name: "React",
+      level: "Expert",
+      xp: 9200,
     },
     {
       icon: <TypeScriptIcon />,
       name: "TypeScript",
-      info: "( Prefessional ) in typescript that adds static typing to the language, reducing bugs and improving code maintainability.",
+      level: "Expert",
+      xp: 8800,
     },
-
     {
       icon: <JavaScriptIcon />,
       name: "JavaScript",
-      info: "( Prefessional ) in the core language of the web, used for adding interactive behavior to my websites.",
+      level: "Expert",
+      xp: 9000,
+    },
+    {
+      icon: <TailwindcssIcon />,
+      name: "Tailwind",
+      level: "Expert",
+      xp: 8500,
     },
     {
       icon: <SassIcon />,
       name: "SASS",
-      info: "( Prefessional ) in sass, a CSS preprocessor that allows for variables, nested rules, and reusable styles (mixins).",
-    },
-    {
-      icon: <TailwindcssIcon />,
-      name: "Tailwindcss",
-      info: "( Prefessional ) in tailwind, CSS framework that allows for quick and consistent UI design by composing classes directly in HTML.",
+      level: "Expert",
+      xp: 8000,
     },
     {
       icon: <FramerMotionIcon />,
-      name: "Framer-motion",
-      info: "( Prefessional ) in framer-motion a React-based animation library that makes creating smooth, interactive animations simple.",
-    },
-    {
-      icon: <GsapIcon />,
-      name: "Gsap",
-      info: "( Intermediate ) in gsap a powerful JavaScript library for creating high-performance animations.",
-    },
-    {
-      icon: <GithubIcon />,
-      name: "Git & Github",
-      info: "( Prefessional ) in github a version control platform where you can manage projects, track changes, and collaborate on code using Git.",
-    },
-    {
-      icon: <HtmlIcon />,
-      name: "HTML",
-      info: "( Prefessional ) in HTML a Fundamental to structuring web pages, ensuring accessible and responsive designs.",
-    },
-    {
-      icon: <CssIcon />,
-      name: "Css",
-      info: "( Prefessional ) in HTML a Fundamental to style pages, ensuring accessible and visually appealing responsive designs.",
-    },
-    {
-      icon: <MjmlIcon />,
-      name: "Mjml",
-      info: "( Prefessional ) in MJML a markup language designed to build responsive email templates that work across different email clients and devices.",
+      name: "Framer Motion",
+      level: "Expert",
+      xp: 7800,
     },
     {
       icon: <FlutterIcon />,
-      name: "flutter",
-      info: "( Intermediate ) in Flutter a UI toolkit for building natively compiled mobile, web, and desktop applications from a single codebase.",
+      name: "Flutter",
+      level: "Advanced",
+      xp: 6500,
     },
     {
       icon: <MongoDBIcon />,
-      name: "MongoDb",
-      info: "( Intermediate ) in MongoDb a NoSQL database that stores data in JSON-like documents, providing flexibility and scalability for projects with unstructured data.",
+      name: "MongoDB",
+      level: "Advanced",
+      xp: 7000,
     },
     {
       icon: <ExpressIcon />,
       name: "Express",
-      info: "( Intermediate ) in Express a lightweight web framework for Node.js, useful for building RESTful APIs and web applications.",
+      level: "Advanced",
+      xp: 6800,
     },
     {
       icon: <NestIcon />,
-      name: "Nestjs",
-      info: "( Intermediate ) in Nestjs a framework built on top of Express.js (or Fastify) for developing scalable, efficient, and well-structured server-side applications.",
+      name: "NestJS",
+      level: "Advanced",
+      xp: 6000,
     },
   ];
+  
   return (
-    <>
-      <div id="skills" className="skills">
-        <motion.p
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 2 }}
-          className="info-hero-lg"
-        >{`< My Stacks >`}</motion.p>
+    <section id="skills" className="section-padding scroll-mt-24 text-center" aria-labelledby="skills-heading">
+      <h2
+        id="skills-heading"
+        className="text-2xl sm:text-3xl font-bold gradient-text font-mono mb-8"
+      >
+        {"< Tech Stack >"}
+      </h2>
 
-        <div className="info-stack">
-          {stacks.map((stack, i) => (
-            <>
-              <motion.div
-                initial="initial"
-                whileInView="animate"
-                viewport={{ once: true }}
-                variants={FadeIn}
-                className="info-stack-cont"
-                key={i}
-                custom={i}
-                style={{ scale }}
-              >
-                <div>{stack.icon}</div>
-
-                <div className="info-stack-description">
-                  <p
-                    style={{ textAlign: "left" }}
-                    className="info-stack-description-lg"
-                  >
-                    {stack.name}
-                  </p>
-
-                  <p className="info-stack-description-md">{stack.info}</p>
-                </div>
-              </motion.div>
-            </>
-          ))}
-        </div>
+      <div ref={ref as React.RefObject<HTMLDivElement>} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+        {stacks.map((stack, i) => (
+          <article
+            key={i}
+            className={`game-card p-4 text-center hover:border-primary-400 dark:hover:border-primary-600 transition-all duration-300 ${
+              isVisible
+                ? `animate-fade-in-up opacity-100`
+                : "opacity-0"
+            }`}
+            style={{
+              animationDelay: `${i * 0.05}s`,
+            }}
+            role="listitem"
+          >
+            <div className="text-primary-600 dark:text-primary-400 mb-3 [&>svg]:w-10 [&>svg]:h-12 mx-auto">{stack.icon}</div>
+            <div className="flex flex-col gap-1">
+              <h3 className="text-sm font-semibold text-muted-900 dark:text-muted-50">
+                {stack.name}
+              </h3>
+              <div className="flex items-center justify-center gap-2">
+                <span className="text-xs text-primary-600 dark:text-primary-400 font-mono">{stack.level}</span>
+                <span className="text-xs text-muted-500 dark:text-muted-500">•</span>
+                <span className="text-xs text-muted-600 dark:text-muted-400">{stack.xp} XP</span>
+              </div>
+            </div>
+          </article>
+        ))}
       </div>
-    </>
+    </section>
   );
 };

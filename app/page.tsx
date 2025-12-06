@@ -1,91 +1,106 @@
 "use client";
-import "../src/style/global.scss";
-import { motion } from "framer-motion";
-import Navbar from "@/src/components/Navbar";
-import { About } from "@/src/components/about";
 import { Reveal } from "@/src/animation/Reveal";
-import { Footer } from "@/src/components/footer";
-import { Projects } from "@/src/components/projects";
 import { useTypewriter, Cursor } from "react-simple-typewriter";
 import { Stack } from "@/src/components/stack";
-import { Modal } from "@/src/components/modal";
-import { useState } from "react";
-import Head from "next/head";
+import Image from "next/image";
+import keyboardImage from "@/src/images/keyboard.png";
+import { Layout } from "@/src/components/Layout";
+import { XPBar } from "@/src/components/XPBar";
+import { Achievements } from "@/src/components/Achievements";
+import { Stats } from "@/src/components/Stats";
 
 export default function Home() {
-  const [modal, setModal] = useState(false);
   const text = useTypewriter({
-    words: ["Developer", "Engineer"],
+    words: ["Developer", "Engineer", "Architect", "Creator"],
     loop: true,
+    typeSpeed: 80,
+    deleteSpeed: 50,
   });
 
   return (
-    <>
-      <Head>
-        <title> Home - Portfolio </title>
-      </Head>
-      <main className="home">
-        <div className="home__content">
-          <Navbar isOpen={setModal} />
-          <Modal isOpen={setModal} modal={modal} />
-          <div id="hero" className="home__main">
-            <motion.div
-              variants={{
-                hidden: { opacity: 0, y: 100 },
-                visible: { opacity: 1, y: 0 },
-              }}
-              initial="hidden"
-              animate="visible"
-              transition={{ duration: 0.3, delay: 0.2 }}
-              className="home__main-description"
-            >
-              <div className="home__main-description-hero">
-                <p className="home__main-description-text-lg ">
-                  Software <span>{text[0]}</span> <Cursor cursorBlinking />{" "}
-                </p>
+    <Layout>
+      <main id="main-content" className="min-h-screen" role="main">
+        <div className="container-custom">
+          {/* Hero Section with Game UI */}
+          <section 
+            id="hero" 
+            className="min-h-[calc(100vh-180px)] flex flex-col items-center justify-center text-center gap-8 pt-24 pb-12" 
+            aria-label="Hero section"
+          >
+            {/* XP Bar */}
+            <div className="w-full max-w-md mb-4 animate-fade-in">
+              <XPBar currentXP={7500} maxXP={10000} level={15} />
+            </div>
 
-                <p className="home__main-description-text-md">
-                  ( Nextjs React Flutter MongoDB Node.js Express.js )
+            {/* Main Title */}
+            <div className="flex flex-col gap-4 max-w-3xl animate-fade-in-up animate-delay-200">
+              <div className="flex flex-col gap-2">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
+                  <span className="text-muted-900 dark:text-muted-50">Software </span>
+                  <span className="gradient-text inline-block">
+                    {text[0]}
+                  </span>
+                  <Cursor cursorBlinking />
+                </h1>
+                <p className="text-xs sm:text-sm font-mono text-muted-600 dark:text-muted-400 tracking-wider">
+                  Next.js • React • Flutter • MongoDB • Node.js • Express.js
                 </p>
               </div>
-
-              <p className="home__main-description-text-md">
-                Specializing in React and Leveraging cut-edge technologies to
-                bring web projects to life.
+              <p className="text-sm sm:text-base text-muted-700 dark:text-muted-300 max-w-xl mx-auto leading-relaxed">
+                Crafting digital experiences with cutting-edge technology
               </p>
-            </motion.div>
-            <div className="home__main-action">
+            </div>
+            
+            {/* Stats */}
+            <div className="w-full max-w-2xl mt-4 animate-fade-in-up animate-delay-400">
+              <Stats />
+            </div>
+            
+            {/* Action Buttons */}
+            <nav className="flex items-center justify-center flex-wrap gap-4 mt-6 animate-fade-in-up animate-delay-500" aria-label="Primary actions">
               <Reveal>
                 <a
                   href="mailto:israelvictor126@gmail.com"
-                  className="home__main-action-email"
+                  className="btn-primary text-sm"
+                  aria-label="Send email to Menya Israel"
                 >
-                  Email Me
+                  📧 Contact Me
                 </a>
               </Reveal>
               <Reveal>
                 <a
-                  href="https://drive.google.com/file/d/1cJHvUAPL2De4rYQ0ugDi69WVfdrLjnap/view?usp=sharing"
-                  className="home__main-action-cv"
+                  href="https://docs.google.com/document/d/17Wq0_KFeW19I54rMaAtq2JQZG5jNki0BuaNH_4wRwEI/edit?usp=sharing"
+                  className="btn-secondary text-sm"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="View resume in new tab"
                 >
-                  My Resume
+                  📄 Resume
                 </a>
               </Reveal>
+            </nav>
+            
+            {/* Achievements */}
+            <div className="w-full max-w-2xl mt-8 animate-fade-in-up animate-delay-600">
+              <p className="text-xs text-muted-500 dark:text-muted-500 mb-3 font-mono">ACHIEVEMENTS</p>
+              <Achievements />
             </div>
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ duration: 2, delay: 0.25 }}
-              className="home__main-image"
-            />
-          </div>
+            
+            {/* Keyboard Image */}
+            <div className="w-full max-w-md h-32 md:h-40 relative opacity-60 mt-8 animate-fade-in animate-delay-600" aria-hidden="true">
+              <Image
+                src={keyboardImage}
+                alt=""
+                fill
+                className="object-contain drop-shadow-2xl"
+                priority
+              />
+            </div>
+          </section>
 
-          <About />
           <Stack />
-          <Projects />
         </div>
-        <Footer />
       </main>
-    </>
+    </Layout>
   );
 }

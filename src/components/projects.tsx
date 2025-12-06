@@ -1,154 +1,138 @@
+"use client";
 import { useState } from "react";
 import { Card } from "./card";
-import { AnimatePresence, motion } from "framer-motion";
-import todoApp from "../images/todoapp.png";
-import currenttime from "../images/currenttime.png";
-import ecommerce from "../images/ecommerce.png";
-import trueperk from "../images/trueperk.png";
-import sparkpay from "../images/sparkpay.png";
-import flyverge from "../images/flyverge.png";
+import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
+
 export const Projects = () => {
   const [apps, setApps] = useState(false);
+  const { ref, isVisible } = useIntersectionObserver();
 
   const appsData = [
     {
-      img: ecommerce,
-      skills: ["flutter", "Dart", "C++"],
-      title: "E-commerce",
-      description:
-        " Our AI technology generates pre-filled answers to grant  application questions based on your business information, saving  you time and ensuring comprehensive responses.",
-      //download link
+      img: require("../images/ecommerce.png"),
+      skills: ["flutter", "Dart"],
+      title: "E-commerce App",
+      description: "Mobile e-commerce application with Flutter",
       link: "download",
       githubLink: "github",
     },
     {
-      img: ecommerce,
-      skills: ["flutter", "Dart", "C++"],
-      title: "Coffee maker",
-      description: "",
+      img: require("../images/ecommerce.png"),
+      skills: ["flutter", "Dart"],
+      title: "Coffee Maker",
+      description: "Smart coffee maker control app",
       link: "",
       githubLink: "",
     },
     {
-      img: ecommerce,
-      skills: ["flutter", "Dart", "C++"],
-      title: "Geo time app",
-      description: "",
+      img: require("../images/ecommerce.png"),
+      skills: ["flutter", "Dart"],
+      title: "Geo Time App",
+      description: "Time zone tracking application",
       link: "",
       githubLink: "",
     },
   ];
+  
   const websitesData = [
     {
-      img: trueperk,
+      img: require("../images/trueperk.png"),
       skills: ["Nuxtjs", "Vuejs", "TypeScript", "Tailwindcss"],
       title: "Trueperk",
-      description:
-        "Trueperk is an AI-driven app that recognizes employee milestones, manages perks, tracks progress, and enables seamless reward redemption.",
+      description: "AI-driven employee recognition and rewards platform",
       link: "https://app.trueperk.co/",
       githubLink: "#",
     },
     {
-      img: sparkpay,
-      skills: ["Nextjs", "React", "TypeScript", "scss"],
+      img: require("../images/sparkpay.png"),
+      skills: ["Nextjs", "React", "TypeScript"],
       title: "SparkPay",
-      description:
-        "SparkPay is a payroll software as a service solution geared towards bringing ease to the process of processing, creating and running payrolls.",
+      description: "Payroll software as a service solution",
       link: "https://www.sparkpayhq.com/",
       githubLink: "#",
     },
     {
-      img: flyverge,
-      skills: ["Nextjs", "React", "TypeScript", "tailwindcss"],
-      title: "Fly-verge",
-      description:
-        "A seamless flight booking app with real-time updates and smooth user experience.",
+      img: require("../images/flyverge.png"),
+      skills: ["Nextjs", "React", "TypeScript"],
+      title: "Flyverge",
+      description: "Seamless flight booking app with real-time updates",
       link: "https://flyverge.vercel.app/",
       githubLink: "https://github.com/MIE-CODE/flyverge",
     },
     {
-      img: ecommerce,
-      skills: ["Reactjs", "Taiwindcss"],
+      img: require("../images/ecommerce.png"),
+      skills: ["Reactjs", "Tailwindcss"],
       title: "E-commerce",
-      description:
-        "I built a modern e-commerce application using React for efficient state management, Tailwind CSS for responsive and customizable styling, and Framer Motion to add smooth animations and interactive user experiences. The app offers a seamless shopping experience with dynamic transitions and a visually engaging interface.",
+      description: "Modern e-commerce application with React and Tailwind CSS",
       link: "https://e-commerce-site-five-psi.vercel.app/",
       githubLink: "github",
     },
     {
-      img: todoApp,
-      skills: ["Vuejs", "Javascript", "Taiwindcss"],
+      img: require("../images/todoapp.png"),
+      skills: ["Vuejs", "Javascript"],
       title: "Todo App",
-      description:
-        "This app is built with Vue.js, JavaScript, HTML, and CSS to deliver a seamless and interactive user experience. Leveraging Vue.js for its reactive components, the app is optimized for performance and ease of use. HTML is used to structure the content, while CSS ensures a clean, responsive design. The combination of these technologies enables a dynamic, intuitive interface, making the app both user-friendly and highly efficient.",
+      description: "Interactive todo application built with Vue.js",
       link: "https://todo-app-vuejs-chi.vercel.app/",
       githubLink: "https://github.com/MIE-CODE/Todo-App-vuejs",
     },
     {
-      img: ecommerce,
-      skills: ["React", "Tailwindcss"],
-      title: "Image Galllery",
-      description:
-        "image gallery application using Next.js, offering fast performance and server-side rendering for optimal image loading. The app features an intuitive drag-and-drop functionality, allowing users to easily organize and interact with their image collections, providing a smooth and dynamic user experience.",
-      link: "https://mie-gallery.vercel.app/",
-      githubLink: "https://github.com/MIE-CODE/image-gallery",
-    },
-    {
-      img: currenttime,
-      skills: ["Javascript", "HTML", "Css"],
-      title: "Current time",
-      description:
-        "image gallery application using Next.js, offering fast performance and server-side rendering for optimal image loading. The app features an intuitive drag-and-drop functionality, allowing users to easily organize and interact with their image collections, providing a smooth and dynamic user experience.",
+      img: require("../images/currenttime.png"),
+      skills: ["Javascript", "HTML", "CSS"],
+      title: "Current Time",
+      description: "Real-time clock application",
       link: "https://current-time-five.vercel.app/",
       githubLink: "https://github.com/MIE-CODE/current-time",
     },
   ];
 
   return (
-    <div id="project" className="projects">
-      <div className="projects-hero">
-        <div className="projects-hero-cont">
-          <motion.p
-            initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 2 }}
-            className="info-hero-lg"
-          >{`< My Dev Projects >`}</motion.p>
-          <p className="info-hero-lg-md">
-            software developer with over +3 years of practical experience in web
-            and mobile development
-          </p>
-        </div>
-        <div className="projects-action">
-          <button
-            className={`projects-action-apps ${apps ? "active" : ""} `}
-            onClick={() => setApps(true)}
-          >
-            Apps
-          </button>
-          <button
-            className={`projects-action-web ${apps ? "" : "active"} `}
-            onClick={() => setApps(false)}
-          >
-            Websites
-          </button>
-        </div>
+    <section id="project" className="section-padding scroll-mt-24" aria-labelledby="projects-heading">
+      <div ref={ref as React.RefObject<HTMLDivElement>} className="flex flex-col gap-6 max-w-3xl mx-auto mb-10">
+        <h2
+          id="projects-heading"
+          className={`text-2xl sm:text-3xl font-bold gradient-text font-mono text-center ${
+            isVisible ? "animate-fade-in-up opacity-100" : "opacity-0"
+          }`}
+        >
+          {"< Projects >"}
+        </h2>
+        <p className="text-sm text-muted-600 dark:text-muted-400 text-center">
+          Showcasing innovative web and mobile applications
+        </p>
       </div>
-      <AnimatePresence mode="wait" onExitComplete={() => setApps(!apps)}>
-        {apps ? (
-          <div className="projects-card-cont">
-            {appsData.map((item, i) => (
+      
+      <div className="flex items-center justify-center gap-3 bg-muted-100 dark:bg-muted-800/60 p-1.5 rounded-lg border border-muted-200 dark:border-muted-700 w-fit mx-auto mb-8">
+        <button
+          className={`px-5 py-2 rounded-md font-medium text-xs transition-all duration-300 ${
+            apps
+              ? "bg-gradient-primary text-white shadow-lg shadow-primary-500/20"
+              : "bg-transparent text-muted-600 dark:text-muted-400 hover:text-muted-900 dark:hover:text-muted-50"
+          }`}
+          onClick={() => setApps(true)}
+        >
+          📱 Apps
+        </button>
+        <button
+          className={`px-5 py-2 rounded-md font-medium text-xs transition-all duration-300 ${
+            !apps
+              ? "bg-gradient-primary text-white shadow-lg shadow-primary-500/20"
+              : "bg-transparent text-muted-600 dark:text-muted-400 hover:text-muted-900 dark:hover:text-muted-50"
+          }`}
+          onClick={() => setApps(false)}
+        >
+          🌐 Websites
+        </button>
+      </div>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" role="list">
+        {apps
+          ? appsData.map((item, i) => (
               <Card app appsData={item} index={i} key={i} />
-            ))}
-          </div>
-        ) : (
-          <div className="projects-card-cont">
-            {websitesData.map((web, i) => (
+            ))
+          : websitesData.map((web, i) => (
               <Card appsData={web} index={i} key={i} />
             ))}
-          </div>
-        )}
-      </AnimatePresence>
-    </div>
+      </div>
+    </section>
   );
 };
