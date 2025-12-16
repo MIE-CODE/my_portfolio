@@ -14,11 +14,11 @@ export const Achievements = () => {
   const { ref, isVisible } = useIntersectionObserver();
 
   return (
-    <div ref={ref as React.RefObject<HTMLDivElement>} className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+    <div ref={ref as React.RefObject<HTMLDivElement>} className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
       {achievements.map((achievement, index) => (
         <div
           key={achievement.id}
-          className={`achievement-badge ${
+          className={`achievement-badge px-2 sm:px-3 py-1 sm:py-1.5 ${
             achievement.unlocked
               ? "text-accent-700 dark:text-accent-300 border-accent-300 dark:border-accent-700"
               : "opacity-40 grayscale"
@@ -31,8 +31,8 @@ export const Achievements = () => {
             animationDelay: `${index * 0.1}s`,
           }}
         >
-          <span className="text-lg">{achievement.icon}</span>
-          <span className="text-xs">{achievement.name}</span>
+          <span className="text-base sm:text-lg">{achievement.icon}</span>
+          <span className="text-[10px] xs:text-xs">{achievement.name}</span>
         </div>
       ))}
     </div>

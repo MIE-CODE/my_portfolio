@@ -4,7 +4,7 @@ import { Layout } from "@/src/components/Layout";
 
 export const metadata: Metadata = {
   title: "About - Menya Israel",
-    description: "Learn about Menya Israel, a full-stack developer with 5+ years of experience in web and mobile development.",
+    description: "Learn about Menya Israel, a professional full-stack developer with 3+ years of comprehensive experience in web and mobile development. Discover expertise in React, Next.js, TypeScript, React Native, and modern software architecture.",
 };
 
 export default function AboutPage() {

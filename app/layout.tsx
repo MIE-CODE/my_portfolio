@@ -5,17 +5,17 @@ import { ThemeProviderWrapper } from "../src/components/ThemeProviderWrapper";
 
 export const metadata: Metadata = {
   title: {
-    default: "Menya Israel - Full Stack Developer | React, Next.js, Flutter Expert",
+    default: "Menya Israel - Full Stack Developer | React, Next.js, React Native Expert",
     template: "%s | Menya Israel Portfolio",
   },
   description:
-    "Professional full-stack developer specializing in React, Next.js, TypeScript, and Flutter. Over 5+ years of experience building scalable web and mobile applications. View my portfolio of projects including Trueperk, SparkPay, and Flyverge.",
+    "Professional full-stack developer with 3+ years of experience specializing in React, Next.js, TypeScript, and React Native. Expert in building scalable, high-performance web and mobile applications. Explore my portfolio featuring innovative projects including Trueperk, SparkPay, Flyverge, and interactive 3D experiences.",
   keywords: [
     "Full Stack Developer",
     "React Developer",
     "Next.js Developer",
     "TypeScript Developer",
-    "Flutter Developer",
+    "React Native Developer",
     "Web Developer",
     "Mobile Developer",
     "Frontend Developer",
@@ -33,9 +33,9 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://your-portfolio-domain.com", // Update with your actual domain
-    title: "Menya Israel - Full Stack Developer | React, Next.js, Flutter Expert",
+    title: "Menya Israel - Full Stack Developer | React, Next.js, React Native Expert",
     description:
-      "Professional full-stack developer specializing in React, Next.js, TypeScript, and Flutter. Over 5+ years of experience building scalable web and mobile applications.",
+      "Professional full-stack developer with 3+ years of experience specializing in React, Next.js, TypeScript, and React Native. Expert in building scalable, high-performance web and mobile applications with modern architecture and best practices.",
     siteName: "Menya Israel Portfolio",
     images: [
       {
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Menya Israel - Full Stack Developer",
     description:
-      "Professional full-stack developer specializing in React, Next.js, TypeScript, and Flutter.",
+      "Professional full-stack developer specializing in React, Next.js, TypeScript, and React Native.",
     images: ["/og-image.jpg"], // You should add a Twitter image
     creator: "@yourtwitterhandle", // Update with your Twitter handle
   },
@@ -99,7 +99,7 @@ export default function RootLayout({
               name: "Menya Israel",
               jobTitle: "Full Stack Developer",
               description:
-                "Professional full-stack developer specializing in React, Next.js, TypeScript, and Flutter",
+                "Professional full-stack developer specializing in React, Next.js, TypeScript, and React Native",
               email: "israelvictor126@gmail.com",
               url: "https://your-portfolio-domain.com", // Update with your actual domain
               sameAs: [
@@ -111,7 +111,7 @@ export default function RootLayout({
                 "Next.js",
                 "TypeScript",
                 "JavaScript",
-                "Flutter",
+                "React Native",
                 "Node.js",
                 "Express.js",
                 "MongoDB",

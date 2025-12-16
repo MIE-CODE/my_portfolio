@@ -1,7 +1,7 @@
 "use client";
 import {
   ExpressIcon,
-  FlutterIcon,
+  ReactNativeIcon,
   FramerMotionIcon,
   JavaScriptIcon,
   MongoDBIcon,
@@ -12,10 +12,13 @@ import {
   TailwindcssIcon,
   TypeScriptIcon,
 } from "../svg";
-import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
+import { useGSAP } from "../hooks/useGSAP";
+import { useRef } from "react";
+import gsap from "gsap";
 
 export const Stack = () => {
-  const { ref, isVisible } = useIntersectionObserver();
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
   
   const stacks = [
     {
@@ -61,8 +64,8 @@ export const Stack = () => {
       xp: 7800,
     },
     {
-      icon: <FlutterIcon />,
-      name: "Flutter",
+      icon: <ReactNativeIcon />,
+      name: "React Native",
       level: "Advanced",
       xp: 6500,
     },
@@ -86,38 +89,76 @@ export const Stack = () => {
     },
   ];
   
+  useGSAP(() => {
+    // Title animation
+    if (titleRef.current) {
+      gsap.fromTo(
+        titleRef.current,
+        { opacity: 0, y: -30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power3.out",
+        }
+      );
+    }
+
+    // Cards stagger animation
+    if (cardsRef.current) {
+      const cards = cardsRef.current.children;
+      gsap.fromTo(
+        cards,
+        {
+          opacity: 0,
+          y: 50,
+          scale: 0.8,
+          rotation: -5,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          rotation: 0,
+          duration: 0.8,
+          stagger: 0.05,
+          delay: 0.3,
+          ease: "back.out(1.7)",
+        }
+      );
+    }
+  }, []);
+  
   return (
-    <section id="skills" className="section-padding scroll-mt-24 text-center" aria-labelledby="skills-heading">
+    <section 
+      id="skills" 
+      className="section-padding scroll-mt-24 text-center" 
+      aria-labelledby="skills-heading"
+    >
       <h2
+        ref={titleRef}
         id="skills-heading"
         className="text-2xl sm:text-3xl font-bold gradient-text font-mono mb-8"
       >
         {"< Tech Stack >"}
       </h2>
 
-      <div ref={ref as React.RefObject<HTMLDivElement>} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+      <div ref={cardsRef} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3 sm:gap-4">
         {stacks.map((stack, i) => (
           <article
             key={i}
-            className={`game-card p-4 text-center hover:border-primary-400 dark:hover:border-primary-600 transition-all duration-300 ${
-              isVisible
-                ? `animate-fade-in-up opacity-100`
-                : "opacity-0"
-            }`}
-            style={{
-              animationDelay: `${i * 0.05}s`,
-            }}
+            className="game-card p-3 sm:p-4 text-center hover:border-primary-400 dark:hover:border-primary-600 transition-all duration-300"
             role="listitem"
           >
-            <div className="text-primary-600 dark:text-primary-400 mb-3 [&>svg]:w-10 [&>svg]:h-12 mx-auto">{stack.icon}</div>
+            <div className="text-primary-600 dark:text-primary-400 mb-2 sm:mb-3 [&>svg]:w-8 [&>svg]:h-10 sm:[&>svg]:w-10 sm:[&>svg]:h-12 mx-auto">{stack.icon}</div>
             <div className="flex flex-col gap-1">
-              <h3 className="text-sm font-semibold text-muted-900 dark:text-muted-50">
+              <h3 className="text-xs sm:text-sm font-semibold text-muted-900 dark:text-muted-50">
                 {stack.name}
               </h3>
-              <div className="flex items-center justify-center gap-2">
-                <span className="text-xs text-primary-600 dark:text-primary-400 font-mono">{stack.level}</span>
-                <span className="text-xs text-muted-500 dark:text-muted-500">•</span>
-                <span className="text-xs text-muted-600 dark:text-muted-400">{stack.xp} XP</span>
+              <div className="flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap">
+                <span className="text-[10px] xs:text-xs text-primary-600 dark:text-primary-400 font-mono">{stack.level}</span>
+                <span className="text-[10px] xs:text-xs text-muted-500 dark:text-muted-500">•</span>
+                <span className="text-[10px] xs:text-xs text-muted-600 dark:text-muted-400">{stack.xp} XP</span>
               </div>
             </div>
           </article>

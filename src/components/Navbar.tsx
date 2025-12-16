@@ -8,28 +8,29 @@ import { ThemeToggle } from "./ThemeToggle";
 
 function Navbar(props: { isOpen: (event: boolean) => void }) {
   const pathname = usePathname();
+
   const handleContactClick = () => {
     window.open("https://wa.link/ztm32r", "_blank", "noopener,noreferrer");
   };
 
   return (
     <header
-      className="sticky top-4 z-50 glass-effect rounded-xl px-4 py-2.5 md:px-6 md:py-3 flex items-center justify-between max-w-7xl mx-auto w-[calc(100%-2rem)] animate-slide-down"
+      className="sticky top-4 z-50 glass-effect rounded-xl px-3 py-2 sm:px-4 sm:py-2.5 md:px-4 md:py-2.5 lg:px-6 lg:py-3 flex items-center justify-between max-w-7xl mx-auto w-[calc(100%-1.5rem)] sm:w-[calc(100%-2rem)]"
       role="banner"
     >
-      <Link href="/" className="flex items-center animate-fade-in" aria-label="Home - Menya Israel Portfolio">
-        <span className="text-xl font-bold gradient-text font-mono tracking-tight">
+      <Link href="/" className="flex items-center animate-fade-in flex-shrink-0" aria-label="Home - Menya Israel Portfolio">
+        <span className="text-lg sm:text-xl font-bold gradient-text font-mono tracking-tight">
           MIE
         </span>
       </Link>
-      <nav className="hidden md:flex items-center gap-6 lg:gap-8" aria-label="Main navigation">
-        <ul className="flex items-center gap-6" role="list">
+      <nav className="hidden md:flex items-center gap-3 lg:gap-6 xl:gap-8" aria-label="Main navigation">
+        <ul className="flex items-center gap-3 lg:gap-4 xl:gap-6" role="list">
           <NavList pathname={pathname} />
         </ul>
         <ThemeToggle />
         <button
           onClick={handleContactClick}
-          className="btn-secondary min-w-[120px] h-9 text-xs"
+          className="btn-secondary min-w-[90px] md:min-w-[100px] lg:min-w-[120px] h-8 md:h-9 text-[10px] md:text-xs flex-shrink-0"
           aria-label="Contact via WhatsApp"
         >
           Contact

@@ -39,9 +39,9 @@ export const ContactForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="p-8 bg-white/60 dark:bg-muted-800/60 border border-muted-200 dark:border-muted-700 rounded-3xl backdrop-blur-sm animate-fade-in-up"
+      className="p-4 sm:p-6 md:p-8 bg-white/60 dark:bg-muted-800/60 border border-muted-200 dark:border-muted-700 rounded-2xl sm:rounded-3xl backdrop-blur-sm animate-fade-in-up"
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-muted-900 dark:text-muted-50 mb-2">
             Name
@@ -53,7 +53,7 @@ export const ContactForm = () => {
             value={formData.name}
             onChange={handleChange}
             required
-            className="w-full px-4 py-3 bg-white dark:bg-muted-800 border border-muted-200 dark:border-muted-700 rounded-xl text-muted-900 dark:text-muted-50 placeholder-muted-400 dark:placeholder-muted-600 focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-500/20 dark:focus:ring-primary-400/20 transition-all duration-300"
+            className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base bg-white dark:bg-muted-800 border border-muted-200 dark:border-muted-700 rounded-lg sm:rounded-xl text-muted-900 dark:text-muted-50 placeholder-muted-400 dark:placeholder-muted-600 focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-500/20 dark:focus:ring-primary-400/20 transition-all duration-300"
             placeholder="Your name"
           />
         </div>
@@ -68,14 +68,14 @@ export const ContactForm = () => {
             value={formData.email}
             onChange={handleChange}
             required
-            className="w-full px-4 py-3 bg-white dark:bg-muted-800 border border-muted-200 dark:border-muted-700 rounded-xl text-muted-900 dark:text-muted-50 placeholder-muted-400 dark:placeholder-muted-600 focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-500/20 dark:focus:ring-primary-400/20 transition-all duration-300"
+            className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base bg-white dark:bg-muted-800 border border-muted-200 dark:border-muted-700 rounded-lg sm:rounded-xl text-muted-900 dark:text-muted-50 placeholder-muted-400 dark:placeholder-muted-600 focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-500/20 dark:focus:ring-primary-400/20 transition-all duration-300"
             placeholder="your.email@example.com"
           />
         </div>
       </div>
       
-      <div className="mb-6">
-        <label htmlFor="subject" className="block text-sm font-medium text-muted-900 dark:text-muted-50 mb-2">
+      <div className="mb-4 sm:mb-6">
+        <label htmlFor="subject" className="block text-xs sm:text-sm font-medium text-muted-900 dark:text-muted-50 mb-2">
           Subject
         </label>
         <input
@@ -85,13 +85,13 @@ export const ContactForm = () => {
           value={formData.subject}
           onChange={handleChange}
           required
-          className="w-full px-4 py-3 bg-white dark:bg-muted-800 border border-muted-200 dark:border-muted-700 rounded-xl text-muted-900 dark:text-muted-50 placeholder-muted-400 dark:placeholder-muted-600 focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-500/20 dark:focus:ring-primary-400/20 transition-all duration-300"
+          className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base bg-white dark:bg-muted-800 border border-muted-200 dark:border-muted-700 rounded-lg sm:rounded-xl text-muted-900 dark:text-muted-50 placeholder-muted-400 dark:placeholder-muted-600 focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-500/20 dark:focus:ring-primary-400/20 transition-all duration-300"
           placeholder="What's this about?"
         />
       </div>
       
-      <div className="mb-6">
-        <label htmlFor="message" className="block text-sm font-medium text-muted-900 dark:text-muted-50 mb-2">
+      <div className="mb-4 sm:mb-6">
+        <label htmlFor="message" className="block text-xs sm:text-sm font-medium text-muted-900 dark:text-muted-50 mb-2">
           Message
         </label>
         <textarea
@@ -100,8 +100,8 @@ export const ContactForm = () => {
           value={formData.message}
           onChange={handleChange}
           required
-          rows={6}
-          className="w-full px-4 py-3 bg-white dark:bg-muted-800 border border-muted-200 dark:border-muted-700 rounded-xl text-muted-900 dark:text-muted-50 placeholder-muted-400 dark:placeholder-muted-600 focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-500/20 dark:focus:ring-primary-400/20 transition-all duration-300 resize-none"
+          rows={5}
+          className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base bg-white dark:bg-muted-800 border border-muted-200 dark:border-muted-700 rounded-lg sm:rounded-xl text-muted-900 dark:text-muted-50 placeholder-muted-400 dark:placeholder-muted-600 focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-500/20 dark:focus:ring-primary-400/20 transition-all duration-300 resize-none"
           placeholder="Tell me about your project..."
         />
       </div>
@@ -120,9 +120,9 @@ export const ContactForm = () => {
         </p>
       )}
       
-      <div className="mt-8 pt-8 border-t border-muted-200 dark:border-muted-700">
-        <p className="text-sm text-muted-600 dark:text-muted-400 text-center mb-4">Or reach out directly:</p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-muted-200 dark:border-muted-700">
+        <p className="text-xs sm:text-sm text-muted-600 dark:text-muted-400 text-center mb-3 sm:mb-4">Or reach out directly:</p>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 text-sm sm:text-base">
           <a
             href="mailto:israelvictor126@gmail.com"
             className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-300"

@@ -2,7 +2,9 @@
 import Image, { StaticImageData } from "next/image";
 import card from "../images/card.png";
 import { GithubIcon } from "../svg";
-import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
+import { CanvasPreview } from "./conva_preview";
+import { useRef, useEffect } from "react";
+import gsap from "gsap";
 
 type Project = {
   id: number;
@@ -15,27 +17,45 @@ type Project = {
   category: "Frontend" | "Backend";
 };
 
-export const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
-  const { ref, isVisible } = useIntersectionObserver();
+export const ProjectCard = ({
+  project,
+  index,
+}: {
+  project: Project;
+  index: number;
+}) => {
+  const cardRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!cardRef.current) return;
+
+    // Simple fade in animation
+    gsap.fromTo(
+      cardRef.current,
+      {
+        opacity: 0,
+      },
+      {
+        opacity: 1,
+        duration: 0.5,
+        delay: index * 0.05,
+        ease: "power2.out",
+      }
+    );
+  }, [index]);
 
   return (
     <article
-      ref={ref as React.RefObject<HTMLElement>}
-      className={`game-card p-4 flex flex-col gap-4 h-full hover:border-primary-400 dark:hover:border-primary-600 transition-all duration-300 ${
-        isVisible
-          ? `animate-fade-in-up opacity-100`
-          : "opacity-0"
-      }`}
-      style={{
-        animationDelay: `${index * 0.08}s`,
-      }}
+      ref={cardRef}
+      className="game-card p-4 flex flex-col gap-4 h-full hover:border-primary-400 dark:hover:border-primary-600 transition-all duration-300"
       role="listitem"
     >
       <div className="flex flex-col gap-3 flex-1">
         {/* Project Image */}
-          <div className="relative w-full h-40 rounded-lg overflow-hidden bg-muted-100 dark:bg-muted-800 border border-muted-200 dark:border-muted-700">
+        <div className="relative w-full h-40 sm:h-48 rounded-lg overflow-hidden bg-muted-100 dark:bg-muted-800 border border-muted-200 dark:border-muted-700">
+          <CanvasPreview imageSrc={project.link} />
           <Image
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover hidden"
             src={project.img || card}
             height={160}
             width={300}
@@ -69,8 +89,10 @@ export const ProjectCard = ({ project, index }: { project: Project; index: numbe
 
         {/* Project Info */}
         <div className="flex flex-col gap-1.5 flex-1">
-          <h3 className="text-base font-semibold text-muted-900 dark:text-muted-50">{project.title}</h3>
-          <p className="text-xs text-muted-600 dark:text-muted-400 leading-relaxed line-clamp-3">
+          <h3 className="text-sm sm:text-base font-semibold text-muted-900 dark:text-muted-50">
+            {project.title}
+          </h3>
+          <p className="text-[11px] xs:text-xs text-muted-600 dark:text-muted-400 leading-relaxed line-clamp-3">
             {project.description}
           </p>
         </div>

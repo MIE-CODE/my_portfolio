@@ -4,16 +4,16 @@ import { Layout } from "@/src/components/Layout";
 
 export const metadata: Metadata = {
   title: "Contact Me - Let's Work Together",
-  description: "Get in touch with Menya Israel for web development projects, collaborations, or just to say hello.",
+  description: "Connect with Menya Israel, a professional full-stack developer with 3+ years of experience. Get in touch for web and mobile development projects, technical consultations, collaborations, or to discuss how we can bring your digital ideas to life.",
 };
 
 export default function ContactPage() {
   return (
     <Layout>
-      <main id="main-content" className="min-h-screen pt-32 pb-20">
-        <div className="container-custom max-w-4xl">
-          <section className="text-center mb-16">
-            <h1 className="text-3xl sm:text-4xl  font-bold gradient-text font-mono mb-6">
+      <main id="main-content" className="min-h-screen pt-24 sm:pt-32 pb-12 sm:pb-20">
+        <div className="container-custom max-w-4xl px-4">
+          <section className="text-center mb-10 sm:mb-16">
+            <h1 className="text-2xl sm:text-3xl  font-bold gradient-text font-mono mb-6">
               {"< Let's Connect >"}
             </h1>
             <p className="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto">

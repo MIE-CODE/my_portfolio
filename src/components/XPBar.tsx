@@ -18,8 +18,8 @@ export const XPBar = ({ currentXP, maxXP, level }: XPBarProps) => {
   }, [currentXP, maxXP]);
 
   return (
-    <div className="flex items-center gap-3">
-      <div className="level-badge animate-bounce-in">{level}</div>
+    <div className="flex items-center gap-2 sm:gap-3">
+      <div className="level-badge animate-bounce-in text-sm sm:text-base">{level}</div>
       <div className="flex-1">
         <div className="xp-bar">
           <div
@@ -30,7 +30,7 @@ export const XPBar = ({ currentXP, maxXP, level }: XPBarProps) => {
             }}
           />
         </div>
-        <div className="flex justify-between text-xs text-muted-600 dark:text-muted-400 mt-1">
+        <div className="flex justify-between text-[10px] xs:text-xs text-muted-600 dark:text-muted-400 mt-1">
           <span>{currentXP} XP</span>
           <span>{maxXP} XP</span>
         </div>

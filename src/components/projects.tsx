@@ -10,15 +10,15 @@ export const Projects = () => {
   const appsData = [
     {
       img: require("../images/ecommerce.png"),
-      skills: ["flutter", "Dart"],
+      skills: ["React Native", "JavaScript"],
       title: "E-commerce App",
-      description: "Mobile e-commerce application with Flutter",
+      description: "Mobile e-commerce application with React Native",
       link: "download",
       githubLink: "github",
     },
     {
       img: require("../images/ecommerce.png"),
-      skills: ["flutter", "Dart"],
+      skills: ["React Native", "JavaScript"],
       title: "Coffee Maker",
       description: "Smart coffee maker control app",
       link: "",
@@ -26,21 +26,21 @@ export const Projects = () => {
     },
     {
       img: require("../images/ecommerce.png"),
-      skills: ["flutter", "Dart"],
+      skills: ["React Native", "JavaScript"],
       title: "Geo Time App",
       description: "Time zone tracking application",
       link: "",
       githubLink: "",
     },
   ];
-  
+
   const websitesData = [
     {
       img: require("../images/trueperk.png"),
       skills: ["Nuxtjs", "Vuejs", "TypeScript", "Tailwindcss"],
       title: "Trueperk",
       description: "AI-driven employee recognition and rewards platform",
-      link: "https://app.trueperk.co/",
+      link: "https://trueperk.co/",
       githubLink: "#",
     },
     {
@@ -59,35 +59,42 @@ export const Projects = () => {
       link: "https://flyverge.vercel.app/",
       githubLink: "https://github.com/MIE-CODE/flyverge",
     },
-    {
-      img: require("../images/ecommerce.png"),
-      skills: ["Reactjs", "Tailwindcss"],
-      title: "E-commerce",
-      description: "Modern e-commerce application with React and Tailwind CSS",
-      link: "https://e-commerce-site-five-psi.vercel.app/",
-      githubLink: "github",
-    },
-    {
-      img: require("../images/todoapp.png"),
-      skills: ["Vuejs", "Javascript"],
-      title: "Todo App",
-      description: "Interactive todo application built with Vue.js",
-      link: "https://todo-app-vuejs-chi.vercel.app/",
-      githubLink: "https://github.com/MIE-CODE/Todo-App-vuejs",
-    },
-    {
-      img: require("../images/currenttime.png"),
-      skills: ["Javascript", "HTML", "CSS"],
-      title: "Current Time",
-      description: "Real-time clock application",
-      link: "https://current-time-five.vercel.app/",
-      githubLink: "https://github.com/MIE-CODE/current-time",
-    },
+    // {
+    //   img: require("../images/ecommerce.png"),
+    //   skills: ["Reactjs", "Tailwindcss"],
+    //   title: "E-commerce",
+    //   description: "Modern e-commerce application with React and Tailwind CSS",
+    //   link: "https://e-commerce-site-five-psi.vercel.app/",
+    //   githubLink: "github",
+    // },
+    // {
+    //   img: require("../images/todoapp.png"),
+    //   skills: ["Vuejs", "Javascript"],
+    //   title: "Todo App",
+    //   description: "Interactive todo application built with Vue.js",
+    //   link: "https://todo-app-vuejs-chi.vercel.app/",
+    //   githubLink: "https://github.com/MIE-CODE/Todo-App-vuejs",
+    // },
+    // {
+    //   img: require("../images/currenttime.png"),
+    //   skills: ["Javascript", "HTML", "CSS"],
+    //   title: "Current Time",
+    //   description: "Real-time clock application",
+    //   link: "https://current-time-five.vercel.app/",
+    //   githubLink: "https://github.com/MIE-CODE/current-time",
+    // },
   ];
 
   return (
-    <section id="project" className="section-padding scroll-mt-24" aria-labelledby="projects-heading">
-      <div ref={ref as React.RefObject<HTMLDivElement>} className="flex flex-col gap-6 max-w-3xl mx-auto mb-10">
+    <section
+      id="project"
+      className="section-padding scroll-mt-24"
+      aria-labelledby="projects-heading"
+    >
+      <div
+        ref={ref as React.RefObject<HTMLDivElement>}
+        className="flex flex-col gap-6 max-w-3xl mx-auto mb-10"
+      >
         <h2
           id="projects-heading"
           className={`text-2xl sm:text-3xl font-bold gradient-text font-mono text-center ${
@@ -100,7 +107,7 @@ export const Projects = () => {
           Showcasing innovative web and mobile applications
         </p>
       </div>
-      
+
       <div className="flex items-center justify-center gap-3 bg-muted-100 dark:bg-muted-800/60 p-1.5 rounded-lg border border-muted-200 dark:border-muted-700 w-fit mx-auto mb-8">
         <button
           className={`px-5 py-2 rounded-md font-medium text-xs transition-all duration-300 ${
@@ -123,8 +130,11 @@ export const Projects = () => {
           🌐 Websites
         </button>
       </div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" role="list">
+
+      <div
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+        role="list"
+      >
         {apps
           ? appsData.map((item, i) => (
               <Card app appsData={item} index={i} key={i} />

@@ -1,57 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
-
-const blogPosts = [
-  {
-    id: 1,
-    title: "Getting Started with Next.js 14",
-    excerpt: "Learn the fundamentals of Next.js 14 and how to build modern React applications with server-side rendering.",
-    date: "2024-01-15",
-    category: "Next.js",
-    readTime: "5 min read",
-  },
-  {
-    id: 2,
-    title: "Mastering TypeScript for React",
-    excerpt: "A comprehensive guide to using TypeScript effectively in React applications for better type safety and developer experience.",
-    date: "2024-01-10",
-    category: "TypeScript",
-    readTime: "8 min read",
-  },
-  {
-    id: 3,
-    title: "Building Responsive UIs with Tailwind CSS",
-    excerpt: "Discover how to create beautiful, responsive user interfaces using Tailwind CSS utility classes.",
-    date: "2024-01-05",
-    category: "CSS",
-    readTime: "6 min read",
-  },
-  {
-    id: 4,
-    title: "State Management in React: Context vs Redux",
-    excerpt: "Comparing Context API and Redux for state management in React applications, with practical examples.",
-    date: "2023-12-28",
-    category: "React",
-    readTime: "10 min read",
-  },
-  {
-    id: 5,
-    title: "Optimizing Performance in Next.js",
-    excerpt: "Best practices for improving performance in Next.js applications, including code splitting and image optimization.",
-    date: "2023-12-20",
-    category: "Performance",
-    readTime: "7 min read",
-  },
-  {
-    id: 6,
-    title: "Introduction to Flutter Development",
-    excerpt: "Getting started with Flutter for cross-platform mobile development and building your first app.",
-    date: "2023-12-15",
-    category: "Flutter",
-    readTime: "9 min read",
-  },
-];
+import { blogPosts } from "../data/blogPosts";
 
 export const BlogList = () => {
   const { ref, isVisible } = useIntersectionObserver();
