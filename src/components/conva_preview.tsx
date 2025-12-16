@@ -1,33 +1,32 @@
 "use client";
 import { useEffect, useState } from "react";
-import Image from "next/image";
 
 type CanvasPreviewProps = {
   imageSrc: string;
 };
 
 // Generate screenshot URL from website URL using multiple services as fallback
-const getScreenshotUrl = (url: string, serviceIndex: number = 0): string => {
-  // If it's already a full URL with http/https, use it directly
-  // Otherwise, prepend https://
-  const fullUrl = url.startsWith("http://") || url.startsWith("https://") 
-    ? url 
-    : `https://${url}`;
+// const getScreenshotUrl = (url: string, serviceIndex: number = 0): string => {
+//   // If it's already a full URL with http/https, use it directly
+//   // Otherwise, prepend https://
+//   const fullUrl = url.startsWith("http://") || url.startsWith("https://") 
+//     ? url 
+//     : `https://${url}`;
   
-  const encodedUrl = encodeURIComponent(fullUrl);
+//   const encodedUrl = encodeURIComponent(fullUrl);
   
-  // Try different screenshot services
-  const services = [
-    // Service 1: screenshot.rocks (free tier)
-    `https://screenshot.rocks/api/screenshot?url=${encodedUrl}&width=1200&height=800`,
-    // Service 2: api.screenshotmachine.com (alternative)
-    `https://api.screenshotmachine.com/?key=demo&url=${encodedUrl}&dimension=1200x800`,
-    // Service 3: image.thum.io (fallback)
-    `https://image.thum.io/get/1200x800/${encodedUrl}`,
-  ];
+//   // Try different screenshot services
+//   const services = [
+//     // Service 1: screenshot.rocks (free tier)
+//     `https://screenshot.rocks/api/screenshot?url=${encodedUrl}&width=1200&height=800`,
+//     // Service 2: api.screenshotmachine.com (alternative)
+//     `https://api.screenshotmachine.com/?key=demo&url=${encodedUrl}&dimension=1200x800`,
+//     // Service 3: image.thum.io (fallback)
+//     `https://image.thum.io/get/1200x800/${encodedUrl}`,
+//   ];
   
-  return services[serviceIndex] || services[0];
-};
+//   return services[serviceIndex] || services[0];
+// };
 
 // Get the full URL for iframe fallback
 const getFullUrl = (url: string): string => {
@@ -37,21 +36,16 @@ const getFullUrl = (url: string): string => {
 };
 
 export const CanvasPreview = ({ imageSrc }: CanvasPreviewProps) => {
-  const [screenshotUrl, setScreenshotUrl] = useState<string>("");
-  const [useIframe, setUseIframe] = useState(true); // Default to iframe since it's more reliable
   const [error, setError] = useState(false);
-  const [serviceIndex, setServiceIndex] = useState(0);
 
   useEffect(() => {
     if (imageSrc && imageSrc !== "#") {
       // Try to load screenshot, but default to iframe
-      const url = getScreenshotUrl(imageSrc, serviceIndex);
-      setScreenshotUrl(url);
       setError(false);
     } else {
       setError(true);
     }
-  }, [imageSrc, serviceIndex]);
+  }, [imageSrc]);
 
   if (error || (!imageSrc || imageSrc === "#")) {
     return (

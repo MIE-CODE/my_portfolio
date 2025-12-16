@@ -1,7 +1,7 @@
 "use client";
-import { OrbitControls, useTexture } from "@react-three/drei";
+import { useTexture } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { useRef, useMemo, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import * as THREE from "three";
 
 // Abstract Geometric Sculpture Component
@@ -14,19 +14,19 @@ const GeometricSculpture = () => {
   const particlesRef = useRef<THREE.InstancedMesh>(null);
   
   const particleCount = 60;
-  const particlePositions = useMemo(() => {
-    const positions = new Float32Array(particleCount * 3);
-    for (let i = 0; i < particleCount; i++) {
-      const radius = 2 + Math.random() * 1.5;
-      const theta = (i / particleCount) * Math.PI * 2;
-      const phi = Math.acos(Math.random() * 2 - 1);
+  // const particlePositions = useMemo(() => {
+  //   const positions = new Float32Array(particleCount * 3);
+  //   for (let i = 0; i < particleCount; i++) {
+  //     const radius = 2 + Math.random() * 1.5;
+  //     const theta = (i / particleCount) * Math.PI * 2;
+  //     const phi = Math.acos(Math.random() * 2 - 1);
       
-      positions[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
-      positions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
-      positions[i * 3 + 2] = radius * Math.cos(phi);
-    }
-    return positions;
-  }, []);
+  //     positions[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
+  //     positions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
+  //     positions[i * 3 + 2] = radius * Math.cos(phi);
+  //   }
+  //   return positions;
+  // }, []);
 
   // Load textures
   const [

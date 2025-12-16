@@ -80,7 +80,8 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
                     if (paragraph.startsWith('```')) {
                       const codeMatch = paragraph.match(/```(\w+)?\n([\s\S]*?)```/);
                       if (codeMatch) {
-                        const [, language, code] = codeMatch;
+                        const [ language, code] = codeMatch;
+                        console.log(language, code);
                         return (
                           <pre
                             key={index}

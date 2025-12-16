@@ -18,6 +18,7 @@
     "react-scroll": "^1.9.0",
     "react-simple-typewriter": "^5.0.1",
     "sass": "^1.78.0",
+    "sharp": "^0.34.5",
     "three": "^0.181.2"
   },
   "devDependencies": {

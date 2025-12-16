@@ -142,7 +142,7 @@ export const textReveal = (element: HTMLElement) => {
   const text = element.textContent || "";
   element.innerHTML = "";
 
-  const chars = text.split("").map((char, i) => {
+  const chars = text.split("").map((char) => {
     const span = document.createElement("span");
     span.textContent = char === " " ? "\u00A0" : char;
     span.style.display = "inline-block";

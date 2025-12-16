@@ -10,7 +10,7 @@ if (typeof window !== "undefined") {
 
 export const useGSAP = (
   animationFn: (ctx: gsap.Context) => void | gsap.core.Tween | gsap.core.Timeline,
-  dependencies: any[] = []
+  dependencies: unknown[] = []
 ) => {
   const context = useRef<gsap.Context | null>(null);
   const scope = useRef<HTMLDivElement>(null);
@@ -25,7 +25,7 @@ export const useGSAP = (
     return () => {
       context.current?.revert();
     };
-  }, dependencies);
+  }, [animationFn,dependencies]);
 
   return scope;
 };

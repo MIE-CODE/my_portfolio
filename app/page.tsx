@@ -1,5 +1,4 @@
 "use client";
-import { Reveal } from "@/src/animation/Reveal";
 import { useTypewriter, Cursor } from "react-simple-typewriter";
 import { Stack } from "@/src/components/stack";
 import Image from "next/image";
