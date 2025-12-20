@@ -3,7 +3,7 @@ import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 
 const stats = [
   { label: "Projects", value: "20+", icon: "🎯" },
-  { label: "Years Exp", value: "3+", icon: "⏱️" },
+  { label: "Years Exp", value: "5+", icon: "⏱️" },
   { label: "Technologies", value: "15+", icon: "🛠️" },
   { label: "Happy Clients", value: "10+", icon: "😊" },
 ];

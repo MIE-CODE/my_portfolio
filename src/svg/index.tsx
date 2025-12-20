@@ -826,3 +826,155 @@ export const ReactIcon = () => (
     </g>
   </svg>
 );
+
+export const ApiIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="100%"
+    height="100%"
+    viewBox="0 0 200 200"
+    className="w-full h-full"
+  >
+    <defs>
+      <linearGradient id="apiGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#009c9e" stopOpacity="0.8" />
+        <stop offset="100%" stopColor="#0066cc" stopOpacity="0.6" />
+      </linearGradient>
+    </defs>
+    
+    {/* Server/API Box */}
+    <rect x="50" y="60" width="100" height="80" rx="8" fill="url(#apiGradient)" stroke="#009c9e" strokeWidth="2" />
+    
+    {/* Connection Lines */}
+    <line x1="20" y1="80" x2="50" y2="80" stroke="#009c9e" strokeWidth="3" strokeLinecap="round" />
+    <line x1="20" y1="100" x2="50" y2="100" stroke="#009c9e" strokeWidth="3" strokeLinecap="round" />
+    <line x1="20" y1="120" x2="50" y2="120" stroke="#009c9e" strokeWidth="3" strokeLinecap="round" />
+    
+    <line x1="150" y1="80" x2="180" y2="80" stroke="#009c9e" strokeWidth="3" strokeLinecap="round" />
+    <line x1="150" y1="100" x2="180" y2="100" stroke="#009c9e" strokeWidth="3" strokeLinecap="round" />
+    <line x1="150" y1="120" x2="180" y2="120" stroke="#009c9e" strokeWidth="3" strokeLinecap="round" />
+    
+    {/* Connection Nodes */}
+    <circle cx="20" cy="80" r="5" fill="#009c9e" />
+    <circle cx="20" cy="100" r="5" fill="#009c9e" />
+    <circle cx="20" cy="120" r="5" fill="#009c9e" />
+    
+    <circle cx="180" cy="80" r="5" fill="#009c9e" />
+    <circle cx="180" cy="100" r="5" fill="#009c9e" />
+    <circle cx="180" cy="120" r="5" fill="#009c9e" />
+    
+    {/* API Text */}
+    <text x="100" y="110" textAnchor="middle" fontSize="24" fontWeight="bold" fill="#ffffff" fontFamily="monospace">API</text>
+    
+    {/* Data Flow Indicators */}
+    <path d="M 15 80 L 20 80 L 20 75 L 15 75 Z" fill="#009c9e" opacity="0.6" />
+    <path d="M 185 80 L 180 80 L 180 75 L 185 75 Z" fill="#009c9e" opacity="0.6" />
+  </svg>
+);
+
+export const VueIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+  >
+    <path
+      d="M24,1.61H14.06L12,5.16,9.94,1.61H0L12,22.39ZM12,14.08,5.16,2.23H9.59L12,6.41l2.41-4.18h4.43Z"
+      fill="#4FC08D"
+    />
+  </svg>
+);
+
+export const AstroIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+  >
+    <path
+      d="M16.428 0L14.598 7.508h2.52l-1.428 4.893-5.598-17.401H7.176L1.58 12.401 0 7.508h2.52L4.32 0h2.52L4.32 7.508h2.52l1.428-4.893 5.598 17.401h2.52l5.596-17.401h-2.52L16.428 0zm-5.598 9.15l-1.428 4.894-1.428-4.893H5.148L9.15 19.894l1.428-4.893 1.428 4.893 3.892-10.744h-2.52z"
+      fill="#FF5D01"
+    />
+  </svg>
+);
+
+export const ShadcnIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+  >
+    <defs>
+      <linearGradient id="shadcnGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#000000" />
+        <stop offset="100%" stopColor="#333333" />
+      </linearGradient>
+    </defs>
+    <rect x="2" y="2" width="20" height="20" rx="4" fill="url(#shadcnGradient)" />
+    <path
+      d="M12 6L8 12h8l-4-6zm0 6l4 6H8l4-6z"
+      fill="#ffffff"
+      opacity="0.9"
+    />
+    <circle cx="12" cy="12" r="2" fill="#ffffff" />
+  </svg>
+);
+
+export const EthereumIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+    <path fill="#627EEA" d="M12 0L5.5 12.25L12 16.5L18.5 12.25L12 0Z"/>
+    <path fill="#627EEA" d="M12 18.5L5.5 13.75L12 24L18.5 13.75L12 18.5Z"/>
+  </svg>
+);
+
+export const Web3Icon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+    <defs>
+      <linearGradient id="web3GradientUnique" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#627EEA" />
+        <stop offset="100%" stopColor="#F7931E" />
+      </linearGradient>
+    </defs>
+    <circle cx="12" cy="12" r="10" fill="url(#web3GradientUnique)" opacity="0.2"/>
+    <path fill="url(#web3GradientUnique)" d="M12 2L6 7L12 9L18 7L12 2ZM6 7L12 12L18 7L12 14L6 7ZM12 15L6 10L12 12L18 10L12 15ZM6 10L12 22L18 10L12 12L6 10Z"/>
+  </svg>
+);
+
+export const GoogleAnalyticsIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+    <path fill="#F4B400" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+    <path fill="#4285F4" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+    <path fill="#34A853" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+  </svg>
+);
+
+export const PostHogIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+    <path fill="#FF6B35" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+    <path fill="#FF6B35" d="M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/>
+  </svg>
+);
+
+export const HubSpotIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+    <path fill="#FF7A59" d="M21.5 0h-19C1.1 0 0 1.1 0 2.5v19C0 22.9 1.1 24 2.5 24h19c1.4 0 2.5-1.1 2.5-2.5v-19C24 1.1 22.9 0 21.5 0z"/>
+    <path fill="#FFFFFF" d="M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/>
+  </svg>
+);
+
+export const SanityIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+    <path fill="#F03E2F" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+    <path fill="#FFFFFF" d="M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/>
+  </svg>
+);
+
+export const ContentfulIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+    <path fill="#FAE500" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+  </svg>
+);

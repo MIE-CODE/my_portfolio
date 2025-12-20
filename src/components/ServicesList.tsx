@@ -1,41 +1,46 @@
 "use client";
-import { ReactIcon, NextIcon, ReactNativeIcon, TypeScriptIcon } from "../svg";
+import { ReactIcon, NextIcon, ReactNativeIcon, TypeScriptIcon, Web3Icon } from "../svg";
 import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 
 const services = [
   {
     icon: <NextIcon />,
     title: "Next.js Development",
-    description: "Build high-performance, SEO-friendly web applications with Next.js. Server-side rendering, static site generation, and API routes.",
-    features: ["SSR/SSG", "API Routes", "Image Optimization", "SEO"],
+    description: "Build production-ready websites from Figma designs to deployment. High-performance, SEO-friendly applications with SSR/SSG, optimized for Core Web Vitals and Lighthouse scores.",
+    features: ["Figma to Code", "SSR/SSG", "Performance Optimization", "Lighthouse 95+"],
   },
   {
     icon: <ReactIcon />,
-    title: "React Development",
-    description: "Create dynamic, interactive user interfaces with React. Component-based architecture with modern hooks and context API.",
-    features: ["Component Architecture", "State Management", "Hooks", "Context API"],
+    title: "React & TypeScript",
+    description: "Expert-level React and TypeScript development. Build dynamic, type-safe user interfaces with modern patterns, hooks, and component architecture.",
+    features: ["TypeScript", "Component Architecture", "State Management", "Type Safety"],
   },
   {
-    icon: <ReactNativeIcon />,
-    title: "Mobile App Development",
-    description: "Cross-platform mobile applications with React Native. Single codebase for iOS and Android with native performance.",
-    features: ["Cross-Platform", "Native Performance", "React Components", "Custom UI"],
+    icon: <Web3Icon />,
+    title: "Blockchain & Web3 Interest",
+    description: "Genuinely excited about blockchain technology and Ethereum scaling solutions. Eager to learn and contribute to Web3 development, smart contract integration, and building consumer-facing applications in the blockchain space.",
+    features: ["Ethereum", "Web3", "Learning", "Enthusiastic"],
   },
   {
     icon: <TypeScriptIcon />,
-    title: "TypeScript Development",
-    description: "Type-safe development with TypeScript. Better code quality, fewer bugs, and improved developer experience.",
-    features: ["Type Safety", "Better DX", "Scalability", "Maintainability"],
+    title: "Performance Optimization",
+    description: "Deep expertise in web performance optimization including Core Web Vitals, Lighthouse scoring, and PageSpeed best practices. Achieve fast page load times and exceptional user experience.",
+    features: ["Core Web Vitals", "Lighthouse", "PageSpeed", "Performance"],
   },
   {
-    title: "Full-Stack Development",
-    description: "End-to-end web application development from frontend to backend. MERN stack expertise with MongoDB, Express, React, and Node.js.",
-    features: ["MERN Stack", "RESTful APIs", "Database Design", "Authentication"],
+    title: "Analytics & CRM Integration",
+    description: "Integrate analytics platforms (Google Analytics, PostHog) and CRM systems (HubSpot) into web applications. Track user behavior, manage leads, and optimize conversion rates.",
+    features: ["Google Analytics", "PostHog", "HubSpot", "Data Tracking"],
   },
   {
-    title: "UI/UX Design & Development",
-    description: "Beautiful, responsive user interfaces with modern design principles. Tailwind CSS, Framer Motion, and custom animations.",
-    features: ["Responsive Design", "Modern UI", "Animations", "Accessibility"],
+    title: "Headless CMS & Content",
+    description: "Build content-driven websites with headless CMS platforms like Sanity and Contentful. Create scalable content architectures that enable seamless content management workflows.",
+    features: ["Sanity CMS", "Contentful", "Content Management", "API Integration"],
+  },
+  {
+    title: "Animation & Design Implementation",
+    description: "Bring creative visions to life with animations and interactions using Framer Motion and GSAP. Collaborate directly with designers to implement pixel-perfect designs with smooth animations.",
+    features: ["Framer Motion", "GSAP", "Animations", "Design Implementation"],
   },
 ];
 

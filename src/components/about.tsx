@@ -8,23 +8,33 @@ export const About = () => {
   const infos = [
     {
       title: "Full Stack Developer",
-      desc: "I develop full-stack web applications using the MERN stack that are responsive, fast, and scalable. Proficient in handling both frontend and backend, ensuring seamless integration of services.",
+      desc: "5+ years building production-ready web applications from Figma designs to deployment. Expert in React, Next.js, TypeScript, and Tailwind CSS. Specialized in creating pixel-perfect, responsive implementations with exceptional performance and accessibility.",
       icon: "💻",
     },
     {
-      title: "React & Next.js Specialist",
-      desc: "Expert in building dynamic, component-based web applications using React & Next.js. I leverage modern state management, SSR/SSG, and optimization techniques to create highly interactive user interfaces.",
-      icon: "⚛️",
+      title: "Performance & Analytics Expert",
+      desc: "Deep expertise in web performance optimization including Core Web Vitals, Lighthouse scoring, and PageSpeed best practices. Experienced integrating Google Analytics, PostHog, and CRM systems like HubSpot into web applications.",
+      icon: "📊",
     },
     {
-      title: "Mobile Developer",
-      desc: "I specialize in React Native for creating high-performance, cross-platform mobile applications using a single codebase. Expertise in UI design, state management, and platform-specific integrations.",
-      icon: "📱",
+      title: "Animation & Design Specialist",
+      desc: "Expert in bringing creative visions to life with animations and interactions using Framer Motion and GSAP. Collaborate directly with designers to implement pixel-perfect designs with smooth, performant animations.",
+      icon: "🎨",
     },
     {
-      title: "Version Control Expert",
-      desc: "With 3+ years of experience, Git and GitHub are core tools I rely on for version control and team collaboration. I efficiently manage codebases and maintain clean development workflows.",
-      icon: "🔧",
+      title: "Blockchain & Web3 Enthusiast",
+      desc: "Genuinely excited about blockchain technology and Ethereum scaling solutions. Eager to learn Web3 development, smart contracts, and building consumer-facing applications in the blockchain space. Actively exploring Arbitrum, Ethereum ecosystem, and decentralized systems.",
+      icon: "⛓️",
+    },
+    {
+      title: "CMS & Content Management",
+      desc: "Hands-on experience with headless CMS platforms like Sanity and Contentful for content-driven websites. Build scalable, maintainable content architectures that enable seamless content management workflows.",
+      icon: "📝",
+    },
+    {
+      title: "Security & Quality Focused",
+      desc: "Security-conscious approach to code development with rigorous QA and testing practices. Ensure production applications meet the highest standards for security, performance, and user experience.",
+      icon: "🔒",
     },
   ];
 
@@ -44,7 +54,7 @@ export const About = () => {
           {"< About Me >"}
         </h2>
         <p className="text-sm text-muted-600 dark:text-muted-400 leading-relaxed">
-          Software developer with 3+ years of practical experience in web and mobile development, specializing in modern technologies and best practices.
+          Full-stack developer with 5+ years of experience building production websites from Figma designs to deployment. Expert in React, Next.js, TypeScript, and Tailwind CSS with deep expertise in performance optimization and analytics integration. Genuinely excited about blockchain technology and eager to learn more about Web3 development, Ethereum scaling solutions, and decentralized systems. Passionate about crafting high-quality user experiences with attention to design details and security best practices.
         </p>
       </div>
 

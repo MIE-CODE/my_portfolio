@@ -11,6 +11,17 @@ import {
   SassIcon,
   TailwindcssIcon,
   TypeScriptIcon,
+  VueIcon,
+  AstroIcon,
+  ShadcnIcon,
+  GsapIcon,
+  EthereumIcon,
+  Web3Icon,
+  GoogleAnalyticsIcon,
+  PostHogIcon,
+  HubSpotIcon,
+  SanityIcon,
+  ContentfulIcon,
 } from "../svg";
 import { useGSAP } from "../hooks/useGSAP";
 import { useRef } from "react";
@@ -47,7 +58,7 @@ export const Stack = () => {
     },
     {
       icon: <TailwindcssIcon />,
-      name: "Tailwind",
+      name: "Tailwind CSS",
       level: "Expert",
       xp: 8500,
     },
@@ -62,6 +73,60 @@ export const Stack = () => {
       name: "Framer Motion",
       level: "Expert",
       xp: 7800,
+    },
+    {
+      icon: <GsapIcon />,
+      name: "GSAP",
+      level: "Expert",
+      xp: 7500,
+    },
+    {
+      icon: <EthereumIcon />,
+      name: "Ethereum",
+      level: "Learning",
+      xp: 500,
+    },
+    {
+      icon: <Web3Icon />,
+      name: "Web3",
+      level: "Learning",
+      xp: 500,
+    },
+    {
+      icon: <GoogleAnalyticsIcon />,
+      name: "Google Analytics",
+      level: "Expert",
+      xp: 7200,
+    },
+    {
+      icon: <PostHogIcon />,
+      name: "PostHog",
+      level: "Advanced",
+      xp: 6800,
+    },
+    {
+      icon: <HubSpotIcon />,
+      name: "HubSpot",
+      level: "Advanced",
+      xp: 6500,
+    },
+    {
+      icon: <SanityIcon />,
+      name: "Sanity CMS",
+      level: "Advanced",
+      xp: 7000,
+    },
+    {
+      icon: <ContentfulIcon />,
+      name: "Contentful",
+      level: "Advanced",
+      xp: 6800,
+    },
+    {
+      icon: <ShadcnIcon />,
+      name: "shadcn/ui",
+      level: "Expert",
+      xp: 8000,
     },
     {
       icon: <ReactNativeIcon />,
@@ -151,14 +216,14 @@ export const Stack = () => {
             role="listitem"
           >
             <div className="text-primary-600 dark:text-primary-400 mb-2 sm:mb-3 [&>svg]:w-8 [&>svg]:h-10 sm:[&>svg]:w-10 sm:[&>svg]:h-12 mx-auto">{stack.icon}</div>
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-1.5">
               <h3 className="text-xs sm:text-sm font-semibold text-muted-900 dark:text-muted-50">
                 {stack.name}
               </h3>
-              <div className="flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap">
-                <span className="text-[10px] xs:text-xs text-primary-600 dark:text-primary-400 font-mono">{stack.level}</span>
-                <span className="text-[10px] xs:text-xs text-muted-500 dark:text-muted-500">•</span>
-                <span className="text-[10px] xs:text-xs text-muted-600 dark:text-muted-400">{stack.xp} XP</span>
+              <div className="flex items-center justify-center">
+                <span className="text-[9px] xs:text-[10px] text-muted-500 dark:text-muted-500 font-mono">
+                  {stack.xp.toLocaleString()} XP
+                </span>
               </div>
             </div>
           </article>

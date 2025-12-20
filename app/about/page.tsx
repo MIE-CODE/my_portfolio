@@ -4,7 +4,7 @@ import { Layout } from "@/src/components/Layout";
 
 export const metadata: Metadata = {
   title: "About - Menya Israel",
-    description: "Learn about Menya Israel, a professional full-stack developer with 3+ years of comprehensive experience in web and mobile development. Discover expertise in React, Next.js, TypeScript, React Native, and modern software architecture.",
+    description: "Learn about Menya Israel, a professional full-stack developer with 5+ years of experience building production websites from Figma designs to deployment. Expert in React, Next.js, TypeScript, Tailwind CSS, performance optimization, analytics integration, and headless CMS. Genuinely excited about blockchain technology and eager to learn Web3 development.",
 };
 
 export default function AboutPage() {

@@ -130,10 +130,132 @@ const backendProjects: Array<{
     githubLink: "#",
     category: "Backend",
   },
+  {
+    id: 11,
+    img: require("../images/ecommerce.png"),
+    skills: ["Node.js", "Express.js", "Redis", "WebSocket"],
+    title: "Real-time Chat API",
+    description: "WebSocket-based real-time messaging API with Redis pub/sub, message persistence, and typing indicators.",
+    link: "#",
+    githubLink: "#",
+    category: "Backend",
+  },
+  {
+    id: 12,
+    img: require("../images/ecommerce.png"),
+    skills: ["NestJS", "PostgreSQL", "TypeScript", "Stripe"],
+    title: "Payment Processing API",
+    description: "Secure payment processing API with Stripe integration, subscription management, and webhook handling.",
+    link: "#",
+    githubLink: "#",
+    category: "Backend",
+  },
+  {
+    id: 13,
+    img: require("../images/ecommerce.png"),
+    skills: ["Node.js", "Express.js", "MongoDB", "AWS S3"],
+    title: "File Upload Service",
+    description: "Scalable file upload API with AWS S3 integration, image processing, and CDN distribution.",
+    link: "#",
+    githubLink: "#",
+    category: "Backend",
+  },
+  {
+    id: 14,
+    img: require("../images/ecommerce.png"),
+    skills: ["NestJS", "PostgreSQL", "TypeScript", "Bull Queue"],
+    title: "Email Service API",
+    description: "Robust email service API with queue management, template engine, and multi-provider support.",
+    link: "#",
+    githubLink: "#",
+    category: "Backend",
+  },
+  {
+    id: 15,
+    img: require("../images/ecommerce.png"),
+    skills: ["Node.js", "Express.js", "MongoDB", "Socket.io"],
+    title: "Notification Service",
+    description: "Real-time notification API with push notifications, in-app alerts, and multi-channel delivery.",
+    link: "#",
+    githubLink: "#",
+    category: "Backend",
+  },
+  {
+    id: 16,
+    img: require("../images/ecommerce.png"),
+    skills: ["NestJS", "PostgreSQL", "TypeScript", "Elasticsearch"],
+    title: "Search API",
+    description: "Advanced search API with Elasticsearch integration, full-text search, and faceted filtering.",
+    link: "#",
+    githubLink: "#",
+    category: "Backend",
+  },
+  {
+    id: 17,
+    img: require("../images/ecommerce.png"),
+    skills: ["Node.js", "Express.js", "MongoDB", "RabbitMQ"],
+    title: "Event-Driven API",
+    description: "Event-driven microservice architecture with message queues, event sourcing, and CQRS pattern.",
+    link: "#",
+    githubLink: "#",
+    category: "Backend",
+  },
+  {
+    id: 18,
+    img: require("../images/ecommerce.png"),
+    skills: ["NestJS", "PostgreSQL", "TypeScript", "Docker"],
+    title: "Analytics API",
+    description: "Analytics and reporting API with data aggregation, real-time metrics, and custom dashboard support.",
+    link: "#",
+    githubLink: "#",
+    category: "Backend",
+  },
+  {
+    id: 19,
+    img: require("../images/ecommerce.png"),
+    skills: ["Node.js", "Express.js", "MongoDB", "Jest"],
+    title: "Social Media API",
+    description: "Social media backend API with user feeds, follow/unfollow, content moderation, and engagement tracking.",
+    link: "#",
+    githubLink: "#",
+    category: "Backend",
+  },
+  {
+    id: 20,
+    img: require("../images/ecommerce.png"),
+    skills: ["NestJS", "PostgreSQL", "TypeScript", "Kafka"],
+    title: "Data Streaming API",
+    description: "High-performance data streaming API with Apache Kafka, real-time processing, and event streaming.",
+    link: "#",
+    githubLink: "#",
+    category: "Backend",
+  },
+  {
+    id: 21,
+    img: require("../images/ecommerce.png"),
+    skills: ["Node.js", "Express.js", "MongoDB", "Swagger"],
+    title: "API Gateway",
+    description: "Centralized API gateway with rate limiting, request routing, API versioning, and comprehensive documentation.",
+    link: "#",
+    githubLink: "#",
+    category: "Backend",
+  },
+  {
+    id: 22,
+    img: require("../images/ecommerce.png"),
+    skills: ["NestJS", "PostgreSQL", "TypeScript", "gRPC"],
+    title: "Microservices API",
+    description: "Microservices architecture with gRPC communication, service discovery, and distributed tracing.",
+    link: "#",
+    githubLink: "#",
+    category: "Backend",
+  },
 ];
 
 export const ProjectsList = () => {
   const [activeTab, setActiveTab] = useState<"frontend" | "backend">("frontend");
+  const [showAllFrontend, setShowAllFrontend] = useState(false);
+  const [showAllBackend, setShowAllBackend] = useState(false);
   const tabsRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const infoTextRef = useRef<HTMLParagraphElement>(null);
@@ -189,7 +311,7 @@ export const ProjectsList = () => {
         }
       );
     }
-  }, [activeTab]);
+  }, [activeTab, showAllFrontend, showAllBackend]);
 
   return (
     <div>
@@ -201,7 +323,10 @@ export const ProjectsList = () => {
               ? "bg-gradient-primary text-white shadow-lg shadow-primary-500/20"
               : "bg-transparent text-muted-600 dark:text-muted-400 hover:text-muted-900 dark:hover:text-muted-50"
           }`}
-          onClick={() => setActiveTab("frontend")}
+          onClick={() => {
+            setActiveTab("frontend");
+            setShowAllFrontend(false);
+          }}
         >
           🎨 Frontend
         </button>
@@ -211,7 +336,10 @@ export const ProjectsList = () => {
               ? "bg-gradient-primary text-white shadow-lg shadow-primary-500/20"
               : "bg-transparent text-muted-600 dark:text-muted-400 hover:text-muted-900 dark:hover:text-muted-50"
           }`}
-          onClick={() => setActiveTab("backend")}
+          onClick={() => {
+            setActiveTab("backend");
+            setShowAllBackend(false);
+          }}
         >
           ⚙️ Backend
         </button>
@@ -220,18 +348,46 @@ export const ProjectsList = () => {
       {/* Projects Grid */}
       <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5" role="list">
         {activeTab === "frontend"
-          ? frontendProjects.map((project, i) => (
+          ? (showAllFrontend ? frontendProjects : frontendProjects.slice(0, 6)).map((project, i) => (
               <ProjectCard key={project.id} project={project} index={i} />
             ))
-          : backendProjects.map((project, i) => (
+          : (showAllBackend ? backendProjects : backendProjects.slice(0, 6)).map((project, i) => (
               <ProjectCard key={project.id} project={project} index={i} />
             ))}
       </div>
 
+      {/* See More Button */}
+      {((activeTab === "frontend" && frontendProjects.length > 6) || 
+        (activeTab === "backend" && backendProjects.length > 6)) && (
+        <div className="flex justify-center mt-6 sm:mt-8">
+          <button
+            onClick={() => {
+              if (activeTab === "frontend") {
+                setShowAllFrontend(!showAllFrontend);
+              } else {
+                setShowAllBackend(!showAllBackend);
+              }
+            }}
+            className="px-6 sm:px-8 py-2.5 sm:py-3 bg-gradient-primary text-white rounded-lg font-medium text-sm sm:text-base hover:shadow-lg shadow-primary-500/20 transition-all duration-300 hover:scale-105"
+          >
+            {activeTab === "frontend"
+              ? showAllFrontend
+                ? "Show Less"
+                : `See More (${frontendProjects.length - 6} more projects)`
+              : showAllBackend
+              ? "Show Less"
+              : `See More (${backendProjects.length - 6} more projects)`}
+          </button>
+        </div>
+      )}
+
       {/* Info Text */}
-      <p ref={infoTextRef} className="text-center text-[10px] xs:text-xs text-muted-500 dark:text-muted-500 mt-8 sm:mt-12 font-mono">
-        More projects coming soon...
-      </p>
+      {((activeTab === "frontend" && frontendProjects.length <= 6) || 
+        (activeTab === "backend" && backendProjects.length <= 6)) && (
+        <p ref={infoTextRef} className="text-center text-[10px] xs:text-xs text-muted-500 dark:text-muted-500 mt-8 sm:mt-12 font-mono">
+          More projects coming soon...
+        </p>
+      )}
     </div>
   );
 };

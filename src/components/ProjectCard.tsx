@@ -1,7 +1,7 @@
 "use client";
 import Image, { StaticImageData } from "next/image";
 import card from "../images/card.png";
-import { GithubIcon } from "../svg";
+import { GithubIcon, ApiIcon } from "../svg";
 import { CanvasPreview } from "./conva_preview";
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
@@ -52,15 +52,14 @@ export const ProjectCard = ({
     >
       <div className="flex flex-col gap-3 flex-1">
         {/* Project Image */}
-        <div className="relative w-full h-40 sm:h-48 rounded-lg overflow-hidden bg-muted-100 dark:bg-muted-800 border border-muted-200 dark:border-muted-700">
-          <CanvasPreview imageSrc={project.link} />
-          <Image
-            className="w-full h-full object-cover hidden"
-            src={project.img || card}
-            height={160}
-            width={300}
-            alt={`${project.title} project screenshot`}
-          />
+        <div className="relative w-full h-40 sm:h-48 rounded-lg overflow-hidden bg-muted-100 dark:bg-muted-800 border border-muted-200 dark:border-muted-700 flex items-center justify-center">
+          {project.category === "Backend" ? (
+            <div className="w-full h-full flex items-center justify-center p-4">
+              <ApiIcon />
+            </div>
+          ) : (
+            <CanvasPreview imageSrc={project.link} />
+          )}
           {/* Category Badge */}
           <div className="absolute top-2 right-2">
             <span
