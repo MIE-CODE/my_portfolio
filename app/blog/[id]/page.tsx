@@ -3,6 +3,203 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Layout } from "@/src/components/Layout";
 import { getBlogPostById, blogPosts } from "@/src/data/blogPosts";
+import { CodeBlock } from "@/src/components/CodeBlock";
+
+// Helper function to parse markdown content
+function parseMarkdown(text: string, startKey: number): JSX.Element[] {
+  const parts: JSX.Element[] = [];
+  let keyIndex = startKey;
+  
+  // Split by double newlines to get paragraphs
+  const paragraphs = text.split(/\n\n+/).filter(p => p.trim());
+  
+  paragraphs.forEach((paragraph) => {
+    const trimmed = paragraph.trim();
+    if (!trimmed) return;
+
+    // Check for headings
+    if (trimmed.startsWith('## ')) {
+      const heading = trimmed.replace(/^##\s+/, '');
+      parts.push(
+        <h2
+          key={keyIndex++}
+          className="text-xl sm:text-2xl font-bold text-muted-900 dark:text-muted-50 mt-8 sm:mt-10 mb-4 sm:mb-6"
+        >
+          {heading}
+        </h2>
+      );
+      return;
+    }
+
+    if (trimmed.startsWith('### ')) {
+      const heading = trimmed.replace(/^###\s+/, '');
+      parts.push(
+        <h3
+          key={keyIndex++}
+          className="text-lg sm:text-xl font-bold text-muted-900 dark:text-muted-50 mt-6 sm:mt-8 mb-3 sm:mb-4"
+        >
+          {heading}
+        </h3>
+      );
+      return;
+    }
+
+    // Check for lists
+    if (trimmed.startsWith('- ') || trimmed.startsWith('* ') || /^\d+\.\s/.test(trimmed)) {
+      const items = trimmed.split('\n').filter(line => {
+        const trimmedLine = line.trim();
+        return trimmedLine.startsWith('- ') || trimmedLine.startsWith('* ') || /^\d+\.\s/.test(trimmedLine);
+      });
+      
+      const isOrdered = /^\d+\.\s/.test(items[0]?.trim() || '');
+      const ListTag = isOrdered ? 'ol' : 'ul';
+      
+      parts.push(
+        <ListTag 
+          key={keyIndex++} 
+          className={`${isOrdered ? 'list-decimal' : 'list-disc'} list-inside space-y-2 ml-4 sm:ml-6`}
+        >
+          {items.map((item, itemIndex) => {
+            const cleanItem = item.trim().replace(/^[-*\d+\.]\s+/, '');
+            // Parse inline code and bold text
+            const processedItem = parseInlineMarkdown(cleanItem);
+            return (
+              <li key={itemIndex} className="text-muted-700 dark:text-muted-300 leading-relaxed">
+                {processedItem.length > 0 ? processedItem : cleanItem}
+              </li>
+            );
+          })}
+        </ListTag>
+      );
+      return;
+    }
+
+    // Regular paragraph with inline markdown
+    const processedParagraph = parseInlineMarkdown(trimmed);
+    parts.push(
+      <p key={keyIndex++} className="leading-relaxed mb-4">
+        {processedParagraph.length > 0 ? processedParagraph : trimmed}
+      </p>
+    );
+  });
+
+  return parts;
+}
+
+// Helper function to parse inline markdown (bold, code, links)
+function parseInlineMarkdown(text: string): (string | JSX.Element)[] {
+  const result: (string | JSX.Element)[] = [];
+  let keyIndex = 0;
+  let lastIndex = 0;
+  
+  // Find all matches (code, bold, links) with their positions
+  const matches: Array<{
+    index: number;
+    endIndex: number;
+    type: 'code' | 'bold' | 'link';
+    content: string;
+    extra?: string;
+  }> = [];
+
+  // Find inline code
+  const codeRegex = /`([^`]+)`/g;
+  let match;
+  while ((match = codeRegex.exec(text)) !== null) {
+    matches.push({
+      index: match.index,
+      endIndex: match.index + match[0].length,
+      type: 'code',
+      content: match[1],
+    });
+  }
+
+  // Find bold text
+  const boldRegex = /\*\*([^*]+)\*\*/g;
+  while ((match = boldRegex.exec(text)) !== null) {
+    matches.push({
+      index: match.index,
+      endIndex: match.index + match[0].length,
+      type: 'bold',
+      content: match[1],
+    });
+  }
+
+  // Find links
+  const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
+  while ((match = linkRegex.exec(text)) !== null) {
+    matches.push({
+      index: match.index,
+      endIndex: match.index + match[0].length,
+      type: 'link',
+      content: match[1],
+      extra: match[2],
+    });
+  }
+
+  // Sort matches by index
+  matches.sort((a, b) => a.index - b.index);
+
+  // Remove overlapping matches (keep the first one)
+  const filteredMatches: typeof matches = [];
+  matches.forEach((match) => {
+    const overlaps = filteredMatches.some(
+      (existing) =>
+        (match.index >= existing.index && match.index < existing.endIndex) ||
+        (match.endIndex > existing.index && match.endIndex <= existing.endIndex) ||
+        (match.index <= existing.index && match.endIndex >= existing.endIndex)
+    );
+    if (!overlaps) {
+      filteredMatches.push(match);
+    }
+  });
+
+  // Build result array
+  filteredMatches.forEach((match) => {
+    // Add text before match
+    if (match.index > lastIndex) {
+      const textBefore = text.slice(lastIndex, match.index);
+      if (textBefore) {
+        result.push(textBefore);
+      }
+    }
+
+    // Add the matched element
+    if (match.type === 'code') {
+      result.push(
+        <code key={`code-${keyIndex++}`} className="px-1.5 py-0.5 bg-muted-200 dark:bg-muted-800 rounded text-xs font-mono text-primary-700 dark:text-primary-300">
+          {match.content}
+        </code>
+      );
+    } else if (match.type === 'bold') {
+      result.push(
+        <strong key={`bold-${keyIndex++}`} className="font-semibold text-muted-900 dark:text-muted-50">
+          {match.content}
+        </strong>
+      );
+    } else if (match.type === 'link') {
+      result.push(
+        <a
+          key={`link-${keyIndex++}`}
+          href={match.extra}
+          target={match.extra?.startsWith('http') ? '_blank' : undefined}
+          rel={match.extra?.startsWith('http') ? 'noopener noreferrer' : undefined}
+          className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 underline"
+        >
+          {match.content}
+        </a>
+      );
+    }
+
+    lastIndex = match.endIndex;
+  });
+
+  // Add remaining text
+  if (lastIndex < text.length) {
+    result.push(text.slice(lastIndex));
+  }
+
+  return result.length > 0 ? result : [text];
+}
 
 interface BlogPostPageProps {
   params: {
@@ -75,60 +272,42 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
                   {post.excerpt}
                 </p>
                 <div className="text-base text-muted-700 dark:text-muted-300 leading-relaxed space-y-6">
-                  {post.content.split('\n\n').map((paragraph, index) => {
-                    // Check if paragraph is a code block
-                    if (paragraph.startsWith('```')) {
-                      const codeMatch = paragraph.match(/```(\w+)?\n([\s\S]*?)```/);
-                      if (codeMatch) {
-                        const [ language, code] = codeMatch;
-                        console.log(language, code);
-                        return (
-                          <pre
-                            key={index}
-                            className="bg-muted-900 dark:bg-muted-950 p-3 sm:p-4 rounded-lg overflow-x-auto border border-muted-700 text-xs sm:text-sm"
-                          >
-                            <code className="text-muted-200 font-mono">
-                              {code.trim()}
-                            </code>
-                          </pre>
-                        );
+                  {(() => {
+                    const content = post.content;
+                    const parts: JSX.Element[] = [];
+                    let keyIndex = 0;
+
+                    // Split content by code blocks first
+                    const codeBlockRegex = /```(\w+)?\n([\s\S]*?)```/g;
+                    let lastIndex = 0;
+                    let match;
+
+                    while ((match = codeBlockRegex.exec(content)) !== null) {
+                      // Add text before code block
+                      if (match.index > lastIndex) {
+                        const textBefore = content.slice(lastIndex, match.index);
+                        parts.push(...parseMarkdown(textBefore, keyIndex));
+                        keyIndex += 1000;
                       }
-                    }
-                    // Check if paragraph is a heading
-                    if (paragraph.startsWith('## ')) {
-                      const heading = paragraph.replace(/^##\s+/, '');
-                      return (
-                        <h2
-                          key={index}
-                          className="text-xl sm:text-2xl font-bold text-muted-900 dark:text-muted-50 mt-6 sm:mt-8 mb-3 sm:mb-4"
-                        >
-                          {heading}
-                        </h2>
+
+                      // Add code block
+                      const language = match[1] || '';
+                      const code = match[2].trim();
+                      parts.push(
+                        <CodeBlock key={keyIndex++} language={language} code={code} />
                       );
+
+                      lastIndex = codeBlockRegex.lastIndex;
                     }
-                    // Check if paragraph is a list item
-                    if (paragraph.startsWith('- ') || paragraph.startsWith('* ')) {
-                      const items = paragraph.split('\n').filter(line => line.trim().startsWith('- ') || line.trim().startsWith('* '));
-                      return (
-                        <ul key={index} className="list-disc list-inside space-y-2 ml-4">
-                          {items.map((item, itemIndex) => (
-                            <li key={itemIndex} className="text-muted-700 dark:text-muted-300">
-                              {item.replace(/^[-*]\s+/, '')}
-                            </li>
-                          ))}
-                        </ul>
-                      );
+
+                    // Add remaining text
+                    if (lastIndex < content.length) {
+                      const remainingText = content.slice(lastIndex);
+                      parts.push(...parseMarkdown(remainingText, keyIndex));
                     }
-                    // Regular paragraph
-                    if (paragraph.trim()) {
-                      return (
-                        <p key={index} className="leading-relaxed">
-                          {paragraph}
-                        </p>
-                      );
-                    }
-                    return null;
-                  })}
+
+                    return parts;
+                  })()}
                 </div>
               </div>
 

@@ -1,7 +1,16 @@
 import { MetadataRoute } from 'next'
+import { blogPosts } from '@/src/data/blogPosts'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://your-portfolio-domain.com' // Update with your actual domain
+  const baseUrl = 'https://mieworks.vercel.app'
+
+  // Generate blog post URLs
+  const blogUrls = blogPosts.map((post) => ({
+    url: `${baseUrl}/blog/${post.id}`,
+    lastModified: new Date(post.date),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }))
 
   return [
     {
@@ -28,6 +37,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.8,
     },
+    ...blogUrls,
     {
       url: `${baseUrl}/contact`,
       lastModified: new Date(),

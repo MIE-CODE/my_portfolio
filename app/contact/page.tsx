@@ -4,7 +4,7 @@ import { Layout } from "@/src/components/Layout";
 
 export const metadata: Metadata = {
   title: "Contact Me - Let's Work Together",
-  description: "Connect with Menya Israel, a professional full-stack developer with 5+ years of experience. Get in touch for web and mobile development projects, technical consultations, collaborations, or to discuss how we can bring your digital ideas to life.",
+  description: "Connect with Menyaga Enyo Israel, a professional full-stack developer with 5+ years of experience. Get in touch for web and mobile development projects, technical consultations, collaborations, or to discuss how we can bring your digital ideas to life.",
 };
 
 export default function ContactPage() {

@@ -174,22 +174,6 @@
       }
     }
     
-    &-image {
-      background-image: url("../../images/keyboard.png");
-      background-repeat: no-repeat;
-      background-size: contain;
-      background-position: center;
-      width: 100%;
-      max-width: 450px;
-      height: 180px;
-      opacity: 0.8;
-      filter: drop-shadow(0 10px 30px rgba(0, 231, 234, 0.2));
-      
-      @media screen and (min-width: 768px) {
-        height: 200px;
-        max-width: 500px;
-      }
-    }
   }
 }
 .info {

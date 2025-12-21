@@ -29,8 +29,8 @@ export const CanvasPreview = ({ imageSrc }: CanvasPreviewProps) => {
       
       // Make it non-accessible
       iframe.setAttribute("tabindex", "-1");
-      iframe.setAttribute("aria-disabled", "true");
       iframe.setAttribute("role", "presentation");
+      iframe.setAttribute("aria-hidden", "true");
       
       // Prevent focus
       iframe.addEventListener("focus", (e) => {
@@ -71,8 +71,8 @@ export const CanvasPreview = ({ imageSrc }: CanvasPreviewProps) => {
       onClick={(e) => e.preventDefault()}
       onDoubleClick={(e) => e.preventDefault()}
       tabIndex={-1}
-      aria-disabled="true"
       role="presentation"
+      aria-hidden="true"
     >
       <iframe
         ref={iframeRef}
@@ -95,8 +95,8 @@ export const CanvasPreview = ({ imageSrc }: CanvasPreviewProps) => {
           touchAction: 'none',
         }}
         tabIndex={-1}
-        aria-disabled="true"
         role="presentation"
+        aria-hidden="true"
         onLoad={() => {
           // Additional safety: disable interactions after iframe loads
           if (iframeRef.current) {

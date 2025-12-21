@@ -1,0 +1,24 @@
+{
+  "name": "Menyaga Enyo Israel - Portfolio",
+  "short_name": "MIE Portfolio",
+  "description": "Full Stack Developer Portfolio - React, Next.js, TypeScript Expert",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-icon.svg",
+      "sizes": "180x180",
+      "type": "image/svg+xml"
+    }
+  ],
+  "theme_color": "#009c9e",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/"
+}
+

@@ -678,11 +678,11 @@ export const ProjectsList = () => {
       {/* Projects Grid */}
       <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5" role="list">
         {activeTab === "frontend"
-          ? (showAllFrontend ? frontendProjects : frontendProjects.slice(0, 6)).map((project, i) => (
-              <ProjectCard key={project.id} project={project} index={i} />
+          ? (showAllFrontend ? frontendProjects : frontendProjects.slice(0, 6)).map((project, index) => (
+              <ProjectCard key={project.id} project={project} index={index} />
             ))
-          : (showAllBackend ? backendProjects : backendProjects.slice(0, 6)).map((project, i) => (
-              <ProjectCard key={project.id} project={project} index={i} />
+          : (showAllBackend ? backendProjects : backendProjects.slice(0, 6)).map((project, index) => (
+              <ProjectCard key={project.id} project={project} index={index} />
             ))}
       </div>
 
