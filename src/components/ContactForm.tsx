@@ -39,7 +39,7 @@ export const ContactForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="p-4 sm:p-6 md:p-8 bg-white/60 dark:bg-muted-800/60 border border-muted-200 dark:border-muted-700 rounded-2xl sm:rounded-3xl backdrop-blur-sm animate-fade-in-up"
+      className="p-4 sm:p-6 md:p-8 bg-white/50 dark:bg-muted-800/60 border border-muted-200 dark:border-muted-700 rounded-2xl sm:rounded-3xl backdrop-blur-sm shadow-sm dark:shadow-none animate-fade-in-up"
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
         <div>

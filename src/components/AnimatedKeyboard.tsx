@@ -168,10 +168,10 @@ export const AnimatedKeyboard = () => {
   return (
     <div ref={keyboardRef} className="w-full max-w-4xl mx-auto mt-4 sm:mt-6 md:mt-8 px-2 xs:px-3 sm:px-4">
       {/* Code Display */}
-      <div className="mb-3 sm:mb-4 p-2 xs:p-2.5 sm:p-3 md:p-4 bg-muted-900/50 dark:bg-muted-800/50 rounded-lg border border-primary-500/20 font-mono text-[10px] xs:text-xs sm:text-sm text-primary-400 min-h-[50px] xs:min-h-[55px] sm:min-h-[60px] flex items-center overflow-x-auto">
+      <div className="mb-3 sm:mb-4 p-2 xs:p-2.5 sm:p-3 md:p-4 bg-muted-800/90 dark:bg-muted-800/50 rounded-lg border border-muted-300 dark:border-primary-500/20 font-mono text-[10px] xs:text-xs sm:text-sm text-muted-900 dark:text-primary-400 min-h-[50px] xs:min-h-[55px] sm:min-h-[60px] flex items-center overflow-x-auto shadow-md dark:shadow-none">
         <span className="text-primary-500 flex-shrink-0">$</span>
-        <span className="ml-1.5 xs:ml-2 whitespace-nowrap">{currentText}</span>
-        <span className="animate-pulse text-primary-400 ml-1 flex-shrink-0">|</span>
+        <span className="ml-1.5 xs:ml-2 whitespace-nowrap text-muted-200">{currentText}</span>
+        <span className="animate-pulse text-primary-600 dark:text-primary-400 ml-1 flex-shrink-0">|</span>
       </div>
 
       {/* Keyboard */}

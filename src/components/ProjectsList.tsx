@@ -646,7 +646,7 @@ export const ProjectsList = () => {
   return (
     <div>
       {/* Tab Selector */}
-      <div ref={tabsRef} className="flex items-center justify-center gap-2 sm:gap-3 bg-muted-100 dark:bg-muted-800/60 p-1 sm:p-1.5 rounded-lg border border-muted-200 dark:border-muted-700 w-fit mx-auto mb-6 sm:mb-10">
+      <div ref={tabsRef} className="flex items-center justify-center gap-2 sm:gap-3 bg-white/50 dark:bg-muted-800/60 p-1 sm:p-1.5 rounded-lg border border-muted-200 dark:border-muted-700 w-fit mx-auto mb-6 sm:mb-10 backdrop-blur-sm">
         <button
           className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-md font-medium text-xs sm:text-sm transition-all duration-300 ${
             activeTab === "frontend"

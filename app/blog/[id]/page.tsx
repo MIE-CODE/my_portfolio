@@ -248,7 +248,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
           </Link>
 
           <article className="max-w-4xl mx-auto px-4">
-            <div className="bg-white/60 dark:bg-muted-800/60 border border-muted-200 dark:border-muted-700 rounded-2xl p-4 sm:p-6 md:p-8 lg:p-12">
+            <div className="bg-white/50 dark:bg-muted-800/60 border border-muted-200 dark:border-muted-700 rounded-2xl p-4 sm:p-6 md:p-8 lg:p-12 backdrop-blur-sm shadow-sm dark:shadow-none">
               <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
                 <span className="px-2 sm:px-3 py-1 text-[10px] xs:text-xs font-medium text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20 rounded-full border border-primary-200 dark:border-primary-800">
                   {post.category}

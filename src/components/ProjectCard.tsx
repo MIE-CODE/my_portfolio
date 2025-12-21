@@ -51,7 +51,7 @@ export const ProjectCard = ({
     >
       <div className="flex flex-col gap-3 flex-1">
         {/* Project Image */}
-        <div className="relative w-full h-40 sm:h-48 rounded-lg overflow-hidden bg-muted-100 dark:bg-muted-800 border border-muted-200 dark:border-muted-700 flex items-center justify-center">
+        <div className="relative w-full h-40 sm:h-48 rounded-lg overflow-hidden bg-white/40 dark:bg-muted-800 border border-muted-200 dark:border-muted-700 flex items-center justify-center">
           {project.category === "Backend" ? (
             <div className="w-full h-full flex items-center justify-center p-4">
               <ApiIcon />

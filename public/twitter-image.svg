@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" width="1200" height="600">
   <defs>
     <linearGradient id="twitterGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#009c9e;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#0066cc;stop-opacity:1" />
+      <stop offset="0%" style="stop-color:#627d98;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#486581;stop-opacity:1" />
     </linearGradient>
     <filter id="twitterShadow">
       <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.25"/>

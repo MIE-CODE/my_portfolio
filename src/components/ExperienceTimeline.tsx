@@ -89,7 +89,7 @@ export const ExperienceTimeline = () => {
                 }}
               >
                 <div className="absolute left-3 sm:left-6 top-2 w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-primary-500 dark:bg-primary-400 border-2 sm:border-4 border-muted-50 dark:border-muted-800 shadow-lg shadow-primary-500/30 dark:shadow-primary-400/20" />
-                <div className="p-4 sm:p-6 bg-white/60 dark:bg-muted-800/60 border border-muted-200 dark:border-muted-700 rounded-2xl hover:bg-white/80 dark:hover:bg-muted-800/80 hover:border-primary-400 dark:hover:border-primary-600 transition-all duration-300">
+                <div className="p-4 sm:p-6 bg-white/50 dark:bg-muted-800/60 border border-muted-200 dark:border-muted-700 rounded-2xl hover:bg-white/70 dark:hover:bg-muted-800/80 hover:border-primary-400 dark:hover:border-primary-600 transition-all duration-300 backdrop-blur-sm shadow-sm dark:shadow-none">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3 sm:mb-4">
                     <div>
                       <h3 className="text-lg sm:text-xl font-semibold text-muted-900 dark:text-muted-50 mb-1">

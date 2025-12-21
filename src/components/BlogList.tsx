@@ -11,7 +11,7 @@ export const BlogList = () => {
       {blogPosts.map((post, index) => (
         <article
           key={post.id}
-          className={`p-6 bg-white/60 dark:bg-muted-800/60 border border-muted-200 dark:border-muted-700 rounded-2xl transition-all duration-300 hover:bg-white/80 dark:hover:bg-muted-800/80 hover:border-primary-400 dark:hover:border-primary-600 hover:-translate-y-2 hover:shadow-xl hover:shadow-primary-500/10 dark:hover:shadow-primary-400/10 ${
+          className={`p-6 bg-white/50 dark:bg-muted-800/60 border border-muted-200 dark:border-muted-700 rounded-2xl transition-all duration-300 hover:bg-white/70 dark:hover:bg-muted-800/80 hover:border-primary-400 dark:hover:border-primary-600 hover:-translate-y-2 hover:shadow-xl hover:shadow-primary-500/10 dark:hover:shadow-primary-400/10 backdrop-blur-sm shadow-sm dark:shadow-none ${
             isVisible
               ? `animate-fade-in-up opacity-100`
               : "opacity-0"

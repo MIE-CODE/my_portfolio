@@ -102,15 +102,25 @@ export const ServicesList = () => {
       {services.map((service, index) => (
         <article
           key={index}
-          className="group relative p-6 sm:p-7 md:p-8 bg-gradient-to-br from-white/80 to-white/60 dark:from-muted-800/80 dark:to-muted-800/60 border border-muted-200 dark:border-muted-700 rounded-2xl sm:rounded-3xl transition-all duration-500 hover:border-primary-400 dark:hover:border-primary-600 hover:-translate-y-3 hover:shadow-2xl hover:shadow-primary-500/20 dark:hover:shadow-primary-400/20 overflow-hidden"
+          className="group relative p-6 sm:p-7 md:p-8 bg-gradient-to-br from-white/80 to-white/70 dark:from-muted-800/80 dark:to-muted-800/60 border-2 border-muted-200 dark:border-muted-700 rounded-2xl sm:rounded-3xl transition-all duration-500 hover:border-opacity-50 hover:-translate-y-3 overflow-hidden backdrop-blur-sm shadow-lg dark:shadow-none"
+          style={{
+            boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+          }}
         >
-          {/* Gradient overlay on hover */}
-          <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-2xl sm:rounded-3xl`} />
+          {/* Gradient border glow on hover */}
+          <div 
+            className={`absolute -inset-0.5 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-30 blur-sm transition-opacity duration-500 rounded-2xl sm:rounded-3xl -z-10`}
+          />
           
-          {/* Icon with gradient background */}
+          {/* Gradient overlay on hover */}
+          <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-8 transition-opacity duration-500 rounded-2xl sm:rounded-3xl`} />
+          
+          {/* Icon with vibrant gradient background */}
           <div className="relative mb-5 sm:mb-6">
-            <div className={`inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-gradient-to-br ${service.color} opacity-10 group-hover:opacity-20 transition-opacity duration-500 mb-3`}>
-              <div className="text-primary-600 dark:text-primary-400 group-hover:scale-110 transition-transform duration-300 [&>svg]:w-8 [&>svg]:h-8 sm:[&>svg]:w-10 sm:[&>svg]:h-10">
+            <div className={`inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-gradient-to-br ${service.color} opacity-40 group-hover:opacity-60 transition-all duration-500 mb-3 shadow-xl group-hover:shadow-2xl group-hover:scale-110`}>
+              {/* Glow effect */}
+              <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-50 blur-xl group-hover:opacity-70 transition-opacity duration-500 rounded-xl sm:rounded-2xl`} />
+              <div className="relative z-10 text-white group-hover:scale-110 transition-transform duration-300 [&>svg]:w-8 [&>svg]:h-8 sm:[&>svg]:w-10 sm:[&>svg]:h-10 [&>svg]:drop-shadow-lg [&>svg]:brightness-110 [&>svg]:contrast-110" style={{ filter: 'brightness(1.2) drop-shadow(0 4px 8px rgba(0,0,0,0.3))' }}>
                 {service.icon}
               </div>
             </div>
@@ -118,7 +128,7 @@ export const ServicesList = () => {
 
           {/* Content */}
           <div className="relative z-10">
-            <h3 className="text-xl sm:text-2xl font-bold text-muted-900 dark:text-muted-50 mb-3 sm:mb-4 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-300">
+            <h3 className={`text-xl sm:text-2xl font-bold mb-3 sm:mb-4 transition-all duration-300 bg-gradient-to-r ${service.color} bg-clip-text text-transparent group-hover:scale-105 inline-block`}>
               {service.title}
             </h3>
             <p className="text-sm sm:text-base text-muted-700 dark:text-muted-300 mb-5 sm:mb-6 leading-relaxed">
@@ -130,7 +140,7 @@ export const ServicesList = () => {
               {service.features.map((feature, i) => (
                 <li
                   key={i}
-                  className="px-3 py-1.5 text-xs font-medium text-primary-700 dark:text-primary-300 bg-primary-50 dark:bg-primary-900/30 rounded-full border border-primary-200 dark:border-primary-800 group-hover:border-primary-400 dark:group-hover:border-primary-600 transition-colors duration-300"
+                  className={`px-3 py-1.5 text-xs font-semibold rounded-full transition-all duration-300 bg-gradient-to-br ${service.color} opacity-20 group-hover:opacity-30 text-white border border-white/20 group-hover:border-white/40 backdrop-blur-sm group-hover:scale-105`}
                 >
                   {feature}
                 </li>
@@ -140,10 +150,10 @@ export const ServicesList = () => {
             {/* CTA Link */}
             <a
               href="/contact"
-              className="inline-flex items-center gap-2 text-sm font-medium text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-300 group-hover:gap-3"
+              className={`inline-flex items-center gap-2 text-sm font-semibold transition-all duration-300 group-hover:gap-3 bg-gradient-to-r ${service.color} bg-clip-text text-transparent hover:scale-105`}
             >
               <span>Get Started</span>
-              <span className="text-lg">→</span>
+              <span className="text-lg group-hover:translate-x-1 transition-transform duration-300">→</span>
             </a>
           </div>
         </article>
