@@ -49,7 +49,7 @@ const frontendProjects: Array<{
   {
     id: 4,
     img: require("../images/ecommerce.png"),
-    skills: ["Three.js", "JavaScript",'CSS'],
+    skills: ["Three.js", "JavaScript","CSS"],
     title: "Solar System",
     description: "Interactive 3D solar system visualization with realistic planetary orbits and smooth animations.",
     link: "https://solar-system-tan-five.vercel.app/",
@@ -86,6 +86,336 @@ const frontendProjects: Array<{
     link: "https://current-time-five.vercel.app/",
     githubLink: "https://github.com/MIE-CODE/current-time",
     category: "Frontend",
+  },
+  {
+    id: 23,
+    img: require("../images/ecommerce.png"),
+    skills: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    title: "Music Streaming Platform",
+    description: "Modern music streaming app with playlist management, audio visualization, and seamless playback experience.",
+    link: "#",
+    githubLink: "#",
+    category: "Frontend",
+  },
+  {
+    id: 24,
+    img: require("../images/ecommerce.png"),
+    skills: ["React", "TypeScript", "GSAP", "Three.js"],
+    title: "3D Portfolio Website",
+    description: "Immersive 3D portfolio with interactive 3D models, smooth animations, and creative transitions.",
+    link: "#",
+    githubLink: "#",
+    category: "Frontend",
+  },
+  {
+    id: 25,
+    img: require("../images/ecommerce.png"),
+    skills: ["Next.js", "TypeScript", "Tailwind CSS", "Chart.js"],
+    title: "Analytics Dashboard",
+    description: "Beautiful analytics dashboard with real-time data visualization, interactive charts, and customizable widgets.",
+    link: "#",
+    githubLink: "#",
+    category: "Frontend",
+  },
+  {
+    id: 26,
+    img: require("../images/ecommerce.png"),
+    skills: ["React", "TypeScript", "Framer Motion", "Zustand"],
+    title: "Task Management App",
+    description: "Advanced task management with drag-and-drop, kanban boards, time tracking, and team collaboration.",
+    link: "#",
+    githubLink: "#",
+    category: "Frontend",
+  },
+  {
+    id: 27,
+    img: require("../images/ecommerce.png"),
+    skills: ["Next.js", "TypeScript", "Tailwind CSS", "Sanity CMS"],
+    title: "Blog Platform",
+    description: "Modern blog platform with headless CMS integration, markdown support, and SEO optimization.",
+    link: "#",
+    githubLink: "#",
+    category: "Frontend",
+  },
+  {
+    id: 28,
+    img: require("../images/ecommerce.png"),
+    skills: ["React", "TypeScript", "GSAP", "Canvas API"],
+    title: "Interactive Drawing App",
+    description: "Creative drawing application with multiple brush tools, layers, undo/redo, and export functionality.",
+    link: "#",
+    githubLink: "#",
+    category: "Frontend",
+  },
+  {
+    id: 29,
+    img: require("../images/ecommerce.png"),
+    skills: ["Next.js", "TypeScript", "Tailwind CSS", "WebRTC"],
+    title: "Video Conferencing App",
+    description: "Real-time video conferencing platform with screen sharing, chat, and recording capabilities.",
+    link: "#",
+    githubLink: "#",
+    category: "Frontend",
+  },
+  {
+    id: 30,
+    img: require("../images/ecommerce.png"),
+    skills: ["React", "TypeScript", "Framer Motion", "PWA"],
+    title: "Weather Forecast App",
+    description: "Progressive web app with weather forecasts, location-based alerts, and beautiful weather animations.",
+    link: "#",
+    githubLink: "#",
+    category: "Frontend",
+  },
+  {
+    id: 31,
+    img: require("../images/ecommerce.png"),
+    skills: ["Next.js", "TypeScript", "Tailwind CSS", "Stripe"],
+    title: "E-commerce Store",
+    description: "Full-featured e-commerce platform with shopping cart, checkout, payment integration, and order tracking.",
+    link: "#",
+    githubLink: "#",
+    category: "Frontend",
+  },
+  {
+    id: 32,
+    img: require("../images/ecommerce.png"),
+    skills: ["React", "TypeScript", "GSAP", "WebSocket"],
+    title: "Real-time Chat App",
+    description: "Modern chat application with real-time messaging, file sharing, emoji reactions, and typing indicators.",
+    link: "#",
+    githubLink: "#",
+    category: "Frontend",
+  },
+  {
+    id: 33,
+    img: require("../images/ecommerce.png"),
+    skills: ["Next.js", "TypeScript", "Tailwind CSS", "Mapbox"],
+    title: "Location Tracker",
+    description: "Interactive map application with location tracking, route planning, and geofencing capabilities.",
+    link: "#",
+    githubLink: "#",
+    category: "Frontend",
+  },
+  {
+    id: 34,
+    img: require("../images/ecommerce.png"),
+    skills: ["React", "TypeScript", "Framer Motion", "IndexedDB"],
+    title: "Offline Note Taking App",
+    description: "Feature-rich note-taking app with offline support, rich text editing, tags, and search functionality.",
+    link: "#",
+    githubLink: "#",
+    category: "Frontend",
+  },
+  {
+    id: 35,
+    img: require("../images/ecommerce.png"),
+    skills: ["Next.js", "TypeScript", "Tailwind CSS", "D3.js"],
+    title: "Data Visualization Tool",
+    description: "Advanced data visualization platform with interactive charts, graphs, and custom dashboard creation.",
+    link: "#",
+    githubLink: "#",
+    category: "Frontend",
+  },
+  {
+    id: 36,
+    img: require("../images/ecommerce.png"),
+    skills: ["React", "TypeScript", "GSAP", "Web Audio API"],
+    title: "Audio Synthesizer",
+    description: "Interactive web-based audio synthesizer with multiple oscillators, filters, and effects.",
+    link: "#",
+    githubLink: "#",
+    category: "Frontend",
+  },
+  {
+    id: 37,
+    img: require("../images/ecommerce.png"),
+    skills: ["Next.js", "TypeScript", "Tailwind CSS", "Firebase"],
+    title: "Social Media Platform",
+    description: "Social networking platform with posts, comments, likes, follows, and real-time notifications.",
+    link: "#",
+    githubLink: "#",
+    category: "Frontend",
+  },
+  {
+    id: 38,
+    img: require("../images/ecommerce.png"),
+    skills: ["React", "TypeScript", "Framer Motion", "TensorFlow.js"],
+    title: "AI Image Generator",
+    description: "AI-powered image generation tool with style transfer, filters, and creative image manipulation.",
+    link: "#",
+    githubLink: "#",
+    category: "Frontend",
+  },
+  {
+    id: 39,
+    img: require("../images/ecommerce.png"),
+    skills: ["Next.js", "TypeScript", "Tailwind CSS", "WebGL"],
+    title: "3D Product Viewer",
+    description: "Interactive 3D product visualization with 360° rotation, zoom, and AR preview capabilities.",
+    link: "#",
+    githubLink: "#",
+    category: "Frontend",
+  },
+  {
+    id: 40,
+    img: require("../images/ecommerce.png"),
+    skills: ["React", "TypeScript", "GSAP", "Chart.js"],
+    title: "Crypto Portfolio Tracker",
+    description: "Cryptocurrency portfolio tracker with real-time prices, charts, profit/loss calculations, and alerts.",
+    link: "#",
+    githubLink: "#",
+    category: "Frontend",
+  },
+  {
+    id: 41,
+    img: require("../images/ecommerce.png"),
+    skills: ["Next.js", "TypeScript", "Tailwind CSS", "Contentful"],
+    title: "News Aggregator",
+    description: "Modern news aggregator with category filtering, bookmarking, and personalized news feed.",
+    link: "#",
+    githubLink: "#",
+    category: "Frontend",
+  },
+  {
+    id: 42,
+    img: require("../images/ecommerce.png"),
+    skills: ["React", "TypeScript", "Framer Motion", "PWA"],
+    title: "Fitness Tracker",
+    description: "Comprehensive fitness tracking app with workout plans, progress charts, and goal setting.",
+    link: "#",
+    githubLink: "#",
+    category: "Frontend",
+  },
+  {
+    id: 43,
+    img: require("../images/ecommerce.png"),
+    skills: ["Next.js", "TypeScript", "Tailwind CSS", "WebRTC"],
+    title: "Screen Recorder",
+    description: "Browser-based screen recording tool with audio capture, editing, and export functionality.",
+    link: "#",
+    githubLink: "#",
+    category: "Frontend",
+  },
+  {
+    id: 44,
+    img: require("../images/ecommerce.png"),
+    skills: ["React", "TypeScript", "GSAP", "Canvas API"],
+    title: "Game Development Platform",
+    description: "Interactive game development tool with sprite editor, level designer, and game engine.",
+    link: "#",
+    githubLink: "#",
+    category: "Frontend",
+  },
+  {
+    id: 45,
+    img: require("../images/ecommerce.png"),
+    skills: ["Next.js", "TypeScript", "Tailwind CSS", "Stripe"],
+    title: "Subscription Management",
+    description: "Subscription management platform with billing, plan switching, and usage analytics.",
+    link: "#",
+    githubLink: "#",
+    category: "Frontend",
+  },
+  {
+    id: 46,
+    img: require("../images/ecommerce.png"),
+    skills: ["React", "TypeScript", "Framer Motion", "WebSocket"],
+    title: "Collaborative Whiteboard",
+    description: "Real-time collaborative whiteboard with drawing tools, shapes, text, and multi-user support.",
+    link: "#",
+    githubLink: "#",
+    category: "Frontend",
+  },
+  {
+    id: 47,
+    img: require("../images/ecommerce.png"),
+    skills: ["Next.js", "TypeScript", "Tailwind CSS", "AI Integration"],
+    title: "AI Code Assistant",
+    description: "AI-powered coding assistant with code completion, explanation, and refactoring suggestions.",
+    link: "#",
+    githubLink: "#",
+    category: "Frontend",
+  },
+  {
+    id: 48,
+    img: require("../images/ecommerce.png"),
+    skills: ["React", "TypeScript", "GSAP", "Three.js"],
+    title: "Virtual Reality Showcase",
+    description: "VR experience showcase with 360° views, interactive hotspots, and immersive navigation.",
+    link: "#",
+    githubLink: "#",
+    category: "Frontend",
+  },
+  {
+    id: 49,
+    img: require("../images/ecommerce.png"),
+    skills: ["Next.js", "TypeScript", "Tailwind CSS", "GraphQL"],
+    title: "API Documentation Tool",
+    description: "Interactive API documentation platform with live testing, code examples, and versioning.",
+    link: "#",
+    githubLink: "#",
+    category: "Frontend",
+  },
+];
+
+// Upcoming Projects - Projects I look forward to building
+const upcomingProjects = [
+  {
+    id: 50,
+    title: "Decentralized Social Network",
+    description: "Building a Web3 social network on Ethereum with smart contracts for content ownership and monetization.",
+    skills: ["Web3", "Ethereum", "Solidity", "IPFS"],
+    status: "Planning",
+  },
+  {
+    id: 51,
+    title: "AI-Powered Design Tool",
+    description: "Creating an AI-assisted design tool that generates UI components and layouts based on natural language descriptions.",
+    skills: ["AI/ML", "Canvas API", "Design Systems"],
+    status: "Research",
+  },
+  {
+    id: 52,
+    title: "Real-time Collaboration Suite",
+    description: "Building a comprehensive collaboration platform with video, whiteboard, document editing, and project management.",
+    skills: ["WebRTC", "WebSocket", "CRDT"],
+    status: "Planning",
+  },
+  {
+    id: 53,
+    title: "Blockchain Analytics Dashboard",
+    description: "Developing an analytics dashboard for tracking DeFi protocols, NFT markets, and blockchain metrics.",
+    skills: ["Web3", "D3.js", "Real-time Data"],
+    status: "Research",
+  },
+  {
+    id: 54,
+    title: "AR Shopping Experience",
+    description: "Creating an augmented reality shopping app where users can visualize products in their space before purchasing.",
+    skills: ["WebXR", "Three.js", "AR"],
+    status: "Planning",
+  },
+  {
+    id: 55,
+    title: "Code Review AI Assistant",
+    description: "Building an AI tool that automatically reviews code, suggests improvements, and detects security vulnerabilities.",
+    skills: ["AI/ML", "AST Parsing", "Code Analysis"],
+    status: "Research",
+  },
+  {
+    id: 56,
+    title: "Decentralized File Storage",
+    description: "Developing a decentralized file storage solution using IPFS and blockchain for permanent, distributed storage.",
+    skills: ["IPFS", "Web3", "Blockchain"],
+    status: "Planning",
+  },
+  {
+    id: 57,
+    title: "Interactive Learning Platform",
+    description: "Creating an immersive learning platform with gamification, progress tracking, and personalized learning paths.",
+    skills: ["Gamification", "Analytics", "Personalization"],
+    status: "Planning",
   },
 ];
 
@@ -388,6 +718,46 @@ export const ProjectsList = () => {
           More projects coming soon...
         </p>
       )}
+
+      {/* Upcoming Projects Section */}
+      <div className="mt-16 sm:mt-20 pt-8 sm:pt-12 border-t border-muted-200 dark:border-muted-700">
+        <h3 className="text-xl sm:text-2xl font-bold gradient-text font-mono text-center mb-6 sm:mb-8">
+          {"< Upcoming Projects >"}
+        </h3>
+        <p className="text-center text-sm text-muted-600 dark:text-muted-400 mb-8 sm:mb-10 max-w-2xl mx-auto">
+          Exciting projects I&apos;m planning to build. These represent my passion for innovation and continuous learning.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+          {upcomingProjects.map((project) => (
+            <div
+              key={project.id}
+              className="game-card p-4 sm:p-5 hover:border-primary-400 dark:hover:border-primary-600 transition-all duration-300 relative overflow-hidden"
+            >
+              <div className="absolute top-2 right-2">
+                <span className="px-2 py-1 text-[9px] xs:text-[10px] font-mono rounded bg-accent-100 dark:bg-accent-900/30 border border-accent-300 dark:border-accent-700 text-accent-700 dark:text-accent-300">
+                  {project.status}
+                </span>
+              </div>
+              <h4 className="text-base sm:text-lg font-semibold text-muted-900 dark:text-muted-50 mb-2 sm:mb-3 pr-16">
+                {project.title}
+              </h4>
+              <p className="text-xs sm:text-sm text-muted-600 dark:text-muted-400 leading-relaxed mb-3 sm:mb-4">
+                {project.description}
+              </p>
+              <div className="flex flex-wrap gap-1.5">
+                {project.skills.map((skill, idx) => (
+                  <span
+                    key={idx}
+                    className="px-2 py-0.5 text-[9px] xs:text-[10px] font-mono bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-800 rounded text-primary-700 dark:text-primary-300"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

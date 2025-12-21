@@ -11,8 +11,6 @@ import {
   SassIcon,
   TailwindcssIcon,
   TypeScriptIcon,
-  VueIcon,
-  AstroIcon,
   ShadcnIcon,
   GsapIcon,
   EthereumIcon,

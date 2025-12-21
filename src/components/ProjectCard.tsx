@@ -1,6 +1,5 @@
 "use client";
-import Image, { StaticImageData } from "next/image";
-import card from "../images/card.png";
+import  { StaticImageData } from "next/image";
 import { GithubIcon, ApiIcon } from "../svg";
 import { CanvasPreview } from "./conva_preview";
 import { useRef, useEffect } from "react";

@@ -1,5 +1,5 @@
 "use client";
-import { ReactIcon, NextIcon, ReactNativeIcon, TypeScriptIcon, Web3Icon } from "../svg";
+import { ReactIcon, NextIcon, TypeScriptIcon, Web3Icon } from "../svg";
 import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 
 const services = [
