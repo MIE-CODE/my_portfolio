@@ -27,7 +27,7 @@ export default function ServicesPage() {
       <main id="main-content" className="min-h-screen pt-20 sm:pt-24 pb-12 sm:pb-20">
         <div className="container-custom px-4">
           <section className="text-center mb-12 sm:mb-16">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text font-mono mb-4 sm:mb-6">
+            <h1 className="text-2xl sm:text-3xl font-bold gradient-text font-mono mb-4 sm:mb-6">
               {"< Services >"}
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-muted-600 dark:text-muted-400 max-w-3xl mx-auto leading-relaxed mb-2">
