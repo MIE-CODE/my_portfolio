@@ -2,10 +2,10 @@
 import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 
 const stats = [
-  { label: "Projects", value: "20+", icon: "🎯" },
-  { label: "Years Exp", value: "5+", icon: "⏱️" },
-  { label: "Technologies", value: "15+", icon: "🛠️" },
-  { label: "Happy Clients", value: "10+", icon: "😊" },
+  { label: "Portfolio products", value: "8+", icon: "🎯" },
+  { label: "Years experience", value: "5+", icon: "⏱️" },
+  { label: "Stacks", value: "Next & Nuxt", icon: "🛠️" },
+  { label: "Leadership", value: "CTO · Founder", icon: "🎖️" },
 ];
 
 export const Stats = () => {

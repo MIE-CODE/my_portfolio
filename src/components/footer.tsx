@@ -12,7 +12,7 @@ export const Footer = () => {
   }, []);
   
   return (
-    <footer className="mt-20 py-12 bg-white/40 dark:bg-muted-800/60 border-t border-muted-200 dark:border-muted-700 backdrop-blur-sm" role="contentinfo">
+    <footer className="mt-20 py-12 bg-white/80 dark:bg-muted-800/60 border-t border-muted-200/95 dark:border-muted-700 backdrop-blur-md shadow-[0_-1px_0_rgba(41,37,36,0.06)] dark:shadow-none" role="contentinfo">
       <div className="container-custom">
         <div className="flex flex-col items-center text-center gap-4 max-w-xl mx-auto">
           <h2 className="text-xl sm:text-2xl font-bold gradient-text font-mono">

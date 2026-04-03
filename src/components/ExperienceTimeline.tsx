@@ -3,6 +3,33 @@ import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 
 const experiences = [
   {
+    year: "2026 - Present",
+    title: "Chief Technology Officer",
+    company: "Belsoft Systems Ltd",
+    description:
+      "CTO for Belsoft Systems’ engineering across products: BelCore—a Slack-like workspace client (channels, DMs, threads, mentions, bookmarks, settings) on Next.js, TypeScript, Tailwind, Redux Toolkit—and BelPower at https://www.belpower.ng/ for utility and telecom billing: airtime, data, electricity with meter verification, cable TV, wallet and history, customer dashboard and admin operations. Sets technical direction, API integration patterns, and delivery with the broader team.",
+    achievements: [
+      "Owns architecture and delivery for multiple web apps against a shared REST API and repository-style client layer",
+      "Ships BelCore’s Slack-style shell (sidebar, workspace navigation, auth routes) and evolves HTTP client, Redux app state, and design system (Sora, Tailwind tokens)",
+      "Leads BelPower: Next.js App Router, Zustand, react-hook-form + Zod, Paystack, httpOnly session cookies, middleware, EN/FR i18n, and Next route handlers to the belpower backend API",
+      "Partners across product and operations with company presence at belsoftsystems.com",
+    ],
+  },
+  {
+    year: "2025 - Present",
+    title: "Founder & Owner",
+    company: "Blivap",
+    description:
+      "Building and shipping Blivap, a Nigeria-focused platform connecting blood and sperm donors with people who need donations—marketing and education (“Give Blood. Save Lives.”) plus authenticated donor experiences (profiles, discovery, appointments, wallet, bookings). Next.js (App Router), React, TypeScript, Tailwind, MUI, Redux Toolkit, and a remote REST API with cookie-based sessions.",
+    achievements: [
+      "Designed the product end-to-end: public content (healthcare, news, FAQ, legal) and logged-in donor flows backed by environment-driven API configuration",
+      "Implemented auth (register, login, verification, password reset), session validation via backend (/me), and post-login flows such as avatar selection",
+      "Shipped donor features: listings, bookings, ID verification, wallet and history—Axios fetcher with Bearer tokens from cookies",
+      "Added SEO and sharing with dynamic Open Graph images (@vercel/og) and structured metadata",
+      "Used Formik + Yup for forms, Framer Motion and GSAP for motion, and tooling (ESLint, Prettier, Husky, lint-staged) for maintainability",
+    ],
+  },
+  {
     year: "2024 - Present",
     title: "Full Stack Developer",
     company: "Freelance",
@@ -18,30 +45,30 @@ const experiences = [
   },
   {
     year: "2022 - 2024",
-    title: "Full Stack Developer",
-    company: "Trueperk",
-    description: "Developed and maintained an AI-driven employee recognition and rewards platform using Nuxt.js, Vue.js, and TypeScript. Collaborated directly with designers to implement pixel-perfect designs, integrated analytics platforms, and optimized for performance.",
+    title: "Chief Technology Officer",
+    company: "True Perk",
+    description:
+      "Led engineering for an employee engagement and recognition platform: perks and gifting, recognition and activity feeds, calendars, analytics, billing, automations, and org administration. Stack: Nuxt 3, Vue 3, TypeScript, Pinia, Tailwind, and a repository pattern for APIs.",
     achievements: [
-      "Built scalable component libraries with Vue.js and Nuxt.js following design system guidelines",
-      "Implemented real-time analytics with PostHog and Google Analytics for user behavior tracking",
-      "Optimized application performance achieving 90+ Lighthouse scores and fast page load times",
-      "Collaborated with designers to bring creative visions to life with animations and interactions",
-      "Ensured cross-browser compatibility and responsive design across all devices",
-      "Maintained security-conscious development practices with rigorous QA and testing",
+      "Owned frontend architecture, component system, and integration with analytics and payment flows",
+      "Shipped features across engagement, employees, perks, calendar, notifications, and admin settings",
+      "Drove performance and quality: Lighthouse-focused optimization, responsive UI, and secure client patterns (RBAC, XSS-safe content)",
+      "Collaborated with design on Shadcn/Radix-based UI and scalable layouts for enterprise use",
+      "Established patterns for Pinia stores, middleware, and composables aligned with product growth",
     ],
   },
   {
     year: "2020 - 2022",
-    title: "Full Stack Developer",
-    company: "SparkPayHQ",
-    description: "Developed payroll SaaS solution using Next.js, React, and TypeScript. Built marketing websites and landing pages from Figma designs, integrated CRM systems, and optimized for performance and SEO.",
+    title: "Chief Technology Officer",
+    company: "SparkPay",
+    description:
+      "Led engineering for a payroll SaaS product on Next.js, React, and TypeScript: core payroll experiences, marketing sites and landing pages from design, HubSpot CRM integration, and strong performance, SEO, and QA practices.",
     achievements: [
-      "Built responsive, pixel-perfect interfaces from Figma designs with Tailwind CSS",
-      "Implemented complex payroll calculation features with TypeScript for type safety",
-      "Optimized application performance for handling large datasets with efficient data structures",
-      "Integrated HubSpot CRM for lead management and customer relationship tracking",
-      "Achieved high Lighthouse scores through performance optimization and Core Web Vitals improvements",
-      "Maintained security best practices and conducted thorough QA testing",
+      "Owned technical direction for the web app and marketing properties, aligning delivery with product and growth goals",
+      "Shipped payroll and data-heavy flows with TypeScript-first patterns and maintainable React architecture",
+      "Partnered with design on responsive, pixel-perfect UI (including Tailwind) and conversion-focused pages",
+      "Integrated HubSpot CRM for lead and customer workflows",
+      "Drove performance and Core Web Vitals (Lighthouse) and security-conscious release practices",
     ],
   },
   {
@@ -89,7 +116,7 @@ export const ExperienceTimeline = () => {
                 }}
               >
                 <div className="absolute left-3 sm:left-6 top-2 w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-primary-500 dark:bg-primary-400 border-2 sm:border-4 border-muted-50 dark:border-muted-800 shadow-lg shadow-primary-500/30 dark:shadow-primary-400/20" />
-                <div className="p-4 sm:p-6 bg-white/50 dark:bg-muted-800/60 border border-muted-200 dark:border-muted-700 rounded-2xl hover:bg-white/70 dark:hover:bg-muted-800/80 hover:border-primary-400 dark:hover:border-primary-600 transition-all duration-300 backdrop-blur-sm shadow-sm dark:shadow-none">
+                <div className="p-4 sm:p-6 bg-white/90 dark:bg-muted-800/60 border border-muted-200/95 dark:border-muted-700 rounded-2xl hover:bg-white dark:hover:bg-muted-800/80 hover:border-primary-300 dark:hover:border-primary-600 transition-all duration-300 backdrop-blur-sm shadow-[0_2px_10px_rgba(28,25,23,0.06)] dark:shadow-none">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3 sm:mb-4">
                     <div>
                       <h3 className="text-lg sm:text-xl font-semibold text-muted-900 dark:text-muted-50 mb-1">
@@ -123,7 +150,7 @@ export const ExperienceTimeline = () => {
           {education.map((edu, index) => (
             <div
               key={index}
-              className={`p-4 sm:p-6 bg-white/60 dark:bg-muted-800/60 border border-muted-200 dark:border-muted-700 rounded-2xl hover:bg-white/80 dark:hover:bg-muted-800/80 hover:border-primary-400 dark:hover:border-primary-600 transition-all duration-300 ${
+              className={`p-4 sm:p-6 bg-white/90 dark:bg-muted-800/60 border border-muted-200/95 dark:border-muted-700 rounded-2xl hover:bg-white dark:hover:bg-muted-800/80 hover:border-primary-300 dark:hover:border-primary-600 transition-all duration-300 shadow-[0_2px_10px_rgba(28,25,23,0.06)] dark:shadow-none ${
                 isVisible
                   ? `animate-fade-in-up opacity-100`
                   : "opacity-0"

@@ -5,11 +5,11 @@ import { ThemeProviderWrapper } from "../src/components/ThemeProviderWrapper";
 
 export const metadata: Metadata = {
   title: {
-    default: "Menyaga Enyo Israel - Full Stack Developer | React, Next.js, React Native Expert",
+    default: "Menyaga Enyo Israel - CTO & Full Stack Engineer | Next.js, Nuxt, React, TypeScript",
     template: "%s",
   },
   description:
-    "Professional full-stack developer with 5+ years of experience specializing in React, Next.js, TypeScript, and Tailwind CSS. Expert in building production websites from Figma designs to deployment, performance optimization (Core Web Vitals, Lighthouse), analytics integration (Google Analytics, PostHog), CRM systems (HubSpot), and headless CMS (Sanity, Contentful). Genuinely excited about blockchain technology and eager to learn Web3 development and Ethereum scaling solutions. Passionate about crafting high-quality user experiences with security-conscious development practices.",
+    "CTO at Belsoft Systems (BelCore, BelPower); founder of Blivap; former CTO at True Perk and SparkPay. Builds production SaaS with Next.js, Nuxt, Vue, React, TypeScript—collaboration tools, fintech and bill pay, HR tech, and marketplaces—with strong performance, analytics (GA, PostHog), and CRM integration. Freelance delivery from Figma to deploy; ongoing interest in Web3 and Ethereum.",
   keywords: [
     "Full Stack Developer",
     "React Developer",

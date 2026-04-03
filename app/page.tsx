@@ -12,7 +12,7 @@ import gsap from "gsap";
 
 export default function Home() {
   const text = useTypewriter({
-    words: ["Developer", "Engineer", "Architect", "Creator"],
+    words: ["Engineer", "Architect", "CTO", "Founder", "Creator"],
     loop: true,
     typeSpeed: 80,
     deleteSpeed: 50,
@@ -130,11 +130,11 @@ export default function Home() {
                   <Cursor cursorBlinking />
                 </h1>
                 <p className="text-[10px] xs:text-xs sm:text-sm font-mono text-muted-600 dark:text-muted-400 tracking-wider px-2">
-                  Next.js • React • TypeScript • Tailwind CSS • Web3 • Ethereum • Performance • Analytics
+                  Next.js • Nuxt • React • Vue • TypeScript • Tailwind • SaaS • Payments • Leadership
                 </p>
               </div>
               <p className="text-xs sm:text-sm md:text-base text-muted-700 dark:text-muted-300 max-w-xl mx-auto leading-relaxed px-2">
-                Building production websites from Figma to deployment. Expert in performance optimization and analytics integration. Genuinely excited about blockchain technology and eager to learn Web3 development.
+                CTO at Belsoft Systems (BelCore, BelPower), founder of Blivap, and former CTO at True Perk and SparkPay. I ship production SaaS—collaboration tools, fintech and bill pay, HR tech, and marketplaces—with strong performance, analytics, and design fidelity. Still curious about Web3 and Ethereum.
               </p>
             </div>
             

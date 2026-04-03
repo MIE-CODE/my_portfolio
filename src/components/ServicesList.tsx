@@ -1,12 +1,13 @@
 "use client";
-import { 
-  ReactIcon, 
-  NextIcon, 
-  TypeScriptIcon, 
+import {
+  ReactIcon,
+  NextIcon,
+  TypeScriptIcon,
   Web3Icon,
   GoogleAnalyticsIcon,
-  ContentfulIcon,
   GsapIcon,
+  VueIcon,
+  ApiIcon,
 } from "../svg";
 import { useGSAP } from "../hooks/useGSAP";
 import { useRef } from "react";
@@ -15,52 +16,67 @@ import gsap from "gsap";
 const services = [
   {
     icon: <NextIcon />,
-    title: "Next.js Development",
-    description: "Build production-ready websites from Figma designs to deployment. High-performance, SEO-friendly applications with SSR/SSG, optimized for Core Web Vitals and Lighthouse scores.",
-    features: ["Figma to Code", "SSR/SSG", "Performance Optimization", "Lighthouse 95+"],
+    title: "Next.js & product delivery",
+    description:
+      "End-to-end SaaS and marketing sites on the App Router—dashboards, auth, middleware, and route handlers talking to REST APIs. Grounded in shipped work: bill payments and wallets (BelPower), donor marketplace (Blivap), and many freelance production apps from Figma to deploy.",
+    features: ["App Router", "Server & client components", "SEO & OG", "API integration"],
     color: "from-blue-500 to-cyan-500",
   },
   {
     icon: <ReactIcon />,
-    title: "React & TypeScript",
-    description: "Expert-level React and TypeScript development. Build dynamic, type-safe user interfaces with modern patterns, hooks, and component architecture.",
-    features: ["TypeScript", "Component Architecture", "State Management", "Type Safety"],
+    title: "React, TypeScript & UI systems",
+    description:
+      "Type-safe React with Redux Toolkit, Zustand, RHF + Zod, MUI, Radix, and Tailwind. Design-system thinking—tokens, accessibility, and maintainable component boundaries—for fintech, HR, and consumer products.",
+    features: ["TypeScript", "Zustand / Redux", "RHF + Zod", "Radix & MUI"],
     color: "from-cyan-400 to-blue-500",
   },
   {
-    icon: <Web3Icon />,
-    title: "Blockchain & Web3 Interest",
-    description: "Genuinely excited about blockchain technology and Ethereum scaling solutions. Eager to learn and contribute to Web3 development, smart contract integration, and building consumer-facing applications in the blockchain space.",
-    features: ["Ethereum", "Web3", "Learning", "Enthusiastic"],
-    color: "from-purple-500 to-pink-500",
+    icon: <VueIcon />,
+    title: "Vue, Nuxt & enterprise UIs",
+    description:
+      "Large Nuxt 3 + Vue 3 apps with Pinia, Shadcn-nuxt, and repository-style API layers—patterns proven in employee engagement and recognition platforms (e.g. True Perk) with complex dashboards and settings.",
+    features: ["Nuxt 3", "Pinia", "Shadcn / Radix Vue", "Repository pattern"],
+    color: "from-emerald-500 to-teal-600",
   },
   {
     icon: <TypeScriptIcon />,
-    title: "Performance Optimization",
-    description: "Deep expertise in web performance optimization including Core Web Vitals, Lighthouse scoring, and PageSpeed best practices. Achieve fast page load times and exceptional user experience.",
-    features: ["Core Web Vitals", "Lighthouse", "PageSpeed", "Performance"],
+    title: "Performance & quality",
+    description:
+      "Core Web Vitals, Lighthouse, and pragmatic profiling so data-heavy and payment flows stay fast. Same bar applied across SparkPay, Blivap, BelPower, and freelance client work.",
+    features: ["Core Web Vitals", "Lighthouse", "Bundle awareness", "UX polish"],
     color: "from-blue-600 to-indigo-600",
   },
   {
     icon: <GoogleAnalyticsIcon />,
-    title: "Analytics & CRM Integration",
-    description: "Integrate analytics platforms (Google Analytics, PostHog) and CRM systems (HubSpot) into web applications. Track user behavior, manage leads, and optimize conversion rates.",
-    features: ["Google Analytics", "PostHog", "HubSpot", "Data Tracking"],
+    title: "Analytics & CRM",
+    description:
+      "Instrument products with Google Analytics, PostHog, and HubSpot where growth and ops need visibility—funnels, events, and CRM handoffs alongside solid privacy and consent habits.",
+    features: ["Google Analytics", "PostHog", "HubSpot", "Event modeling"],
     color: "from-yellow-400 to-orange-500",
   },
   {
-    icon: <ContentfulIcon />,
-    title: "Headless CMS & Content",
-    description: "Build content-driven websites with headless CMS platforms like Sanity and Contentful. Create scalable content architectures that enable seamless content management workflows.",
-    features: ["Sanity CMS", "Contentful", "Content Management", "API Integration"],
-    color: "from-yellow-400 to-orange-500",
+    icon: <ApiIcon />,
+    title: "Payments, auth & APIs",
+    description:
+      "Secure client patterns: httpOnly cookies, JWT refresh flows, Paystack and wallet funding, Axios/fetch layers, and admin tooling—experience from BelPower, payroll-adjacent UIs, and multi-tenant settings.",
+    features: ["Paystack", "Sessions & middleware", "REST integration", "Admin surfaces"],
+    color: "from-violet-500 to-purple-600",
   },
   {
     icon: <GsapIcon />,
-    title: "Animation & Design Implementation",
-    description: "Bring creative visions to life with animations and interactions using Framer Motion and GSAP. Collaborate directly with designers to implement pixel-perfect designs with smooth animations.",
-    features: ["Framer Motion", "GSAP", "Animations", "Design Implementation"],
+    title: "Motion & Figma fidelity",
+    description:
+      "Framer Motion and GSAP for marketing and product moments; close collaboration with design for pixel fidelity, carousels, and hero sections without sacrificing performance.",
+    features: ["Framer Motion", "GSAP", "Figma to code", "Micro-interactions"],
     color: "from-green-400 to-teal-500",
+  },
+  {
+    icon: <Web3Icon />,
+    title: "Web3 & Ethereum (learning)",
+    description:
+      "Ongoing interest in Ethereum and Web3—exploring how wallets, contracts, and decentralized apps fit next to traditional SaaS. Open to selective projects while core delivery stays Next, Nuxt, and React.",
+    features: ["Ethereum", "Exploration", "SaaS + Web3", "Selective builds"],
+    color: "from-purple-500 to-pink-500",
   },
 ];
 
@@ -102,7 +118,7 @@ export const ServicesList = () => {
       {services.map((service, index) => (
         <article
           key={index}
-          className="group relative p-6 sm:p-7 md:p-8 bg-gradient-to-br from-white/80 to-white/70 dark:from-muted-800/80 dark:to-muted-800/60 border-2 border-muted-200 dark:border-muted-700 rounded-2xl sm:rounded-3xl transition-all duration-500 hover:border-opacity-50 hover:-translate-y-3 overflow-hidden backdrop-blur-sm shadow-lg dark:shadow-none"
+          className="group relative p-6 sm:p-7 md:p-8 bg-gradient-to-br from-white to-muted-50/90 dark:from-muted-800/80 dark:to-muted-800/60 border-2 border-muted-200/95 dark:border-muted-700 rounded-2xl sm:rounded-3xl transition-all duration-500 hover:border-primary-300/80 dark:hover:border-primary-600/50 hover:-translate-y-3 overflow-hidden backdrop-blur-sm shadow-[0_4px_24px_-4px_rgba(28,25,23,0.08)] dark:shadow-none"
           style={{
             boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
           }}

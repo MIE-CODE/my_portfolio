@@ -7,33 +7,33 @@ export const About = () => {
 
   const infos = [
     {
-      title: "Full Stack Developer",
-      desc: "5+ years building production-ready web applications from Figma designs to deployment. Expert in React, Next.js, TypeScript, and Tailwind CSS. Specialized in creating pixel-perfect, responsive implementations with exceptional performance and accessibility.",
+      title: "CTO & product engineer",
+      desc: "CTO at Belsoft Systems (BelCore, BelPower); founder of Blivap; former CTO at True Perk and SparkPay. I lead and ship full-stack products—collaboration (Slack-style), fintech and bill pay, HR and engagement, and marketplaces—using Next.js, Nuxt, Vue, React, and TypeScript.",
       icon: "💻",
     },
     {
-      title: "Performance & Analytics Expert",
-      desc: "Deep expertise in web performance optimization including Core Web Vitals, Lighthouse scoring, and PageSpeed best practices. Experienced integrating Google Analytics, PostHog, and CRM systems like HubSpot into web applications.",
+      title: "Performance & analytics",
+      desc: "Core Web Vitals, Lighthouse, and pragmatic tuning on data-heavy dashboards and payment flows. Comfortable wiring Google Analytics, PostHog, and HubSpot where product and growth need visibility.",
       icon: "📊",
     },
     {
-      title: "Animation & Design Specialist",
-      desc: "Expert in bringing creative visions to life with animations and interactions using Framer Motion and GSAP. Collaborate directly with designers to implement pixel-perfect designs with smooth, performant animations.",
+      title: "Motion & design fidelity",
+      desc: "Framer Motion and GSAP for marketing and product; close work with design for pixel-accurate layouts, responsive behavior, and animations that stay performant.",
       icon: "🎨",
     },
     {
-      title: "Blockchain & Web3 Enthusiast",
-      desc: "Genuinely excited about blockchain technology and Ethereum scaling solutions. Eager to learn Web3 development, smart contracts, and building consumer-facing applications in the blockchain space. Actively exploring Arbitrum, Ethereum ecosystem, and decentralized systems.",
+      title: "Web3 & Ethereum (learning)",
+      desc: "Interested in how wallets, contracts, and decentralized apps complement traditional SaaS—exploring Ethereum and the wider ecosystem alongside core delivery on Next, Nuxt, and React.",
       icon: "⛓️",
     },
     {
-      title: "CMS & Content Management",
-      desc: "Hands-on experience with headless CMS platforms like Sanity and Contentful for content-driven websites. Build scalable, maintainable content architectures that enable seamless content management workflows.",
+      title: "Freelance & content stacks",
+      desc: "Production sites from Figma to deploy for clients; headless CMS experience (Sanity, Contentful) where content teams need flexible, API-driven workflows.",
       icon: "📝",
     },
     {
-      title: "Security & Quality Focused",
-      desc: "Security-conscious approach to code development with rigorous QA and testing practices. Ensure production applications meet the highest standards for security, performance, and user experience.",
+      title: "Security & quality",
+      desc: "Security-minded development—auth patterns, sessions, payment flows—and disciplined QA so releases stay reliable for users and stakeholders.",
       icon: "🔒",
     },
   ];
@@ -54,7 +54,7 @@ export const About = () => {
           {"< About Me >"}
         </h2>
         <p className="text-sm text-muted-600 dark:text-muted-400 leading-relaxed">
-          Full-stack developer with 5+ years of experience building production websites from Figma designs to deployment. Expert in React, Next.js, TypeScript, and Tailwind CSS with deep expertise in performance optimization and analytics integration. Genuinely excited about blockchain technology and eager to learn more about Web3 development, Ethereum scaling solutions, and decentralized systems. Passionate about crafting high-quality user experiences with attention to design details and security best practices.
+          I build and lead production SaaS: currently CTO at Belsoft Systems, founder of Blivap, and still taking selective freelance work. Stack-wise I live in Next.js and Nuxt, React and Vue, TypeScript and Tailwind—with payments, analytics, and performance baked in from day one.
         </p>
       </div>
 

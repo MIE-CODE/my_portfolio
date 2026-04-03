@@ -15,66 +15,127 @@ const frontendProjects: Array<{
   link: string;
   githubLink: string;
   category: "Frontend" | "Backend";
+  role?: string;
 }> = [
   {
     id: 1,
     img: require("../images/trueperk.png"),
-    skills: ["Nuxt.js", "Vue.js", "TypeScript", "Tailwind CSS"],
-    title: "Trueperk",
-    description: "AI-driven employee recognition platform with real-time analytics and reward redemption.",
-    link: "https://app.trueperk.co/",
+    skills: [
+      "Nuxt 3",
+      "Vue 3",
+      "TypeScript",
+      "Pinia",
+      "Tailwind CSS",
+      "Shadcn",
+    ],
+    title: "True Perk",
+    description:
+      "Employee engagement and recognition platform: perks and gifting, recognition feeds, calendars and events, analytics dashboards, billing, automations, and org admin—built with Nuxt 3, Pinia, and a repository-style API layer.",
+    link: "https://trueperk.co/",
     githubLink: "#",
     category: "Frontend",
+    role: "CTO · frontend architecture",
   },
   {
     id: 2,
     img: require("../images/sparkpay.png"),
     skills: ["Next.js", "React", "TypeScript", "SCSS"],
     title: "SparkPay",
-    description: "Payroll SaaS solution with intuitive UI for processing and managing payrolls efficiently.",
+    description:
+      "Payroll SaaS product and marketing surfaces: payroll workflows, data-heavy UI, CRM-connected funnels, and performance- and SEO-focused delivery on Next.js and React.",
     link: "https://www.sparkpayhq.com/",
     githubLink: "#",
     category: "Frontend",
+    role: "CTO · engineering leadership",
   },
   {
     id: 3,
     img: require("../images/flyverge.png"),
+    skills: [
+      "Next.js",
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS",
+      "MUI",
+      "Redux Toolkit",
+    ],
+    title: "Blivap",
+    description:
+      "Donor marketplace for Nigeria: connects blood and sperm donors with people who need donations—public education and marketing (“Give Blood. Save Lives.”) plus authenticated donor flows (profiles, discovery, appointments, wallet, bookings, settings) against a remote REST API with cookie-backed auth.",
+    link: "https://blivap.com/",
+    githubLink: "#",
+    category: "Frontend",
+    role: "Founder & owner",
+  },
+  {
+    id: 4,
+    img: require("../images/flyverge.png"),
+    skills: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Redux Toolkit",
+      "Headless UI",
+    ],
+    title: "BelCore",
+    description:
+      "Slack-style team collaboration app for Belsoft Systems: workspace shell, channels, direct messages, threads, mentions, bookmarks, and settings—the same core pattern as Slack. Next.js App Router, Redux Toolkit, repository-style API layer, Tailwind, Headless UI, Sora typography.",
+    link: "https://www.belsoftsystems.com/",
+    githubLink: "#",
+    category: "Frontend",
+    role: "CTO · Belsoft Systems",
+  },
+  {
+    id: 5,
+    img: require("../images/sparkpay.png"),
+    skills: [
+      "Next.js 15",
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS 4",
+      "Zustand",
+      "Paystack",
+    ],
+    title: "BelPower",
+    description:
+      "Pay airtime, data, electricity (meter verification, DISCO flows), and cable TV from one app—wallet, history, scheduled bills, onboarding, public marketing pages, customer dashboard, and admin. Next.js 15 App Router, Zustand, RHF + Zod, Radix/Headless UI, Paystack, httpOnly sessions, middleware, EN/FR i18n, route handlers to a separate backend API.",
+    link: "https://www.belpower.ng/",
+    githubLink: "#",
+    category: "Frontend",
+    role: "CTO · Belsoft Systems",
+  },
+  {
+    id: 6,
+    img: require("../images/flyverge.png"),
     skills: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
     title: "Flyverge",
-    description: "Flight booking app with real-time updates, dynamic pricing, and seamless booking experience.",
+    description:
+      "Flight booking app with real-time updates, dynamic pricing, and seamless booking experience.",
     link: "https://flyverge.vercel.app/",
     githubLink: "https://github.com/MIE-CODE/flyverge",
     category: "Frontend",
   },
   {
-    id: 4,
+    id: 7,
     img: require("../images/ecommerce.png"),
-    skills: ["Three.js", "JavaScript","CSS"],
+    skills: ["Three.js", "JavaScript", "CSS"],
     title: "Solar System",
-    description: "Interactive 3D solar system visualization with realistic planetary orbits and smooth animations.",
+    description:
+      "Interactive 3D solar system visualization with realistic planetary orbits and smooth animations.",
     link: "https://solar-system-tan-five.vercel.app/",
     githubLink: "https://github.com/MIE-CODE/solar-system",
     category: "Frontend",
   },
   {
-    id: 5,
+    id: 8,
     img: require("../images/ecommerce.png"),
     skills: ["React", "Tailwind CSS", "Framer Motion"],
     title: "E-commerce Platform",
-    description: "Modern e-commerce app with efficient state management, responsive design, and smooth animations.",
+    description:
+      "Modern e-commerce app with efficient state management, responsive design, and smooth animations.",
     link: "https://e-commerce-site-five-psi.vercel.app/",
     githubLink: "#",
-    category: "Frontend",
-  },
-  
-  {
-    id: 6,
-    img: require("../images/todoapp.png"),
-    skills: ["Vue.js", "JavaScript", "Tailwind CSS"],
-    title: "Todo App",
-    description: "Interactive todo app built with Vue.js, featuring reactive components and optimized performance.",
-    link: "https://todo-app-vuejs-chi.vercel.app/",
-    githubLink: "https://github.com/MIE-CODE/Todo-App-vuejs",
     category: "Frontend",
   },
 ];
@@ -84,56 +145,64 @@ const upcomingProjects = [
   {
     id: 50,
     title: "Decentralized Social Network",
-    description: "Building a Web3 social network on Ethereum with smart contracts for content ownership and monetization.",
+    description:
+      "Building a Web3 social network on Ethereum with smart contracts for content ownership and monetization.",
     skills: ["Web3", "Ethereum", "Solidity", "IPFS"],
     status: "Planning",
   },
   {
     id: 51,
     title: "AI-Powered Design Tool",
-    description: "Creating an AI-assisted design tool that generates UI components and layouts based on natural language descriptions.",
+    description:
+      "Creating an AI-assisted design tool that generates UI components and layouts based on natural language descriptions.",
     skills: ["AI/ML", "Canvas API", "Design Systems"],
     status: "Research",
   },
   {
     id: 52,
     title: "Real-time Collaboration Suite",
-    description: "Building a comprehensive collaboration platform with video, whiteboard, document editing, and project management.",
+    description:
+      "Building a comprehensive collaboration platform with video, whiteboard, document editing, and project management.",
     skills: ["WebRTC", "WebSocket", "CRDT"],
     status: "Planning",
   },
   {
     id: 53,
     title: "Blockchain Analytics Dashboard",
-    description: "Developing an analytics dashboard for tracking DeFi protocols, NFT markets, and blockchain metrics.",
+    description:
+      "Developing an analytics dashboard for tracking DeFi protocols, NFT markets, and blockchain metrics.",
     skills: ["Web3", "D3.js", "Real-time Data"],
     status: "Research",
   },
   {
     id: 54,
     title: "AR Shopping Experience",
-    description: "Creating an augmented reality shopping app where users can visualize products in their space before purchasing.",
+    description:
+      "Creating an augmented reality shopping app where users can visualize products in their space before purchasing.",
     skills: ["WebXR", "Three.js", "AR"],
     status: "Planning",
   },
   {
     id: 55,
     title: "Code Review AI Assistant",
-    description: "Building an AI tool that automatically reviews code, suggests improvements, and detects security vulnerabilities.",
+    description:
+      "Building an AI tool that automatically reviews code, suggests improvements, and detects security vulnerabilities.",
     skills: ["AI/ML", "AST Parsing", "Code Analysis"],
     status: "Research",
   },
   {
     id: 56,
     title: "Decentralized File Storage",
-    description: "Developing a decentralized file storage solution using IPFS and blockchain for permanent, distributed storage.",
+    description:
+      "Developing a decentralized file storage solution using IPFS and blockchain for permanent, distributed storage.",
     skills: ["IPFS", "Web3", "Blockchain"],
     status: "Planning",
   },
   {
     id: 57,
     title: "Interactive Learning Platform",
-    description: "Creating an immersive learning platform with gamification, progress tracking, and personalized learning paths.",
+    description:
+      "Creating an immersive learning platform with gamification, progress tracking, and personalized learning paths.",
     skills: ["Gamification", "Analytics", "Personalization"],
     status: "Planning",
   },
@@ -149,13 +218,15 @@ const backendProjects: Array<{
   link: string;
   githubLink: string;
   category: "Frontend" | "Backend";
+  role?: string;
 }> = [
   {
     id: 8,
     img: require("../images/ecommerce.png"),
     skills: ["Node.js", "Express.js", "MongoDB", "REST API"],
     title: "E-commerce API",
-    description: "RESTful API for e-commerce platform with authentication, payment processing, and order management.",
+    description:
+      "RESTful API for e-commerce platform with authentication, payment processing, and order management.",
     link: "#",
     githubLink: "#",
     category: "Backend",
@@ -165,7 +236,8 @@ const backendProjects: Array<{
     img: require("../images/ecommerce.png"),
     skills: ["NestJS", "PostgreSQL", "TypeScript", "GraphQL"],
     title: "Task Management API",
-    description: "Scalable task management system with GraphQL API, real-time updates, and advanced filtering.",
+    description:
+      "Scalable task management system with GraphQL API, real-time updates, and advanced filtering.",
     link: "#",
     githubLink: "#",
     category: "Backend",
@@ -175,7 +247,8 @@ const backendProjects: Array<{
     img: require("../images/ecommerce.png"),
     skills: ["Node.js", "Express.js", "MongoDB", "JWT"],
     title: "Authentication Service",
-    description: "Secure authentication microservice with JWT tokens, OAuth integration, and role-based access control.",
+    description:
+      "Secure authentication microservice with JWT tokens, OAuth integration, and role-based access control.",
     link: "#",
     githubLink: "#",
     category: "Backend",
@@ -185,7 +258,8 @@ const backendProjects: Array<{
     img: require("../images/ecommerce.png"),
     skills: ["Node.js", "Express.js", "Redis", "WebSocket"],
     title: "Real-time Chat API",
-    description: "WebSocket-based real-time messaging API with Redis pub/sub, message persistence, and typing indicators.",
+    description:
+      "WebSocket-based real-time messaging API with Redis pub/sub, message persistence, and typing indicators.",
     link: "#",
     githubLink: "#",
     category: "Backend",
@@ -195,7 +269,8 @@ const backendProjects: Array<{
     img: require("../images/ecommerce.png"),
     skills: ["NestJS", "PostgreSQL", "TypeScript", "Stripe"],
     title: "Payment Processing API",
-    description: "Secure payment processing API with Stripe integration, subscription management, and webhook handling.",
+    description:
+      "Secure payment processing API with Stripe integration, subscription management, and webhook handling.",
     link: "#",
     githubLink: "#",
     category: "Backend",
@@ -205,7 +280,8 @@ const backendProjects: Array<{
     img: require("../images/ecommerce.png"),
     skills: ["Node.js", "Express.js", "MongoDB", "AWS S3"],
     title: "File Upload Service",
-    description: "Scalable file upload API with AWS S3 integration, image processing, and CDN distribution.",
+    description:
+      "Scalable file upload API with AWS S3 integration, image processing, and CDN distribution.",
     link: "#",
     githubLink: "#",
     category: "Backend",
@@ -215,7 +291,8 @@ const backendProjects: Array<{
     img: require("../images/ecommerce.png"),
     skills: ["NestJS", "PostgreSQL", "TypeScript", "Bull Queue"],
     title: "Email Service API",
-    description: "Robust email service API with queue management, template engine, and multi-provider support.",
+    description:
+      "Robust email service API with queue management, template engine, and multi-provider support.",
     link: "#",
     githubLink: "#",
     category: "Backend",
@@ -225,7 +302,8 @@ const backendProjects: Array<{
     img: require("../images/ecommerce.png"),
     skills: ["Node.js", "Express.js", "MongoDB", "Socket.io"],
     title: "Notification Service",
-    description: "Real-time notification API with push notifications, in-app alerts, and multi-channel delivery.",
+    description:
+      "Real-time notification API with push notifications, in-app alerts, and multi-channel delivery.",
     link: "#",
     githubLink: "#",
     category: "Backend",
@@ -235,7 +313,8 @@ const backendProjects: Array<{
     img: require("../images/ecommerce.png"),
     skills: ["NestJS", "PostgreSQL", "TypeScript", "Elasticsearch"],
     title: "Search API",
-    description: "Advanced search API with Elasticsearch integration, full-text search, and faceted filtering.",
+    description:
+      "Advanced search API with Elasticsearch integration, full-text search, and faceted filtering.",
     link: "#",
     githubLink: "#",
     category: "Backend",
@@ -245,7 +324,8 @@ const backendProjects: Array<{
     img: require("../images/ecommerce.png"),
     skills: ["Node.js", "Express.js", "MongoDB", "RabbitMQ"],
     title: "Event-Driven API",
-    description: "Event-driven microservice architecture with message queues, event sourcing, and CQRS pattern.",
+    description:
+      "Event-driven microservice architecture with message queues, event sourcing, and CQRS pattern.",
     link: "#",
     githubLink: "#",
     category: "Backend",
@@ -255,7 +335,8 @@ const backendProjects: Array<{
     img: require("../images/ecommerce.png"),
     skills: ["NestJS", "PostgreSQL", "TypeScript", "Docker"],
     title: "Analytics API",
-    description: "Analytics and reporting API with data aggregation, real-time metrics, and custom dashboard support.",
+    description:
+      "Analytics and reporting API with data aggregation, real-time metrics, and custom dashboard support.",
     link: "#",
     githubLink: "#",
     category: "Backend",
@@ -265,7 +346,8 @@ const backendProjects: Array<{
     img: require("../images/ecommerce.png"),
     skills: ["Node.js", "Express.js", "MongoDB", "Jest"],
     title: "Social Media API",
-    description: "Social media backend API with user feeds, follow/unfollow, content moderation, and engagement tracking.",
+    description:
+      "Social media backend API with user feeds, follow/unfollow, content moderation, and engagement tracking.",
     link: "#",
     githubLink: "#",
     category: "Backend",
@@ -275,7 +357,8 @@ const backendProjects: Array<{
     img: require("../images/ecommerce.png"),
     skills: ["NestJS", "PostgreSQL", "TypeScript", "Kafka"],
     title: "Data Streaming API",
-    description: "High-performance data streaming API with Apache Kafka, real-time processing, and event streaming.",
+    description:
+      "High-performance data streaming API with Apache Kafka, real-time processing, and event streaming.",
     link: "#",
     githubLink: "#",
     category: "Backend",
@@ -285,7 +368,8 @@ const backendProjects: Array<{
     img: require("../images/ecommerce.png"),
     skills: ["Node.js", "Express.js", "MongoDB", "Swagger"],
     title: "API Gateway",
-    description: "Centralized API gateway with rate limiting, request routing, API versioning, and comprehensive documentation.",
+    description:
+      "Centralized API gateway with rate limiting, request routing, API versioning, and comprehensive documentation.",
     link: "#",
     githubLink: "#",
     category: "Backend",
@@ -295,7 +379,8 @@ const backendProjects: Array<{
     img: require("../images/ecommerce.png"),
     skills: ["NestJS", "PostgreSQL", "TypeScript", "gRPC"],
     title: "Microservices API",
-    description: "Microservices architecture with gRPC communication, service discovery, and distributed tracing.",
+    description:
+      "Microservices architecture with gRPC communication, service discovery, and distributed tracing.",
     link: "#",
     githubLink: "#",
     category: "Backend",
@@ -303,7 +388,9 @@ const backendProjects: Array<{
 ];
 
 export const ProjectsList = () => {
-  const [activeTab, setActiveTab] = useState<"frontend" | "backend">("frontend");
+  const [activeTab, setActiveTab] = useState<"frontend" | "backend">(
+    "frontend",
+  );
   const [showAllFrontend, setShowAllFrontend] = useState(false);
   const [showAllBackend, setShowAllBackend] = useState(false);
   const tabsRef = useRef<HTMLDivElement>(null);
@@ -321,7 +408,7 @@ export const ProjectsList = () => {
           y: 0,
           duration: 0.8,
           ease: "power3.out",
-        }
+        },
       );
     }
 
@@ -343,7 +430,7 @@ export const ProjectsList = () => {
           stagger: 0.1,
           delay: 0.3,
           ease: "back.out(1.7)",
-        }
+        },
       );
     }
 
@@ -358,7 +445,7 @@ export const ProjectsList = () => {
           duration: 0.8,
           delay: 0.8,
           ease: "power3.out",
-        }
+        },
       );
     }
   }, [activeTab, showAllFrontend, showAllBackend]);
@@ -366,7 +453,10 @@ export const ProjectsList = () => {
   return (
     <div>
       {/* Tab Selector */}
-      <div ref={tabsRef} className="flex items-center justify-center gap-2 sm:gap-3 bg-white/50 dark:bg-muted-800/60 p-1 sm:p-1.5 rounded-lg border border-muted-200 dark:border-muted-700 w-fit mx-auto mb-6 sm:mb-10 backdrop-blur-sm">
+      <div
+        ref={tabsRef}
+        className="flex items-center justify-center gap-2 sm:gap-3 bg-white/90 dark:bg-muted-800/60 p-1 sm:p-1.5 rounded-lg border border-muted-200/95 dark:border-muted-700 w-fit mx-auto mb-6 sm:mb-10 backdrop-blur-sm shadow-[0_2px_10px_rgba(28,25,23,0.06)]"
+      >
         <button
           className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-md font-medium text-xs sm:text-sm transition-all duration-300 ${
             activeTab === "frontend"
@@ -396,18 +486,28 @@ export const ProjectsList = () => {
       </div>
 
       {/* Projects Grid */}
-      <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5" role="list">
+      <div
+        ref={gridRef}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5"
+        role="list"
+      >
         {activeTab === "frontend"
-          ? (showAllFrontend ? frontendProjects : frontendProjects.slice(0, 6)).map((project, index) => (
+          ? (showAllFrontend
+              ? frontendProjects
+              : frontendProjects.slice(0, 6)
+            ).map((project, index) => (
               <ProjectCard key={project.id} project={project} index={index} />
             ))
-          : (showAllBackend ? backendProjects : backendProjects.slice(0, 6)).map((project, index) => (
+          : (showAllBackend
+              ? backendProjects
+              : backendProjects.slice(0, 6)
+            ).map((project, index) => (
               <ProjectCard key={project.id} project={project} index={index} />
             ))}
       </div>
 
       {/* See More Button */}
-      {((activeTab === "frontend" && frontendProjects.length > 6) || 
+      {((activeTab === "frontend" && frontendProjects.length > 6) ||
         (activeTab === "backend" && backendProjects.length > 6)) && (
         <div className="flex justify-center mt-6 sm:mt-8">
           <button
@@ -425,16 +525,19 @@ export const ProjectsList = () => {
                 ? "Show Less"
                 : `See More (${frontendProjects.length - 6} more projects)`
               : showAllBackend
-              ? "Show Less"
-              : `See More (${backendProjects.length - 6} more projects)`}
+                ? "Show Less"
+                : `See More (${backendProjects.length - 6} more projects)`}
           </button>
         </div>
       )}
 
       {/* Info Text */}
-      {((activeTab === "frontend" && frontendProjects.length <= 6) || 
+      {((activeTab === "frontend" && frontendProjects.length <= 6) ||
         (activeTab === "backend" && backendProjects.length <= 6)) && (
-        <p ref={infoTextRef} className="text-center text-[10px] xs:text-xs text-muted-500 dark:text-muted-500 mt-8 sm:mt-12 font-mono">
+        <p
+          ref={infoTextRef}
+          className="text-center text-[10px] xs:text-xs text-muted-500 dark:text-muted-500 mt-8 sm:mt-12 font-mono"
+        >
           More projects coming soon...
         </p>
       )}
@@ -445,7 +548,8 @@ export const ProjectsList = () => {
           {"< Upcoming Projects >"}
         </h3>
         <p className="text-center text-sm text-muted-600 dark:text-muted-400 mb-8 sm:mb-10 max-w-2xl mx-auto">
-          Exciting projects I&apos;m planning to build. These represent my passion for innovation and continuous learning.
+          Exciting projects I&apos;m planning to build. These represent my
+          passion for innovation and continuous learning.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           {upcomingProjects.map((project) => (

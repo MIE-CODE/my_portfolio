@@ -14,6 +14,8 @@ type Project = {
   link: string;
   githubLink: string;
   category: "Frontend" | "Backend";
+  /** e.g. your role on the project */
+  role?: string;
 };
 
 export const ProjectCard = ({
@@ -46,12 +48,12 @@ export const ProjectCard = ({
   return (
     <article
       ref={cardRef}
-      className="game-card p-4 flex flex-col gap-4 h-full hover:border-primary-400 dark:hover:border-primary-600 transition-all duration-300"
+      className="game-card p-4 flex flex-col gap-4 h-full hover:border-primary-300 dark:hover:border-primary-600 transition-all duration-300"
       role="listitem"
     >
       <div className="flex flex-col gap-3 flex-1">
         {/* Project Image */}
-        <div className="relative w-full h-40 sm:h-48 rounded-lg overflow-hidden bg-white/40 dark:bg-muted-800 border border-muted-200 dark:border-muted-700 flex items-center justify-center">
+        <div className="relative w-full h-40 sm:h-48 rounded-lg overflow-hidden bg-muted-100/80 dark:bg-muted-800 border border-muted-200/95 dark:border-muted-700 flex items-center justify-center">
           {project.category === "Backend" ? (
             <div className="w-full h-full flex items-center justify-center p-4">
               <ApiIcon />
@@ -87,9 +89,16 @@ export const ProjectCard = ({
 
         {/* Project Info */}
         <div className="flex flex-col gap-1.5 flex-1">
-          <h3 className="text-sm sm:text-base font-semibold text-muted-900 dark:text-muted-50">
-            {project.title}
-          </h3>
+          <div>
+            <h3 className="text-sm sm:text-base font-semibold text-muted-900 dark:text-muted-50">
+              {project.title}
+            </h3>
+            {project.role ? (
+              <p className="text-[10px] xs:text-[11px] font-medium text-primary-600 dark:text-primary-400 mt-0.5">
+                {project.role}
+              </p>
+            ) : null}
+          </div>
           <p className="text-[11px] xs:text-xs text-muted-600 dark:text-muted-400 leading-relaxed line-clamp-3">
             {project.description}
           </p>

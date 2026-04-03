@@ -20,6 +20,7 @@ import {
   HubSpotIcon,
   SanityIcon,
   ContentfulIcon,
+  VueIcon,
 } from "../svg";
 import { useGSAP } from "../hooks/useGSAP";
 import { useRef } from "react";
@@ -41,6 +42,12 @@ export const Stack = () => {
       name: "React",
       level: "Expert",
       xp: 9200,
+    },
+    {
+      icon: <VueIcon />,
+      name: "Vue / Nuxt",
+      level: "Expert",
+      xp: 9000,
     },
     {
       icon: <TypeScriptIcon />,

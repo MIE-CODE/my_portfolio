@@ -36,8 +36,8 @@ export const NavList = (props: {
               onClick={handleClick}
               className={`text-[10px] md:text-xs lg:text-sm font-medium transition-all duration-300 relative pb-1.5 whitespace-nowrap ${
                 isActive
-                  ? "text-primary-600 dark:text-primary-400"
-                  : "text-muted-600 dark:text-muted-400 hover:text-primary-600 dark:hover:text-primary-400"
+                  ? "text-primary-700 dark:text-primary-400"
+                  : "text-muted-600 dark:text-muted-400 hover:text-primary-700 dark:hover:text-primary-400"
               }`}
             >
               {item.label}

@@ -2,12 +2,12 @@
 import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 
 const achievements = [
-  { id: 1, name: "Code Master", icon: "💻", unlocked: true },
-  { id: 2, name: "React Wizard", icon: "⚛️", unlocked: true },
-  { id: 3, name: "Full Stack Hero", icon: "🚀", unlocked: true },
-  { id: 4, name: "Bug Slayer", icon: "🐛", unlocked: true },
-  { id: 5, name: "Performance Guru", icon: "⚡", unlocked: false },
-  { id: 6, name: "Open Source", icon: "🌟", unlocked: false },
+  { id: 1, name: "Product shipper", icon: "💻", unlocked: true },
+  { id: 2, name: "React & Vue", icon: "⚛️", unlocked: true },
+  { id: 3, name: "CTO track", icon: "🎯", unlocked: true },
+  { id: 4, name: "Founder", icon: "🚀", unlocked: true },
+  { id: 5, name: "Performance", icon: "⚡", unlocked: true },
+  { id: 6, name: "Web3 curious", icon: "🌟", unlocked: true },
 ];
 
 export const Achievements = () => {

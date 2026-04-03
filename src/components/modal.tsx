@@ -36,7 +36,7 @@ export const Modal = (props: {
         <div className="flex justify-end p-6">
           <button
             onClick={() => props.isOpen(false)}
-            className="w-11 h-11 flex items-center justify-center rounded-full bg-white/60 dark:bg-muted-800 border border-muted-200 dark:border-muted-700 hover:bg-white/80 dark:hover:bg-muted-700 transition-all duration-300"
+            className="w-11 h-11 flex items-center justify-center rounded-full bg-white/90 dark:bg-muted-800 border border-muted-200/95 dark:border-muted-700 hover:bg-white dark:hover:bg-muted-700 shadow-[0_2px_10px_rgba(28,25,23,0.06)] transition-all duration-300"
             aria-label="Close navigation menu"
           >
             <div className="text-muted-700 dark:text-muted-300 [&>svg]:w-6 [&>svg]:h-6">

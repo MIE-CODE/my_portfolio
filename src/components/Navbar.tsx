@@ -41,7 +41,7 @@ function Navbar(props: { isOpen: (event: boolean) => void }) {
         <ThemeToggle />
         <button
           onClick={() => props.isOpen(true)}
-          className="flex items-center justify-center w-9 h-9 rounded-lg bg-white/60 dark:bg-muted-800 border border-muted-200 dark:border-muted-700 transition-all duration-300 hover:bg-white/80 dark:hover:bg-muted-700 focus-visible:outline-2 focus-visible:outline-primary-500 focus-visible:outline-offset-2"
+          className="flex items-center justify-center w-9 h-9 rounded-lg bg-white/90 dark:bg-muted-800 border border-muted-200/95 dark:border-muted-700 transition-all duration-300 hover:bg-white dark:hover:bg-muted-700 shadow-[0_2px_10px_rgba(28,25,23,0.06)] focus-visible:outline-2 focus-visible:outline-primary-500 focus-visible:outline-offset-2"
           aria-label="Open navigation menu"
           aria-expanded="false"
         >
