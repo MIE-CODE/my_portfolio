@@ -1,8 +1,7 @@
 "use client";
-import { StaticImageData } from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { GithubIcon, ApiIcon } from "../svg";
-import { CanvasPreview } from "./conva_preview";
-import { useRef, useEffect } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
 type Project = {
@@ -28,27 +27,25 @@ export const ProjectCard = ({
   const cardRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    if (!cardRef.current) return;
-
-    // Simple fade in animation
-    gsap.fromTo(
-      cardRef.current,
-      {
-        opacity: 0,
-      },
-      {
-        opacity: 1,
-        duration: 0.5,
-        delay: index * 0.05,
-        ease: "power2.out",
-      }
-    );
-  }, [index]);
+    const el = cardRef.current;
+    if (!el) return;
+    const onEnter = () =>
+      gsap.to(el, { y: -6, scale: 1.02, duration: 0.35, ease: "power2.out" });
+    const onLeave = () =>
+      gsap.to(el, { y: 0, scale: 1, duration: 0.35, ease: "power2.out" });
+    el.addEventListener("mouseenter", onEnter);
+    el.addEventListener("mouseleave", onLeave);
+    return () => {
+      el.removeEventListener("mouseenter", onEnter);
+      el.removeEventListener("mouseleave", onLeave);
+    };
+  }, []);
 
   return (
     <article
       ref={cardRef}
-      className="game-card p-4 flex flex-col gap-4 h-full hover:border-primary-300 dark:hover:border-primary-600 transition-all duration-300"
+      data-reveal-item
+      className="game-card verse-hover-hud verse-scan-border p-4 flex flex-col gap-4 h-full opacity-0 hover:border-primary-300 dark:hover:border-primary-600 transition-all duration-300"
       role="listitem"
     >
       <div className="flex flex-col gap-3 flex-1">
@@ -59,7 +56,13 @@ export const ProjectCard = ({
               <ApiIcon />
             </div>
           ) : (
-            <CanvasPreview imageSrc={project.link} />
+            <Image
+              src={project.img}
+              alt={`${project.title} screenshot`}
+              fill
+              className="object-cover object-top"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
           )}
           {/* Category Badge */}
           <div className="absolute top-2 right-2">

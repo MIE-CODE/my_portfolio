@@ -2,7 +2,6 @@
 import {
   ExpressIcon,
   ReactNativeIcon,
-  FramerMotionIcon,
   JavaScriptIcon,
   MongoDBIcon,
   NestIcon,
@@ -22,13 +21,28 @@ import {
   ContentfulIcon,
   VueIcon,
 } from "../svg";
-import { useGSAP } from "../hooks/useGSAP";
 import { useRef } from "react";
-import gsap from "gsap";
+import { useGsapReveal } from "../hooks/useGsapReveal";
+import { useStackHomeReveal } from "../hooks/useStackHomeReveal";
 
-export const Stack = () => {
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const cardsRef = useRef<HTMLDivElement>(null);
+type StackProps = {
+  /** Home: dedicated silk timeline (no scroll trigger). */
+  variant?: "scroll" | "home";
+};
+
+export const Stack = ({ variant = "scroll" }: StackProps) => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const isHome = variant === "home";
+
+  useStackHomeReveal(sectionRef, isHome);
+
+  const scrollRef = useGsapReveal({
+    preset: "depthFade",
+    stagger: 0.05,
+    duration: 0.65,
+    ease: "power3.out",
+    childSelector: "[data-reveal-item]",
+  });
   
   const stacks = [
     {
@@ -74,16 +88,10 @@ export const Stack = () => {
       xp: 8000,
     },
     {
-      icon: <FramerMotionIcon />,
-      name: "Framer Motion",
-      level: "Expert",
-      xp: 7800,
-    },
-    {
       icon: <GsapIcon />,
       name: "GSAP",
       level: "Expert",
-      xp: 7500,
+      xp: 8500,
     },
     {
       icon: <EthereumIcon />,
@@ -159,65 +167,27 @@ export const Stack = () => {
     },
   ];
   
-  useGSAP(() => {
-    // Title animation
-    if (titleRef.current) {
-      gsap.fromTo(
-        titleRef.current,
-        { opacity: 0, y: -30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: "power3.out",
-        }
-      );
-    }
-
-    // Cards stagger animation
-    if (cardsRef.current) {
-      const cards = cardsRef.current.children;
-      gsap.fromTo(
-        cards,
-        {
-          opacity: 0,
-          y: 50,
-          scale: 0.8,
-          rotation: -5,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          rotation: 0,
-          duration: 0.8,
-          stagger: 0.05,
-          delay: 0.3,
-          ease: "back.out(1.7)",
-        }
-      );
-    }
-  }, []);
-  
   return (
-    <section 
-      id="skills" 
-      className="section-padding scroll-mt-24 text-center" 
+    <section
+      ref={(isHome ? sectionRef : scrollRef) as React.RefObject<HTMLElement>}
+      id="skills"
+      className={`section-padding scroll-mt-24 text-center${isHome ? " stack-home-reveal" : ""}`}
       aria-labelledby="skills-heading"
     >
       <h2
-        ref={titleRef}
+        {...(isHome ? { "data-stack-item": "" } : { "data-reveal-item": "" })}
         id="skills-heading"
-        className="text-2xl sm:text-3xl font-bold gradient-text font-mono mb-8"
+        className={`text-2xl sm:text-3xl font-bold gradient-text font-mono mb-8${isHome ? "" : " opacity-0"}`}
       >
         {"< Tech Stack >"}
       </h2>
 
-      <div ref={cardsRef} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3 sm:gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3 sm:gap-4">
         {stacks.map((stack, i) => (
           <article
             key={i}
-            className="game-card p-3 sm:p-4 text-center hover:border-primary-400 dark:hover:border-primary-600 transition-all duration-300"
+            {...(isHome ? { "data-stack-item": "" } : { "data-reveal-item": "" })}
+            className={`game-card verse-hover-hud verse-scan-border p-3 sm:p-4 text-center hover:border-primary-400 dark:hover:border-primary-600 transition-all duration-300${isHome ? "" : " opacity-0"}`}
             role="listitem"
           >
             <div className="text-primary-600 dark:text-primary-400 mb-2 sm:mb-3 [&>svg]:w-8 [&>svg]:h-10 sm:[&>svg]:w-10 sm:[&>svg]:h-12 mx-auto">{stack.icon}</div>

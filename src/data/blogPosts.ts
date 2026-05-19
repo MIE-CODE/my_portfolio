@@ -33,7 +33,7 @@ Start with a solid foundation:
 npx create-next-app@latest my-project --typescript --tailwind --app
 
 # Install essential tools
-npm install framer-motion gsap
+npm install gsap
 npm install -D @types/node
 \`\`\`
 
@@ -123,18 +123,18 @@ Implement responsive design systematically:
 
 ## Animation Implementation
 
-Add smooth animations using Framer Motion or GSAP:
+Add smooth animations using GSAP:
 
 \`\`\`typescript
-import { motion } from 'framer-motion';
+import gsap from 'gsap';
+import { useGSAP } from '@/hooks/useGSAP';
 
-<motion.div
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.5 }}
->
-  Content
-</motion.div>
+useGSAP(() => {
+  gsap.fromTo('.hero-block',
+    { opacity: 0, y: 20 },
+    { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' }
+  );
+}, []);
 \`\`\`
 
 ## Collaboration with Designers
@@ -1442,78 +1442,59 @@ Build scalable, content-driven websites with headless CMS integration.`,
   },
   {
     id: 9,
-    title: "Advanced Animation Techniques: Framer Motion and GSAP Mastery",
-    excerpt: "Master advanced animation techniques using Framer Motion and GSAP to create stunning, performant animations.",
-    content: `Animations bring websites to life, creating engaging user experiences. This comprehensive guide covers advanced techniques using Framer Motion and GSAP.
+    title: "Advanced Animation Techniques: GSAP & ScrollTrigger Mastery",
+    excerpt: "Master GSAP timelines, ScrollTrigger, and scroll-linked motion for stunning, performant web animations.",
+    content: `Animations bring websites to life, creating engaging user experiences. This guide covers production-ready GSAP patterns for React and Next.js.
 
-## Framer Motion Fundamentals
+## GSAP in React
 
-### Basic Animations
+### Basic reveal on mount
 
 \`\`\`typescript
-import { motion } from 'framer-motion';
+import gsap from 'gsap';
+import { useGSAP } from '@/hooks/useGSAP';
 
 export function AnimatedCard() {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-    >
-      Content
-    </motion.div>
-  );
+  const ref = useGSAP(() => {
+    gsap.fromTo(ref.current,
+      { opacity: 0, y: 20, scale: 0.98 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: 'power3.out' }
+    );
+  }, []);
+
+  return <div ref={ref} className="card opacity-0">Content</div>;
 }
 \`\`\`
 
-### Stagger Animations
+### Stagger children
 
 \`\`\`typescript
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0 },
-};
-
-<motion.div variants={container} initial="hidden" animate="show">
-  {items.map((item) => (
-    <motion.div key={item.id} variants={item}>
-      {item.content}
-    </motion.div>
-  ))}
-</motion.div>
+useGSAP(() => {
+  gsap.from('[data-reveal-item]', {
+    opacity: 0,
+    y: 24,
+    duration: 0.6,
+    stagger: 0.1,
+    ease: 'power3.out',
+  });
+}, []);
 \`\`\`
 
-### Scroll Animations
+### Scroll-triggered reveals
 
 \`\`\`typescript
-import { useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useGsapReveal } from '@/hooks/useGsapReveal';
 
-export function ScrollAnimation() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-  
+export function ScrollSection() {
+  const ref = useGsapReveal({ preset: 'fadeLeft', stagger: 0.12 });
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, x: -50 }}
-      animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-      transition={{ duration: 0.5 }}
-    >
-      Content
-    </motion.div>
+    <section ref={ref}>
+      {items.map((item) => (
+        <div key={item.id} data-reveal-item className="opacity-0">
+          {item.content}
+        </div>
+      ))}
+    </section>
   );
 }
 \`\`\`
@@ -1600,59 +1581,46 @@ gsap.to('.element', {
 });
 \`\`\`
 
-## Combining Framer Motion and GSAP
+## Hover and interaction with GSAP
 
 \`\`\`typescript
-// Use Framer Motion for component animations
-// Use GSAP for complex timeline animations
+const btnRef = useRef<HTMLButtonElement>(null);
 
-export function HybridAnimation() {
-  const [isVisible, setIsVisible] = useState(false);
-  const containerRef = useRef(null);
-  
-  // GSAP for complex sequence
-  useGSAP(() => {
-    if (isVisible) {
-      gsap.to('.complex-element', {
-        rotation: 360,
-        scale: 1.2,
-        duration: 2,
-        ease: 'elastic.out(1, 0.3)',
-      });
-    }
-  }, { scope: containerRef, dependencies: [isVisible] });
-  
-  // Framer Motion for simple interactions
-  return (
-    <motion.div
-      ref={containerRef}
-      onViewportEnter={() => setIsVisible(true)}
-    >
-      <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-        Click Me
-      </motion.button>
-    </motion.div>
-  );
-}
+useEffect(() => {
+  const el = btnRef.current;
+  if (!el) return;
+
+  const onEnter = () => gsap.to(el, { scale: 1.05, duration: 0.2, ease: 'power2.out' });
+  const onLeave = () => gsap.to(el, { scale: 1, duration: 0.2, ease: 'power2.out' });
+  const onDown = () => gsap.to(el, { scale: 0.95, duration: 0.1 });
+  const onUp = () => gsap.to(el, { scale: 1.05, duration: 0.1 });
+
+  el.addEventListener('mouseenter', onEnter);
+  el.addEventListener('mouseleave', onLeave);
+  el.addEventListener('mousedown', onDown);
+  el.addEventListener('mouseup', onUp);
+
+  return () => {
+    el.removeEventListener('mouseenter', onEnter);
+    el.removeEventListener('mouseleave', onLeave);
+    el.removeEventListener('mousedown', onDown);
+    el.removeEventListener('mouseup', onUp);
+  };
+}, []);
 \`\`\`
 
 ## Best Practices
 
-1. **Performance**: Use \`transform\` and \`opacity\` for animations
+1. **Performance**: Animate \`transform\` and \`opacity\` only when possible
 2. **Accessibility**: Respect \`prefers-reduced-motion\`
-3. **Mobile**: Optimize for touch interactions
-4. **Testing**: Test animations across devices
+3. **Cleanup**: Use \`gsap.context()\` and revert on unmount
+4. **Testing**: Test scroll scenes on mobile and desktop
 
 \`\`\`typescript
-// Respect reduced motion
-const prefersReducedMotion = useReducedMotion();
-
-const animation = prefersReducedMotion
-  ? {}
-  : {
-      initial: { opacity: 0, y: 20 },
-      animate: { opacity: 1, y: 0 },
-    };
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  gsap.set('.animated', { opacity: 1, clearProps: 'all' });
+  return;
+}
 \`\`\`
 
 Create stunning, performant animations that enhance user experience.`,

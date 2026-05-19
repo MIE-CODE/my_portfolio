@@ -1,5 +1,5 @@
 "use client";
-import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
+import { useGsapReveal } from "../hooks/useGsapReveal";
 
 const achievements = [
   { id: 1, name: "Product shipper", icon: "💻", unlocked: true },
@@ -10,26 +10,34 @@ const achievements = [
   { id: 6, name: "Web3 curious", icon: "🌟", unlocked: true },
 ];
 
-export const Achievements = () => {
-  const { ref, isVisible } = useIntersectionObserver();
+type AchievementsProps = {
+  variant?: "scroll" | "hero";
+};
+
+export const Achievements = ({ variant = "scroll" }: AchievementsProps) => {
+  const scrollRef = useGsapReveal({
+    preset: "dataPulse",
+    stagger: 0.08,
+    duration: 0.55,
+    ease: "power3.out",
+  });
 
   return (
-    <div ref={ref as React.RefObject<HTMLDivElement>} className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
-      {achievements.map((achievement, index) => (
+    <div
+      ref={variant === "scroll" ? (scrollRef as React.RefObject<HTMLDivElement>) : undefined}
+      className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3"
+    >
+      {achievements.map((achievement) => (
         <div
           key={achievement.id}
-          className={`achievement-badge px-2 sm:px-3 py-1 sm:py-1.5 ${
+          {...(variant === "hero" ? { "data-hero-badge": "" } : { "data-reveal-item": "" })}
+          className={`achievement-badge verse-hover-hud px-2 sm:px-3 py-1 sm:py-1.5 ${
+            variant === "hero" ? "opacity-0" : "opacity-0"
+          } ${
             achievement.unlocked
               ? "text-accent-700 dark:text-accent-300 border-accent-300 dark:border-accent-700"
-              : "opacity-40 grayscale"
-          } ${
-            isVisible
-              ? `animate-fade-in-up opacity-100`
-              : "opacity-0"
+              : "grayscale opacity-40"
           }`}
-          style={{
-            animationDelay: `${index * 0.1}s`,
-          }}
         >
           <span className="text-base sm:text-lg">{achievement.icon}</span>
           <span className="text-[10px] xs:text-xs">{achievement.name}</span>

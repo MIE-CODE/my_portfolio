@@ -2,9 +2,18 @@
 import { CallIcon, LinkdenIcon, MailIcon } from "@/src/svg";
 import { useEffect, useState } from "react";
 import { FlipIcons } from "../animation/flipText";
+import { useGsapReveal } from "../hooks/useGsapReveal";
 
 export const Footer = () => {
   const [year, setYear] = useState<string>("");
+  const ref = useGsapReveal({
+    preset: "hudRise",
+    stagger: 0.12,
+    duration: 0.7,
+    parallax: 0.1,
+    childSelector: "[data-reveal-item]",
+  });
+
   useEffect(() => {
     const date = new Date();
     const currentYear = date?.getFullYear();
@@ -12,9 +21,14 @@ export const Footer = () => {
   }, []);
   
   return (
-    <footer className="mt-20 py-12 bg-white/80 dark:bg-muted-800/60 border-t border-muted-200/95 dark:border-muted-700 backdrop-blur-md shadow-[0_-1px_0_rgba(41,37,36,0.06)] dark:shadow-none" role="contentinfo">
+    <footer
+      ref={ref as React.RefObject<HTMLElement>}
+      className="mt-20 py-12 bg-white/80 dark:bg-muted-800/60 border-t border-muted-200/95 dark:border-muted-700 backdrop-blur-md shadow-[0_-1px_0_rgba(41,37,36,0.06)] dark:shadow-none"
+      role="contentinfo"
+      data-parallax-depth="0.08"
+    >
       <div className="container-custom">
-        <div className="flex flex-col items-center text-center gap-4 max-w-xl mx-auto">
+        <div data-reveal-item className="flex flex-col items-center text-center gap-4 max-w-xl mx-auto opacity-0">
           <h2 className="text-xl sm:text-2xl font-bold gradient-text font-mono">
             {"< Let's Work Together >"}
           </h2>
@@ -23,7 +37,7 @@ export const Footer = () => {
           </p>
         </div>
         
-        <div className="mt-6 text-center">
+        <div data-reveal-item className="mt-6 text-center opacity-0">
           <a 
             className="text-sm font-medium text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-all duration-300"
             href="mailto:israelvictor126@gmail.com"
@@ -33,7 +47,7 @@ export const Footer = () => {
           </a>
         </div>
         
-        <nav className="mt-8 flex flex-col gap-4 items-center" aria-label="Social links">
+        <nav data-reveal-item className="mt-8 flex flex-col gap-4 items-center opacity-0" aria-label="Social links">
           <div className="flex items-center justify-center gap-4">
             <FlipIcons>
               <a 

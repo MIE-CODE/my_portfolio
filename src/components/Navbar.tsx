@@ -5,9 +5,17 @@ import { usePathname } from "next/navigation";
 import { NavList } from "./navlist";
 import { MenuIcon } from "../svg";
 import { ThemeToggle } from "./ThemeToggle";
+import { useGsapMount } from "../hooks/useGsapReveal";
 
 function Navbar(props: { isOpen: (event: boolean) => void }) {
   const pathname = usePathname();
+  const headerRef = useGsapMount({
+    preset: "streamIn",
+    duration: 0.7,
+    stagger: 0.08,
+    childSelector: "[data-nav-item]",
+    ease: "power3.out",
+  });
 
   const handleContactClick = () => {
     window.open("https://wa.link/ztm32r", "_blank", "noopener,noreferrer");
@@ -15,22 +23,30 @@ function Navbar(props: { isOpen: (event: boolean) => void }) {
 
   return (
     <header
+      ref={headerRef as React.RefObject<HTMLElement>}
       className="sticky top-4 z-50 glass-effect rounded-xl px-3 py-2 sm:px-4 sm:py-2.5 md:px-4 md:py-2.5 lg:px-6 lg:py-3 flex items-center justify-between max-w-7xl mx-auto w-[calc(100%-1.5rem)] sm:w-[calc(100%-2rem)]"
       role="banner"
+      data-parallax-depth="0.05"
     >
-      <Link href="/" className="flex items-center animate-fade-in flex-shrink-0" aria-label="Home - Menya Israel Portfolio">
+      <Link
+        data-nav-item
+        href="/"
+        className="flex items-center flex-shrink-0 opacity-0"
+        aria-label="Home - Menya Israel Portfolio"
+      >
         <span className="text-lg sm:text-xl font-bold gradient-text font-mono tracking-tight">
           MIE
         </span>
       </Link>
-      <nav className="hidden md:flex items-center gap-3 lg:gap-6 xl:gap-8" aria-label="Main navigation">
+      <nav data-nav-item className="hidden md:flex items-center gap-3 lg:gap-6 xl:gap-8 opacity-0" aria-label="Main navigation">
         <ul className="flex items-center gap-3 lg:gap-4 xl:gap-6" role="list">
           <NavList pathname={pathname} />
         </ul>
         <ThemeToggle />
         <button
+          data-nav-item
           onClick={handleContactClick}
-          className="btn-secondary min-w-[90px] md:min-w-[100px] lg:min-w-[120px] h-8 md:h-9 text-[10px] md:text-xs flex-shrink-0"
+          className="btn-secondary min-w-[90px] md:min-w-[100px] lg:min-w-[120px] h-8 md:h-9 text-[10px] md:text-xs flex-shrink-0 opacity-0"
           aria-label="Contact via WhatsApp"
         >
           Contact

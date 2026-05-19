@@ -1,7 +1,16 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { useGsapMount } from "../hooks/useGsapReveal";
 
 export const ContactForm = () => {
+  const formRef = useGsapMount({
+    preset: "hudPanel",
+    duration: 0.85,
+    parallax: 0.1,
+    ease: "expo.out",
+  });
+  const successRef = useRef<HTMLParagraphElement>(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -10,6 +19,15 @@ export const ContactForm = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+
+  useEffect(() => {
+    if (submitStatus !== "success" || !successRef.current) return;
+    gsap.fromTo(
+      successRef.current,
+      { opacity: 0, y: 8 },
+      { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" },
+    );
+  }, [submitStatus]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,8 +56,9 @@ export const ContactForm = () => {
 
   return (
     <form
+      ref={formRef as React.RefObject<HTMLFormElement>}
       onSubmit={handleSubmit}
-      className="p-4 sm:p-6 md:p-8 bg-white/90 dark:bg-muted-800/60 border border-muted-200/95 dark:border-muted-700 rounded-2xl sm:rounded-3xl backdrop-blur-sm shadow-[0_2px_10px_rgba(28,25,23,0.06)] dark:shadow-none animate-fade-in-up"
+      className="p-4 sm:p-6 md:p-8 bg-white/90 dark:bg-muted-800/60 border border-muted-200/95 dark:border-muted-700 rounded-2xl sm:rounded-3xl backdrop-blur-sm shadow-[0_2px_10px_rgba(28,25,23,0.06)] dark:shadow-none verse-scan-border verse-hover-hud opacity-0"
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
         <div>
@@ -115,7 +134,10 @@ export const ContactForm = () => {
       </button>
       
       {submitStatus === "success" && (
-        <p className="mt-4 text-center text-primary-600 dark:text-primary-400 animate-fade-in">
+        <p
+          ref={successRef}
+          className="mt-4 text-center text-primary-600 dark:text-primary-400 opacity-0"
+        >
           Thank you! I&apos;ll get back to you soon.
         </p>
       )}
