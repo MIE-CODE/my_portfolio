@@ -376,22 +376,25 @@
     backface-visibility: hidden;
   }
 
-  /* Experience timeline — scroll stack */
-  .experience-stack [data-exp-card] {
-    min-height: min(72vh, 640px);
+  /* Experience timeline — full-size scroll stack (no scale/shrink) */
+  .experience-stack__item {
+    min-height: 100vh;
   }
 
-  .experience-stack [data-exp-card-inner] {
-    will-change: transform, opacity;
-    backface-visibility: hidden;
+  .experience-stack__item:last-child {
+    min-height: auto;
+  }
+
+  .experience-stack__sticky {
+    width: 100%;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .experience-stack [data-exp-card] {
+    .experience-stack__item {
       min-height: 0;
     }
 
-    .experience-stack .sticky {
+    .experience-stack__sticky {
       position: relative;
       top: auto;
     }
