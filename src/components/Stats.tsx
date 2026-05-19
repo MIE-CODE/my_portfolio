@@ -1,5 +1,5 @@
 "use client";
-import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
+import { useGsapReveal } from "../hooks/useGsapReveal";
 
 const stats = [
   { label: "Portfolio products", value: "8+", icon: "🎯" },
@@ -8,26 +8,37 @@ const stats = [
   { label: "Leadership", value: "CTO · Founder", icon: "🎖️" },
 ];
 
-export const Stats = () => {
-  const { ref, isVisible } = useIntersectionObserver();
+type StatsProps = {
+  /** Hero: cards animated by home hero timeline (no scroll trigger). */
+  variant?: "scroll" | "hero";
+};
+
+export const Stats = ({ variant = "scroll" }: StatsProps) => {
+  const scrollRef = useGsapReveal({
+    preset: "dataPulse",
+    stagger: 0.12,
+    duration: 0.65,
+    ease: "expo.out",
+  });
 
   return (
-    <div ref={ref as React.RefObject<HTMLDivElement>} className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
-      {stats.map((stat, index) => (
+    <div
+      ref={variant === "scroll" ? (scrollRef as React.RefObject<HTMLDivElement>) : undefined}
+      className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4"
+    >
+      {stats.map((stat) => (
         <div
           key={stat.label}
-          className={`game-card text-center p-3 sm:p-4 ${
-            isVisible
-              ? `animate-fade-in-up opacity-100`
-              : "opacity-0"
-          }`}
-          style={{
-            animationDelay: `${index * 0.1}s`,
-          }}
+          {...(variant === "hero" ? { "data-hero-stat": "" } : { "data-reveal-item": "" })}
+          className="game-card verse-hover-hud verse-scan-border text-center p-3 sm:p-4 opacity-0"
         >
           <div className="text-2xl sm:text-3xl mb-1 sm:mb-2">{stat.icon}</div>
-          <div className="text-xl sm:text-2xl font-bold text-primary-600 dark:text-primary-400 mb-1">{stat.value}</div>
-          <div className="text-[10px] xs:text-xs text-muted-600 dark:text-muted-400">{stat.label}</div>
+          <div className="text-xl sm:text-2xl font-bold text-primary-600 dark:text-primary-400 mb-1">
+            {stat.value}
+          </div>
+          <div className="text-[10px] xs:text-xs text-muted-600 dark:text-muted-400">
+            {stat.label}
+          </div>
         </div>
       ))}
     </div>

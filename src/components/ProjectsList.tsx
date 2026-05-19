@@ -1,8 +1,8 @@
 "use client";
-import { useState, useRef } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { ProjectCard } from "./ProjectCard";
 import { StaticImageData } from "next/image";
-import { useGSAP } from "../hooks/useGSAP";
+import { useGsapReveal } from "../hooks/useGsapReveal";
 import gsap from "gsap";
 
 // Frontend Projects - Add your projects here
@@ -130,7 +130,7 @@ const frontendProjects: Array<{
   {
     id: 8,
     img: require("../images/ecommerce.png"),
-    skills: ["React", "Tailwind CSS", "Framer Motion"],
+    skills: ["React", "Tailwind CSS", "GSAP"],
     title: "E-commerce Platform",
     description:
       "Modern e-commerce app with efficient state management, responsive design, and smooth animations.",
@@ -393,69 +393,60 @@ export const ProjectsList = () => {
   );
   const [showAllFrontend, setShowAllFrontend] = useState(false);
   const [showAllBackend, setShowAllBackend] = useState(false);
-  const tabsRef = useRef<HTMLDivElement>(null);
+  const tabsRef = useGsapReveal({
+    preset: "orbitIn",
+    duration: 0.75,
+  });
   const gridRef = useRef<HTMLDivElement>(null);
-  const infoTextRef = useRef<HTMLParagraphElement>(null);
+  const infoTextRef = useGsapReveal({ preset: "hudRise", duration: 0.65 });
 
-  useGSAP(() => {
-    // Tabs animation
-    if (tabsRef.current) {
-      gsap.fromTo(
-        tabsRef.current,
-        { opacity: 0, y: -20 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power3.out",
-        },
-      );
+  useLayoutEffect(() => {
+    const grid = gridRef.current;
+    if (!grid) return;
+
+    const cards = grid.querySelectorAll<HTMLElement>("[data-reveal-item]");
+    if (!cards.length) return;
+
+    const reduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (reduced) {
+      gsap.set(cards, { opacity: 1, clearProps: "transform" });
+      return;
     }
 
-    // Grid animation
-    if (gridRef.current) {
-      const cards = gridRef.current.children;
+    const ctx = gsap.context(() => {
       gsap.fromTo(
         cards,
-        {
-          opacity: 0,
-          y: 60,
-          scale: 0.9,
-        },
+        { opacity: 0, y: 48, scale: 0.94, rotateZ: 2 },
         {
           opacity: 1,
           y: 0,
           scale: 1,
-          duration: 0.8,
-          stagger: 0.1,
-          delay: 0.3,
-          ease: "back.out(1.7)",
+          rotateZ: 0,
+          duration: 0.75,
+          stagger: 0.08,
+          ease: "expo.out",
         },
       );
-    }
+    }, grid);
 
-    // Info text animation
-    if (infoTextRef.current) {
-      gsap.fromTo(
-        infoTextRef.current,
-        { opacity: 0, y: 20 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          delay: 0.8,
-          ease: "power3.out",
-        },
-      );
-    }
+    return () => ctx.revert();
   }, [activeTab, showAllFrontend, showAllBackend]);
+  const upcomingRef = useGsapReveal({
+    preset: "dataPulse",
+    stagger: 0.1,
+    duration: 0.65,
+    parallax: 0.1,
+  });
 
   return (
     <div>
       {/* Tab Selector */}
       <div
-        ref={tabsRef}
-        className="flex items-center justify-center gap-2 sm:gap-3 bg-white/90 dark:bg-muted-800/60 p-1 sm:p-1.5 rounded-lg border border-muted-200/95 dark:border-muted-700 w-fit mx-auto mb-6 sm:mb-10 backdrop-blur-sm shadow-[0_2px_10px_rgba(28,25,23,0.06)]"
+        ref={tabsRef as React.RefObject<HTMLDivElement>}
+        className="flex items-center justify-center gap-2 sm:gap-3 bg-white/90 dark:bg-muted-800/60 p-1 sm:p-1.5 rounded-lg border border-muted-200/95 dark:border-muted-700 w-fit mx-auto mb-6 sm:mb-10 backdrop-blur-sm shadow-[0_2px_10px_rgba(28,25,23,0.06)] opacity-0"
       >
         <button
           className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-md font-medium text-xs sm:text-sm transition-all duration-300 ${
@@ -535,15 +526,18 @@ export const ProjectsList = () => {
       {((activeTab === "frontend" && frontendProjects.length <= 6) ||
         (activeTab === "backend" && backendProjects.length <= 6)) && (
         <p
-          ref={infoTextRef}
-          className="text-center text-[10px] xs:text-xs text-muted-500 dark:text-muted-500 mt-8 sm:mt-12 font-mono"
+          ref={infoTextRef as React.RefObject<HTMLParagraphElement>}
+          className="text-center text-[10px] xs:text-xs text-muted-500 dark:text-muted-500 mt-8 sm:mt-12 font-mono opacity-0"
         >
           More projects coming soon...
         </p>
       )}
 
       {/* Upcoming Projects Section */}
-      <div className="mt-16 sm:mt-20 pt-8 sm:pt-12 border-t border-muted-200 dark:border-muted-700">
+      <div
+        className="mt-16 sm:mt-20 pt-8 sm:pt-12 border-t border-muted-200 dark:border-muted-700"
+        data-parallax-depth="0.14"
+      >
         <h3 className="text-xl sm:text-2xl font-bold gradient-text font-mono text-center mb-6 sm:mb-8">
           {"< Upcoming Projects >"}
         </h3>
@@ -551,11 +545,15 @@ export const ProjectsList = () => {
           Exciting projects I&apos;m planning to build. These represent my
           passion for innovation and continuous learning.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+        <div
+          ref={upcomingRef as React.RefObject<HTMLDivElement>}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5"
+        >
           {upcomingProjects.map((project) => (
             <div
               key={project.id}
-              className="game-card p-4 sm:p-5 hover:border-primary-400 dark:hover:border-primary-600 transition-all duration-300 relative overflow-hidden"
+              data-reveal-item
+              className="game-card verse-hover-hud verse-scan-border p-4 sm:p-5 hover:border-primary-400 dark:hover:border-primary-600 transition-all duration-300 relative overflow-hidden opacity-0"
             >
               <div className="absolute top-2 right-2">
                 <span className="px-2 py-1 text-[9px] xs:text-[10px] font-mono rounded bg-accent-100 dark:bg-accent-900/30 border border-accent-300 dark:border-accent-700 text-accent-700 dark:text-accent-300">

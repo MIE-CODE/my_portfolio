@@ -9,9 +9,7 @@ import {
   VueIcon,
   ApiIcon,
 } from "../svg";
-import { useGSAP } from "../hooks/useGSAP";
-import { useRef } from "react";
-import gsap from "gsap";
+import { useGsapReveal } from "../hooks/useGsapReveal";
 
 const services = [
   {
@@ -66,8 +64,8 @@ const services = [
     icon: <GsapIcon />,
     title: "Motion & Figma fidelity",
     description:
-      "Framer Motion and GSAP for marketing and product moments; close collaboration with design for pixel fidelity, carousels, and hero sections without sacrificing performance.",
-    features: ["Framer Motion", "GSAP", "Figma to code", "Micro-interactions"],
+      "GSAP and ScrollTrigger for marketing and product motion; close collaboration with design for pixel fidelity, carousels, and hero sections without sacrificing performance.",
+    features: ["GSAP", "ScrollTrigger", "Figma to code", "Micro-interactions"],
     color: "from-green-400 to-teal-500",
   },
   {
@@ -81,44 +79,24 @@ const services = [
 ];
 
 export const ServicesList = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useGSAP(() => {
-    if (containerRef.current) {
-      const cards = containerRef.current.children;
-      gsap.fromTo(
-        cards,
-        {
-          opacity: 0,
-          y: 60,
-          scale: 0.9,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: "back.out(1.7)",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-    }
-  }, []);
+  const containerRef = useGsapReveal({
+    preset: "hudPanel",
+    stagger: 0.1,
+    duration: 0.75,
+    parallax: 0.08,
+    ease: "expo.out",
+  });
 
   return (
-    <div 
-      ref={containerRef} 
+    <div
+      ref={containerRef as React.RefObject<HTMLDivElement>}
       className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
     >
       {services.map((service, index) => (
         <article
           key={index}
-          className="group relative p-6 sm:p-7 md:p-8 bg-gradient-to-br from-white to-muted-50/90 dark:from-muted-800/80 dark:to-muted-800/60 border-2 border-muted-200/95 dark:border-muted-700 rounded-2xl sm:rounded-3xl transition-all duration-500 hover:border-primary-300/80 dark:hover:border-primary-600/50 hover:-translate-y-3 overflow-hidden backdrop-blur-sm shadow-[0_4px_24px_-4px_rgba(28,25,23,0.08)] dark:shadow-none"
+          data-reveal-item
+          className="group relative p-6 sm:p-7 md:p-8 bg-gradient-to-br from-white to-muted-50/90 dark:from-muted-800/80 dark:to-muted-800/60 border-2 border-muted-200/95 dark:border-muted-700 rounded-2xl sm:rounded-3xl verse-hover-hud verse-scan-border transition-all duration-500 hover:border-primary-300/80 dark:hover:border-primary-600/50 overflow-hidden backdrop-blur-sm shadow-[0_4px_24px_-4px_rgba(28,25,23,0.08)] dark:shadow-none opacity-0"
           style={{
             boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
           }}

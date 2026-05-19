@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { BlogList } from "@/src/components/BlogList";
-import { Layout } from "@/src/components/Layout";
+import { PageHeader } from "@/src/components/PageHeader";
 
 export const metadata: Metadata = {
   title: "Blog - Tech Insights & Tutorials",
@@ -9,21 +9,19 @@ export const metadata: Metadata = {
 
 export default function BlogPage() {
   return (
-    <Layout>
-      <main id="main-content" className="min-h-screen pt-24 sm:pt-32 pb-12 sm:pb-20">
-        <div className="container-custom px-4">
-          <section className="text-center mb-10 sm:mb-16">
-            <h1 className="text-2xl sm:text-3xl font-bold gradient-text font-mono mb-6">
-              {"< Blog >"}
-            </h1>
-            <p className="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto">
-              Insights, tutorials, and thoughts on modern web development
-            </p>
-          </section>
-          <BlogList />
-        </div>
-      </main>
-    </Layout>
+    <main
+      id="main-content"
+      className="min-h-screen pt-24 sm:pt-32 pb-12 sm:pb-20"
+      data-parallax-depth="0.1"
+    >
+      <div className="container-custom px-4">
+        <PageHeader
+          title="< Blog >"
+          description="Insights, tutorials, and thoughts on modern web development"
+        />
+        <BlogList />
+      </div>
+    </main>
   );
 }
 

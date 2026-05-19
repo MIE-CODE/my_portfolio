@@ -1,8 +1,10 @@
 "use client";
 import { useTexture } from "@react-three/drei";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { useRef, useEffect } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { useRef, useEffect, useMemo, useState } from "react";
 import * as THREE from "three";
+
+const PARTICLE_COUNT = 32;
 
 // Abstract Geometric Sculpture Component
 const GeometricSculpture = () => {
@@ -12,8 +14,7 @@ const GeometricSculpture = () => {
   const ring2Ref = useRef<THREE.Group>(null);
   const ring3Ref = useRef<THREE.Group>(null);
   const particlesRef = useRef<THREE.InstancedMesh>(null);
-  
-  const particleCount = 60;
+  const instanceMatrix = useMemo(() => new THREE.Matrix4(), []);
   // const particlePositions = useMemo(() => {
   //   const positions = new Float32Array(particleCount * 3);
   //   for (let i = 0; i < particleCount; i++) {
@@ -100,20 +101,19 @@ const GeometricSculpture = () => {
 
     // Particles animation
     if (particlesRef.current) {
-      const matrix = new THREE.Matrix4();
-      for (let i = 0; i < particleCount; i++) {
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
         const radius = 2 + Math.sin(time + i) * 0.5;
-        const theta = (i / particleCount) * Math.PI * 2 + time * 0.3;
+        const theta = (i / PARTICLE_COUNT) * Math.PI * 2 + time * 0.3;
         const phi = Math.acos((Math.sin(time * 0.2 + i * 0.1) + 1) / 2);
-        
+
         const x = radius * Math.sin(phi) * Math.cos(theta);
         const y = radius * Math.sin(phi) * Math.sin(theta);
         const z = radius * Math.cos(phi);
-        
+
         const scale = 0.08 + Math.sin(time * 2 + i) * 0.03;
-        matrix.makeScale(scale, scale, scale);
-        matrix.setPosition(x, y, z);
-        particlesRef.current.setMatrixAt(i, matrix);
+        instanceMatrix.makeScale(scale, scale, scale);
+        instanceMatrix.setPosition(x, y, z);
+        particlesRef.current.setMatrixAt(i, instanceMatrix);
       }
       particlesRef.current.instanceMatrix.needsUpdate = true;
     }
@@ -197,7 +197,7 @@ const GeometricSculpture = () => {
       {/* Orbiting Particles */}
       <instancedMesh
         ref={particlesRef}
-        args={[undefined, undefined, particleCount]}
+        args={[undefined, undefined, PARTICLE_COUNT]}
       >
         <sphereGeometry args={[0.06, 8, 8]} />
         <meshStandardMaterial
@@ -229,15 +229,10 @@ const GeometricSculpture = () => {
 const CameraController = () => {
   const targetSphericalRef = useRef({ theta: 0, phi: Math.PI / 3 });
   const currentSphericalRef = useRef({ theta: 0, phi: Math.PI / 3 });
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const { gl } = useThree();
   const distance = 5;
 
-  useFrame(({ camera, gl }) => {
-    // Store canvas reference
-    if (!canvasRef.current && gl.domElement) {
-      canvasRef.current = gl.domElement;
-    }
-
+  useFrame(({ camera }) => {
     // Smooth interpolation for spherical coordinates
     const lerpFactor = 0.05;
     currentSphericalRef.current.theta +=
@@ -264,58 +259,69 @@ const CameraController = () => {
   });
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!canvasRef.current) return;
+    const canvas = gl.domElement;
+    let moveRaf = 0;
+    let lastX = 0;
+    let lastY = 0;
 
-      const rect = canvasRef.current.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      // Check if mouse is inside canvas
-      const isInside =
-        x >= 0 && x <= rect.width && y >= 0 && y <= rect.height;
-
-      if (isInside) {
-        // Normalize mouse position to -1 to 1 based on canvas
-        const normalizedX = (x / rect.width) * 2 - 1;
-        const normalizedY = (y / rect.height) * 2 - 1;
-
-        // Update target spherical coordinates for orbiting
-        targetSphericalRef.current.theta = normalizedX * Math.PI; // Horizontal orbit (0 to 2π)
-        targetSphericalRef.current.phi =
-          Math.PI / 3 + normalizedY * (Math.PI / 3); // Vertical orbit (limited range)
-      } else {
-        // Smoothly return to center when mouse leaves
-        targetSphericalRef.current.theta *= 0.95;
-        targetSphericalRef.current.phi =
-          Math.PI / 3 + (targetSphericalRef.current.phi - Math.PI / 3) * 0.95;
-      }
+    const applyPointer = () => {
+      moveRaf = 0;
+      const rect = canvas.getBoundingClientRect();
+      const x = lastX - rect.left;
+      const y = lastY - rect.top;
+      const normalizedX = (x / rect.width) * 2 - 1;
+      const normalizedY = (y / rect.height) * 2 - 1;
+      targetSphericalRef.current.theta = normalizedX * Math.PI;
+      targetSphericalRef.current.phi =
+        Math.PI / 3 + normalizedY * (Math.PI / 3);
     };
 
-    const handleMouseLeave = () => {
-      // Reset to default position when mouse leaves
+    const onMove = (e: MouseEvent) => {
+      lastX = e.clientX;
+      lastY = e.clientY;
+      if (!moveRaf) moveRaf = requestAnimationFrame(applyPointer);
+    };
+
+    const onLeave = () => {
       targetSphericalRef.current = { theta: 0, phi: Math.PI / 3 };
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-    if (canvasRef.current) {
-      canvasRef.current.addEventListener("mouseleave", handleMouseLeave);
-    }
+    canvas.addEventListener("mousemove", onMove, { passive: true });
+    canvas.addEventListener("mouseleave", onLeave);
 
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      if (canvasRef.current) {
-        canvasRef.current.removeEventListener("mouseleave", handleMouseLeave);
-      }
+      if (moveRaf) cancelAnimationFrame(moveRaf);
+      canvas.removeEventListener("mousemove", onMove);
+      canvas.removeEventListener("mouseleave", onLeave);
     };
-  }, []);
+  }, [gl]);
 
   return null;
 };
 
 export const Avatar3D = () => {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+
+    const io = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { rootMargin: "80px", threshold: 0.08 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   return (
-    <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
+    <div ref={wrapRef} className="h-full w-full">
+    <Canvas
+      frameloop={inView ? "always" : "never"}
+      dpr={[1, 1.5]}
+      camera={{ position: [0, 0, 5], fov: 50 }}
+    >
       {/* Professional lighting setup */}
       <ambientLight intensity={1.0} />
       <directionalLight position={[5, 5, 5]} intensity={2.5} />
@@ -339,5 +345,6 @@ export const Avatar3D = () => {
       <GeometricSculpture />
       <CameraController />
     </Canvas>
+    </div>
   );
 };

@@ -1,5 +1,6 @@
 "use client";
-import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
+
+import { useGsapReveal } from "../hooks/useGsapReveal";
 
 const experiences = [
   {
@@ -26,20 +27,21 @@ const experiences = [
       "Implemented auth (register, login, verification, password reset), session validation via backend (/me), and post-login flows such as avatar selection",
       "Shipped donor features: listings, bookings, ID verification, wallet and history—Axios fetcher with Bearer tokens from cookies",
       "Added SEO and sharing with dynamic Open Graph images (@vercel/og) and structured metadata",
-      "Used Formik + Yup for forms, Framer Motion and GSAP for motion, and tooling (ESLint, Prettier, Husky, lint-staged) for maintainability",
+      "Used Formik + Yup for forms, GSAP for motion, and tooling (ESLint, Prettier, Husky, lint-staged) for maintainability",
     ],
   },
   {
     year: "2024 - Present",
     title: "Full Stack Developer",
     company: "Freelance",
-    description: "Building production-ready web applications from Figma designs to deployment using React, Next.js, TypeScript, and Tailwind CSS. Specializing in performance optimization, analytics integration, and exploring blockchain/web3 technologies.",
+    description:
+      "Building production-ready web applications from Figma designs to deployment using React, Next.js, TypeScript, and Tailwind CSS. Specializing in performance optimization, analytics integration, and exploring blockchain/web3 technologies.",
     achievements: [
       "Developed 20+ production applications with pixel-perfect Figma implementations",
       "Optimized applications achieving 95+ Lighthouse scores and improved Core Web Vitals",
       "Integrated Google Analytics, PostHog, and HubSpot CRM into multiple web applications",
       "Implemented headless CMS solutions using Sanity and Contentful for content-driven websites",
-      "Created performant animations and interactions using Framer Motion and GSAP",
+      "Created performant animations and interactions using GSAP and ScrollTrigger",
       "Actively learning blockchain technology, Web3 development, and Ethereum ecosystem",
     ],
   },
@@ -75,7 +77,8 @@ const experiences = [
     year: "2021 - 2022",
     title: "Software Developer Intern",
     company: "HNGX Internship",
-    description: "Participated in an intensive internship program focused on web development. Worked on real-world projects, learned modern technologies, and collaborated with a team of developers.",
+    description:
+      "Participated in an intensive internship program focused on web development. Worked on real-world projects, learned modern technologies, and collaborated with a team of developers.",
     achievements: [
       "Completed multiple challenging projects during the internship",
       "Learned and applied React, Next.js, and modern web technologies",
@@ -89,81 +92,112 @@ const education = [
   {
     year: "2021 - 2025",
     title: "BSc(Ed) Mathematics",
-    description: "Prince Abubakar Audu University - Bachelor of Science in Education (Mathematics). Studied advanced mathematics, educational theory, and teaching methodologies.",
+    description:
+      "Prince Abubakar Audu University - Bachelor of Science in Education (Mathematics). Studied advanced mathematics, educational theory, and teaching methodologies.",
   },
 ];
 
 export const ExperienceTimeline = () => {
-  const { ref, isVisible } = useIntersectionObserver();
+  const eduRef = useGsapReveal({
+    preset: "hudRise",
+    stagger: 0.1,
+    duration: 0.65,
+    parallax: 0.08,
+  });
 
   return (
-    <div ref={ref as React.RefObject<HTMLDivElement>} className="space-y-8 sm:space-y-12">
+    <div className="space-y-8 sm:space-y-12">
       <div>
-        <h2 className="text-xl sm:text-2xl font-semibold text-muted-900 dark:text-muted-50 mb-6 sm:mb-8">Work Experience</h2>
-        <div className="relative">
-          <div className="absolute left-4 sm:left-8 top-0 bottom-0 w-0.5 bg-primary-300 dark:bg-primary-700" />
-          <div className="space-y-8 sm:space-y-12">
+        <h2 className="text-xl sm:text-2xl font-semibold text-muted-900 dark:text-muted-50 mb-6 sm:mb-8">
+          Work Experience
+        </h2>
+        <div
+          ref={workStackRef}
+          className="experience-stack relative pb-[30vh]"
+        >
+          <div
+            className="absolute left-4 sm:left-8 top-0 bottom-0 w-0.5 bg-primary-300 dark:bg-primary-700 -z-10"
+            aria-hidden
+          />
+          <div className="relative">
             {experiences.map((exp, index) => (
               <div
-                key={index}
-                className={`relative pl-12 sm:pl-20 ${
-                  isVisible
-                    ? `animate-fade-in-up opacity-100`
-                    : "opacity-0"
-                }`}
-                style={{
-                  animationDelay: `${index * 0.1}s`,
-                }}
+                key={`${exp.company}-${exp.year}`}
+                data-exp-card
+                className="relative pl-12 sm:pl-20 pb-6 sm:pb-8 last:pb-0"
+                style={{ zIndex: index + 1 }}
               >
-                <div className="absolute left-3 sm:left-6 top-2 w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-primary-500 dark:bg-primary-400 border-2 sm:border-4 border-muted-50 dark:border-muted-800 shadow-lg shadow-primary-500/30 dark:shadow-primary-400/20" />
-                <div className="p-4 sm:p-6 bg-white/90 dark:bg-muted-800/60 border border-muted-200/95 dark:border-muted-700 rounded-2xl hover:bg-white dark:hover:bg-muted-800/80 hover:border-primary-300 dark:hover:border-primary-600 transition-all duration-300 backdrop-blur-sm shadow-[0_2px_10px_rgba(28,25,23,0.06)] dark:shadow-none">
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3 sm:mb-4">
-                    <div>
-                      <h3 className="text-lg sm:text-xl font-semibold text-muted-900 dark:text-muted-50 mb-1">
-                        {exp.title}
-                      </h3>
-                      <p className="text-sm sm:text-base text-primary-600 dark:text-primary-400 font-medium">{exp.company}</p>
+                <div
+                  className="absolute left-3 sm:left-6 top-6 w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-primary-500 dark:bg-primary-400 border-2 sm:border-4 border-muted-50 dark:border-muted-800 shadow-lg shadow-primary-500/30 dark:shadow-primary-400/20 z-10"
+                  aria-hidden
+                />
+                <div className="sticky top-20 sm:top-24 pt-2">
+                  <div
+                    data-exp-card-inner
+                    className="p-4 sm:p-6 bg-white/95 dark:bg-muted-800/90 border border-muted-200/95 dark:border-muted-700 rounded-2xl verse-hover-hud verse-scan-border backdrop-blur-md shadow-[0_8px_32px_rgba(28,25,23,0.12)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.35)]"
+                  >
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3 sm:mb-4">
+                      <div>
+                        <h3 className="text-lg sm:text-xl font-semibold text-muted-900 dark:text-muted-50 mb-1">
+                          {exp.title}
+                        </h3>
+                        <p className="text-sm sm:text-base text-primary-600 dark:text-primary-400 font-medium">
+                          {exp.company}
+                        </p>
+                      </div>
+                      <span className="text-xs sm:text-sm text-muted-600 dark:text-muted-400 mt-2 sm:mt-0 shrink-0">
+                        {exp.year}
+                      </span>
                     </div>
-                    <span className="text-xs sm:text-sm text-muted-600 dark:text-muted-400 mt-2 sm:mt-0">{exp.year}</span>
+                    <p className="text-sm sm:text-base text-muted-700 dark:text-muted-300 mb-3 sm:mb-4 leading-relaxed">
+                      {exp.description}
+                    </p>
+                    <ul className="space-y-1.5 sm:space-y-2">
+                      {exp.achievements.map((achievement, i) => (
+                        <li
+                          key={i}
+                          className="flex items-start gap-2 text-xs sm:text-sm text-muted-600 dark:text-muted-400"
+                        >
+                          <span className="text-primary-600 dark:text-primary-400 mt-0.5 sm:mt-1 flex-shrink-0">
+                            ▸
+                          </span>
+                          <span>{achievement}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <p className="text-sm sm:text-base text-muted-700 dark:text-muted-300 mb-3 sm:mb-4 leading-relaxed">
-                    {exp.description}
-                  </p>
-                  <ul className="space-y-1.5 sm:space-y-2">
-                    {exp.achievements.map((achievement, i) => (
-                      <li key={i} className="flex items-start gap-2 text-xs sm:text-sm text-muted-600 dark:text-muted-400">
-                        <span className="text-primary-600 dark:text-primary-400 mt-0.5 sm:mt-1 flex-shrink-0">▸</span>
-                        <span>{achievement}</span>
-                      </li>
-                    ))}
-                  </ul>
                 </div>
               </div>
             ))}
           </div>
         </div>
       </div>
-      
+
       <div>
-        <h2 className="text-xl sm:text-2xl font-semibold text-muted-900 dark:text-muted-50 mb-6 sm:mb-8">Education</h2>
-        <div className="space-y-4 sm:space-y-6">
+        <h2 className="text-xl sm:text-2xl font-semibold text-muted-900 dark:text-muted-50 mb-6 sm:mb-8">
+          Education
+        </h2>
+        <div
+          ref={eduRef as React.RefObject<HTMLDivElement>}
+          className="space-y-4 sm:space-y-6"
+        >
           {education.map((edu, index) => (
             <div
               key={index}
-              className={`p-4 sm:p-6 bg-white/90 dark:bg-muted-800/60 border border-muted-200/95 dark:border-muted-700 rounded-2xl hover:bg-white dark:hover:bg-muted-800/80 hover:border-primary-300 dark:hover:border-primary-600 transition-all duration-300 shadow-[0_2px_10px_rgba(28,25,23,0.06)] dark:shadow-none ${
-                isVisible
-                  ? `animate-fade-in-up opacity-100`
-                  : "opacity-0"
-              }`}
-              style={{
-                animationDelay: `${index * 0.1}s`,
-              }}
+              data-reveal-item
+              className="p-4 sm:p-6 bg-white/90 dark:bg-muted-800/60 border border-muted-200/95 dark:border-muted-700 rounded-2xl verse-hover-hud verse-scan-border hover:bg-white dark:hover:bg-muted-800/80 hover:border-primary-300 dark:hover:border-primary-600 transition-all duration-300 shadow-[0_2px_10px_rgba(28,25,23,0.06)] dark:shadow-none opacity-0"
             >
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
-                <h3 className="text-lg sm:text-xl font-semibold text-muted-900 dark:text-muted-50">{edu.title}</h3>
-                <span className="text-xs sm:text-sm text-muted-600 dark:text-muted-400 mt-2 sm:mt-0">{edu.year}</span>
+                <h3 className="text-lg sm:text-xl font-semibold text-muted-900 dark:text-muted-50">
+                  {edu.title}
+                </h3>
+                <span className="text-xs sm:text-sm text-muted-600 dark:text-muted-400 mt-2 sm:mt-0">
+                  {edu.year}
+                </span>
               </div>
-              <p className="text-sm sm:text-base text-muted-700 dark:text-muted-300 leading-relaxed">{edu.description}</p>
+              <p className="text-sm sm:text-base text-muted-700 dark:text-muted-300 leading-relaxed">
+                {edu.description}
+              </p>
             </div>
           ))}
         </div>

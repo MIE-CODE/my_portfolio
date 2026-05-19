@@ -2,10 +2,12 @@
 import type { Metadata } from "next";
 import "../src/style/globals.css";
 import { ThemeProviderWrapper } from "../src/components/ThemeProviderWrapper";
+import { SiteShell } from "../src/components/SiteShell";
 
 export const metadata: Metadata = {
   title: {
-    default: "Menyaga Enyo Israel - CTO & Full Stack Engineer | Next.js, Nuxt, React, TypeScript",
+    default:
+      "Israel Enyo Menyaga - CTO & Full Stack Engineer | Next.js, Nuxt, React, TypeScript",
     template: "%s",
   },
   description:
@@ -29,8 +31,8 @@ export const metadata: Metadata = {
     "Headless CMS",
     "Sanity CMS",
     "Contentful",
-    "Framer Motion",
     "GSAP",
+    "ScrollTrigger",
     "Web Developer",
     "Frontend Developer",
     "Software Engineer",
@@ -40,37 +42,38 @@ export const metadata: Metadata = {
     "M_I_E_CODE",
     "MIE",
   ],
-  authors: [{ name: "Menyaga Israel" }],
-  creator: "Menyaga Israel",
-  publisher: "Menyaga Israel",
-  metadataBase: new URL("https://mieworks.vercel.app"),
+  authors: [{ name: "Israel Menyaga" }],
+  creator: "Israel Menyaga",
+  publisher: "Israel Menyaga",
+  metadataBase: new URL("https://israelm.site"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://mieworks.vercel.app",
-    title: "Menyaga Enyo Israel - Full Stack Developer | React, Next.js, React Native Expert",
+    url: "https://israelm.site",
+    title:
+      "Israel Menyaga - Full Stack Developer | React, Next.js, React Native Expert",
     description:
       "Professional full-stack developer with 5+ years of experience specializing in React, Next.js, TypeScript, and Tailwind CSS. Expert in building production websites from Figma designs, performance optimization, and analytics integration. Genuinely excited about blockchain technology and eager to learn Web3 development.",
-    siteName: "Menyaga Enyo Israel Portfolio",
+    siteName: "Israel Menyaga Portfolio",
     images: [
       {
-        url: "https://mieworks.vercel.app/og-image.svg",
+        url: "https://israelm.site/og-image.svg",
         width: 1200,
         height: 630,
-        alt: "Menyaga Enyo Israel - Full Stack Developer",
+        alt: "Israel Menyaga - Full Stack Developer",
         type: "image/svg+xml",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Menyaga Enyo Israel - Full Stack Developer",
+    title: "Israel Menyaga - Full Stack Developer",
     description:
       "Professional full-stack developer specializing in React, Next.js, TypeScript, and React Native.",
-    images: ["https://mieworks.vercel.app/twitter-image.svg"],
+    images: ["https://israelm.site/twitter-image.svg"],
     creator: "@M_I_E_CODE", // Update with your Twitter handle
   },
   robots: {
@@ -97,7 +100,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -120,7 +123,11 @@ export default function RootLayout({
           }}
         />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
           rel="stylesheet"
@@ -131,19 +138,22 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/apple-icon.svg" />
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#009c9e" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=5"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Person",
-              name: "Menyaga Enyo Israel",
+              name: "Israel Menyaga",
               jobTitle: "Full Stack Developer",
               description:
                 "Professional full-stack developer specializing in React, Next.js, TypeScript, and Tailwind CSS. Genuinely excited about blockchain technology and eager to learn Web3 development.",
               email: "israelvictor126@gmail.com",
-              url: "https://mieworks.vercel.app",
+              url: "https://israelm.site",
               sameAs: [
                 "http://www.linkedin.com/in/israelmenyaga",
                 // Add other social profiles
@@ -154,8 +164,8 @@ export default function RootLayout({
                 "TypeScript",
                 "JavaScript",
                 "Tailwind CSS",
-                "Framer Motion",
                 "GSAP",
+                "ScrollTrigger",
                 "Google Analytics",
                 "PostHog",
                 "HubSpot",
@@ -180,7 +190,9 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-muted-50 dark:bg-muted-900 text-muted-900 dark:text-muted-50 transition-colors duration-300">
-        <ThemeProviderWrapper>{children}</ThemeProviderWrapper>
+        <ThemeProviderWrapper>
+          <SiteShell>{children}</SiteShell>
+        </ThemeProviderWrapper>
       </body>
     </html>
   );

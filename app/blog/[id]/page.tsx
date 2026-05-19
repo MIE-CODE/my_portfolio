@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Layout } from "@/src/components/Layout";
 import { getBlogPostById, blogPosts } from "@/src/data/blogPosts";
 import { CodeBlock } from "@/src/components/CodeBlock";
 
@@ -236,7 +235,6 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
   }
 
   return (
-    <Layout>
       <main id="main-content" className="min-h-screen pt-32 pb-20">
         <div className="container-custom">
           <Link
@@ -324,7 +322,6 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
           </article>
         </div>
       </main>
-    </Layout>
   );
 }
 

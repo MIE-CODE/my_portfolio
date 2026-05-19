@@ -1,5 +1,6 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
+import gsap from "gsap";
 import { CloseIcon } from "../svg";
 import { NavList } from "./navlist";
 
@@ -7,6 +8,9 @@ export const Modal = (props: {
   isOpen: (event: boolean) => void;
   modal: boolean;
 }) => {
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLElement>(null);
+
   useEffect(() => {
     if (props.modal) {
       document.body.style.overflow = "hidden";
@@ -18,19 +22,45 @@ export const Modal = (props: {
     };
   }, [props.modal]);
 
+  useEffect(() => {
+    if (!props.modal || !overlayRef.current || !panelRef.current) return;
+
+    const reduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (reduced) {
+      gsap.set([overlayRef.current, panelRef.current], { opacity: 1, x: 0 });
+      return;
+    }
+
+    gsap.fromTo(
+      overlayRef.current,
+      { opacity: 0 },
+      { opacity: 1, duration: 0.25, ease: "power2.out" },
+    );
+    gsap.fromTo(
+      panelRef.current,
+      { x: "100%" },
+      { x: 0, duration: 0.35, ease: "power3.out" },
+    );
+  }, [props.modal]);
+
   if (!props.modal) return null;
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-muted-900/80 dark:bg-muted-950/80 backdrop-blur-sm flex items-start justify-end animate-fade-in"
+      ref={overlayRef}
+      className="fixed inset-0 z-50 bg-muted-900/80 dark:bg-muted-950/80 backdrop-blur-sm flex items-start justify-end opacity-0"
       onClick={() => props.isOpen(false)}
       role="dialog"
       aria-modal="true"
       aria-label="Navigation menu"
     >
       <nav
+        ref={panelRef}
         onClick={(e) => e.stopPropagation()}
-        className="h-full w-[70%] bg-white dark:bg-muted-800/95 backdrop-blur-xl border-l border-muted-200 dark:border-muted-700 flex flex-col animate-slide-down"
+        className="h-full w-[70%] bg-white dark:bg-muted-800/95 backdrop-blur-xl border-l border-muted-200 dark:border-muted-700 flex flex-col"
         aria-label="Mobile navigation"
       >
         <div className="flex justify-end p-6">

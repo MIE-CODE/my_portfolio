@@ -35,7 +35,12 @@ const keyFlexRatios: Record<string, number> = {
   default: 1.0,
 };
 
-export const AnimatedKeyboard = () => {
+type AnimatedKeyboardProps = {
+  /** Skip mount fade when parent hero timeline handles entrance */
+  suppressEntrance?: boolean;
+};
+
+export const AnimatedKeyboard = ({ suppressEntrance = false }: AnimatedKeyboardProps) => {
   const [currentText, setCurrentText] = useState("");
   const [currentSnippetIndex, setCurrentSnippetIndex] = useState(0);
   const [pressedKeys, setPressedKeys] = useState<Set<string>>(new Set());
@@ -45,20 +50,19 @@ export const AnimatedKeyboard = () => {
   const isDeletingRef = useRef(false);
 
   useGSAP(() => {
-    if (keyboardRef.current) {
-      gsap.fromTo(
-        keyboardRef.current,
-        { opacity: 0, y: 20 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          delay: 0.5,
-          ease: "power3.out",
-        }
-      );
-    }
-  }, []);
+    if (suppressEntrance || !keyboardRef.current) return;
+    gsap.fromTo(
+      keyboardRef.current,
+      { opacity: 0, y: 20 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        delay: 0.5,
+        ease: "power3.out",
+      },
+    );
+  }, [suppressEntrance]);
 
   useEffect(() => {
     const snippet = codeSnippets[currentSnippetIndex];
@@ -166,7 +170,11 @@ export const AnimatedKeyboard = () => {
   };
 
   return (
-    <div ref={keyboardRef} className="w-full max-w-4xl mx-auto mt-4 sm:mt-6 md:mt-8 px-2 xs:px-3 sm:px-4">
+    <div
+      ref={keyboardRef}
+      data-keyboard-panel
+      className="w-full max-w-4xl mx-auto mt-4 sm:mt-6 md:mt-8 px-2 xs:px-3 sm:px-4"
+    >
       {/* Code Display */}
       <div className="mb-3 sm:mb-4 p-2 xs:p-2.5 sm:p-3 md:p-4 bg-muted-800/90 dark:bg-muted-800/50 rounded-lg border border-muted-300 dark:border-primary-500/20 font-mono text-[10px] xs:text-xs sm:text-sm text-muted-900 dark:text-primary-400 min-h-[50px] xs:min-h-[55px] sm:min-h-[60px] flex items-center overflow-x-auto shadow-md dark:shadow-none">
         <span className="text-primary-500 flex-shrink-0">$</span>
@@ -182,13 +190,13 @@ export const AnimatedKeyboard = () => {
               key={rowIndex}
               className="flex justify-center gap-0.5 xs:gap-1 sm:gap-1.5 mb-1 xs:mb-1.5 sm:mb-2 w-full"
             >
-              {row.map((key) => {
+              {row.map((key, keyIndex) => {
                 const isPressed = isKeyPressed(key);
                 const flexRatio = keyFlexRatios[key] || keyFlexRatios.default;
                 
                 return (
                   <div
-                    key={key}
+                    key={`${rowIndex}-${keyIndex}-${key}`}
                     style={{
                       flex: `${flexRatio} 1 0%`,
                       minWidth: '0',
