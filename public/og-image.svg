@@ -1,50 +1,79 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Israel Enyo Menyaga (MIE) portfolio">
   <defs>
-    <linearGradient id="ogGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#627d98;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#486581;stop-opacity:1" />
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141820"/>
+      <stop offset="100%" stop-color="#0c0f14"/>
     </linearGradient>
-    <filter id="shadow">
-      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.25"/>
+    <linearGradient id="mark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5b82a8"/>
+      <stop offset="100%" stop-color="#3a5c80"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#5b82a8"/>
+      <stop offset="50%" stop-color="#7eb8e8"/>
+      <stop offset="100%" stop-color="#b38256"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="24" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
     </filter>
   </defs>
-  
-  <!-- Background -->
-  <rect width="1200" height="630" fill="url(#ogGrad)"/>
-  
-  <!-- Subtle grid pattern -->
-  <g opacity="0.1">
-    <line x1="0" y1="105" x2="1200" y2="105" stroke="white" stroke-width="1"/>
-    <line x1="0" y1="210" x2="1200" y2="210" stroke="white" stroke-width="1"/>
-    <line x1="0" y1="315" x2="1200" y2="315" stroke="white" stroke-width="1"/>
-    <line x1="0" y1="420" x2="1200" y2="420" stroke="white" stroke-width="1"/>
-    <line x1="0" y1="525" x2="1200" y2="525" stroke="white" stroke-width="1"/>
-  </g>
-  
-  <!-- Decorative circles -->
-  <circle cx="80" cy="80" r="60" fill="white" opacity="0.08"/>
-  <circle cx="1120" cy="550" r="100" fill="white" opacity="0.08"/>
-  
-  <!-- Main Content Container -->
-  <g transform="translate(600, 315)">
-    <!-- Logo Badge -->
-    <rect x="-70" y="-180" width="140" height="140" rx="28" fill="white" opacity="0.15" filter="url(#shadow)"/>
-    <text x="0" y="-110" font-family="'Arial', 'Helvetica', sans-serif" font-size="72" font-weight="bold" fill="white" text-anchor="middle" filter="url(#shadow)" letter-spacing="2">MIE</text>
-    
-    <!-- Name -->
-    <text x="0" y="-30" font-family="'Arial', 'Helvetica', sans-serif" font-size="58" font-weight="bold" fill="white" text-anchor="middle" filter="url(#shadow)" letter-spacing="1">Menyaga Enyo Israel</text>
-    
-    <!-- Title -->
-    <text x="0" y="30" font-family="'Arial', 'Helvetica', sans-serif" font-size="34" fill="rgba(255,255,255,0.95)" text-anchor="middle" font-weight="500">Full Stack Developer</text>
-    
-    <!-- Tech Stack -->
-    <text x="0" y="85" font-family="'Arial', 'Helvetica', sans-serif" font-size="22" fill="rgba(255,255,255,0.85)" text-anchor="middle" letter-spacing="0.5">React • Next.js • TypeScript • Tailwind CSS</text>
-    
-    <!-- Tagline -->
-    <text x="0" y="130" font-family="'Arial', 'Helvetica', sans-serif" font-size="18" fill="rgba(255,255,255,0.75)" text-anchor="middle" font-weight="300">Building production-ready websites from Figma to deployment</text>
-    
-    <!-- URL -->
-    <text x="0" y="180" font-family="'Arial', 'Helvetica', sans-serif" font-size="16" fill="rgba(255,255,255,0.6)" text-anchor="middle" font-weight="300">mieworks.vercel.app</text>
-  </g>
-</svg>
 
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Top accent -->
+  <rect width="1200" height="5" fill="url(#accent)"/>
+
+  <!-- Soft ambient glow -->
+  <ellipse cx="600" cy="300" rx="280" ry="200" fill="#5b82a8" opacity="0.12"/>
+
+  <!-- Logo mark -->
+  <g transform="translate(600, 268)" filter="url(#glow)">
+    <rect x="-100" y="-100" width="200" height="200" rx="44" fill="url(#mark)"/>
+    <rect x="-100" y="-100" width="200" height="200" rx="44" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="2"/>
+    <text
+      x="0"
+      y="18"
+      font-family="system-ui, -apple-system, 'Segoe UI', Inter, sans-serif"
+      font-size="72"
+      font-weight="700"
+      fill="#faf9f7"
+      text-anchor="middle"
+      letter-spacing="-0.04em"
+    >MIE</text>
+  </g>
+
+  <!-- Name -->
+  <text
+    x="600"
+    y="420"
+    font-family="system-ui, -apple-system, 'Segoe UI', Inter, sans-serif"
+    font-size="28"
+    font-weight="600"
+    fill="#e8e4dc"
+    text-anchor="middle"
+    letter-spacing="0.02em"
+  >Israel Enyo Menyaga</text>
+
+  <text
+    x="600"
+    y="458"
+    font-family="system-ui, -apple-system, 'Segoe UI', Inter, sans-serif"
+    font-size="18"
+    font-weight="400"
+    fill="rgba(232,228,220,0.55)"
+    text-anchor="middle"
+  >Senior Software Engineer</text>
+
+  <text
+    x="1140"
+    y="600"
+    font-family="ui-monospace, 'JetBrains Mono', monospace"
+    font-size="14"
+    fill="rgba(232,228,220,0.35)"
+    text-anchor="end"
+  >israelm.site</text>
+</svg>

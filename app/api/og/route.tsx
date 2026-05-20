@@ -1,23 +1,21 @@
 import { ImageResponse } from "@vercel/og";
+import { SITE } from "@/src/seo/site";
 
 export const runtime = "edge";
 
-const ogSize = { width: 1200, height: 630 };
+const SIZE = { width: 1200, height: 630 };
 
 const PRIMARY = "#5b82a8";
 const PRIMARY_DARK = "#3a5c80";
-const ACCENT = "#b38256";
-const BG = "#0f1218";
-const BG_CARD = "rgba(255,255,255,0.04)";
+const BG = "#0c0f14";
+const BG_TOP = "#141820";
+const TEXT = "#e8e4dc";
+const MUTED = "rgba(232, 228, 220, 0.55)";
 
 const INTER_REGULAR =
   "https://cdn.jsdelivr.net/fontsource/fonts/inter@5.2.5/latin-400-normal.woff";
 const INTER_BOLD =
   "https://cdn.jsdelivr.net/fontsource/fonts/inter@5.2.5/latin-700-normal.woff";
-
-const DEFAULT_TITLE = "Israel Enyo Menyaga (MIE)";
-const DEFAULT_SUBTITLE = "Senior Software Engineer & CTO";
-const DEFAULT_TAGLINE = "React · Next.js · TypeScript · Blivap Founder";
 
 function safeDecode(value: string): string {
   try {
@@ -33,255 +31,155 @@ function clampText(s: string, max: number): string {
   return `${t.slice(0, max - 1)}…`;
 }
 
-async function loadInterFonts(): Promise<{
-  regular: ArrayBuffer;
-  bold: ArrayBuffer;
-}> {
+async function loadFonts() {
   const [regular, bold] = await Promise.all([
-    fetch(INTER_REGULAR).then((res) => {
-      if (!res.ok) throw new Error("Inter regular font failed to load");
-      return res.arrayBuffer();
-    }),
-    fetch(INTER_BOLD).then((res) => {
-      if (!res.ok) throw new Error("Inter bold font failed to load");
-      return res.arrayBuffer();
-    }),
+    fetch(INTER_REGULAR).then((r) => r.arrayBuffer()),
+    fetch(INTER_BOLD).then((r) => r.arrayBuffer()),
   ]);
   return { regular, bold };
 }
 
+/** Simple logo OG — optional ?title= for blog/page-specific cards */
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
-    const title = clampText(
-      searchParams.get("title")
-        ? safeDecode(searchParams.get("title")!)
-        : DEFAULT_TITLE,
-      56,
-    );
-    const subtitle = clampText(
-      searchParams.get("subtitle")
-        ? safeDecode(searchParams.get("subtitle")!)
-        : DEFAULT_SUBTITLE,
-      72,
-    );
-    const tagline = clampText(
-      searchParams.get("tagline")
-        ? safeDecode(searchParams.get("tagline")!)
-        : DEFAULT_TAGLINE,
-      80,
-    );
+    const customTitle = searchParams.get("title")
+      ? clampText(safeDecode(searchParams.get("title")!), 48)
+      : null;
+    const customSubtitle = searchParams.get("subtitle")
+      ? clampText(safeDecode(searchParams.get("subtitle")!), 56)
+      : null;
 
-    const { regular, bold } = await loadInterFonts();
+    const name = customTitle ?? SITE.person.fullName;
+    const role = customSubtitle ?? SITE.person.jobTitle;
+    const showMarkOnly = !customTitle && !customSubtitle;
+
+    const { regular, bold } = await loadFonts();
 
     return new ImageResponse(
-      <div
-        tw="flex w-full h-full flex-col relative overflow-hidden"
-        style={{ background: BG }}
-      >
-        {/* Ambient glow */}
+      (
         <div
           style={{
-            position: "absolute",
-            top: -120,
-            left: -80,
-            width: 520,
-            height: 520,
-            borderRadius: "50%",
-            background: `radial-gradient(circle, ${PRIMARY}55 0%, transparent 70%)`,
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            bottom: -100,
-            right: -60,
-            width: 480,
-            height: 480,
-            borderRadius: "50%",
-            background: `radial-gradient(circle, ${ACCENT}44 0%, transparent 70%)`,
-          }}
-        />
-
-        {/* Top accent */}
-        <div
-          style={{
-            height: 6,
             width: "100%",
-            background: `linear-gradient(90deg, ${PRIMARY} 0%, ${PRIMARY_DARK} 50%, ${ACCENT} 100%)`,
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            background: `linear-gradient(135deg, ${BG_TOP} 0%, ${BG} 100%)`,
+            position: "relative",
           }}
-        />
-
-        <div
-          tw="flex flex-1 flex-col justify-between px-16 py-12"
-          style={{ position: "relative" }}
         >
-          {/* Header row */}
-          <div tw="flex flex-row items-center justify-between w-full">
-            <div tw="flex flex-row items-center">
-              <div
-                tw="flex items-center justify-center"
-                style={{
-                  width: 72,
-                  height: 72,
-                  borderRadius: 18,
-                  background: `linear-gradient(135deg, ${PRIMARY} 0%, ${PRIMARY_DARK} 100%)`,
-                  boxShadow: `0 12px 40px ${PRIMARY}66`,
-                  fontFamily: "Inter",
-                  fontSize: 28,
-                  fontWeight: 700,
-                  color: "#ffffff",
-                  letterSpacing: "-0.04em",
-                }}
-              >
-                MIE
-              </div>
-              <span
-                style={{
-                  marginLeft: 20,
-                  fontFamily: "Inter",
-                  fontSize: 22,
-                  fontWeight: 700,
-                  color: "rgba(255,255,255,0.55)",
-                  letterSpacing: "0.12em",
-                  textTransform: "uppercase",
-                }}
-              >
-                Portfolio
-              </span>
-            </div>
+          {/* Top accent bar */}
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              height: 5,
+              background: `linear-gradient(90deg, ${PRIMARY} 0%, #7eb8e8 50%, #b38256 100%)`,
+            }}
+          />
 
-            <div
-              tw="flex flex-row"
-              style={{
-                gap: 10,
-                padding: "10px 18px",
-                borderRadius: 999,
-                background: BG_CARD,
-                border: "1px solid rgba(255,255,255,0.1)",
-              }}
-            >
-              <span
-                style={{
-                  fontFamily: "Inter",
-                  fontSize: 18,
-                  color: PRIMARY,
-                  fontWeight: 700,
-                }}
-              >
-                ●
-              </span>
-              <span
-                style={{
-                  fontFamily: "Inter",
-                  fontSize: 18,
-                  color: "rgba(255,255,255,0.75)",
-                  fontWeight: 400,
-                }}
-              >
-                Open to work
-              </span>
-            </div>
-          </div>
+          {/* Ambient glow */}
+          <div
+            style={{
+              position: "absolute",
+              width: 560,
+              height: 400,
+              borderRadius: "50%",
+              background: `radial-gradient(circle, ${PRIMARY}33 0%, transparent 70%)`,
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -55%)",
+            }}
+          />
 
-          {/* Main copy */}
-          <div tw="flex flex-col" style={{ marginTop: 8 }}>
+          {/* MIE logo mark */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: 200,
+              height: 200,
+              borderRadius: 44,
+              background: `linear-gradient(135deg, ${PRIMARY} 0%, ${PRIMARY_DARK} 100%)`,
+              border: "2px solid rgba(255,255,255,0.18)",
+              boxShadow: `0 0 48px ${PRIMARY}55`,
+              marginBottom: showMarkOnly ? 36 : 28,
+            }}
+          >
             <span
               style={{
                 fontFamily: "Inter",
-                fontSize: 64,
+                fontSize: 72,
                 fontWeight: 700,
                 color: "#faf9f7",
-                letterSpacing: "-0.03em",
-                lineHeight: 1.08,
-                maxWidth: 1000,
+                letterSpacing: "-0.04em",
               }}
             >
-              {title}
-            </span>
-            <span
-              style={{
-                fontFamily: "Inter",
-                fontSize: 32,
-                fontWeight: 700,
-                color: PRIMARY,
-                marginTop: 20,
-                letterSpacing: "-0.02em",
-              }}
-            >
-              {subtitle}
-            </span>
-            <span
-              style={{
-                fontFamily: "Inter",
-                fontSize: 22,
-                fontWeight: 400,
-                color: "rgba(255,255,255,0.55)",
-                marginTop: 16,
-                letterSpacing: "0.01em",
-              }}
-            >
-              {tagline}
+              MIE
             </span>
           </div>
 
-          {/* Footer pills */}
-          <div tw="flex flex-row items-center justify-between w-full">
-            <div tw="flex flex-row" style={{ gap: 12 }}>
-              {["Blivap", "Fintech", "AI"].map((pill) => (
-                <div
-                  key={pill}
-                  style={{
-                    padding: "8px 18px",
-                    borderRadius: 10,
-                    background: BG_CARD,
-                    border: "1px solid rgba(255,255,255,0.08)",
-                    fontFamily: "Inter",
-                    fontSize: 18,
-                    fontWeight: 400,
-                    color: "rgba(255,255,255,0.7)",
-                  }}
-                >
-                  {pill}
-                </div>
-              ))}
-            </div>
-            <span
-              style={{
-                fontFamily: "Inter",
-                fontSize: 20,
-                color: "rgba(255,255,255,0.35)",
-                fontWeight: 400,
-              }}
-            >
-              www.israelm.site
-            </span>
-          </div>
+          {/* Name + role (default or custom) */}
+          <span
+            style={{
+              fontFamily: "Inter",
+              fontSize: showMarkOnly ? 28 : 32,
+              fontWeight: 600,
+              color: TEXT,
+              letterSpacing: "0.02em",
+              textAlign: "center",
+              maxWidth: 900,
+              padding: "0 48px",
+            }}
+          >
+            {name}
+          </span>
+          <span
+            style={{
+              fontFamily: "Inter",
+              fontSize: 18,
+              fontWeight: 400,
+              color: MUTED,
+              marginTop: 10,
+              textAlign: "center",
+              maxWidth: 800,
+              padding: "0 48px",
+            }}
+          >
+            {role}
+          </span>
+
+          {/* Domain */}
+          <span
+            style={{
+              position: "absolute",
+              bottom: 28,
+              right: 40,
+              fontFamily: "Inter",
+              fontSize: 14,
+              color: "rgba(232,228,220,0.35)",
+            }}
+          >
+            israelm.site
+          </span>
         </div>
-      </div>,
+      ),
       {
-        ...ogSize,
+        ...SIZE,
         fonts: [
-          {
-            name: "Inter",
-            data: regular,
-            style: "normal",
-            weight: 400,
-          },
-          {
-            name: "Inter",
-            data: bold,
-            style: "normal",
-            weight: 700,
-          },
+          { name: "Inter", data: regular, style: "normal", weight: 400 },
+          { name: "Inter", data: bold, style: "normal", weight: 700 },
         ],
       },
     );
   } catch (e) {
     const message = e instanceof Error ? e.message : String(e);
     console.error("OG image error:", message);
-    return new Response(`Failed to generate OG image: ${message}`, {
-      status: 500,
-    });
+    return new Response(`Failed to generate OG image: ${message}`, { status: 500 });
   }
 }

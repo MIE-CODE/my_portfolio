@@ -1,6 +1,6 @@
 /**
  * Site-wide SEO constants — single source of truth for metadata, JSON-LD, and sitemap.
- * Add `/public/og-image.png` (1200×630) for static social previews; `/api/og` is the dynamic fallback.
+ * OG assets: `public/og-image.svg` + `og-image.png` (generated via `yarn og:generate`).
  */
 export const SITE = {
   name: "Israel Enyo Menyaga",

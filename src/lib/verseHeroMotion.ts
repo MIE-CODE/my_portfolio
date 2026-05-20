@@ -5,6 +5,7 @@ import { VERSE_EASE } from "@/src/config/verseMotion";
 export function runVerseHeroEnter(root: HTMLElement) {
   const xpBar = root.querySelector("[data-hero-xp]");
   const title = root.querySelector("[data-hero-title]");
+  const intro = root.querySelector("[data-hero-intro]");
   const stats = root.querySelector("[data-hero-stats]");
   const buttons = root.querySelector("[data-hero-actions]");
   const achievements = root.querySelector("[data-hero-achievements]");
@@ -30,6 +31,16 @@ export function runVerseHeroEnter(root: HTMLElement) {
       { opacity: 0, y: 48, scale: 0.98 },
       { opacity: 1, y: 0, scale: 1, duration: 0.85 },
       0.15,
+    );
+  }
+
+  if (intro) {
+    gsap.set(intro, { opacity: 0 });
+    tl.fromTo(
+      intro,
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.6 },
+      0.35,
     );
   }
 
@@ -100,7 +111,7 @@ export function runVerseHeroEnter(root: HTMLElement) {
 
   tl.eventCallback("onComplete", () => {
     const visible = root.querySelectorAll(
-      "[data-hero-xp], [data-hero-title], [data-hero-stats], [data-hero-achievements], [data-hero-keyboard], [data-hero-actions] > *, [data-hero-stat], [data-hero-badge], #skills [data-stack-item]",
+      "[data-hero-xp], [data-hero-title], [data-hero-intro], [data-hero-stats], [data-hero-achievements], [data-hero-keyboard], [data-hero-actions] > *, [data-hero-stat], [data-hero-badge], #skills [data-stack-item]",
     );
     gsap.set(visible, { opacity: 1, clearProps: "transform,filter" });
   });

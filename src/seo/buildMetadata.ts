@@ -38,21 +38,26 @@ function resolveOgImages(config: PageSeoConfig, ogTitle: string) {
   if (config.ogImage) {
     return [{ url: config.ogImage, width: 1200, height: 630, alt }];
   }
-  const dynamic = buildOgImageUrl({
-    title: config.og?.imageTitle ?? ogTitle,
-    subtitle: config.og?.imageSubtitle ?? SITE.person.role,
-    tagline: config.og?.imageTagline ?? SITE.tagline,
-  });
+  const imageTitle = config.og?.imageTitle;
+  const useDynamic =
+    imageTitle &&
+    imageTitle !== SITE.person.fullName &&
+    imageTitle !== ogTitle;
+  if (useDynamic) {
+    const dynamic = buildOgImageUrl({
+      title: imageTitle,
+      subtitle: config.og?.imageSubtitle ?? SITE.person.role,
+      tagline: config.og?.imageTagline ?? SITE.tagline,
+    });
+    return [
+      { url: dynamic, width: 1200, height: 630, alt },
+      { url: SITE.ogImage, width: 1200, height: 630, alt },
+      { url: SITE.staticOgImageFallback, width: 1200, height: 630, alt, type: "image/svg+xml" },
+    ];
+  }
   return [
     { url: SITE.ogImage, width: 1200, height: 630, alt },
-    { url: dynamic, width: 1200, height: 630, alt },
-    {
-      url: SITE.staticOgImageFallback,
-      width: 1200,
-      height: 630,
-      alt: SITE.person.fullName,
-      type: "image/svg+xml",
-    },
+    { url: SITE.staticOgImageFallback, width: 1200, height: 630, alt, type: "image/svg+xml" },
   ];
 }
 
@@ -143,12 +148,6 @@ export function buildArticleMetadata(config: ArticleSeoConfig): Metadata {
 }
 
 export function buildRootMetadata(): Metadata {
-  const dynamicOg = buildOgImageUrl({
-    title: SITE.person.fullName,
-    subtitle: SITE.person.role,
-    tagline: SITE.tagline,
-  });
-
   return {
     metadataBase: new URL(SITE.url),
     title: {
@@ -169,20 +168,15 @@ export function buildRootMetadata(): Metadata {
       title: SITE.defaultTitle,
       description: SITE.defaultDescription,
       images: [
-        {
-          url: SITE.ogImage,
-          width: 1200,
-          height: 630,
-          alt: SITE.ogImageAlt,
-        },
-        { url: dynamicOg, width: 1200, height: 630, alt: SITE.ogImageAlt },
+        { url: SITE.ogImage, width: 1200, height: 630, alt: SITE.ogImageAlt },
+        { url: SITE.staticOgImageFallback, width: 1200, height: 630, alt: SITE.ogImageAlt, type: "image/svg+xml" },
       ],
     },
     twitter: {
       card: "summary_large_image",
       title: SITE.defaultTitle,
       description: SITE.defaultDescription,
-      images: [SITE.twitterImage],
+      images: [SITE.ogImage],
       site: SITE.twitter,
       creator: SITE.twitter,
     },
