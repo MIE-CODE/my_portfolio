@@ -91,12 +91,12 @@ export const ProjectCard = ({ project }: { project: Project }) => {
               {project.title}
             </h3>
             {project.role ? (
-              <p className="text-[10px] xs:text-[11px] font-medium text-primary-600 dark:text-primary-400 mt-0.5">
+              <p className="text-xs font-medium text-primary-600 dark:text-primary-400 mt-0.5">
                 {project.role}
               </p>
             ) : null}
           </div>
-          <p className="text-[11px] xs:text-xs text-muted-600 dark:text-muted-400 leading-relaxed line-clamp-3">
+          <p className="text-xs sm:text-sm text-muted-600 dark:text-muted-400 leading-relaxed line-clamp-3">
             {project.description}
           </p>
         </div>
@@ -105,7 +105,7 @@ export const ProjectCard = ({ project }: { project: Project }) => {
       {/* Action Buttons */}
       <div className="flex items-center justify-between pt-3 border-t border-muted-200 dark:border-muted-700">
         <a
-          className="text-xs font-medium text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-300 flex items-center gap-1.5"
+          className="touch-target text-xs font-medium text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-300 flex items-center gap-1.5 min-h-11 -ml-2 pl-2"
           href={project.link || "#"}
           target={project.link !== "#" ? "_blank" : undefined}
           rel={project.link !== "#" ? "noopener noreferrer" : undefined}
@@ -114,7 +114,7 @@ export const ProjectCard = ({ project }: { project: Project }) => {
           {project.category === "Backend" ? "API Docs" : "Live"}
         </a>
         <a
-          className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-800 hover:bg-primary-100 dark:hover:bg-primary-900/30 transition-all duration-300"
+          className="touch-target rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-800 hover:bg-primary-100 dark:hover:bg-primary-900/30 transition-all duration-300"
           href={project.githubLink || "#"}
           target={project.githubLink !== "#" ? "_blank" : undefined}
           rel={project.githubLink !== "#" ? "noopener noreferrer" : undefined}

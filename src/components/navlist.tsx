@@ -2,13 +2,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export const NavList = (props: { 
+export const NavList = (props: {
   isOpen?: (event: boolean) => void;
   pathname?: string;
 }) => {
   const routerPathname = usePathname();
   const pathname = props.pathname || routerPathname;
-  
+  const isMobileMenu = props.isOpen !== undefined;
+
   const navItems = [
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
@@ -20,9 +21,7 @@ export const NavList = (props: {
   ];
 
   const handleClick = () => {
-    if (props.isOpen) {
-      props.isOpen(false);
-    }
+    props.isOpen?.(false);
   };
 
   return (
@@ -34,17 +33,27 @@ export const NavList = (props: {
             <Link
               href={item.href}
               onClick={handleClick}
-              className={`text-[10px] md:text-xs lg:text-sm font-medium transition-all duration-300 relative pb-1.5 whitespace-nowrap ${
-                isActive
-                  ? "text-primary-700 dark:text-primary-400"
-                  : "text-muted-600 dark:text-muted-400 hover:text-primary-700 dark:hover:text-primary-400"
-              }`}
+              className={
+                isMobileMenu
+                  ? `nav-link-mobile transition-colors duration-300 ${
+                      isActive
+                        ? "text-primary-700 dark:text-primary-400"
+                        : "text-muted-700 dark:text-muted-300 hover:text-primary-700 dark:hover:text-primary-400"
+                    }`
+                  : `text-xs lg:text-sm font-medium transition-all duration-300 relative pb-1.5 whitespace-nowrap ${
+                      isActive
+                        ? "text-primary-700 dark:text-primary-400"
+                        : "text-muted-600 dark:text-muted-400 hover:text-primary-700 dark:hover:text-primary-400"
+                    }`
+              }
             >
               {item.label}
-              {isActive && (
+              {!isMobileMenu && isActive && (
                 <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary-500 dark:bg-primary-400 rounded-full" />
               )}
-              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary-500 dark:bg-primary-400 rounded-full scale-x-0 transition-transform duration-300 hover:scale-x-100" />
+              {!isMobileMenu && (
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary-500 dark:bg-primary-400 rounded-full scale-x-0 transition-transform duration-300 hover:scale-x-100" />
+              )}
             </Link>
           </li>
         );

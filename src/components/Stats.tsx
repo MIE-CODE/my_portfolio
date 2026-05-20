@@ -36,7 +36,7 @@ export const Stats = ({ variant = "scroll" }: StatsProps) => {
           <div className="text-xl sm:text-2xl font-bold text-primary-600 dark:text-primary-400 mb-1">
             {stat.value}
           </div>
-          <div className="text-[10px] xs:text-xs text-muted-600 dark:text-muted-400">
+          <div className="text-xs text-muted-600 dark:text-muted-400 leading-snug">
             {stat.label}
           </div>
         </div>

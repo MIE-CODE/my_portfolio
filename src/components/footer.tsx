@@ -52,7 +52,7 @@ export const Footer = () => {
             <FlipIcons>
               <a 
                 href="mailto:israelvictor126@gmail.com"
-                className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-800 hover:bg-primary-100 dark:hover:bg-primary-900/30 hover:-translate-y-0.5 transition-all duration-300"
+                className="touch-target rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-800 hover:bg-primary-100 dark:hover:bg-primary-900/30 hover:-translate-y-0.5 transition-all duration-300"
                 aria-label="Send email"
               >
                 <div className="text-primary-600 dark:text-primary-400 [&>svg]:w-5 [&>svg]:h-5">
@@ -63,7 +63,7 @@ export const Footer = () => {
             <FlipIcons>
               <a 
                 href="tel:+2349137437424"
-                className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-800 hover:bg-primary-100 dark:hover:bg-primary-900/30 hover:-translate-y-0.5 transition-all duration-300"
+                className="touch-target rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-800 hover:bg-primary-100 dark:hover:bg-primary-900/30 hover:-translate-y-0.5 transition-all duration-300"
                 aria-label="Call phone number"
               >
                 <div className="text-primary-600 dark:text-primary-400 [&>svg]:w-5 [&>svg]:h-5">
@@ -76,7 +76,7 @@ export const Footer = () => {
                 href="http://www.linkedin.com/in/israelmenyaga"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-800 hover:bg-primary-100 dark:hover:bg-primary-900/30 hover:-translate-y-0.5 transition-all duration-300"
+                className="touch-target rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-800 hover:bg-primary-100 dark:hover:bg-primary-900/30 hover:-translate-y-0.5 transition-all duration-300"
                 aria-label="Visit LinkedIn profile"
               >
                 <div className="text-primary-600 dark:text-primary-400 [&>svg]:w-5 [&>svg]:h-5">

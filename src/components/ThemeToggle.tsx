@@ -58,7 +58,7 @@ export const ThemeToggle = () => {
   return (
     <button
       onClick={toggleTheme}
-      className="flex items-center justify-center w-9 h-9 rounded-lg bg-muted-200 dark:bg-muted-800 border border-muted-300 dark:border-muted-700 transition-all duration-300 hover:bg-muted-300 dark:hover:bg-muted-700 focus-visible:outline-2 focus-visible:outline-primary-500 focus-visible:outline-offset-2"
+      className="touch-target rounded-lg bg-muted-200 dark:bg-muted-800 border border-muted-300 dark:border-muted-700 transition-all duration-300 hover:bg-muted-300 dark:hover:bg-muted-700 focus-visible:outline-2 focus-visible:outline-primary-500 focus-visible:outline-offset-2"
       aria-label={getAriaLabel()}
       title={theme === "system" ? `System (${resolvedTheme})` : theme === "dark" ? "Dark" : "Light"}
     >

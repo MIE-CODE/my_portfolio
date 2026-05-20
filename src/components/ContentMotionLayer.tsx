@@ -23,7 +23,7 @@ export function ContentMotionLayer({ children }: { children: ReactNode }) {
   }, [pathname]);
 
   return (
-    <div ref={ref} className="verse-content-layer relative">
+    <div ref={ref} className="verse-content-layer relative overflow-x-clip">
       {children}
     </div>
   );

@@ -196,7 +196,7 @@ export const Stack = ({ variant = "scroll" }: StackProps) => {
                 {stack.name}
               </h3>
               <div className="flex items-center justify-center">
-                <span className="text-[9px] xs:text-[10px] text-muted-500 dark:text-muted-500 font-mono">
+                <span className="text-[10px] xs:text-xs text-muted-500 dark:text-muted-500 font-mono">
                   {stack.xp.toLocaleString()} XP
                 </span>
               </div>

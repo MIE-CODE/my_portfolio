@@ -90,7 +90,7 @@ export function ExperienceTimeline() {
 
         <div
           ref={workRef}
-          className="experience-timeline relative pl-11 sm:pl-16"
+          className="experience-timeline relative pl-9 sm:pl-16"
         >
           <div
             className="experience-timeline__rail"

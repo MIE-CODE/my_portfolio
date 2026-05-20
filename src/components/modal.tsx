@@ -10,17 +10,29 @@ export const Modal = (props: {
 }) => {
   const overlayRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLElement>(null);
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (props.modal) {
       document.body.style.overflow = "hidden";
+      closeBtnRef.current?.focus();
     } else {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = "";
     }
     return () => {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = "";
     };
   }, [props.modal]);
+
+  useEffect(() => {
+    if (!props.modal) return;
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") props.isOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [props.modal, props.isOpen]);
 
   useEffect(() => {
     if (!props.modal || !overlayRef.current || !panelRef.current) return;
@@ -51,22 +63,25 @@ export const Modal = (props: {
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-50 bg-muted-900/80 dark:bg-muted-950/80 backdrop-blur-sm flex items-start justify-end opacity-0"
+      className="fixed inset-0 z-50 bg-muted-900/50 dark:bg-muted-950/60 backdrop-blur-sm flex items-stretch justify-end opacity-0"
       onClick={() => props.isOpen(false)}
       role="dialog"
       aria-modal="true"
       aria-label="Navigation menu"
     >
       <nav
+        id="mobile-nav-menu"
         ref={panelRef}
         onClick={(e) => e.stopPropagation()}
-        className="h-full w-[70%] bg-muted-100 dark:bg-muted-800/95 backdrop-blur-xl border-l border-muted-200 dark:border-muted-700 flex flex-col"
+        className="mobile-nav-panel h-full w-[min(17.5rem,78vw)] sm:w-72 sm:max-w-xs shrink-0 bg-muted-100 dark:bg-muted-800/95 backdrop-blur-xl border-l border-muted-200 dark:border-muted-700 flex flex-col pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] shadow-[-8px_0_32px_rgba(28,25,23,0.12)] dark:shadow-[-8px_0_32px_rgba(0,0,0,0.35)]"
         aria-label="Mobile navigation"
       >
-        <div className="flex justify-end p-6">
+        <div className="flex justify-end p-3 sm:p-5">
           <button
+            ref={closeBtnRef}
+            type="button"
             onClick={() => props.isOpen(false)}
-            className="w-11 h-11 flex items-center justify-center rounded-full bg-muted-100/90 dark:bg-muted-800 border border-muted-300/80 dark:border-muted-700 hover:bg-muted-50 dark:hover:bg-muted-700 shadow-[0_2px_10px_rgba(28,25,23,0.06)] transition-all duration-300"
+            className="touch-target rounded-full bg-muted-100/90 dark:bg-muted-800 border border-muted-300/80 dark:border-muted-700 hover:bg-muted-50 dark:hover:bg-muted-700 shadow-[0_2px_10px_rgba(28,25,23,0.06)] transition-all duration-300"
             aria-label="Close navigation menu"
           >
             <div className="text-muted-700 dark:text-muted-300 [&>svg]:w-6 [&>svg]:h-6">
@@ -74,7 +89,7 @@ export const Modal = (props: {
             </div>
           </button>
         </div>
-        <ul className="flex flex-col gap-6 px-8 py-4" role="list">
+        <ul className="flex flex-col gap-0.5 px-4 sm:px-6 py-2 flex-1 overflow-y-auto" role="list">
           <NavList isOpen={props.isOpen} />
         </ul>
       </nav>

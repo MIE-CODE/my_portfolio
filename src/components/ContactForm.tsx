@@ -128,7 +128,7 @@ export const ContactForm = () => {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full btn-primary touch-target disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isSubmitting ? "Sending..." : submitStatus === "success" ? "Message Sent!" : "Send Message"}
       </button>

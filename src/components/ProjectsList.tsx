@@ -449,7 +449,7 @@ export const ProjectsList = () => {
         className="flex items-center justify-center gap-2 sm:gap-3 bg-muted-100/95 dark:bg-muted-900/90 p-1 sm:p-1.5 rounded-lg border border-muted-200/95 dark:border-muted-700 w-fit mx-auto mb-6 sm:mb-10 backdrop-blur-md shadow-[0_2px_10px_rgba(28,25,23,0.08)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.35)] opacity-0"
       >
         <button
-          className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-md font-medium text-xs sm:text-sm transition-all duration-300 ${
+          className={`touch-target px-4 sm:px-6 py-2.5 rounded-md font-medium text-xs sm:text-sm transition-all duration-300 ${
             activeTab === "frontend"
               ? "bg-gradient-primary text-white shadow-lg shadow-primary-500/20"
               : "bg-transparent text-muted-600 dark:text-muted-400 hover:text-muted-900 dark:hover:text-muted-50"
@@ -462,7 +462,7 @@ export const ProjectsList = () => {
           🎨 Frontend
         </button>
         <button
-          className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-md font-medium text-xs sm:text-sm transition-all duration-300 ${
+          className={`touch-target px-4 sm:px-6 py-2.5 rounded-md font-medium text-xs sm:text-sm transition-all duration-300 ${
             activeTab === "backend"
               ? "bg-gradient-primary text-white shadow-lg shadow-primary-500/20"
               : "bg-transparent text-muted-600 dark:text-muted-400 hover:text-muted-900 dark:hover:text-muted-50"
@@ -509,15 +509,29 @@ export const ProjectsList = () => {
                 setShowAllBackend(!showAllBackend);
               }
             }}
-            className="px-6 sm:px-8 py-2.5 sm:py-3 bg-gradient-primary text-white rounded-lg font-medium text-sm sm:text-base hover:shadow-lg shadow-primary-500/20 transition-all duration-300 hover:scale-105"
+            className="touch-target px-6 sm:px-8 py-3 bg-gradient-primary text-white rounded-lg font-medium text-sm sm:text-base hover:shadow-lg shadow-primary-500/20 transition-all duration-300 sm:hover:scale-105"
           >
             {activeTab === "frontend"
               ? showAllFrontend
                 ? "Show Less"
-                : `See More (${frontendProjects.length - 6} more projects)`
+                : (
+                  <>
+                    <span className="sm:hidden">See more ({frontendProjects.length - 6})</span>
+                    <span className="hidden sm:inline">
+                      {`See More (${frontendProjects.length - 6} more projects)`}
+                    </span>
+                  </>
+                )
               : showAllBackend
                 ? "Show Less"
-                : `See More (${backendProjects.length - 6} more projects)`}
+                : (
+                  <>
+                    <span className="sm:hidden">See more ({backendProjects.length - 6})</span>
+                    <span className="hidden sm:inline">
+                      {`See More (${backendProjects.length - 6} more projects)`}
+                    </span>
+                  </>
+                )}
           </button>
         </div>
       )}

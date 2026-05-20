@@ -40,7 +40,7 @@ export const Achievements = ({ variant = "scroll" }: AchievementsProps) => {
           }`}
         >
           <span className="text-base sm:text-lg">{achievement.icon}</span>
-          <span className="text-[10px] xs:text-xs">{achievement.name}</span>
+          <span className="text-xs leading-tight">{achievement.name}</span>
         </div>
       ))}
     </div>

@@ -86,12 +86,12 @@ const education = [
 export function AboutPageContent() {
   return (
     <div className="about-dossier max-w-5xl mx-auto pb-8">
-      <div className="about-dossier__hero mb-12 sm:mb-16 grid gap-8 lg:grid-cols-12 lg:gap-10 items-end border-b border-muted-200/80 dark:border-muted-700/80 pb-10">
+      <div className="about-dossier__hero mb-10 sm:mb-16 grid gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-10 items-end border-b border-muted-200/80 dark:border-muted-700/80 pb-8 sm:pb-10">
         <div className="lg:col-span-5">
-          <p className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.28em] text-primary-600 dark:text-primary-400 mb-4">
+          <p className="font-mono text-xs uppercase tracking-[0.2em] sm:tracking-[0.28em] text-primary-600 dark:text-primary-400 mb-4">
             Résumé on file
           </p>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-muted-900 dark:text-muted-50 leading-[0.95]">
+          <h2 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-muted-900 dark:text-muted-50 leading-[0.95]">
             Menyaga
             <span className="block text-muted-400 dark:text-muted-500 font-light mt-1">
               Enyo Israel

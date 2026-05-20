@@ -4,11 +4,8 @@ import { PageHeader } from "@/src/components/PageHeader";
 
 export default function ExperiencePage() {
   return (
-    <main
-      id="main-content"
-      className="min-h-screen pt-24 sm:pt-32 pb-12 sm:pb-20"
-    >
-      <div className="container-custom max-w-4xl px-4">
+    <main id="main-content" className="page-shell">
+      <div className="container-custom max-w-4xl">
         <PageHeader
           title="< Experience >"
           description="My professional journey and key achievements in software development"

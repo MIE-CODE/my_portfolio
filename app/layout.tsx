@@ -1,98 +1,13 @@
 /* eslint-disable @next/next/no-page-custom-font */
-import type { Metadata } from "next";
-import "../src/style/globals.css";
-import { ThemeProviderWrapper } from "../src/components/ThemeProviderWrapper";
 import { SiteShell } from "../src/components/SiteShell";
+import { ThemeProviderWrapper } from "../src/components/ThemeProviderWrapper";
+import { JsonLd } from "@/src/components/JsonLd";
+import { buildRootMetadata } from "@/src/seo/buildMetadata";
+import { personJsonLd, webSiteJsonLd } from "@/src/seo/jsonLd";
+import { SITE } from "@/src/seo/site";
+import "../src/style/globals.css";
 
-export const metadata: Metadata = {
-  title: {
-    default:
-      "Israel Enyo Menyaga - CTO & Full Stack Engineer | Next.js, Nuxt, React, TypeScript",
-    template: "%s",
-  },
-  description:
-    "CTO at Belsoft Systems (BelCore, BelPower); founder of Blivap; former CTO at True Perk and SparkPay. Builds production SaaS with Next.js, Nuxt, Vue, React, TypeScript—collaboration tools, fintech and bill pay, HR tech, and marketplaces—with strong performance, analytics (GA, PostHog), and CRM integration. Freelance delivery from Figma to deploy; ongoing interest in Web3 and Ethereum.",
-  keywords: [
-    "Full Stack Developer",
-    "React Developer",
-    "Next.js Developer",
-    "TypeScript Developer",
-    "Tailwind CSS Developer",
-    "Web3 Developer",
-    "Blockchain Developer",
-    "Ethereum Developer",
-    "Figma to Code",
-    "Performance Optimization",
-    "Lighthouse Optimization",
-    "Core Web Vitals",
-    "Google Analytics",
-    "PostHog",
-    "HubSpot Integration",
-    "Headless CMS",
-    "Sanity CMS",
-    "Contentful",
-    "GSAP",
-    "ScrollTrigger",
-    "Web Developer",
-    "Frontend Developer",
-    "Software Engineer",
-    "Portfolio",
-    "Menyaga Enyo Israel",
-    "Israel Enyo Menyaga",
-    "M_I_E_CODE",
-    "MIE",
-  ],
-  authors: [{ name: "Israel Menyaga" }],
-  creator: "Israel Menyaga",
-  publisher: "Israel Menyaga",
-  metadataBase: new URL("https://israelm.site"),
-  alternates: {
-    canonical: "/",
-  },
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://israelm.site",
-    title:
-      "Israel Menyaga - Full Stack Developer | React, Next.js, React Native Expert",
-    description:
-      "Professional full-stack developer with 5+ years of experience specializing in React, Next.js, TypeScript, and Tailwind CSS. Expert in building production websites from Figma designs, performance optimization, and analytics integration. Genuinely excited about blockchain technology and eager to learn Web3 development.",
-    siteName: "Israel Menyaga Portfolio",
-    images: [
-      {
-        url: "https://israelm.site/og-image.svg",
-        width: 1200,
-        height: 630,
-        alt: "Israel Menyaga - Full Stack Developer",
-        type: "image/svg+xml",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Israel Menyaga - Full Stack Developer",
-    description:
-      "Professional full-stack developer specializing in React, Next.js, TypeScript, and React Native.",
-    images: ["https://israelm.site/twitter-image.svg"],
-    creator: "@M_I_E_CODE", // Update with your Twitter handle
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  verification: {
-    // Add your verification codes when available
-    // google: "your-google-verification-code",
-    // yandex: "your-yandex-verification-code",
-  },
-};
+export const metadata = buildRootMetadata();
 
 export default function RootLayout({
   children,
@@ -100,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={SITE.language} suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -137,57 +52,12 @@ export default function RootLayout({
         <link rel="icon" type="image/svg+xml" sizes="any" href="/icon.svg" />
         <link rel="apple-touch-icon" href="/apple-icon.svg" />
         <link rel="manifest" href="/site.webmanifest" />
-        <meta name="theme-color" content="#009c9e" />
+        <meta name="theme-color" content={SITE.themeColor} />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=5"
         />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              name: "Israel Menyaga",
-              jobTitle: "Full Stack Developer",
-              description:
-                "Professional full-stack developer specializing in React, Next.js, TypeScript, and Tailwind CSS. Genuinely excited about blockchain technology and eager to learn Web3 development.",
-              email: "israelvictor126@gmail.com",
-              url: "https://israelm.site",
-              sameAs: [
-                "http://www.linkedin.com/in/israelmenyaga",
-                // Add other social profiles
-              ],
-              knowsAbout: [
-                "React",
-                "Next.js",
-                "TypeScript",
-                "JavaScript",
-                "Tailwind CSS",
-                "GSAP",
-                "ScrollTrigger",
-                "Google Analytics",
-                "PostHog",
-                "HubSpot",
-                "Sanity CMS",
-                "Contentful",
-                "Performance Optimization",
-                "Core Web Vitals",
-                "Lighthouse",
-                "Figma to Code",
-                "Node.js",
-                "Express.js",
-                "MongoDB",
-                "Web Development",
-                "Security",
-                "QA Testing",
-                "Blockchain Interest",
-                "Web3 Interest",
-                "Ethereum Interest",
-              ],
-            }),
-          }}
-        />
+        <JsonLd data={[personJsonLd(), webSiteJsonLd()]} />
       </head>
       <body className="bg-muted-50 dark:bg-muted-900 text-muted-900 dark:text-muted-50 transition-colors duration-300">
         <ThemeProviderWrapper>
