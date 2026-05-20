@@ -60,13 +60,13 @@ export const Modal = (props: {
       <nav
         ref={panelRef}
         onClick={(e) => e.stopPropagation()}
-        className="h-full w-[70%] bg-white dark:bg-muted-800/95 backdrop-blur-xl border-l border-muted-200 dark:border-muted-700 flex flex-col"
+        className="h-full w-[70%] bg-muted-100 dark:bg-muted-800/95 backdrop-blur-xl border-l border-muted-200 dark:border-muted-700 flex flex-col"
         aria-label="Mobile navigation"
       >
         <div className="flex justify-end p-6">
           <button
             onClick={() => props.isOpen(false)}
-            className="w-11 h-11 flex items-center justify-center rounded-full bg-white/90 dark:bg-muted-800 border border-muted-200/95 dark:border-muted-700 hover:bg-white dark:hover:bg-muted-700 shadow-[0_2px_10px_rgba(28,25,23,0.06)] transition-all duration-300"
+            className="w-11 h-11 flex items-center justify-center rounded-full bg-muted-100/90 dark:bg-muted-800 border border-muted-300/80 dark:border-muted-700 hover:bg-muted-50 dark:hover:bg-muted-700 shadow-[0_2px_10px_rgba(28,25,23,0.06)] transition-all duration-300"
             aria-label="Close navigation menu"
           >
             <div className="text-muted-700 dark:text-muted-300 [&>svg]:w-6 [&>svg]:h-6">

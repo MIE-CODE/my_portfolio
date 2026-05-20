@@ -10,12 +10,15 @@ export function ServicesCTA() {
       parallax={0.18}
       className="mt-16 sm:mt-20 text-center"
     >
-      <div className="max-w-2xl mx-auto p-8 sm:p-10 bg-gradient-to-br from-white via-primary-50/90 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 rounded-2xl sm:rounded-3xl border border-primary-200/90 dark:border-primary-800 shadow-[0_4px_28px_-6px_rgba(58,92,128,0.12)] dark:shadow-none verse-scan-border verse-hover-hud">
-        <h2 className="text-2xl sm:text-3xl font-bold text-muted-900 dark:text-muted-50 mb-4">
-          Ready to Start Your Project?
+      <div className="panel-surface max-w-2xl mx-auto p-8 sm:p-10 text-center">
+        <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-primary-600 dark:text-primary-400 mb-3">
+          Next step
+        </p>
+        <h2 className="text-2xl sm:text-3xl font-bold text-muted-900 dark:text-muted-50 mb-3">
+          Ready to start?
         </h2>
-        <p className="text-sm sm:text-base text-muted-700 dark:text-muted-300 mb-6 sm:mb-8">
-          Whether you need a greenfield product, a critical refactor, or leadership on stack and delivery, we can map it to something I&apos;ve already shipped at scale.
+        <p className="text-sm sm:text-base text-muted-600 dark:text-muted-300 mb-6 sm:mb-8 max-w-lg mx-auto leading-relaxed">
+          Greenfield product, critical refactor, or stack leadership—we can map it to work already shipped at scale.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a

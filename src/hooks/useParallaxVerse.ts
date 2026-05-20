@@ -12,6 +12,7 @@ import {
 import type { VerseTarget } from "@/src/components/verse/verseState";
 import { VERSE_LATERAL_MAX } from "@/src/components/verse/verseState";
 import { flightDuration, routeToPathIndex } from "@/src/config/verseCameraPath";
+import { refreshScrollMotion } from "@/src/hooks/useContentParallax";
 import { getRouteViewpoint } from "@/src/config/verseCinematics";
 import {
   CHAMBER_STEP_VW,
@@ -121,6 +122,13 @@ function idleTravel(anchor: number): TravelState {
   };
 }
 
+function readPageScrollProgress() {
+  const st = ScrollTrigger.getAll().find(
+    (trigger) => trigger.trigger === document.documentElement,
+  );
+  return st?.progress ?? 0;
+}
+
 function settledSnapshot(
   pathname: string,
   targetIndex: number,
@@ -151,6 +159,7 @@ export function useParallaxVerse(refs: ParallaxVerseRefs) {
   const tweenRef = useRef<gsap.core.Tween | null>(null);
   const pathTweenRef = useRef<gsap.core.Tween | null>(null);
   const panLockRef = useRef(false);
+  const flightGenRef = useRef(0);
   const pathnameRef = useRef(pathname);
   pathnameRef.current = pathname;
 
@@ -218,22 +227,6 @@ export function useParallaxVerse(refs: ParallaxVerseRefs) {
       setCanPanRight(chamber < 2);
     },
     [refs],
-  );
-
-  const applyState = useCallback(
-    (
-      v: VerseVars,
-      pathname: string,
-      chamber: number,
-      scrollP: number,
-      lateralPx: number,
-    ) => {
-      varsRef.current = v;
-      const rig = refs.rig.current;
-      if (rig) applyVars(rig, v);
-      commitTarget(pathname, chamber, scrollP, lateralPx, travelRef.current);
-    },
-    [refs.rig, commitTarget],
   );
 
   const animateChamberScroll = useCallback(
@@ -308,6 +301,7 @@ export function useParallaxVerse(refs: ParallaxVerseRefs) {
       const dur = flightDuration(flightStart, flightEnd, reduced);
 
       pathTweenRef.current?.kill();
+      const flightGen = ++flightGenRef.current;
       const proxy = { travelT: 0 };
       const viewAnchor = travelRef.current.pathAnchor;
 
@@ -321,21 +315,24 @@ export function useParallaxVerse(refs: ParallaxVerseRefs) {
 
       pathnameRef.current = pathname;
       panLockRef.current = true;
+      document.documentElement.dataset.verseFlying = "";
       commitTarget(pathname, chamber, scrollP, lateralRef.current, leg);
 
       pathTweenRef.current = gsap.to(proxy, {
         travelT: 1,
         duration: dur,
-        ease: "none",
+        ease: "power2.inOut",
         onUpdate: () => {
-          const active: TravelState = { ...leg, travelT: proxy.travelT };
-          commitTarget(
-            pathname,
-            chamber,
-            scrollP,
-            lateralRef.current,
-            active,
-          );
+          commitTarget(pathname, chamber, scrollP, lateralRef.current, {
+            ...leg,
+            travelT: proxy.travelT,
+          });
+        },
+        onComplete: () => {
+          if (flightGen !== flightGenRef.current) return;
+          const done = idleTravel(targetIndex);
+          travelRef.current = done;
+          commitTarget(pathname, chamber, scrollP, lateralRef.current, done);
           const v = varsFromState(
             pathname,
             targetIndex,
@@ -347,21 +344,43 @@ export function useParallaxVerse(refs: ParallaxVerseRefs) {
           varsRef.current = v;
           const rig = refs.rig.current;
           if (rig) applyVars(rig, v);
-        },
-        onComplete: () => {
-          const done = idleTravel(targetIndex);
-          travelRef.current = done;
-          commitTarget(pathname, chamber, scrollP, lateralRef.current, done);
           panLockRef.current = false;
+          delete document.documentElement.dataset.verseFlying;
+          scrollRef.current = readPageScrollProgress();
+          pushVerseState(
+            pathname,
+            chamber,
+            scrollRef.current,
+            lateralRef.current,
+          );
+          refreshScrollMotion();
         },
       });
 
       if (dur === 0) {
-        travelRef.current = idleTravel(targetIndex);
+        if (flightGen !== flightGenRef.current) return;
+        const done = idleTravel(targetIndex);
+        travelRef.current = done;
+        commitTarget(pathname, chamber, scrollP, lateralRef.current, done);
+        const v = varsFromState(
+          pathname,
+          targetIndex,
+          chamber,
+          scrollP,
+          lateralRef.current,
+          use3dRef.current,
+        );
+        varsRef.current = v;
+        const rig = refs.rig.current;
+        if (rig) applyVars(rig, v);
         panLockRef.current = false;
+        delete document.documentElement.dataset.verseFlying;
+        scrollRef.current = readPageScrollProgress();
+        pushVerseState(pathname, chamber, scrollRef.current, lateralRef.current);
+        refreshScrollMotion();
       }
     },
-    [commitTarget, refs.rig],
+    [commitTarget, refs.rig, pushVerseState],
   );
 
   const goToState = useCallback(
@@ -511,6 +530,7 @@ export function useParallaxVerse(refs: ParallaxVerseRefs) {
     travelDirectTo(pathname, targetIndex, 1, 0);
 
     return () => {
+      flightGenRef.current += 1;
       pathTweenRef.current?.kill();
     };
   }, [pathname, travelDirectTo, syncHud]);

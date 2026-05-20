@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
 
 type Theme = "light" | "dark" | "system";
 
@@ -23,26 +23,29 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const [mounted, setMounted] = useState(false);
 
   // Get system preference
-  const getSystemTheme = (): "light" | "dark" => {
+  const getSystemTheme = useCallback((): "light" | "dark" => {
     if (typeof window === "undefined") return "dark";
     return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-  };
+  }, []);
 
   // Resolve theme based on current setting
-  const resolveTheme = (currentTheme: Theme): "light" | "dark" => {
-    if (currentTheme === "system") {
-      return getSystemTheme();
-    }
-    return currentTheme;
-  };
+  const resolveTheme = useCallback(
+    (currentTheme: Theme): "light" | "dark" => {
+      if (currentTheme === "system") {
+        return getSystemTheme();
+      }
+      return currentTheme;
+    },
+    [getSystemTheme],
+  );
 
   // Apply theme to document
-  const applyTheme = (themeToApply: "light" | "dark") => {
+  const applyTheme = useCallback((themeToApply: "light" | "dark") => {
     if (typeof window !== "undefined") {
       document.documentElement.classList.toggle("dark", themeToApply === "dark");
       setResolvedTheme(themeToApply);
     }
-  };
+  }, []);
 
   // Initialize theme on mount
   useEffect(() => {
@@ -56,7 +59,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
       applyTheme(initialResolved);
       setMounted(true);
     }
-  }, []);
+  }, [resolveTheme, applyTheme]);
 
   // Listen for system preference changes
   useEffect(() => {
@@ -87,14 +90,14 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
         mediaQuery.removeListener(handleChange);
       }
     };
-  }, [theme, mounted]);
+  }, [theme, mounted, applyTheme]);
 
   // Update resolved theme when theme changes
   useEffect(() => {
     if (!mounted) return;
     const newResolved = resolveTheme(theme);
     applyTheme(newResolved);
-  }, [theme, mounted]);
+  }, [theme, mounted, resolveTheme, applyTheme]);
 
   const setTheme = (newTheme: Theme) => {
     setThemeState(newTheme);

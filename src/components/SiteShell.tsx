@@ -6,6 +6,7 @@ import { Footer } from "./footer";
 import { Modal } from "./modal";
 import { GSAPInit } from "./GSAPInit";
 import { ContentMotionLayer } from "./ContentMotionLayer";
+import { AppLoadProvider } from "@/src/contexts/AppLoadContext";
 import { ParallaxVerse } from "./ParallaxVerse";
 
 /** Persistent app chrome + verse — mounted once in root layout, survives route changes */
@@ -13,7 +14,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   const [modal, setModal] = useState(false);
 
   return (
-    <>
+    <AppLoadProvider>
       <GSAPInit />
       <ParallaxVerse>
         <Navbar isOpen={setModal} />
@@ -21,6 +22,6 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
         <Footer />
       </ParallaxVerse>
       <Modal isOpen={setModal} modal={modal} />
-    </>
+    </AppLoadProvider>
   );
 }

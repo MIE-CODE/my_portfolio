@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/src/components/PageHeader";
-import { About } from "@/src/components/about";
+import { AboutPageContent } from "@/src/components/AboutPageContent";
 
 export const metadata: Metadata = {
   title: "About - Menyaga Enyo Israel",
   description:
-    "About Menyaga Enyo Israel—CTO at Belsoft Systems, founder of Blivap, former CTO at True Perk and SparkPay. Full-stack engineer focused on Next.js, Nuxt, React, and TypeScript for SaaS, fintech, collaboration, and marketplaces.",
+    "About Israel Menyaga—Senior Software Engineer; CTO (Technical Leadership) at Belsoft Systems; senior frontend engineer at True Perk and SparkPay; senior software engineer at Blivap. Résumé (PDF) on this page.",
 };
 
 export default function AboutPage() {
@@ -16,11 +16,8 @@ export default function AboutPage() {
       data-parallax-depth="0.1"
     >
       <div className="container-custom px-4">
-        <PageHeader
-          title="< About Me >"
-          description="I build and lead production SaaS: currently CTO at Belsoft Systems, founder of Blivap, and still taking selective freelance work. Stack-wise I live in Next.js and Nuxt, React and Vue, TypeScript and Tailwind—with payments, analytics, and performance baked in from day one."
-        />
-        <About />
+        <PageHeader align="start" title="About" className="max-w-5xl mx-auto w-full" />
+        <AboutPageContent />
       </div>
     </main>
   );

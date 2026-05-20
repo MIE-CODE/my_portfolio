@@ -1,89 +1,61 @@
 "use client";
 
+import { ExperienceCard } from "./ExperienceCard";
+import { useExperienceTimelineMotion } from "../hooks/useExperienceTimelineMotion";
 import { useGsapReveal } from "../hooks/useGsapReveal";
 
+/** Dates and titles aligned with Israel_menyaga_cv.pdf */
 const experiences = [
   {
-    year: "2026 - Present",
+    year: "Jan 2026 - Present",
     title: "Chief Technology Officer",
     company: "Belsoft Systems Ltd",
     description:
-      "CTO for Belsoft Systems’ engineering across products: BelCore—a Slack-like workspace client (channels, DMs, threads, mentions, bookmarks, settings) on Next.js, TypeScript, Tailwind, Redux Toolkit—and BelPower at https://www.belpower.ng/ for utility and telecom billing: airtime, data, electricity with meter verification, cable TV, wallet and history, customer dashboard and admin operations. Sets technical direction, API integration patterns, and delivery with the broader team.",
+      "Technical leadership across Belsoft engineering: strategy, architecture, and product delivery for BelCore (Slack-style workspace), BelPower (bill payments at belpower.ng), and BelAI. Remote.",
     achievements: [
-      "Owns architecture and delivery for multiple web apps against a shared REST API and repository-style client layer",
-      "Ships BelCore’s Slack-style shell (sidebar, workspace navigation, auth routes) and evolves HTTP client, Redux app state, and design system (Sora, Tailwind tokens)",
-      "Leads BelPower: Next.js App Router, Zustand, react-hook-form + Zod, Paystack, httpOnly session cookies, middleware, EN/FR i18n, and Next route handlers to the belpower backend API",
-      "Partners across product and operations with company presence at belsoftsystems.com",
+      "Lead engineering strategy, architecture, and releases across multiple web platforms",
+      "Directed cross-functional delivery for bill payment systems and the BelAI platform",
+      "Defined engineering processes focused on scalability, maintainability, and delivery speed",
+      "Mentor developers and drive best practices on shared REST APIs and frontend stacks",
     ],
   },
   {
-    year: "2025 - Present",
-    title: "Founder & Owner",
-    company: "Blivap",
-    description:
-      "Building and shipping Blivap, a Nigeria-focused platform connecting blood and sperm donors with people who need donations—marketing and education (“Give Blood. Save Lives.”) plus authenticated donor experiences (profiles, discovery, appointments, wallet, bookings). Next.js (App Router), React, TypeScript, Tailwind, MUI, Redux Toolkit, and a remote REST API with cookie-based sessions.",
-    achievements: [
-      "Designed the product end-to-end: public content (healthcare, news, FAQ, legal) and logged-in donor flows backed by environment-driven API configuration",
-      "Implemented auth (register, login, verification, password reset), session validation via backend (/me), and post-login flows such as avatar selection",
-      "Shipped donor features: listings, bookings, ID verification, wallet and history—Axios fetcher with Bearer tokens from cookies",
-      "Added SEO and sharing with dynamic Open Graph images (@vercel/og) and structured metadata",
-      "Used Formik + Yup for forms, GSAP for motion, and tooling (ESLint, Prettier, Husky, lint-staged) for maintainability",
-    ],
-  },
-  {
-    year: "2024 - Present",
-    title: "Full Stack Developer",
-    company: "Freelance",
-    description:
-      "Building production-ready web applications from Figma designs to deployment using React, Next.js, TypeScript, and Tailwind CSS. Specializing in performance optimization, analytics integration, and exploring blockchain/web3 technologies.",
-    achievements: [
-      "Developed 20+ production applications with pixel-perfect Figma implementations",
-      "Optimized applications achieving 95+ Lighthouse scores and improved Core Web Vitals",
-      "Integrated Google Analytics, PostHog, and HubSpot CRM into multiple web applications",
-      "Implemented headless CMS solutions using Sanity and Contentful for content-driven websites",
-      "Created performant animations and interactions using GSAP and ScrollTrigger",
-      "Actively learning blockchain technology, Web3 development, and Ethereum ecosystem",
-    ],
-  },
-  {
-    year: "2022 - 2024",
-    title: "Chief Technology Officer",
+    year: "Feb 2025 - Present",
+    title: "Senior Frontend Engineer",
     company: "True Perk",
     description:
-      "Led engineering for an employee engagement and recognition platform: perks and gifting, recognition and activity feeds, calendars, analytics, billing, automations, and org administration. Stack: Nuxt 3, Vue 3, TypeScript, Pinia, Tailwind, and a repository pattern for APIs.",
+      "Architecting scalable Nuxt.js applications with AI-assisted workflows for recognition cards, milestone tracking, and employee engagement experiences. Remote.",
     achievements: [
-      "Owned frontend architecture, component system, and integration with analytics and payment flows",
-      "Shipped features across engagement, employees, perks, calendar, notifications, and admin settings",
-      "Drove performance and quality: Lighthouse-focused optimization, responsive UI, and secure client patterns (RBAC, XSS-safe content)",
-      "Collaborated with design on Shadcn/Radix-based UI and scalable layouts for enterprise use",
-      "Established patterns for Pinia stores, middleware, and composables aligned with product growth",
+      "Build responsive, high-performance interfaces for recognition and engagement products",
+      "Ship maintainable Nuxt 3 / Vue 3 / TypeScript frontends with Pinia and Tailwind",
+      "Collaborate cross-functionally on AI-driven content generation and product UX",
+      "Improve scalability and frontend architecture for enterprise-style dashboards",
     ],
   },
   {
-    year: "2020 - 2022",
-    title: "Chief Technology Officer",
+    year: "Oct 2023 - Jan 2025",
+    title: "Senior Frontend Engineer",
     company: "SparkPay",
     description:
-      "Led engineering for a payroll SaaS product on Next.js, React, and TypeScript: core payroll experiences, marketing sites and landing pages from design, HubSpot CRM integration, and strong performance, SEO, and QA practices.",
+      "Developed payroll and financial monitoring platforms using Next.js, TypeScript, and Sass—production-ready UX with reusable component architecture. Remote.",
     achievements: [
-      "Owned technical direction for the web app and marketing properties, aligning delivery with product and growth goals",
-      "Shipped payroll and data-heavy flows with TypeScript-first patterns and maintainable React architecture",
-      "Partnered with design on responsive, pixel-perfect UI (including Tailwind) and conversion-focused pages",
-      "Integrated HubSpot CRM for lead and customer workflows",
-      "Drove performance and Core Web Vitals (Lighthouse) and security-conscious release practices",
+      "Delivered scalable payroll and monitoring surfaces on Next.js and React",
+      "Collaborated with engineers and designers on seamless, production-ready experiences",
+      "Improved performance and maintainability through frontend optimization",
+      "Built reusable component patterns for data-heavy financial workflows",
     ],
   },
   {
-    year: "2021 - 2022",
-    title: "Software Developer Intern",
-    company: "HNGX Internship",
+    year: "Mar 2021 - Aug 2023",
+    title: "Senior Software Engineer",
+    company: "Blivap",
     description:
-      "Participated in an intensive internship program focused on web development. Worked on real-world projects, learned modern technologies, and collaborated with a team of developers.",
+      "Full-stack healthcare platform (Next.js, NestJS) for donor–recipient matching: secure APIs, onboarding, verification, and production infrastructure. Remote.",
     achievements: [
-      "Completed multiple challenging projects during the internship",
-      "Learned and applied React, Next.js, and modern web technologies",
-      "Collaborated with team members on group projects",
-      "Gained hands-on experience with version control and agile methodologies",
+      "Engineered real-time donor–recipient matching and trusted interaction flows",
+      "Built REST APIs for auth, onboarding, blood requests, donation tracking, and verification",
+      "Integrated AI-driven questionnaires for donor screening and onboarding",
+      "Managed deployments, environments, custom domains, and DNS for production",
     ],
   },
 ];
@@ -97,78 +69,60 @@ const education = [
   },
 ];
 
-export const ExperienceTimeline = () => {
+export function ExperienceTimeline() {
+  const workRef = useExperienceTimelineMotion();
   const eduRef = useGsapReveal({
-    preset: "hudRise",
+    preset: "smoothRise",
     stagger: 0.1,
     duration: 0.65,
-    parallax: 0.08,
+    parallax: 0.06,
   });
 
   return (
-    <div className="space-y-8 sm:space-y-12">
-      <div>
-        <h2 className="text-xl sm:text-2xl font-semibold text-muted-900 dark:text-muted-50 mb-6 sm:mb-8">
+    <div className="space-y-14 sm:space-y-16">
+      <section aria-labelledby="work-experience-heading">
+        <h2
+          id="work-experience-heading"
+          className="text-xl sm:text-2xl font-semibold text-muted-900 dark:text-muted-50 mb-8 sm:mb-10"
+        >
           Work Experience
         </h2>
-        <div className="experience-stack relative pb-[20vh]">
+
+        <div
+          ref={workRef}
+          className="experience-timeline relative pl-11 sm:pl-16"
+        >
           <div
-            className="absolute left-4 sm:left-8 top-0 bottom-0 w-0.5 bg-primary-300 dark:bg-primary-700 -z-10"
+            className="experience-timeline__rail"
             aria-hidden
           />
-          <div className="relative">
-            {experiences.map((exp, index) => (
-              <div
+
+          <ol className="space-y-8 sm:space-y-10">
+            {experiences.map((exp) => (
+              <li
                 key={`${exp.company}-${exp.year}`}
-                data-exp-card
-                className="experience-stack__item relative pl-12 sm:pl-20"
-                style={{ zIndex: index + 1 }}
+                data-exp-item
+                className="experience-timeline__item relative"
               >
-                <div
-                  className="absolute left-3 sm:left-6 top-6 w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-primary-500 dark:bg-primary-400 border-2 sm:border-4 border-muted-50 dark:border-muted-800 shadow-lg shadow-primary-500/30 dark:shadow-primary-400/20 z-10"
+                <span
+                  className="experience-timeline__dot"
                   aria-hidden
                 />
-                <div className="experience-stack__sticky sticky top-20 sm:top-24 pt-2 pb-4">
-                  <div className="p-4 sm:p-6 bg-white/95 dark:bg-muted-800/90 border border-muted-200/95 dark:border-muted-700 rounded-2xl verse-hover-hud verse-scan-border backdrop-blur-md shadow-[0_8px_32px_rgba(28,25,23,0.12)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.35)]">
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3 sm:mb-4">
-                      <div>
-                        <h3 className="text-lg sm:text-xl font-semibold text-muted-900 dark:text-muted-50 mb-1">
-                          {exp.title}
-                        </h3>
-                        <p className="text-sm sm:text-base text-primary-600 dark:text-primary-400 font-medium">
-                          {exp.company}
-                        </p>
-                      </div>
-                      <span className="text-xs sm:text-sm text-muted-600 dark:text-muted-400 mt-2 sm:mt-0 shrink-0">
-                        {exp.year}
-                      </span>
-                    </div>
-                    <p className="text-sm sm:text-base text-muted-700 dark:text-muted-300 mb-3 sm:mb-4 leading-relaxed">
-                      {exp.description}
-                    </p>
-                    <ul className="space-y-1.5 sm:space-y-2">
-                      {exp.achievements.map((achievement, i) => (
-                        <li
-                          key={i}
-                          className="flex items-start gap-2 text-xs sm:text-sm text-muted-600 dark:text-muted-400"
-                        >
-                          <span className="text-primary-600 dark:text-primary-400 mt-0.5 sm:mt-1 flex-shrink-0">
-                            ▸
-                          </span>
-                          <span>{achievement}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
+                <time className="experience-timeline__date font-mono text-xs sm:text-sm text-primary-600 dark:text-primary-400 tabular-nums block mb-3">
+                  {exp.year}
+                </time>
+                <ExperienceCard {...exp} hideYear />
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
-      </div>
+      </section>
 
-      <div>
-        <h2 className="text-xl sm:text-2xl font-semibold text-muted-900 dark:text-muted-50 mb-6 sm:mb-8">
+      <section aria-labelledby="education-heading" className="relative z-10">
+        <h2
+          id="education-heading"
+          className="text-xl sm:text-2xl font-semibold text-muted-900 dark:text-muted-50 mb-6 sm:mb-8"
+        >
           Education
         </h2>
         <div
@@ -179,23 +133,23 @@ export const ExperienceTimeline = () => {
             <div
               key={index}
               data-reveal-item
-              className="p-4 sm:p-6 bg-white/90 dark:bg-muted-800/60 border border-muted-200/95 dark:border-muted-700 rounded-2xl verse-hover-hud verse-scan-border hover:bg-white dark:hover:bg-muted-800/80 hover:border-primary-300 dark:hover:border-primary-600 transition-all duration-300 shadow-[0_2px_10px_rgba(28,25,23,0.06)] dark:shadow-none opacity-0"
+              className="panel-surface p-4 sm:p-6 opacity-0 transition-colors duration-300 hover:border-primary-400/45 dark:hover:border-primary-500/40"
             >
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3 gap-2">
                 <h3 className="text-lg sm:text-xl font-semibold text-muted-900 dark:text-muted-50">
                   {edu.title}
                 </h3>
-                <span className="text-xs sm:text-sm text-muted-600 dark:text-muted-400 mt-2 sm:mt-0">
+                <span className="font-mono text-xs sm:text-sm text-primary-600 dark:text-primary-400 tabular-nums">
                   {edu.year}
                 </span>
               </div>
-              <p className="text-sm sm:text-base text-muted-700 dark:text-muted-300 leading-relaxed">
+              <p className="text-sm sm:text-base text-muted-600 dark:text-muted-300 leading-relaxed">
                 {edu.description}
               </p>
             </div>
           ))}
         </div>
-      </div>
+      </section>
     </div>
   );
-};
+}

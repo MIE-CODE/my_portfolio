@@ -56,7 +56,7 @@ export default function Home() {
 
           <div
             data-hero-title
-            className="flex flex-col gap-3 sm:gap-4 max-w-3xl rounded-2xl border border-primary-200/30 bg-white/40 px-3 py-2 backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.04] verse-scan-border"
+            className="flex flex-col gap-3 sm:gap-4 max-w-3xl rounded-2xl border border-primary-200/40 bg-muted-100/95 px-3 py-2 backdrop-blur-md dark:border-white/12 dark:bg-muted-900/90 verse-scan-border shadow-[0_8px_32px_-8px_rgba(28,25,23,0.12)] dark:shadow-[0_8px_32px_-8px_rgba(0,0,0,0.4)]"
           >
             <div className="flex flex-col gap-2">
               <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
