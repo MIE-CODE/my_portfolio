@@ -3,7 +3,6 @@
 import { useFrame } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
 import * as THREE from "three";
-import type { PhysicsKind } from "@/src/config/verseCinematics";
 import type { VerseLandmark } from "@/src/config/verseLandmarks";
 import { VERSE_LANDMARKS } from "@/src/config/verseLandmarks";
 import type { VerseTarget } from "./verseState";
@@ -385,7 +384,8 @@ function PendulumWave({ landmark, targetRef, quality }: SimProps) {
 }
 
 /** Simplified three-body problem */
-function ThreeBody({ landmark, targetRef, quality }: SimProps) {
+function ThreeBody(props: SimProps) {
+  const { landmark, targetRef } = props;
   const energy = useFocus(targetRef, landmark.position);
   const mesh = useRef<THREE.InstancedMesh>(null);
   const dummy = useMemo(() => new THREE.Object3D(), []);

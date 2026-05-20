@@ -1,5 +1,8 @@
 "use client";
 
+import { useRef } from "react";
+import { ExperienceCard } from "./ExperienceCard";
+import { useExperienceStackScroll } from "../hooks/useExperienceStackScroll";
 import { useGsapReveal } from "../hooks/useGsapReveal";
 
 const experiences = [
@@ -97,7 +100,21 @@ const education = [
   },
 ];
 
-export const ExperienceTimeline = () => {
+export function ExperienceTimeline() {
+  const workBlockRef = useRef<HTMLDivElement>(null);
+  const stackSectionRef = useRef<HTMLDivElement>(null);
+  const stackPinRef = useRef<HTMLDivElement>(null);
+  const stackStageRef = useRef<HTMLDivElement>(null);
+  const stackTrailRef = useRef<HTMLDivElement>(null);
+
+  useExperienceStackScroll(
+    workBlockRef,
+    stackSectionRef,
+    stackPinRef,
+    stackStageRef,
+    stackTrailRef,
+  );
+
   const eduRef = useGsapReveal({
     preset: "hudRise",
     stagger: 0.1,
@@ -106,68 +123,47 @@ export const ExperienceTimeline = () => {
   });
 
   return (
-    <div className="space-y-8 sm:space-y-12">
-      <div>
-        <h2 className="text-xl sm:text-2xl font-semibold text-muted-900 dark:text-muted-50 mb-6 sm:mb-8">
+    <div className="space-y-6 sm:space-y-8">
+      <div ref={workBlockRef} className="experience-work-block">
+        <h2 className="experience-work-block__title text-xl sm:text-2xl font-semibold text-muted-900 dark:text-muted-50 mb-6 sm:mb-8">
           Work Experience
         </h2>
-        <div className="experience-stack relative pb-[20vh]">
+
+        <div ref={stackSectionRef} className="experience-stack-scroll">
           <div
-            className="absolute left-4 sm:left-8 top-0 bottom-0 w-0.5 bg-primary-300 dark:bg-primary-700 -z-10"
-            aria-hidden
-          />
-          <div className="relative">
-            {experiences.map((exp, index) => (
+            ref={stackPinRef}
+            className="experience-stack-pin relative pl-12 sm:pl-20"
+          >
+            <div className="experience-stack-trail" aria-hidden>
               <div
-                key={`${exp.company}-${exp.year}`}
-                data-exp-card
-                className="experience-stack__item relative pl-12 sm:pl-20"
-                style={{ zIndex: index + 1 }}
-              >
+                ref={stackTrailRef}
+                data-stack-trail
+                className="experience-stack-trail__line"
+              />
+            </div>
+
+            <div ref={stackStageRef} className="experience-stack-stage relative">
+              {experiences.map((exp, index) => (
                 <div
-                  className="absolute left-3 sm:left-6 top-6 w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-primary-500 dark:bg-primary-400 border-2 sm:border-4 border-muted-50 dark:border-muted-800 shadow-lg shadow-primary-500/30 dark:shadow-primary-400/20 z-10"
-                  aria-hidden
-                />
-                <div className="experience-stack__sticky sticky top-20 sm:top-24 pt-2 pb-4">
-                  <div className="p-4 sm:p-6 bg-white/95 dark:bg-muted-800/90 border border-muted-200/95 dark:border-muted-700 rounded-2xl verse-hover-hud verse-scan-border backdrop-blur-md shadow-[0_8px_32px_rgba(28,25,23,0.12)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.35)]">
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3 sm:mb-4">
-                      <div>
-                        <h3 className="text-lg sm:text-xl font-semibold text-muted-900 dark:text-muted-50 mb-1">
-                          {exp.title}
-                        </h3>
-                        <p className="text-sm sm:text-base text-primary-600 dark:text-primary-400 font-medium">
-                          {exp.company}
-                        </p>
-                      </div>
-                      <span className="text-xs sm:text-sm text-muted-600 dark:text-muted-400 mt-2 sm:mt-0 shrink-0">
-                        {exp.year}
-                      </span>
-                    </div>
-                    <p className="text-sm sm:text-base text-muted-700 dark:text-muted-300 mb-3 sm:mb-4 leading-relaxed">
-                      {exp.description}
-                    </p>
-                    <ul className="space-y-1.5 sm:space-y-2">
-                      {exp.achievements.map((achievement, i) => (
-                        <li
-                          key={i}
-                          className="flex items-start gap-2 text-xs sm:text-sm text-muted-600 dark:text-muted-400"
-                        >
-                          <span className="text-primary-600 dark:text-primary-400 mt-0.5 sm:mt-1 flex-shrink-0">
-                            ▸
-                          </span>
-                          <span>{achievement}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  key={`${exp.company}-${exp.year}`}
+                  data-stack-card
+                  data-stack-index={index}
+                  className="experience-stack-card"
+                >
+                  <div
+                    data-stack-dot
+                    className="absolute -left-9 sm:-left-14 top-6 w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-primary-500 dark:bg-primary-400 border-2 sm:border-4 border-muted-50 dark:border-muted-800 shadow-lg shadow-primary-500/30 dark:shadow-primary-400/20 z-10"
+                    aria-hidden
+                  />
+                  <ExperienceCard {...exp} />
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
-      <div>
+      <div className="relative z-10">
         <h2 className="text-xl sm:text-2xl font-semibold text-muted-900 dark:text-muted-50 mb-6 sm:mb-8">
           Education
         </h2>
@@ -198,4 +194,4 @@ export const ExperienceTimeline = () => {
       </div>
     </div>
   );
-};
+}

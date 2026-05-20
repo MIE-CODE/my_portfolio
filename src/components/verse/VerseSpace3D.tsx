@@ -22,17 +22,22 @@ function CinematicCamera({
   const up = useRef(new THREE.Vector3(0, 1, 0));
   const mat = useRef(new THREE.Matrix4());
 
+  const lookTarget = useRef(new THREE.Vector3(0, 0, -12));
+
   useFrame((_, delta) => {
     const w = verseTargetToWorld(targetRef.current);
-    const flying = targetRef.current.travelT < 1;
-    const damp = 1 - Math.exp(-(flying ? 5.5 : 3.4) * delta);
+    const flying =
+      targetRef.current.travelT < 1 &&
+      targetRef.current.flightStart != null;
+    const follow = 1 - Math.exp(-(flying ? 11 : 4.2) * delta);
 
     pos.current.set(w.camera.x, w.camera.y, w.camera.z);
-    look.current.set(w.lookAt.x, w.lookAt.y, w.lookAt.z);
-    fov.current = THREE.MathUtils.lerp(fov.current, w.fov, damp);
-    roll.current = THREE.MathUtils.lerp(roll.current, w.roll, damp);
+    lookTarget.current.set(w.lookAt.x, w.lookAt.y, w.lookAt.z);
+    fov.current = THREE.MathUtils.lerp(fov.current, w.fov, follow);
+    roll.current = THREE.MathUtils.lerp(roll.current, w.roll, follow);
 
-    camera.position.lerp(pos.current, damp);
+    camera.position.lerp(pos.current, follow);
+    look.current.lerp(lookTarget.current, follow);
     mat.current.lookAt(camera.position, look.current, up.current);
     camera.quaternion.setFromRotationMatrix(mat.current);
     camera.rotateZ(THREE.MathUtils.degToRad(roll.current));

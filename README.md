@@ -73,7 +73,7 @@ my_portfolio/
 │   └── sitemap.ts          # Sitemap generation
 ├── src/
 │   ├── components/         # React components
-│   │   ├── about.tsx
+│   │   ├── AboutPageContent.tsx
 │   │   ├── Achievements.tsx
 │   │   ├── AnimatedKeyboard.tsx
 │   │   ├── Avatar3D.tsx
@@ -236,7 +236,7 @@ Custom color palette and design tokens defined in `tailwind.config.ts`:
 Edit `src/components/ProjectsList.tsx` to add new projects to the `frontendProjects` or `backendProjects` arrays.
 
 ### Modifying Content
-- **About**: `src/components/about.tsx`
+- **About**: `src/components/AboutPageContent.tsx` (dossier layout; `app/about/page.tsx`)
 - **Experience**: `src/components/ExperienceTimeline.tsx`
 - **Services**: `src/components/ServicesList.tsx`
 - **Blog Posts**: `src/data/blogPosts.ts`

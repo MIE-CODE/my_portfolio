@@ -11,6 +11,8 @@ type PageHeaderProps = {
   description2?: string;
   className?: string;
   preset?: GsapRevealPreset;
+  /** Default center; use start for editorial pages like About. */
+  align?: "center" | "start";
 };
 
 export function PageHeader({
@@ -19,6 +21,7 @@ export function PageHeader({
   description2,
   className = "",
   preset,
+  align = "center",
 }: PageHeaderProps) {
   const pathname = usePathname();
   const ref = useGsapMount({
@@ -29,10 +32,14 @@ export function PageHeader({
     ease: "expo.out",
   });
 
+  const isStart = align === "start";
+  const blockAlign = isStart ? "text-start" : "text-center";
+  const descMax = isStart ? "max-w-3xl" : "max-w-3xl mx-auto";
+
   return (
     <section
       ref={ref as React.RefObject<HTMLElement>}
-      className={`text-center mb-8 sm:mb-12 ${className}`.trim()}
+      className={`${blockAlign} mb-8 sm:mb-12 ${className}`.trim()}
       data-parallax-depth="0.12"
     >
       <h1
@@ -44,7 +51,7 @@ export function PageHeader({
       {description && (
         <p
           data-page-header-part
-          className="text-base sm:text-lg text-muted-600 dark:text-muted-400 max-w-3xl mx-auto leading-relaxed opacity-0"
+          className={`text-base sm:text-lg text-muted-600 dark:text-muted-400 ${descMax} leading-relaxed opacity-0`}
         >
           {description}
         </p>
@@ -52,7 +59,7 @@ export function PageHeader({
       {description2 && (
         <p
           data-page-header-part
-          className="mt-2 text-sm sm:text-base text-muted-500 dark:text-muted-500 max-w-2xl mx-auto opacity-0"
+          className={`mt-2 text-sm sm:text-base text-muted-500 dark:text-muted-500 max-w-2xl ${isStart ? "" : "mx-auto"} opacity-0`}
         >
           {description2}
         </p>

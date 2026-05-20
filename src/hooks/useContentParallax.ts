@@ -31,8 +31,15 @@ let refreshRaf = 0;
 /**
  * Debounced ScrollTrigger refresh — coalesces route-change bursts into one layout pass.
  */
+/** True while the verse camera is mid-route (see useParallaxVerse). */
+export function isVerseFlying() {
+  if (typeof document === "undefined") return false;
+  return document.documentElement.dataset.verseFlying != null;
+}
+
 export function refreshScrollMotion() {
   if (typeof window === "undefined") return;
+  if (isVerseFlying()) return;
   if (refreshRaf) cancelAnimationFrame(refreshRaf);
   refreshRaf = requestAnimationFrame(() => {
     refreshRaf = 0;
@@ -86,5 +93,7 @@ export function useContentParallax(
     }, root);
 
     return () => ctx.revert();
+    // deps is intentionally caller-driven (e.g. pathname); spread cannot be statically verified.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rootRef, options?.disabled, ...deps]);
 }

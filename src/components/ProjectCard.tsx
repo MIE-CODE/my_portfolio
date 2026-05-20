@@ -17,13 +17,7 @@ type Project = {
   role?: string;
 };
 
-export const ProjectCard = ({
-  project,
-  index,
-}: {
-  project: Project;
-  index: number;
-}) => {
+export const ProjectCard = ({ project }: { project: Project }) => {
   const cardRef = useRef<HTMLElement>(null);
 
   useEffect(() => {

@@ -486,14 +486,14 @@ export const ProjectsList = () => {
           ? (showAllFrontend
               ? frontendProjects
               : frontendProjects.slice(0, 6)
-            ).map((project, index) => (
-              <ProjectCard key={project.id} project={project} index={index} />
+            ).map((project) => (
+              <ProjectCard key={project.id} project={project} />
             ))
           : (showAllBackend
               ? backendProjects
               : backendProjects.slice(0, 6)
-            ).map((project, index) => (
-              <ProjectCard key={project.id} project={project} index={index} />
+            ).map((project) => (
+              <ProjectCard key={project.id} project={project} />
             ))}
       </div>
 

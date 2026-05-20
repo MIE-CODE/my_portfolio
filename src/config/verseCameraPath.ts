@@ -51,11 +51,6 @@ function getWaypoints(): PathWaypoint[] {
   return waypointsCache;
 }
 
-function smoothstep(t: number) {
-  const c = Math.max(0, Math.min(1, t));
-  return c * c * (3 - 2 * c);
-}
-
 function lerp(a: number, b: number, t: number) {
   return a + (b - a) * t;
 }
@@ -79,14 +74,14 @@ export function getWaypoint(index: number): PathSample {
 
 /** Blend two world-space camera snapshots — no intermediate route indices */
 export function blendPathSamples(from: PathSample, to: PathSample, t: number): PathSample {
-  const e = smoothstep(t);
+  const e = Math.max(0, Math.min(1, t));
   const span =
     Math.hypot(
       to.camera.x - from.camera.x,
       to.camera.y - from.camera.y,
       to.camera.z - from.camera.z,
     ) || 1;
-  const arc = Math.sin(e * Math.PI) * Math.min(5, span * 0.06);
+  const arc = Math.sin(e * Math.PI) * Math.min(2.5, span * 0.03);
 
   return {
     camera: {
@@ -97,9 +92,9 @@ export function blendPathSamples(from: PathSample, to: PathSample, t: number): P
     lookAt: lerpVec(from.lookAt, to.lookAt, e),
     fov: lerp(from.fov, to.fov, e),
     roll: lerp(from.roll, to.roll, e),
-    landmarkId: e < 0.92 ? from.landmarkId : to.landmarkId,
-    tagline: e < 0.92 ? from.tagline : to.tagline,
-    viewpointId: e < 0.92 ? from.viewpointId : to.viewpointId,
+    landmarkId: e < 0.94 ? from.landmarkId : to.landmarkId,
+    tagline: e < 0.94 ? from.tagline : to.tagline,
+    viewpointId: e < 0.94 ? from.viewpointId : to.viewpointId,
   };
 }
 
@@ -114,7 +109,8 @@ export function flightDuration(from: PathSample, to: PathSample, reducedMotion: 
     to.camera.y - from.camera.y,
     to.camera.z - from.camera.z,
   );
-  return 0.45 + dist * 0.028;
+  const dur = 0.38 + dist * 0.024;
+  return Math.min(Math.max(dur, 0.55), 2.6);
 }
 
 export function landmarkFocusStrengthFromCamera(

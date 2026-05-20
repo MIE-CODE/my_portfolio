@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/src/components/PageHeader";
-import { About } from "@/src/components/about";
+import { AboutPageContent } from "@/src/components/AboutPageContent";
 
 export const metadata: Metadata = {
   title: "About - Menyaga Enyo Israel",
@@ -17,10 +17,12 @@ export default function AboutPage() {
     >
       <div className="container-custom px-4">
         <PageHeader
-          title="< About Me >"
-          description="I build and lead production SaaS: currently CTO at Belsoft Systems, founder of Blivap, and still taking selective freelance work. Stack-wise I live in Next.js and Nuxt, React and Vue, TypeScript and Tailwind—with payments, analytics, and performance baked in from day one."
+          align="start"
+          title="About"
+          description="Biography, roles, and how I ship—without the game chrome."
+          className="max-w-5xl mx-auto w-full"
         />
-        <About />
+        <AboutPageContent />
       </div>
     </main>
   );

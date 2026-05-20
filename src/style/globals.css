@@ -376,28 +376,163 @@
     backface-visibility: hidden;
   }
 
-  /* Experience timeline — full-size scroll stack (no scale/shrink) */
-  .experience-stack__item {
-    min-height: 100vh;
+  /* Experience timeline — work block pin (title + stack) */
+  .experience-work-block {
+    position: relative;
+    z-index: 2;
+    overflow: visible;
+    margin-bottom: 0;
   }
 
-  .experience-stack__item:last-child {
-    min-height: auto;
+  .experience-work-block--done {
+    overflow: hidden;
   }
 
-  .experience-stack__sticky {
+  .experience-work-block__title {
+    position: relative;
+    z-index: 3;
+  }
+
+  /* Experience timeline — pinned scroll stack */
+  .experience-stack-scroll {
+    position: relative;
     width: 100%;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .experience-stack__item {
-      min-height: 0;
-    }
+  .experience-stack-scroll:not(.experience-stack--static) {
+    z-index: 0;
+    isolation: isolate;
+    overflow: visible;
+  }
 
-    .experience-stack__sticky {
-      position: relative;
-      top: auto;
+  .experience-stack-pin {
+    width: 100%;
+    overflow: visible;
+  }
+
+  .experience-stack-trail {
+    position: absolute;
+    left: 1rem;
+    top: 0;
+    width: 2px;
+    height: auto;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  @media (min-width: 640px) {
+    .experience-stack-trail {
+      left: 2rem;
     }
+  }
+
+  .experience-stack-trail__line {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 0;
+    border-radius: 1px;
+    background: linear-gradient(
+      180deg,
+      #7eb8e8 0%,
+      #5b82a8 70%,
+      rgba(91, 130, 168, 0.35) 100%
+    );
+    transform-origin: top center;
+  }
+
+  .dark .experience-stack-trail__line {
+    background: linear-gradient(
+      180deg,
+      #8eb8e8 0%,
+      #456d94 70%,
+      rgba(69, 109, 148, 0.35) 100%
+    );
+  }
+
+  .experience-stack-stage {
+    position: relative;
+    width: 100%;
+    overflow: visible;
+    contain: layout style;
+  }
+
+  .experience-work-block--scrolling .experience-stack-stage {
+    contain: layout style paint;
+  }
+
+  .experience-stack-card {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    width: 100%;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  .experience-work-block--scrolling .experience-stack-card {
+    will-change: transform;
+  }
+
+  .experience-stack-card [data-stack-dot] {
+    opacity: 1;
+  }
+
+  /* Before GSAP: only first card visible (others overlap at top:0 in DOM) */
+  .experience-stack-scroll:not(.experience-stack--static):not(
+      .experience-stack--ready
+    )
+    .experience-stack-card[data-stack-index]:not([data-stack-index="0"]) {
+    transform: translate3d(0, 100vh, 0);
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .experience-card-panel {
+    height: var(--experience-card-h, auto);
+    min-height: var(--experience-card-h, auto);
+  }
+
+  .experience-stack-card .experience-card-panel,
+  .experience-stack-card .experience-card-panel:hover {
+    transform: none !important;
+  }
+
+  .experience-stack-card .experience-card-panel {
+    transition:
+      border-color 0.35s ease,
+      box-shadow 0.35s ease;
+  }
+
+  .experience-work-block--scrolling .experience-card-panel {
+    transition: none;
+    box-shadow: 0 4px 16px rgba(28, 25, 23, 0.08);
+  }
+
+  .dark .experience-work-block--scrolling .experience-card-panel {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
+  }
+
+  .experience-work-block--scrolling .experience-stack-card [data-stack-dot] {
+    box-shadow: none;
+  }
+
+  /* Static fallback (mobile / reduced motion) */
+  .experience-stack--static .experience-stack-card {
+    position: relative;
+    margin-bottom: 26px;
+    transform: none !important;
+  }
+
+  .experience-stack--static .experience-stack-card:last-child {
+    margin-bottom: 0;
+  }
+
+  .experience-stack--static .experience-stack-stage {
+    height: auto !important;
+    min-height: 0 !important;
   }
 
   .verse-hover-hud {
