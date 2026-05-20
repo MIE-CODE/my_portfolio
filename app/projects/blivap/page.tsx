@@ -62,7 +62,7 @@ export default function BlivapProjectPage() {
             />
           </div>
 
-          <section aria-labelledby="blivap-summary" className="panel-surface p-5 sm:p-6 mb-8">
+          <section aria-labelledby="blivap-summary" className="panel-surface p-4 sm:p-6 mb-6 sm:mb-8">
             <h2 id="blivap-summary" className="sr-only">
               Blivap summary
             </h2>
@@ -126,19 +126,19 @@ export default function BlivapProjectPage() {
             </ul>
           </section>
 
-          <footer className="flex flex-wrap gap-3 border-t border-muted-200 pt-8 dark:border-muted-700">
+          <footer className="flex flex-col xs:flex-row flex-wrap gap-3 border-t border-muted-200 pt-6 sm:pt-8 dark:border-muted-700">
             <a
               href={SITE.blivap}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary text-sm"
+              className="btn-primary text-sm w-full xs:w-auto"
             >
               Visit Blivap (blivap.com)
             </a>
-            <Link href="/projects" className="btn-secondary text-sm">
+            <Link href="/projects" className="btn-secondary text-sm w-full xs:w-auto">
               All projects
             </Link>
-            <Link href="/contact" className="btn-secondary text-sm">
+            <Link href="/contact" className="btn-secondary text-sm w-full xs:w-auto">
               Contact Israel Menyaga
             </Link>
           </footer>

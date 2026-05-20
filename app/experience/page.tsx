@@ -9,6 +9,7 @@ export default function ExperiencePage() {
         <PageHeader
           title="< Experience >"
           description="My professional journey and key achievements in software development"
+          descriptionMobile="Professional journey and key engineering milestones."
         />
 
         <ExperienceTimeline />

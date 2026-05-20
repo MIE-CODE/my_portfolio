@@ -182,12 +182,12 @@ export const Stack = ({ variant = "scroll" }: StackProps) => {
         {"< Tech Stack >"}
       </h2>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3 sm:gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2.5 sm:gap-4">
         {stacks.map((stack, i) => (
           <article
             key={i}
             {...(isHome ? { "data-stack-item": "" } : { "data-reveal-item": "" })}
-            className={`game-card verse-hover-hud verse-scan-border p-3 sm:p-4 text-center hover:border-primary-400 dark:hover:border-primary-600 transition-all duration-300${isHome ? "" : " opacity-0"}`}
+            className={`game-card verse-hover-hud verse-scan-border p-2.5 sm:p-4 text-center hover:border-primary-400 dark:hover:border-primary-600 transition-all duration-300${isHome ? "" : " opacity-0"}`}
             role="listitem"
           >
             <div className="text-primary-600 dark:text-primary-400 mb-2 sm:mb-3 [&>svg]:w-8 [&>svg]:h-10 sm:[&>svg]:w-10 sm:[&>svg]:h-12 mx-auto">{stack.icon}</div>

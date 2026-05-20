@@ -25,6 +25,7 @@ export default function BlogPage() {
           <PageHeader
             title="< Blog >"
             description="Insights, tutorials, and thoughts on modern web development"
+            descriptionMobile="Tutorials and notes on modern web development."
           />
           <BlogList />
         </div>

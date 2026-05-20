@@ -42,7 +42,7 @@ export const ProjectCard = ({ project }: { project: Project }) => {
     <article
       ref={cardRef}
       data-reveal-item
-      className="game-card verse-hover-hud verse-scan-border p-4 flex flex-col gap-4 h-full opacity-0 hover:border-primary-300 dark:hover:border-primary-600 transition-all duration-300"
+      className="game-card verse-hover-hud verse-scan-border p-4 sm:p-5 flex flex-col gap-3 sm:gap-4 h-full opacity-0 hover:border-primary-300 dark:hover:border-primary-600 transition-all duration-300"
       role="listitem"
     >
       <div className="flex flex-col gap-3 flex-1">
@@ -107,8 +107,8 @@ export const ProjectCard = ({ project }: { project: Project }) => {
       </div>
 
       {/* Action Buttons */}
-      <div className="flex items-center justify-between pt-3 border-t border-muted-200 dark:border-muted-700 gap-2">
-        <div className="flex flex-wrap items-center gap-3">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between pt-3 border-t border-muted-200 dark:border-muted-700 gap-3 sm:gap-2">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
           <a
             className="touch-target text-xs font-medium text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-300 flex items-center gap-1.5 min-h-11 -ml-2 pl-2"
             href={project.link || "#"}

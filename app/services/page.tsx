@@ -30,7 +30,9 @@ export default function ServicesPage() {
             title="< Services >"
             description="Product-minded engineering—same muscles behind Belsoft (BelCore, BelPower), Blivap, True Perk, SparkPay, and freelance SaaS"
             description2="From architecture and CTO-style delivery to hands-on Next.js, Nuxt, and React: performance, payments, analytics, and design fidelity"
-            className="mb-12 sm:mb-16"
+            descriptionMobile="Product engineering for Belsoft, Blivap, True Perk, SparkPay, and freelance SaaS."
+            description2Mobile="Architecture, CTO delivery, and hands-on Next.js, Nuxt, and React."
+            className="mb-8 sm:mb-16"
           />
           <ServicesList />
           <ServicesCTA />

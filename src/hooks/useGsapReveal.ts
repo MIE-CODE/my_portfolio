@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { VERSE_EASE } from "@/src/config/verseMotion";
+import { NATIVE_SCROLL_ONLY } from "@/src/lib/nativeScroll";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -88,7 +89,7 @@ function prefersReducedMotion() {
 }
 
 function applyParallax(root: HTMLElement, depth: number) {
-  if (depth <= 0) return;
+  if (depth <= 0 || NATIVE_SCROLL_ONLY) return;
   const y = depth * -64;
   gsap.fromTo(
     root,

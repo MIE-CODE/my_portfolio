@@ -1,26 +1,10 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-import { useEffect, useRef, type ReactNode } from "react";
-import {
-  refreshScrollMotion,
-  useContentParallax,
-} from "@/src/hooks/useContentParallax";
+import { useRef, type ReactNode } from "react";
 
-/** Wraps page content: route-aware parallax + ScrollTrigger refresh */
+/** Page content wrapper — no scroll-linked motion (native scroll only). */
 export function ContentMotionLayer({ children }: { children: ReactNode }) {
-  const pathname = usePathname();
   const ref = useRef<HTMLDivElement>(null);
-
-  useContentParallax(ref, [pathname], {
-    disabled: pathname === "/",
-  });
-
-  useEffect(() => {
-    refreshScrollMotion();
-    const t = window.setTimeout(refreshScrollMotion, 400);
-    return () => window.clearTimeout(t);
-  }, [pathname]);
 
   return (
     <div ref={ref} className="verse-content-layer relative overflow-x-clip">

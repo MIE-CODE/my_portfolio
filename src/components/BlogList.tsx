@@ -23,23 +23,23 @@ export const BlogList = () => {
           data-reveal-item
           className="p-4 sm:p-6 bg-muted-100/95 dark:bg-muted-900/90 border border-muted-300/80 dark:border-muted-700 rounded-2xl verse-hover-hud verse-scan-border transition-all duration-300 hover:bg-muted-50 dark:hover:bg-muted-900/95 hover:border-primary-300 dark:hover:border-primary-600 backdrop-blur-md shadow-[0_2px_10px_rgba(28,25,23,0.08)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.35)] opacity-0"
         >
-          <div className="flex items-center gap-3 mb-4">
-            <span className="px-3 py-1 text-xs font-medium text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20 rounded-full border border-primary-200 dark:border-primary-800">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4">
+            <span className="px-2.5 sm:px-3 py-1 text-[11px] sm:text-xs font-medium text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20 rounded-full border border-primary-200 dark:border-primary-800">
               {post.category}
             </span>
-            <span className="text-xs text-muted-600 dark:text-muted-400">
+            <span className="text-[11px] sm:text-xs text-muted-600 dark:text-muted-400">
               {post.readTime}
             </span>
           </div>
-          <h2 className="text-xl font-semibold text-muted-900 dark:text-muted-50 mb-3 line-clamp-2">
+          <h2 className="text-lg sm:text-xl font-semibold text-muted-900 dark:text-muted-50 mb-3 line-clamp-2">
             {post.title}
           </h2>
           <p className="text-sm text-muted-700 dark:text-muted-300 mb-4 line-clamp-3 leading-relaxed">
             {post.excerpt}
           </p>
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col xs:flex-row xs:items-center xs:justify-between gap-2 xs:gap-3">
             <time
-              className="text-xs text-muted-600 dark:text-muted-400"
+              className="text-[11px] sm:text-xs text-muted-600 dark:text-muted-400"
               dateTime={post.date}
             >
               {new Date(post.date).toLocaleDateString("en-US", {
