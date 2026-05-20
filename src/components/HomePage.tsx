@@ -47,7 +47,7 @@ export function HomePage() {
       <div className="container-custom">
         <section
           id="hero"
-          className="relative min-h-[min(100dvh,720px)] sm:min-h-[calc(100vh-180px)] flex flex-col items-center justify-center text-center gap-5 sm:gap-8 pt-16 sm:pt-24 pb-8 sm:pb-1"
+          className="relative min-h-[min(100dvh,720px)] sm:min-h-[calc(100vh-12rem)] flex flex-col items-center justify-center text-center gap-5 sm:gap-8 pt-4 sm:pt-8 pb-8 sm:pb-1"
           aria-label="Hero section"
         >
           <div data-hero-xp className="w-full max-w-md mb-2 sm:mb-4 px-4 opacity-0">

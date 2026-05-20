@@ -1,13 +1,6 @@
 "use client";
 import { useEffect } from "react";
 
-export const GSAPInit = () => {
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      document.documentElement.style.scrollBehavior = "smooth";
-    }
-  }, []);
-
-  return null;
-};
+/** Registers GSAP plugins only — avoid scroll-behavior: smooth (fights ScrollTrigger). */
+export const GSAPInit = () => null;
 

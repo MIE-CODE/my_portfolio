@@ -10,10 +10,9 @@ export function SeoHeadLinks() {
       <link rel="me" href={SITE.github} />
       <link rel="me" href={SITE.linkedIn} />
       <link rel="me" href={SITE.blivap} />
-      <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-      <link rel="alternate icon" href="/favicon.svg" />
-      <link rel="icon" type="image/svg+xml" sizes="any" href="/icon.svg" />
-      <link rel="apple-touch-icon" href="/apple-icon.svg" />
+      {/* Icons also served via app/icon.svg + metadata.icons; kept for manifest parity */}
+      <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any" />
+      <link rel="apple-touch-icon" href="/apple-icon.svg" sizes="180x180" />
       <link rel="manifest" href="/site.webmanifest" />
     </>
   );

@@ -192,5 +192,9 @@ export function buildRootMetadata(): Metadata {
       },
     },
     verification: {},
+    icons: {
+      icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+      apple: [{ url: "/apple-icon.svg", type: "image/svg+xml", sizes: "180x180" }],
+    },
   };
 }
