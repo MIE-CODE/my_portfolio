@@ -38,9 +38,20 @@
   }
   
   html {
-    @apply scroll-smooth;
+    @apply scroll-smooth overflow-x-hidden;
   }
-  
+
+  body {
+    overflow-x: hidden;
+    min-height: 100dvh;
+  }
+
+  @media (max-width: 768px) {
+    html:not(.dark) body {
+      background-attachment: scroll;
+    }
+  }
+
   h1, h2, h3, h4, h5, h6 {
     @apply font-bold;
   }
@@ -199,6 +210,18 @@
   
   .container-custom {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .page-shell {
+    @apply min-h-screen overflow-x-clip pt-20 sm:pt-24 pb-12 sm:pb-16;
+  }
+
+  .nav-link-mobile {
+    @apply flex min-h-11 items-center py-2 text-base font-medium;
+  }
+
+  .touch-target {
+    @apply inline-flex min-h-11 min-w-11 items-center justify-center;
   }
   
   .game-card {
@@ -572,6 +595,10 @@
   }
 
   /* Experience page — vertical timeline */
+  .experience-timeline {
+    overflow-x: clip;
+  }
+
   .experience-timeline__rail {
     position: absolute;
     left: 0.4rem;
@@ -612,7 +639,7 @@
 
   .experience-timeline__dot {
     position: absolute;
-    left: -2.35rem;
+    left: -2.05rem;
     top: 0.35rem;
     width: 0.65rem;
     height: 0.65rem;

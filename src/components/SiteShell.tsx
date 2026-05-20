@@ -17,7 +17,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     <AppLoadProvider>
       <GSAPInit />
       <ParallaxVerse>
-        <Navbar isOpen={setModal} />
+        <Navbar isOpen={setModal} menuOpen={modal} />
         <ContentMotionLayer>{children}</ContentMotionLayer>
         <Footer />
       </ParallaxVerse>

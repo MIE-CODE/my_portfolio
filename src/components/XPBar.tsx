@@ -30,7 +30,7 @@ export const XPBar = ({ currentXP, maxXP, level }: XPBarProps) => {
             }}
           />
         </div>
-        <div className="flex justify-between text-[10px] xs:text-xs text-muted-600 dark:text-muted-400 mt-1">
+        <div className="flex justify-between text-xs text-muted-600 dark:text-muted-400 mt-1">
           <span>{currentXP} XP</span>
           <span>{maxXP} XP</span>
         </div>

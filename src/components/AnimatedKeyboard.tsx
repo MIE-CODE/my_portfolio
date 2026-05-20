@@ -173,12 +173,12 @@ export const AnimatedKeyboard = ({ suppressEntrance = false }: AnimatedKeyboardP
     <div
       ref={keyboardRef}
       data-keyboard-panel
-      className="w-full max-w-4xl mx-auto mt-4 sm:mt-6 md:mt-8 px-2 xs:px-3 sm:px-4"
+      className="w-full max-w-4xl mx-auto mt-4 sm:mt-6 md:mt-8 px-2 xs:px-3 sm:px-4 overflow-x-clip"
     >
       {/* Code Display */}
-      <div className="mb-3 sm:mb-4 p-2 xs:p-2.5 sm:p-3 md:p-4 bg-muted-800/90 dark:bg-muted-800/50 rounded-lg border border-muted-300 dark:border-primary-500/20 font-mono text-[10px] xs:text-xs sm:text-sm text-muted-900 dark:text-primary-400 min-h-[50px] xs:min-h-[55px] sm:min-h-[60px] flex items-center overflow-x-auto shadow-md dark:shadow-none">
+      <div className="mb-3 sm:mb-4 p-3 sm:p-4 bg-muted-800/90 dark:bg-muted-800/50 rounded-lg border border-muted-300 dark:border-primary-500/20 font-mono text-xs sm:text-sm text-muted-900 dark:text-primary-400 min-h-[52px] sm:min-h-[60px] flex items-start sm:items-center overflow-x-auto max-w-full shadow-md dark:shadow-none">
         <span className="text-primary-500 flex-shrink-0">$</span>
-        <span className="ml-1.5 xs:ml-2 whitespace-nowrap text-muted-200">{currentText}</span>
+        <span className="ml-2 text-muted-200 break-all sm:break-normal sm:whitespace-nowrap">{currentText}</span>
         <span className="animate-pulse text-primary-600 dark:text-primary-400 ml-1 flex-shrink-0">|</span>
       </div>
 
@@ -188,7 +188,7 @@ export const AnimatedKeyboard = ({ suppressEntrance = false }: AnimatedKeyboardP
           return (
             <div
               key={rowIndex}
-              className="flex justify-center gap-0.5 xs:gap-1 sm:gap-1.5 mb-1 xs:mb-1.5 sm:mb-2 w-full"
+              className={`flex justify-center gap-0.5 xs:gap-1 sm:gap-1.5 mb-1 xs:mb-1.5 sm:mb-2 w-full${rowIndex === 0 ? " hidden sm:flex" : ""}`}
             >
               {row.map((key, keyIndex) => {
                 const isPressed = isKeyPressed(key);
@@ -202,10 +202,10 @@ export const AnimatedKeyboard = ({ suppressEntrance = false }: AnimatedKeyboardP
                       minWidth: '0',
                     }}
                     className={`
-                      h-6 xs:h-7 sm:h-8 md:h-9 lg:h-10
+                      h-8 sm:h-9 md:h-10
                       flex items-center justify-center
                       rounded sm:rounded-md
-                      text-[7px] xs:text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs
+                      text-[9px] xs:text-[10px] sm:text-xs
                       font-medium
                       transition-all duration-75 ease-out
                       ${

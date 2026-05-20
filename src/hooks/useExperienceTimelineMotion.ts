@@ -20,6 +20,7 @@ export function useExperienceTimelineMotion() {
     const items = gsap.utils.toArray<HTMLElement>("[data-exp-item]", root);
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const narrow = window.matchMedia("(max-width: 639px)").matches;
     if (reduced) {
       gsap.set([rail, ...items].filter(Boolean), {
         opacity: 1,
@@ -32,7 +33,7 @@ export function useExperienceTimelineMotion() {
       if (rail) {
         gsap.set(rail, { scaleY: 0, transformOrigin: "top center" });
       }
-      gsap.set(items, { opacity: 0, y: 28, x: -16 });
+      gsap.set(items, { opacity: 0, y: 28, x: narrow ? 0 : -16 });
 
       const tl = gsap.timeline({
         scrollTrigger: {

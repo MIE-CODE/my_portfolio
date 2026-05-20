@@ -1,7 +1,7 @@
 {
-  "name": "Menyaga Enyo Israel - Portfolio",
+  "name": "Israel Menyaga — Software Engineer Portfolio",
   "short_name": "MIE Portfolio",
-  "description": "Full Stack Developer Portfolio - React, Next.js, TypeScript Expert",
+  "description": "Senior Software Engineer & CTO. Next.js, Nuxt, React, TypeScript, SaaS, fintech, and technical leadership.",
   "icons": [
     {
       "src": "/icon.svg",
@@ -15,7 +15,7 @@
       "type": "image/svg+xml"
     }
   ],
-  "theme_color": "#009c9e",
+  "theme_color": "#5b82a8",
   "background_color": "#ffffff",
   "display": "standalone",
   "start_url": "/",
