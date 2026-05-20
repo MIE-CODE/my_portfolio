@@ -23,12 +23,19 @@ export function HomePage() {
     const root = scopeRef.current;
     if (!root) return;
 
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     if (reduced) {
-      gsap.set(root.querySelectorAll("[data-hero-xp], [data-hero-title], [data-hero-intro], [data-hero-stats], [data-hero-achievements], [data-hero-keyboard], [data-hero-actions] > *, [data-hero-stat], [data-hero-badge], #skills [data-stack-item]"), {
-        opacity: 1,
-        clearProps: "transform,filter",
-      });
+      gsap.set(
+        root.querySelectorAll(
+          "[data-hero-xp], [data-hero-title], [data-hero-intro], [data-hero-stats], [data-hero-achievements], [data-hero-keyboard], [data-hero-actions] > *, [data-hero-stat], [data-hero-badge], #skills [data-stack-item]",
+        ),
+        {
+          opacity: 1,
+          clearProps: "transform,filter",
+        },
+      );
       return;
     }
 
@@ -47,14 +54,17 @@ export function HomePage() {
       <div className="container-custom">
         <section
           id="hero"
-          className="relative min-h-[min(100dvh,720px)] sm:min-h-[calc(100vh-12rem)] flex flex-col items-center justify-center text-center gap-5 sm:gap-8 pt-4 sm:pt-8 pb-8 sm:pb-1"
+          className="relative min-h-[min(92dvh,680px)] sm:min-h-[min(100dvh,720px)] md:min-h-[calc(100vh-12rem)] flex flex-col items-center justify-center text-center gap-4 sm:gap-8 pt-2 sm:pt-8 pb-6 sm:pb-1"
           aria-label="Hero section"
         >
-          <div data-hero-xp className="w-full max-w-md mb-2 sm:mb-4 px-4 opacity-0">
+          <div
+            data-hero-xp
+            className="w-full max-w-md mb-2 sm:mb-4 px-4 opacity-0"
+          >
             <XPBar currentXP={7500} maxXP={10000} level={15} />
           </div>
 
-          <div className="flex flex-col gap-3 sm:gap-4 max-w-3xl rounded-2xl border border-primary-200/40 bg-muted-100/95 px-3 py-2 backdrop-blur-md dark:border-white/12 dark:bg-muted-900/90 verse-scan-border shadow-[0_8px_32px_-8px_rgba(28,25,23,0.12)] dark:shadow-[0_8px_32px_-8px_rgba(0,0,0,0.4)]">
+          <div className="flex flex-col gap-3 sm:gap-4 w-full max-w-3xl rounded-xl sm:rounded-2xl border border-primary-200/40 bg-muted-100/95 px-4 py-4 sm:px-5 sm:py-7 backdrop-blur-md dark:border-white/12 dark:bg-muted-900/90 verse-scan-border shadow-[0_8px_32px_-8px_rgba(28,25,23,0.12)] dark:shadow-[0_8px_32px_-8px_rgba(0,0,0,0.4)]">
             <div className="flex flex-col gap-2">
               <h1 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold leading-tight text-muted-900 dark:text-muted-50">
                 Israel Enyo Menyaga{" "}
@@ -65,27 +75,33 @@ export function HomePage() {
                   Senior Software Engineer &amp; CTO
                 </span>
               </h1>
-              <p className="text-xs sm:text-sm font-mono text-muted-600 dark:text-muted-400 tracking-wide sm:tracking-wider px-2 leading-relaxed">
-                Also known as MIE ·{" "}
-                <a
-                  href="https://github.com/MIE-CODE"
-                  target="_blank"
-                  rel="me noopener noreferrer"
-                  className="text-primary-600 hover:underline dark:text-primary-400"
-                >
-                  MIE-CODE on GitHub
-                </a>
-                {" · Founder of "}
-                <a
-                  href="https://blivap.com"
-                  rel="me noopener noreferrer"
-                  className="text-primary-600 hover:underline dark:text-primary-400"
-                >
-                  Blivap
-                </a>
+              <p className="text-xs sm:text-sm font-mono text-muted-600 dark:text-muted-400 tracking-wide sm:tracking-wider leading-relaxed space-y-1">
+                <span className="block">Also known as MIE</span>
+                <span className="block xs:inline xs:space-x-1">
+                  <a
+                    href="https://github.com/MIE-CODE"
+                    target="_blank"
+                    rel="me noopener noreferrer"
+                    className="text-primary-600 hover:underline dark:text-primary-400"
+                  >
+                    MIE-CODE on GitHub
+                  </a>
+                  <span className="hidden xs:inline"> · </span>
+                  <span className="block xs:inline">
+                    Founder of{" "}
+                    <a
+                      href="https://blivap.com"
+                      rel="me noopener noreferrer"
+                      className="text-primary-600 hover:underline dark:text-primary-400"
+                    >
+                      Blivap
+                    </a>
+                  </span>
+                </span>
               </p>
               <p className="text-xs sm:text-sm font-mono text-muted-500 dark:text-muted-500 tracking-wide px-2">
-                React · Next.js · TypeScript · NestJS · AI · Fintech · Healthcare
+                React · Next.js · TypeScript · NestJS · AI · Fintech ·
+                Healthcare
               </p>
             </div>
             <div
@@ -97,9 +113,7 @@ export function HomePage() {
                 <span className="text-muted-800 dark:text-muted-200">
                   Software{" "}
                 </span>
-                <span className="gradient-text inline-block">
-                  {text[0]}
-                </span>
+                <span className="gradient-text inline-block">{text[0]}</span>
                 <Cursor cursorBlinking />
               </p>
             </div>
@@ -109,8 +123,8 @@ export function HomePage() {
             >
               Senior Software Engineer with 5+ years of experience building
               scalable web applications, leading engineering teams, and
-              delivering production-grade systems across fintech,
-              healthcare, and AI-powered platforms.
+              delivering production-grade systems across fintech, healthcare,
+              and AI-powered platforms.
             </p>
           </div>
 

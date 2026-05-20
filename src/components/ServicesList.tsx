@@ -77,7 +77,7 @@ export const ServicesList = () => {
   return (
     <div
       ref={containerRef}
-      className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6"
+      className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6"
     >
       {services.map((service, index) => (
         <article
@@ -85,7 +85,7 @@ export const ServicesList = () => {
           data-service-card
           className="service-card group relative flex flex-col will-change-transform"
         >
-          <div className="service-card__surface panel-surface relative flex h-full flex-col overflow-hidden p-6 sm:p-7 transition-[border-color,box-shadow] duration-300 group-hover:border-primary-400/45 dark:group-hover:border-primary-500/40">
+          <div className="service-card__surface panel-surface relative flex h-full flex-col overflow-hidden p-5 sm:p-7 transition-[border-color,box-shadow] duration-300 group-hover:border-primary-400/45 dark:group-hover:border-primary-500/40">
             <div
               className="service-card__accent pointer-events-none absolute inset-x-0 top-0 h-px origin-left scale-x-0 bg-gradient-to-r from-primary-500/80 via-primary-400/50 to-transparent"
               aria-hidden
@@ -110,7 +110,7 @@ export const ServicesList = () => {
 
             <h3
               data-service-part
-              className="mb-2.5 text-lg font-semibold tracking-tight text-muted-900 dark:text-muted-50 sm:text-xl"
+              className="mb-2.5 text-base sm:text-lg font-semibold tracking-tight text-muted-900 dark:text-muted-50 md:text-xl"
             >
               {service.title}
             </h3>

@@ -7,6 +7,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { resetScrollLock } from "@/src/lib/scrollLock";
 
 type AppLoadContextValue = {
   /** True once the splash is done and the main app tree is mounted. */
@@ -78,14 +79,7 @@ export function AppLoadProvider({ children }: { children: ReactNode }) {
   }, [exiting]);
 
   useEffect(() => {
-    if (gone) {
-      document.body.style.overflow = "";
-      return;
-    }
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "";
-    };
+    if (gone) resetScrollLock();
   }, [gone]);
 
   if (gone) {
@@ -99,7 +93,7 @@ export function AppLoadProvider({ children }: { children: ReactNode }) {
   return (
     <AppLoadContext.Provider value={{ appReady: false }}>
       <div
-        className={`app-splash relative isolate min-h-dvh w-full${exiting ? " app-splash--exiting" : ""}`}
+        className={`app-splash fixed inset-0 z-[9999] isolate min-h-dvh w-full overflow-hidden${exiting ? " app-splash--exiting" : ""}`}
         role="progressbar"
         aria-valuetext="Loading portfolio"
         aria-busy={!exiting}

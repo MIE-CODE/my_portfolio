@@ -27,10 +27,10 @@ function Navbar(props: {
   return (
     <header
       ref={headerRef as React.RefObject<HTMLElement>}
-      className="site-navbar fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)] pointer-events-none"
+      className="site-navbar fixed inset-x-0 top-0 z-50 pointer-events-none"
       role="banner"
     >
-      <div className="site-navbar__inner glass-effect pointer-events-auto mx-auto flex w-[calc(100%-1rem)] max-w-7xl items-center justify-between gap-2 rounded-xl px-3 py-2 sm:w-[calc(100%-2rem)] sm:px-4 sm:py-2.5 lg:px-6 lg:py-3">
+      <div className="site-navbar__inner glass-effect pointer-events-auto mx-auto flex w-[calc(100%-1.25rem)] max-w-7xl items-center justify-between gap-2 rounded-xl px-3 py-2 sm:w-[calc(100%-2rem)] sm:px-4 sm:py-2.5 lg:px-6 lg:py-3">
       <Link
         data-nav-item
         href="/"

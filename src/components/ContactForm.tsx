@@ -144,17 +144,17 @@ export const ContactForm = () => {
       
       <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-muted-200 dark:border-muted-700">
         <p className="text-xs sm:text-sm text-muted-600 dark:text-muted-400 text-center mb-3 sm:mb-4">Or reach out directly:</p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 text-sm sm:text-base">
+        <div className="flex flex-col xs:flex-row items-center justify-center gap-2 sm:gap-4 text-sm sm:text-base">
           <a
             href="mailto:israelmenyaga@gmail.com"
-            className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-300"
+            className="touch-target text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-300 break-all xs:break-normal text-center"
           >
             israelvictor126@gmail.com
           </a>
-          <span className="text-muted-400 dark:text-muted-600">•</span>
+          <span className="hidden xs:inline text-muted-400 dark:text-muted-600">•</span>
           <a
             href="tel:+2349137437424"
-            className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-300"
+            className="touch-target text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-300"
           >
             +234 913 743 7424
           </a>

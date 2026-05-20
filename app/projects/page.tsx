@@ -13,6 +13,7 @@ export default function ProjectsPage() {
         <PageHeader
           title="< Projects >"
           description="Showcasing innovative frontend and backend applications built with modern technologies"
+          descriptionMobile="Frontend and backend work built with modern web stacks."
         />
         <ProjectsList />
       </div>

@@ -106,9 +106,7 @@ export function ParallaxVerse({ children }: ParallaxVerseProps) {
         suppressHydrationWarning
         className="verse-chrome-hint pointer-events-none fixed bottom-5 left-1/2 z-[5] hidden -translate-x-1/2 font-mono text-[9px] uppercase tracking-widest sm:block"
       >
-        {canvasMountedRef.current
-          ? "scroll ↔ strafe · scroll ↕ depth · JARVIS HUD"
-          : "scroll ↔ strafe · scroll ↕ depth"}
+        {canvasMountedRef.current ? "JARVIS HUD" : null}
       </p>
 
       <div className="relative z-10">{children}</div>

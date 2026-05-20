@@ -9,6 +9,9 @@ type PageHeaderProps = {
   title: string;
   description?: string;
   description2?: string;
+  /** Shorter copy shown below `sm` when the full description is too long on phones */
+  descriptionMobile?: string;
+  description2Mobile?: string;
   className?: string;
   preset?: GsapRevealPreset;
   /** Default center; use start for editorial pages like About. */
@@ -21,6 +24,8 @@ export function PageHeader({
   title,
   description,
   description2,
+  descriptionMobile,
+  description2Mobile,
   className = "",
   preset,
   align = "center",
@@ -43,29 +48,43 @@ export function PageHeader({
   return (
     <section
       ref={ref as React.RefObject<HTMLElement>}
-      className={`${blockAlign} mb-8 sm:mb-12 ${className}`.trim()}
+      className={`${blockAlign} mb-6 sm:mb-12 ${className}`.trim()}
       data-parallax-depth="0.12"
     >
       <HeadingTag
         data-page-header-part
-        className="text-2xl sm:text-3xl font-bold gradient-text font-mono mb-4 sm:mb-6 opacity-0"
+        className="text-xl xs:text-2xl sm:text-3xl font-bold gradient-text font-mono mb-3 sm:mb-6 opacity-0"
       >
         {title}
       </HeadingTag>
       {description && (
         <p
           data-page-header-part
-          className={`text-base sm:text-lg text-muted-600 dark:text-muted-400 ${descMax} leading-relaxed opacity-0`}
+          className={`text-sm sm:text-lg text-muted-600 dark:text-muted-400 ${descMax} leading-relaxed opacity-0`}
         >
-          {description}
+          {descriptionMobile ? (
+            <>
+              <span className="sm:hidden">{descriptionMobile}</span>
+              <span className="hidden sm:inline">{description}</span>
+            </>
+          ) : (
+            description
+          )}
         </p>
       )}
       {description2 && (
         <p
           data-page-header-part
-          className={`mt-2 text-sm sm:text-base text-muted-500 dark:text-muted-500 max-w-2xl ${isStart ? "" : "mx-auto"} opacity-0`}
+          className={`mt-2 text-xs sm:text-base text-muted-500 dark:text-muted-500 max-w-2xl ${isStart ? "" : "mx-auto"} leading-relaxed opacity-0`}
         >
-          {description2}
+          {description2Mobile ? (
+            <>
+              <span className="sm:hidden">{description2Mobile}</span>
+              <span className="hidden sm:inline">{description2}</span>
+            </>
+          ) : (
+            description2
+          )}
         </p>
       )}
     </section>

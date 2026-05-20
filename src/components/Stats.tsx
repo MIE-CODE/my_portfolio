@@ -24,13 +24,13 @@ export const Stats = ({ variant = "scroll" }: StatsProps) => {
   return (
     <div
       ref={variant === "scroll" ? (scrollRef as React.RefObject<HTMLDivElement>) : undefined}
-      className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4"
+      className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4"
     >
       {stats.map((stat) => (
         <div
           key={stat.label}
           {...(variant === "hero" ? { "data-hero-stat": "" } : { "data-reveal-item": "" })}
-          className="game-card verse-hover-hud verse-scan-border text-center p-3 sm:p-4 opacity-0"
+          className="game-card verse-hover-hud verse-scan-border text-center p-2.5 sm:p-4 opacity-0"
         >
           <div className="text-2xl sm:text-3xl mb-1 sm:mb-2">{stat.icon}</div>
           <div className="text-xl sm:text-2xl font-bold text-primary-600 dark:text-primary-400 mb-1">

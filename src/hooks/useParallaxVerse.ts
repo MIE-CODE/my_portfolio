@@ -3,7 +3,6 @@
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { PathSample } from "@/src/components/verse/verseState";
 import {
   verseTargetToWorld,
@@ -12,7 +11,6 @@ import {
 import type { VerseTarget } from "@/src/components/verse/verseState";
 import { VERSE_LATERAL_MAX } from "@/src/components/verse/verseState";
 import { flightDuration, routeToPathIndex } from "@/src/config/verseCameraPath";
-import { refreshScrollMotion } from "@/src/hooks/useContentParallax";
 import { getRouteViewpoint } from "@/src/config/verseCinematics";
 import {
   CHAMBER_STEP_VW,
@@ -20,10 +18,6 @@ import {
   getVerseTransform,
   getVerseZone,
 } from "@/src/config/verseMap";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 export type ParallaxVerseRefs = {
   root: React.RefObject<HTMLDivElement | null>;
@@ -39,8 +33,6 @@ type VerseVars = {
   scale: number;
   rotate: number;
 };
-
-const LATERAL_WHEEL_GAIN = 0.14;
 
 type TravelState = {
   pathAnchor: number;
@@ -122,13 +114,6 @@ function idleTravel(anchor: number): TravelState {
   };
 }
 
-function readPageScrollProgress() {
-  const st = ScrollTrigger.getAll().find(
-    (trigger) => trigger.trigger === document.documentElement,
-  );
-  return st?.progress ?? 0;
-}
-
 function settledSnapshot(
   pathname: string,
   targetIndex: number,
@@ -197,24 +182,6 @@ export function useParallaxVerse(refs: ParallaxVerseRefs) {
       setCinematicTagline((prev) => (prev === nextTagline ? prev : nextTagline));
     },
     [],
-  );
-
-  const pushVerseState = useCallback(
-    (pathname: string, chamber: number, scrollP: number, lateralPx: number) => {
-      const v = varsFromState(
-        pathname,
-        travelRef.current.pathAnchor,
-        chamber,
-        scrollP,
-        lateralPx,
-        use3dRef.current,
-      );
-      varsRef.current = v;
-      const rig = refs.rig.current;
-      if (rig) applyVars(rig, v);
-      commitTarget(pathname, chamber, scrollP, lateralPx, travelRef.current);
-    },
-    [refs.rig, commitTarget],
   );
 
   const syncHud = useCallback(
@@ -346,14 +313,6 @@ export function useParallaxVerse(refs: ParallaxVerseRefs) {
           if (rig) applyVars(rig, v);
           panLockRef.current = false;
           delete document.documentElement.dataset.verseFlying;
-          scrollRef.current = readPageScrollProgress();
-          pushVerseState(
-            pathname,
-            chamber,
-            scrollRef.current,
-            lateralRef.current,
-          );
-          refreshScrollMotion();
         },
       });
 
@@ -375,12 +334,9 @@ export function useParallaxVerse(refs: ParallaxVerseRefs) {
         if (rig) applyVars(rig, v);
         panLockRef.current = false;
         delete document.documentElement.dataset.verseFlying;
-        scrollRef.current = readPageScrollProgress();
-        pushVerseState(pathname, chamber, scrollRef.current, lateralRef.current);
-        refreshScrollMotion();
       }
     },
-    [commitTarget, refs.rig, pushVerseState],
+    [commitTarget, refs.rig],
   );
 
   const goToState = useCallback(
@@ -418,97 +374,17 @@ export function useParallaxVerse(refs: ParallaxVerseRefs) {
     const rig = refs.rig.current;
     if (!root || !rig) return;
 
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
     commitTarget(pathnameRef.current, 1, 0, 0, travelRef.current);
     syncHud(1);
 
-    if (reduced) return;
-
-    let scrollRaf = 0;
-    const st = ScrollTrigger.create({
-      trigger: document.documentElement,
-      start: 0,
-      end: "max",
-      onUpdate: (self) => {
-        if (panLockRef.current) return;
-        scrollRef.current = self.progress;
-        if (scrollRaf) return;
-        scrollRaf = requestAnimationFrame(() => {
-          scrollRaf = 0;
-          pushVerseState(
-            pathnameRef.current,
-            chamberRef.current,
-            scrollRef.current,
-            lateralRef.current,
-          );
-        });
-      },
-    });
-
-    const onWheel = (e: WheelEvent) => {
-      if (panLockRef.current) return;
-
-      const dx = e.deltaX;
-      const dy = e.deltaY;
-      const absX = Math.abs(dx);
-      const absY = Math.abs(dy);
-
-      // Horizontal trackpad only — do not steal mostly-vertical page scroll
-      if (absX > absY * 2.25 && absX > 28) {
-        e.preventDefault();
-        lateralRef.current = Math.max(
-          -VERSE_LATERAL_MAX,
-          Math.min(
-            VERSE_LATERAL_MAX,
-            lateralRef.current + dx * LATERAL_WHEEL_GAIN,
-          ),
-        );
-        pushVerseState(
-          pathnameRef.current,
-          chamberRef.current,
-          scrollRef.current,
-          lateralRef.current,
-        );
-        return;
-      }
-
-      // Shift + vertical wheel → discrete chamber step
-      if (e.shiftKey && absY > absX) {
-        e.preventDefault();
-        panHorizontal(dy > 0 ? 1 : -1);
-      }
-    };
-
-    const onKey = (e: KeyboardEvent) => {
-      if (
-        e.target instanceof HTMLInputElement ||
-        e.target instanceof HTMLTextAreaElement
-      ) {
-        return;
-      }
-      if (e.key === "ArrowLeft") {
-        e.preventDefault();
-        panHorizontal(-1);
-      }
-      if (e.key === "ArrowRight") {
-        e.preventDefault();
-        panHorizontal(1);
-      }
-    };
-
-    window.addEventListener("wheel", onWheel, { passive: false });
-    window.addEventListener("keydown", onKey);
-
+    // Native scroll only — no ScrollTrigger on document, no wheel/key hijacking
     return () => {
-      if (scrollRaf) cancelAnimationFrame(scrollRaf);
-      st.kill();
       tweenRef.current?.kill();
       pathTweenRef.current?.kill();
-      window.removeEventListener("wheel", onWheel);
-      window.removeEventListener("keydown", onKey);
+      panLockRef.current = false;
+      delete document.documentElement.dataset.verseFlying;
     };
-  }, [refs, panHorizontal, syncHud, pushVerseState, commitTarget]);
+  }, [refs, commitTarget, syncHud]);
 
   useEffect(() => {
     const targetIndex = routeToPathIndex(pathname);
@@ -532,6 +408,8 @@ export function useParallaxVerse(refs: ParallaxVerseRefs) {
     return () => {
       flightGenRef.current += 1;
       pathTweenRef.current?.kill();
+      panLockRef.current = false;
+      delete document.documentElement.dataset.verseFlying;
     };
   }, [pathname, travelDirectTo, syncHud]);
 

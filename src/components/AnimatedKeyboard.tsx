@@ -178,7 +178,7 @@ export const AnimatedKeyboard = ({ suppressEntrance = false }: AnimatedKeyboardP
       {/* Code Display */}
       <div className="mb-3 sm:mb-4 p-3 sm:p-4 bg-muted-800/90 dark:bg-muted-800/50 rounded-lg border border-muted-300 dark:border-primary-500/20 font-mono text-xs sm:text-sm text-muted-900 dark:text-primary-400 min-h-[52px] sm:min-h-[60px] flex items-start sm:items-center overflow-x-auto max-w-full shadow-md dark:shadow-none">
         <span className="text-primary-500 flex-shrink-0">$</span>
-        <span className="ml-2 text-muted-200 break-all sm:break-normal sm:whitespace-nowrap">{currentText}</span>
+        <span className="ml-2 text-muted-200 break-words">{currentText}</span>
         <span className="animate-pulse text-primary-600 dark:text-primary-400 ml-1 flex-shrink-0">|</span>
       </div>
 
@@ -205,7 +205,7 @@ export const AnimatedKeyboard = ({ suppressEntrance = false }: AnimatedKeyboardP
                       h-8 sm:h-9 md:h-10
                       flex items-center justify-center
                       rounded sm:rounded-md
-                      text-[9px] xs:text-[10px] sm:text-xs
+                      text-[10px] xs:text-[11px] sm:text-xs
                       font-medium
                       transition-all duration-75 ease-out
                       ${

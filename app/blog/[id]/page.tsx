@@ -266,13 +266,13 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
           </Link>
 
           <article className="max-w-4xl mx-auto">
-            <div className="bg-muted-100/95 dark:bg-muted-900/90 border border-muted-200/95 dark:border-muted-700 rounded-2xl p-4 sm:p-6 md:p-8 lg:p-12 backdrop-blur-md shadow-[0_2px_10px_rgba(28,25,23,0.08)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.35)]">
+            <div className="bg-muted-100/95 dark:bg-muted-900/90 border border-muted-200/95 dark:border-muted-700 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 lg:p-12 backdrop-blur-md shadow-[0_2px_10px_rgba(28,25,23,0.08)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.35)]">
               <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-                <span className="px-2 sm:px-3 py-1 text-xs font-medium text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20 rounded-full border border-primary-200 dark:border-primary-800">
+                <span className="px-2 sm:px-3 py-1 text-[11px] sm:text-xs font-medium text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20 rounded-full border border-primary-200 dark:border-primary-800">
                   {post.category}
                 </span>
-                <span className="text-xs text-muted-600 dark:text-muted-400">{post.readTime}</span>
-                <time className="text-xs text-muted-600 dark:text-muted-400 ml-auto" dateTime={post.date}>
+                <span className="text-[11px] sm:text-xs text-muted-600 dark:text-muted-400">{post.readTime}</span>
+                <time className="text-[11px] sm:text-xs text-muted-600 dark:text-muted-400 w-full xs:w-auto xs:ml-auto" dateTime={post.date}>
                   {new Date(post.date).toLocaleDateString("en-US", {
                     year: "numeric",
                     month: "long",

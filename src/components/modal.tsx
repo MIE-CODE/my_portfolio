@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
+import { lockScroll, unlockScroll } from "@/src/lib/scrollLock";
 import { CloseIcon } from "../svg";
 import { NavList } from "./navlist";
 
@@ -16,15 +17,10 @@ export const Modal = ({
   const closeBtnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    if (modal) {
-      document.body.style.overflow = "hidden";
-      closeBtnRef.current?.focus();
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
+    if (!modal) return;
+    lockScroll();
+    closeBtnRef.current?.focus();
+    return () => unlockScroll();
   }, [modal]);
 
   useEffect(() => {
@@ -92,7 +88,10 @@ export const Modal = ({
             </div>
           </button>
         </div>
-        <ul className="flex flex-col gap-0.5 px-4 sm:px-6 py-2 flex-1 overflow-y-auto" role="list">
+        <ul
+          className="flex flex-col gap-0.5 px-4 sm:px-6 py-2 flex-1 overflow-y-auto"
+          role="list"
+        >
           <NavList isOpen={isOpen} />
         </ul>
       </nav>

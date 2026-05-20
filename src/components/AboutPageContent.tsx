@@ -85,13 +85,13 @@ const education = [
 
 export function AboutPageContent() {
   return (
-    <div className="about-dossier max-w-5xl mx-auto pb-8">
-      <div className="about-dossier__hero mb-10 sm:mb-16 grid gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-10 items-end border-b border-muted-200/80 dark:border-muted-700/80 pb-8 sm:pb-10">
+    <div className="about-dossier max-w-5xl mx-auto pb-6 sm:pb-8">
+      <div className="about-dossier__hero mb-8 sm:mb-16 grid gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-10 items-end border-b border-muted-200/80 dark:border-muted-700/80 pb-6 sm:pb-10">
         <div className="lg:col-span-5">
           <p className="font-mono text-xs uppercase tracking-[0.2em] sm:tracking-[0.28em] text-primary-600 dark:text-primary-400 mb-4">
             Résumé on file · Also known as MIE
           </p>
-          <h1 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-muted-900 dark:text-muted-50 leading-[0.95]">
+          <h1 className="text-2xl xs:text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-muted-900 dark:text-muted-50 leading-[1.05] sm:leading-[0.95]">
             Israel Enyo Menyaga
             <span className="block text-primary-600 dark:text-primary-400 text-2xl sm:text-3xl font-mono mt-2">
               (MIE)
@@ -126,7 +126,7 @@ export function AboutPageContent() {
             <a
               href={CV_HREF}
               download={CV_FILENAME}
-              className="inline-flex items-center gap-2 rounded-lg border border-primary-500/50 bg-primary-50/80 px-4 py-2.5 text-sm font-medium text-primary-800 hover:bg-primary-100/90 dark:border-primary-400/40 dark:bg-primary-900 dark:text-primary-200 dark:hover:bg-primary-900/50 transition-colors"
+              className="touch-target inline-flex items-center justify-center gap-2 rounded-lg border border-primary-500/50 bg-primary-50/80 px-4 py-2.5 text-sm font-medium text-primary-800 hover:bg-primary-100/90 dark:border-primary-400/40 dark:bg-primary-900 dark:text-primary-200 dark:hover:bg-primary-900/50 transition-colors"
             >
               Download CV (PDF)
             </a>

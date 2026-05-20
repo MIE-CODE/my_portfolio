@@ -449,10 +449,10 @@ export const ProjectsList = () => {
       {/* Tab Selector */}
       <div
         ref={tabsRef as React.RefObject<HTMLDivElement>}
-        className="flex items-center justify-center gap-2 sm:gap-3 bg-muted-100/95 dark:bg-muted-900/90 p-1 sm:p-1.5 rounded-lg border border-muted-200/95 dark:border-muted-700 w-fit mx-auto mb-6 sm:mb-10 backdrop-blur-md shadow-[0_2px_10px_rgba(28,25,23,0.08)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.35)] opacity-0"
+        className="flex w-full max-w-md sm:max-w-none sm:w-fit items-stretch sm:items-center justify-center gap-1.5 sm:gap-3 bg-muted-100/95 dark:bg-muted-900/90 p-1 sm:p-1.5 rounded-lg border border-muted-200/95 dark:border-muted-700 mx-auto mb-6 sm:mb-10 backdrop-blur-md shadow-[0_2px_10px_rgba(28,25,23,0.08)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.35)] opacity-0"
       >
         <button
-          className={`touch-target px-4 sm:px-6 py-2.5 rounded-md font-medium text-xs sm:text-sm transition-all duration-300 ${
+          className={`touch-target flex-1 sm:flex-none px-3 sm:px-6 py-2.5 rounded-md font-medium text-xs sm:text-sm transition-all duration-300 ${
             activeTab === "frontend"
               ? "bg-gradient-primary text-white shadow-lg shadow-primary-500/20"
               : "bg-transparent text-muted-600 dark:text-muted-400 hover:text-muted-900 dark:hover:text-muted-50"
@@ -465,7 +465,7 @@ export const ProjectsList = () => {
           🎨 Frontend
         </button>
         <button
-          className={`touch-target px-4 sm:px-6 py-2.5 rounded-md font-medium text-xs sm:text-sm transition-all duration-300 ${
+          className={`touch-target flex-1 sm:flex-none px-3 sm:px-6 py-2.5 rounded-md font-medium text-xs sm:text-sm transition-all duration-300 ${
             activeTab === "backend"
               ? "bg-gradient-primary text-white shadow-lg shadow-primary-500/20"
               : "bg-transparent text-muted-600 dark:text-muted-400 hover:text-muted-900 dark:hover:text-muted-50"
@@ -577,7 +577,7 @@ export const ProjectsList = () => {
                   {project.status}
                 </span>
               </div>
-              <h4 className="text-base sm:text-lg font-semibold text-muted-900 dark:text-muted-50 mb-2 sm:mb-3 pr-16">
+              <h4 className="text-base sm:text-lg font-semibold text-muted-900 dark:text-muted-50 mb-2 sm:mb-3 pr-14 sm:pr-16">
                 {project.title}
               </h4>
               <p className="text-xs sm:text-sm text-muted-600 dark:text-muted-400 leading-relaxed mb-3 sm:mb-4">

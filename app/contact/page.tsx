@@ -25,6 +25,7 @@ export default function ContactPage() {
           <PageHeader
             title="< Let's Connect >"
             description="Have a project in mind? Let's discuss how we can bring your ideas to life."
+            descriptionMobile="Have a project in mind? Let's talk."
           />
           <ContactForm />
         </div>
