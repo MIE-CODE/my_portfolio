@@ -1,23 +1,23 @@
-# SEO assets checklist
+# Open Graph image
 
-## Required: Open Graph image
+## Files
 
-Create **`public/og-image.png`** at **1200×630px**.
+| File | Purpose |
+|------|---------|
+| `og-image.svg` | Source design (1200×630) — simple MIE logo mark |
+| `og-image.png` | Generated PNG for LinkedIn, Facebook, Slack (run `yarn og:generate`) |
+| `/api/og` | Dynamic OG for blog posts (`?title=` & `?subtitle=`) — same logo style |
 
-Suggested content:
-- Name: **Israel Enyo Menyaga (MIE)**
-- Subtitle: Senior Software Engineer & CTO
-- Tags: React · Next.js · Blivap
-- Brand colors from the portfolio (primary `#5b82a8`)
+## Regenerate PNG after editing the SVG
 
-Until this file exists, social previews fall back to `/api/og` (dynamic) and `/og-image.svg`.
+```bash
+yarn og:generate
+```
 
-## Optional: Blivap-specific OG
+`yarn build` runs this automatically before `next build`.
 
-Add **`public/projects/blivap-og.png`** (1200×630) and set `ogImage` on `PAGE_SEO.blivap` in `src/seo/pages.ts`.
+## Preview
 
-## Verify after deploy
-
-1. [Google Rich Results Test](https://search.google.com/test/rich-results) — Person + WebSite + SoftwareApplication
-2. [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/) — OG image
-3. Submit `https://israelm.site/sitemap.xml` in Google Search Console
+- Static: http://localhost:3000/og-image.svg
+- PNG: http://localhost:3000/og-image.png
+- Dynamic: http://localhost:3000/api/og

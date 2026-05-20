@@ -1,10 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="MIE">
   <defs>
-    <linearGradient id="iconGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#627d98;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#486581;stop-opacity:1" />
+    <linearGradient id="icon-mark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5b82a8"/>
+      <stop offset="100%" stop-color="#3a5c80"/>
     </linearGradient>
   </defs>
-  <rect width="512" height="512" rx="100" fill="url(#iconGrad)"/>
-  <text x="256" y="360" font-family="Arial, sans-serif" font-size="240" font-weight="bold" fill="white" text-anchor="middle" letter-spacing="8">MIE</text>
+  <rect width="512" height="512" rx="112" fill="url(#icon-mark)"/>
+  <rect width="512" height="512" rx="112" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="4"/>
+  <text
+    x="256"
+    y="292"
+    font-family="system-ui, -apple-system, 'Segoe UI', sans-serif"
+    font-size="200"
+    font-weight="700"
+    fill="#faf9f7"
+    text-anchor="middle"
+    letter-spacing="-0.04em"
+  >MIE</text>
 </svg>

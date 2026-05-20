@@ -1,10 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" width="180" height="180" role="img" aria-label="MIE">
   <defs>
-    <linearGradient id="appleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#627d98;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#486581;stop-opacity:1" />
+    <linearGradient id="apple-mark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5b82a8"/>
+      <stop offset="100%" stop-color="#3a5c80"/>
     </linearGradient>
   </defs>
-  <rect width="180" height="180" rx="40" fill="url(#appleGrad)"/>
-  <text x="90" y="125" font-family="Arial, sans-serif" font-size="70" font-weight="bold" fill="white" text-anchor="middle" letter-spacing="3">MIE</text>
+  <rect width="180" height="180" rx="40" fill="url(#apple-mark)"/>
+  <rect width="180" height="180" rx="40" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="2"/>
+  <text
+    x="90"
+    y="108"
+    font-family="system-ui, -apple-system, 'Segoe UI', sans-serif"
+    font-size="68"
+    font-weight="700"
+    fill="#faf9f7"
+    text-anchor="middle"
+    letter-spacing="-0.04em"
+  >MIE</text>
 </svg>

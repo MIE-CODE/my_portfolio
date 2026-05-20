@@ -85,7 +85,8 @@ export function useContentParallax(
               trigger: el,
               start: "top bottom",
               end: "bottom top",
-              scrub: 0.6 + depth * 0.4,
+              scrub: 1.2,
+              invalidateOnRefresh: true,
             },
           },
         );

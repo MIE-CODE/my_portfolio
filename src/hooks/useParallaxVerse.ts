@@ -454,8 +454,8 @@ export function useParallaxVerse(refs: ParallaxVerseRefs) {
       const absX = Math.abs(dx);
       const absY = Math.abs(dy);
 
-      // Horizontal scroll → smooth camera strafe
-      if (absX > absY * 1.15 && absX > 12) {
+      // Horizontal trackpad only — do not steal mostly-vertical page scroll
+      if (absX > absY * 2.25 && absX > 28) {
         e.preventDefault();
         lateralRef.current = Math.max(
           -VERSE_LATERAL_MAX,

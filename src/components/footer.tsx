@@ -25,7 +25,7 @@ export const Footer = () => {
       ref={ref as React.RefObject<HTMLElement>}
       className="mt-20 py-12 bg-muted-100/95 dark:bg-muted-900/90 border-t border-muted-200/95 dark:border-muted-700 backdrop-blur-md shadow-[0_-1px_0_rgba(41,37,36,0.06)] dark:shadow-[0_-4px_24px_-8px_rgba(0,0,0,0.35)]"
       role="contentinfo"
-      data-parallax-depth="0.08"
+
     >
       <div className="container-custom">
         <div data-reveal-item className="flex flex-col items-center text-center gap-4 max-w-xl mx-auto opacity-0">

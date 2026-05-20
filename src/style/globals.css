@@ -38,7 +38,8 @@
   }
   
   html {
-    @apply scroll-smooth overflow-x-hidden;
+    @apply overflow-x-hidden;
+    scroll-behavior: auto;
   }
 
   body {
@@ -212,8 +213,24 @@
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
+  .site-navbar {
+    --site-nav-bar-h: 3.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .site-navbar {
+      --site-nav-bar-h: 3.75rem;
+    }
+  }
+
+  /* Fixed navbar offset (safe area counted once on the header) */
+  .site-main {
+    padding-top: calc(env(safe-area-inset-top, 0px) + var(--site-nav-bar-h) + 0.625rem);
+  }
+
   .page-shell {
-    @apply min-h-screen overflow-x-clip pt-20 sm:pt-24 pb-12 sm:pb-16;
+    @apply min-h-screen overflow-x-clip pb-12 sm:pb-16;
+    padding-top: 1.5rem;
   }
 
   .nav-link-mobile {
