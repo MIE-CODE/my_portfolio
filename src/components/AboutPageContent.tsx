@@ -1,53 +1,55 @@
 import Link from "next/link";
 
+const CV_HREF = "/cv/Israel_menyaga_cv.pdf";
+const CV_FILENAME = "Israel_menyaga_cv.pdf";
+
+/** Work history dates and titles aligned with Israel_menyaga_cv.pdf */
+const PRIMARY_ROLE = "Senior Software Engineer";
+const CURRENT_ROLE = "CTO (Technical Leadership) · Belsoft Systems";
+
 const roles = [
   {
-    period: "2026 —",
-    title: "Chief Technology Officer",
+    period: "Jan 2026 — Present",
+    title: "CTO (Technical Leadership)",
     org: "Belsoft Systems",
     detail:
-      "BelCore workspace client and BelPower utility billing—Next.js, TypeScript, Redux, Paystack, sessions.",
+      "Engineering strategy and delivery across BelCore, BelPower bill payments, and BelAI—architecture, team mentorship, and production releases.",
   },
   {
-    period: "2025 —",
-    title: "Founder",
+    period: "Feb 2025 — Present",
+    title: "Senior Frontend Engineer (Nuxt.js)",
+    org: "True Perk",
+    detail:
+      "Nuxt.js apps with AI-assisted recognition cards, milestone tracking, and engagement experiences—scalable, maintainable frontend systems.",
+  },
+  {
+    period: "Oct 2023 — Jan 2025",
+    title: "Senior Frontend Engineer (Next.js)",
+    org: "SparkPay",
+    detail:
+      "Payroll and financial monitoring platforms on Next.js, TypeScript, and Sass—performance, reusable components, and production-ready UX.",
+  },
+  {
+    period: "Mar 2021 — Aug 2023",
+    title: "Senior Software Engineer",
     org: "Blivap",
     detail:
-      "Donor marketplace for Nigeria: Next.js App Router, MUI, Redux, cookie-backed API, SEO and @vercel/og.",
-  },
-  {
-    period: "2024 —",
-    title: "Full stack (freelance)",
-    org: "Independent",
-    detail:
-      "Figma-to-ship web apps, headless CMS, analytics, and performance work for client products.",
-  },
-  {
-    period: "2022 — 2024",
-    title: "Chief Technology Officer",
-    org: "True Perk",
-    detail: "Nuxt 3, Vue 3, Pinia, engagement and recognition SaaS at enterprise scale.",
-  },
-  {
-    period: "2020 — 2022",
-    title: "Chief Technology Officer",
-    org: "SparkPay",
-    detail: "Next.js payroll SaaS, HubSpot, marketing and product surfaces.",
+      "Full-stack healthcare platform (Next.js, NestJS): donor–recipient matching, secure APIs, verification workflows, and production infrastructure.",
   },
 ];
 
 const focusAreas = [
   {
-    label: "Product delivery",
-    body: "End-to-end ownership from architecture through release: APIs, auth, payments, and UI systems.",
+    label: "Leadership & delivery",
+    body: "Technical leadership when needed: architecture, team alignment, releases, and clear stakeholder communication across products.",
   },
   {
-    label: "Performance",
-    body: "Lighthouse and Core Web Vitals as part of normal delivery—not a separate phase.",
+    label: "Performance & quality",
+    body: "Lighthouse and Core Web Vitals, pragmatic tuning on dashboards and payment flows, disciplined QA.",
   },
   {
-    label: "Motion & polish",
-    body: "GSAP and ScrollTrigger where marketing and product need motion without sacrificing frame budget.",
+    label: "Motion & UX craft",
+    body: "GSAP and ScrollTrigger for product and marketing surfaces where motion must stay smooth on real devices.",
   },
 ];
 
@@ -58,13 +60,27 @@ const stack = [
   "Vue",
   "TypeScript",
   "Tailwind",
-  "Redux / Zustand",
+  "Redux Toolkit",
+  "Zustand",
+  "Pinia",
   "REST",
   "Paystack",
   "PostHog",
   "HubSpot",
   "Sanity",
   "Contentful",
+  "Zod",
+  "Redux",
+];
+
+const education = [
+  {
+    period: "2021 — 2025",
+    title: "BSc(Ed) Mathematics",
+    org: "Prince Abubakar Audu University",
+    detail:
+      "Mathematics and education—analytical foundation alongside engineering practice.",
+  },
 ];
 
 export function AboutPageContent() {
@@ -73,7 +89,7 @@ export function AboutPageContent() {
       <div className="about-dossier__hero mb-12 sm:mb-16 grid gap-8 lg:grid-cols-12 lg:gap-10 items-end border-b border-muted-200/80 dark:border-muted-700/80 pb-10">
         <div className="lg:col-span-5">
           <p className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.28em] text-primary-600 dark:text-primary-400 mb-4">
-            File · biography
+            Résumé on file
           </p>
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-muted-900 dark:text-muted-50 leading-[0.95]">
             Menyaga
@@ -81,34 +97,59 @@ export function AboutPageContent() {
               Enyo Israel
             </span>
           </h2>
+          <p className="mt-4 text-base sm:text-lg font-medium text-primary-700 dark:text-primary-300">
+            {PRIMARY_ROLE}
+          </p>
+          <p className="mt-1 text-sm text-muted-500 dark:text-muted-400">
+            {CURRENT_ROLE}
+          </p>
+          <p className="mt-6">
+            <a
+              href={CV_HREF}
+              download={CV_FILENAME}
+              className="inline-flex items-center gap-2 rounded-lg border border-primary-500/50 bg-primary-50/80 px-4 py-2.5 text-sm font-medium text-primary-800 hover:bg-primary-100/90 dark:border-primary-400/40 dark:bg-primary-900 dark:text-primary-200 dark:hover:bg-primary-900/50 transition-colors"
+            >
+              Download CV (PDF)
+            </a>
+          </p>
         </div>
         <div className="lg:col-span-7">
           <p className="text-base sm:text-lg text-muted-600 dark:text-muted-300 leading-relaxed max-w-xl lg:max-w-none">
-            I build and lead production SaaS: collaboration tools, fintech and billing, HR and engagement,
-            and marketplaces. I work in{" "}
+            I help teams and founders turn ideas into products people actually
+            use—from first UI and API design through launch, payments,
+            analytics, and the performance work that keeps things fast in the
+            real world. If you need a hands-on engineer who can own a feature, a
+            product slice, or a full stack build, I work in{" "}
             <span className="text-muted-900 dark:text-muted-100 font-medium">
-              Next.js and Nuxt
+              Next.js, Nuxt, React, Vue, and TypeScript
             </span>
-            , with TypeScript, strong API boundaries, and shipping discipline.
+            , and I care about clear communication, reliable delivery, and code
+            that your team can live with after I hand it over.
           </p>
           <dl className="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-6 font-mono text-[11px] sm:text-xs">
             <div>
               <dt className="text-muted-500 dark:text-muted-500 uppercase tracking-wider mb-1">
-                Mode
+                Title
               </dt>
-              <dd className="text-muted-800 dark:text-muted-200">CTO · founder · IC</dd>
+              <dd className="text-muted-800 dark:text-muted-200">
+                {PRIMARY_ROLE}
+              </dd>
             </div>
             <div>
               <dt className="text-muted-500 dark:text-muted-500 uppercase tracking-wider mb-1">
-                Stack bias
+                Focus
               </dt>
-              <dd className="text-muted-800 dark:text-muted-200">React / Vue</dd>
+              <dd className="text-muted-800 dark:text-muted-200">
+                SaaS · fintech
+              </dd>
             </div>
             <div className="col-span-2 sm:col-span-1">
               <dt className="text-muted-500 dark:text-muted-500 uppercase tracking-wider mb-1">
                 Open to
               </dt>
-              <dd className="text-muted-800 dark:text-muted-200">Select freelance</dd>
+              <dd className="text-muted-800 dark:text-muted-200">
+                Select freelance
+              </dd>
             </div>
           </dl>
         </div>
@@ -123,7 +164,7 @@ export function AboutPageContent() {
             id="about-timeline-heading"
             className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.22em] text-muted-500 dark:text-muted-400 mb-8"
           >
-            Chronology
+            Experience
           </h3>
           <ol className="space-y-10">
             {roles.map((r) => (
@@ -135,8 +176,12 @@ export function AboutPageContent() {
                   {r.period}
                 </time>
                 <div className="sm:flex-1 sm:border-l sm:border-primary-500/20 dark:sm:border-primary-400/20 sm:pl-8 min-w-0">
-                  <p className="text-lg font-semibold text-muted-900 dark:text-muted-50">{r.title}</p>
-                  <p className="text-sm font-medium text-muted-500 dark:text-muted-400">{r.org}</p>
+                  <p className="text-lg font-semibold text-muted-900 dark:text-muted-50">
+                    {r.title}
+                  </p>
+                  <p className="text-sm font-medium text-muted-500 dark:text-muted-400">
+                    {r.org}
+                  </p>
                   <p className="mt-2 text-sm text-muted-600 dark:text-muted-300 leading-relaxed max-w-prose">
                     {r.detail}
                   </p>
@@ -147,20 +192,46 @@ export function AboutPageContent() {
         </section>
 
         <aside className="lg:col-span-5 space-y-10">
+          <section aria-labelledby="about-education-heading">
+            <h3
+              id="about-education-heading"
+              className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.22em] text-muted-500 dark:text-muted-400 mb-5"
+            >
+              Education
+            </h3>
+            <ul className="space-y-6">
+              {education.map((e) => (
+                <li key={e.title} className="panel-surface px-4 py-4 sm:px-5">
+                  <p className="font-mono text-xs text-primary-600 dark:text-primary-400">
+                    {e.period}
+                  </p>
+                  <p className="mt-1 text-sm font-semibold text-muted-900 dark:text-muted-100">
+                    {e.title}
+                  </p>
+                  <p className="text-xs font-medium text-muted-500 dark:text-muted-400">
+                    {e.org}
+                  </p>
+                  <p className="mt-2 text-xs sm:text-sm text-muted-600 dark:text-muted-400 leading-relaxed">
+                    {e.detail}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </section>
+
           <section aria-labelledby="about-focus-heading">
             <h3
               id="about-focus-heading"
               className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.22em] text-muted-500 dark:text-muted-400 mb-5"
             >
-              How I work
+              Strengths
             </h3>
             <ul className="space-y-6">
               {focusAreas.map((f) => (
-                <li
-                  key={f.label}
-                  className="rounded-xl border border-muted-200/90 dark:border-muted-700/80 bg-muted-50/40 dark:bg-muted-900/20 px-4 py-4 sm:px-5"
-                >
-                  <p className="text-sm font-semibold text-muted-900 dark:text-muted-100">{f.label}</p>
+                <li key={f.label} className="panel-surface px-4 py-4 sm:px-5">
+                  <p className="text-sm font-semibold text-muted-900 dark:text-muted-100">
+                    {f.label}
+                  </p>
                   <p className="mt-2 text-xs sm:text-sm text-muted-600 dark:text-muted-400 leading-relaxed">
                     {f.body}
                   </p>
@@ -174,12 +245,12 @@ export function AboutPageContent() {
               id="about-stack-heading"
               className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.22em] text-muted-500 dark:text-muted-400 mb-4"
             >
-              Tools & surfaces
+              Tools & stacks
             </h3>
             <ul className="flex flex-wrap gap-2">
               {stack.map((tag) => (
                 <li key={tag}>
-                  <span className="inline-block rounded-md border border-muted-300/80 dark:border-muted-600/60 bg-white/80 dark:bg-muted-800/40 px-2.5 py-1 text-[11px] sm:text-xs font-mono text-muted-700 dark:text-muted-300">
+                  <span className="inline-block rounded-md border border-muted-300/80 dark:border-muted-600/60 bg-muted-100/95 dark:bg-muted-900/85 px-2.5 py-1 text-[11px] sm:text-xs font-mono text-muted-700 dark:text-muted-300">
                     {tag}
                   </span>
                 </li>
@@ -189,8 +260,9 @@ export function AboutPageContent() {
 
           <div className="rounded-xl border border-primary-300/40 dark:border-primary-600/30 bg-primary-50/30 dark:bg-primary-950/20 px-5 py-5">
             <p className="text-sm text-muted-700 dark:text-muted-300 leading-relaxed">
-              Interested in how wallets and contracts sit next to traditional SaaS—learning Ethereum and
-              the wider ecosystem alongside shipping core product work.
+              Exploring how wallets, contracts, and decentralized apps
+              complement traditional SaaS—alongside core delivery on Next, Nuxt,
+              and React.
             </p>
           </div>
         </aside>
@@ -198,14 +270,21 @@ export function AboutPageContent() {
 
       <footer className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-8 border-t border-muted-200/80 dark:border-muted-700/80">
         <p className="text-sm text-muted-500 dark:text-muted-400">
-          Want to collaborate or see shipped work?
+          Full timeline and detail: use the PDF or browse projects.
         </p>
         <div className="flex flex-wrap gap-3">
-          <Link
-            href="/projects"
+          <a
+            href={CV_HREF}
+            download={CV_FILENAME}
             className="inline-flex items-center justify-center rounded-lg bg-primary-600 px-4 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-400 transition-colors"
           >
-            View projects
+            Download CV
+          </a>
+          <Link
+            href="/projects"
+            className="inline-flex items-center justify-center rounded-lg border border-muted-300 dark:border-muted-600 px-4 py-2.5 text-sm font-medium text-muted-800 dark:text-muted-200 hover:border-primary-400 dark:hover:border-primary-500 transition-colors"
+          >
+            Projects
           </Link>
           <Link
             href="/contact"

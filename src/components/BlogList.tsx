@@ -21,7 +21,7 @@ export const BlogList = () => {
         <article
           key={post.id}
           data-reveal-item
-          className="p-6 bg-white/90 dark:bg-muted-800/60 border border-muted-200/95 dark:border-muted-700 rounded-2xl verse-hover-hud verse-scan-border transition-all duration-300 hover:bg-white dark:hover:bg-muted-800/80 hover:border-primary-300 dark:hover:border-primary-600 backdrop-blur-sm shadow-[0_2px_10px_rgba(28,25,23,0.06)] dark:shadow-none opacity-0"
+          className="p-6 bg-muted-100/95 dark:bg-muted-900/90 border border-muted-300/80 dark:border-muted-700 rounded-2xl verse-hover-hud verse-scan-border transition-all duration-300 hover:bg-muted-50 dark:hover:bg-muted-900/95 hover:border-primary-300 dark:hover:border-primary-600 backdrop-blur-md shadow-[0_2px_10px_rgba(28,25,23,0.08)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.35)] opacity-0"
         >
           <div className="flex items-center gap-3 mb-4">
             <span className="px-3 py-1 text-xs font-medium text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20 rounded-full border border-primary-200 dark:border-primary-800">

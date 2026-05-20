@@ -157,16 +157,28 @@ function VerseScene({
 type VerseSpace3DProps = {
   targetRef: React.MutableRefObject<VerseTarget>;
   quality?: "full" | "low";
+  /** Fires once after WebGL context and R3F root are created. */
+  onSurfaceReady?: () => void;
 };
 
 export const VerseSpace3D = memo(function VerseSpace3D({
   targetRef,
   quality = "full",
+  onSurfaceReady,
 }: VerseSpace3DProps) {
+  const readyRef = useRef(false);
+
+  const handleCreated = () => {
+    if (readyRef.current) return;
+    readyRef.current = true;
+    onSurfaceReady?.();
+  };
+
   return (
-    <div aria-hidden className="pointer-events-none fixed inset-0 z-0">
+    <div aria-hidden className="verse-canvas-shell pointer-events-none fixed inset-0 z-0">
       <Canvas
         camera={{ position: [0, 18, 55], fov: 58, near: 0.1, far: 400 }}
+        onCreated={handleCreated}
         gl={{
           alpha: false,
           antialias: quality === "full",

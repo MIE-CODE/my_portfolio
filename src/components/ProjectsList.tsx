@@ -34,7 +34,7 @@ const frontendProjects: Array<{
     link: "https://trueperk.co/",
     githubLink: "#",
     category: "Frontend",
-    role: "CTO · frontend architecture",
+    role: "Senior frontend engineer · Nuxt",
   },
   {
     id: 2,
@@ -46,7 +46,7 @@ const frontendProjects: Array<{
     link: "https://www.sparkpayhq.com/",
     githubLink: "#",
     category: "Frontend",
-    role: "CTO · engineering leadership",
+    role: "Senior frontend engineer · Next.js",
   },
   {
     id: 3,
@@ -65,7 +65,7 @@ const frontendProjects: Array<{
     link: "https://blivap.com/",
     githubLink: "#",
     category: "Frontend",
-    role: "Founder & owner",
+    role: "Senior software engineer",
   },
   {
     id: 4,
@@ -446,7 +446,7 @@ export const ProjectsList = () => {
       {/* Tab Selector */}
       <div
         ref={tabsRef as React.RefObject<HTMLDivElement>}
-        className="flex items-center justify-center gap-2 sm:gap-3 bg-white/90 dark:bg-muted-800/60 p-1 sm:p-1.5 rounded-lg border border-muted-200/95 dark:border-muted-700 w-fit mx-auto mb-6 sm:mb-10 backdrop-blur-sm shadow-[0_2px_10px_rgba(28,25,23,0.06)] opacity-0"
+        className="flex items-center justify-center gap-2 sm:gap-3 bg-muted-100/95 dark:bg-muted-900/90 p-1 sm:p-1.5 rounded-lg border border-muted-200/95 dark:border-muted-700 w-fit mx-auto mb-6 sm:mb-10 backdrop-blur-md shadow-[0_2px_10px_rgba(28,25,23,0.08)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.35)] opacity-0"
       >
         <button
           className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-md font-medium text-xs sm:text-sm transition-all duration-300 ${

@@ -432,9 +432,6 @@ export function useParallaxVerse(refs: ParallaxVerseRefs) {
       end: "max",
       onUpdate: (self) => {
         if (panLockRef.current) return;
-        if (document.documentElement.dataset.experienceStackActive != null) {
-          return;
-        }
         scrollRef.current = self.progress;
         if (scrollRaf) return;
         scrollRaf = requestAnimationFrame(() => {

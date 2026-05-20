@@ -12,6 +12,14 @@ import { landmarkFocusStrengthFromCamera, verseTargetToWorld } from "./verseStat
 
 const HUD_CYAN = "#4ee8ff";
 const HUD_AMBER = "#ffb347";
+const HUD_OUTLINE = "#0a2030";
+
+function useHudPalette() {
+  return useMemo(
+    () => ({ cyan: HUD_CYAN, amber: HUD_AMBER, outline: HUD_OUTLINE }),
+    [],
+  );
+}
 
 type HudProps = {
   landmark: VerseLandmark;
@@ -240,9 +248,11 @@ function ArcReactorCore({
 function ScanSweep({
   radius,
   energyRef,
+  color,
 }: {
   radius: number;
   energyRef: React.MutableRefObject<number>;
+  color: string;
 }) {
   const ref = useRef<THREE.Mesh>(null);
   const mat = useRef<THREE.MeshBasicMaterial>(null);
@@ -257,7 +267,7 @@ function ScanSweep({
       <ringGeometry args={[radius * 0.15, radius, 40, 1, 0, Math.PI / 5]} />
       <meshBasicMaterial
         ref={mat}
-        color={HUD_CYAN}
+        color={color}
         transparent
         opacity={0.08}
         side={THREE.DoubleSide}
@@ -272,10 +282,16 @@ function CodeBillboard({
   landmark,
   energyRef,
   quality,
+  hudCyan,
+  hudAmber,
+  hudOutline,
 }: {
   landmark: VerseLandmark;
   energyRef: React.MutableRefObject<number>;
   quality: "full" | "low";
+  hudCyan: string;
+  hudAmber: string;
+  hudOutline: string;
 }) {
   const snippet = useMemo(() => getTechSnippet(landmark.id), [landmark.id]);
   const group = useRef<THREE.Group>(null);
@@ -318,21 +334,21 @@ function CodeBillboard({
         <Text
           position={[0.15, 0, 0.01]}
           fontSize={0.2}
-          color={HUD_CYAN}
+          color={hudCyan}
           anchorX="left"
           anchorY="top"
           maxWidth={4}
           lineHeight={0.28}
           fillOpacity={0.85}
           outlineWidth={0.01}
-          outlineColor="#0a2030"
+          outlineColor={hudOutline}
         >
           {snippet}
         </Text>
         <Text
           position={[0.15, -2.55, 0.01]}
           fontSize={0.12}
-          color={HUD_AMBER}
+          color={hudAmber}
           anchorX="left"
           anchorY="top"
           fillOpacity={0.7}
@@ -348,11 +364,13 @@ function DataTicks({
   radius,
   count,
   color,
+  accent,
   energyRef,
 }: {
   radius: number;
   count: number;
   color: string;
+  accent: string;
   energyRef: React.MutableRefObject<number>;
 }) {
   const group = useRef<THREE.Group>(null);
@@ -378,7 +396,7 @@ function DataTicks({
         <mesh key={i} position={[Math.cos(a) * radius, Math.sin(a) * radius, 0]}>
           <boxGeometry args={[0.06, 0.22 + (i % 3) * 0.08, 0.02]} />
           <meshBasicMaterial
-            color={i % 2 === 0 ? color : HUD_AMBER}
+            color={i % 2 === 0 ? color : accent}
             transparent
             opacity={0.4}
             blending={THREE.AdditiveBlending}
@@ -391,6 +409,7 @@ function DataTicks({
 }
 
 function TechLandmarkHud({ landmark, targetRef, quality }: HudProps) {
+  const { cyan, amber, outline } = useHudPalette();
   const energy = useHudFocus(targetRef, landmark.position);
   const s = landmark.scale;
   const shell = useRef<THREE.Group>(null);
@@ -414,7 +433,7 @@ function TechLandmarkHud({ landmark, targetRef, quality }: HudProps) {
           accent={landmark.accent}
           energyRef={energy}
         />
-        <ScanSweep radius={s * 5} energyRef={energy} />
+        <ScanSweep radius={s * 5} energyRef={energy} color={cyan} />
 
         <group rotation={[Math.PI / 2.1, 0, 0]}>
           <RotatingArc
@@ -439,21 +458,29 @@ function TechLandmarkHud({ landmark, targetRef, quality }: HudProps) {
             start={-0.4}
             sweep={Math.PI * 0.9}
             speed={0.35}
-            color={HUD_CYAN}
+            color={cyan}
             opacity={0.15 + energy.current * 0.4}
             rollAxis="x"
           />
         </group>
 
-        <HexLattice radius={s * 2.8} color={HUD_CYAN} opacity={0.25} />
+        <HexLattice radius={s * 2.8} color={cyan} opacity={0.25} />
         <CornerBrackets size={s * 3.2} color={landmark.color} opacity={0.35} />
         <DataTicks
           radius={s * 4.8}
           count={quality === "full" ? 24 : 12}
           color={landmark.color}
+          accent={amber}
           energyRef={energy}
         />
-        <CodeBillboard landmark={landmark} energyRef={energy} quality={quality} />
+        <CodeBillboard
+          landmark={landmark}
+          energyRef={energy}
+          quality={quality}
+          hudCyan={cyan}
+          hudAmber={amber}
+          hudOutline={outline}
+        />
       </group>
     </group>
   );
@@ -461,6 +488,7 @@ function TechLandmarkHud({ landmark, targetRef, quality }: HudProps) {
 
 /** World-space tech lattice between landmarks (always faint) */
 function GlobalTechLattice({ quality }: { quality: "full" | "low" }) {
+  const { cyan } = useHudPalette();
   const group = useRef<THREE.Group>(null);
   const segments = useMemo(() => {
     if (quality === "low") return [];
@@ -491,7 +519,7 @@ function GlobalTechLattice({ quality }: { quality: "full" | "low" }) {
 
   return (
     <group ref={group} position={[0, 0, -40]}>
-      <Line points={segments} color={HUD_CYAN} transparent opacity={0.08} />
+      <Line points={segments} color={cyan} transparent opacity={0.08} />
     </group>
   );
 }

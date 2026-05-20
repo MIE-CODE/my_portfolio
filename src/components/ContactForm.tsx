@@ -58,7 +58,7 @@ export const ContactForm = () => {
     <form
       ref={formRef as React.RefObject<HTMLFormElement>}
       onSubmit={handleSubmit}
-      className="p-4 sm:p-6 md:p-8 bg-white/90 dark:bg-muted-800/60 border border-muted-200/95 dark:border-muted-700 rounded-2xl sm:rounded-3xl backdrop-blur-sm shadow-[0_2px_10px_rgba(28,25,23,0.06)] dark:shadow-none verse-scan-border verse-hover-hud opacity-0"
+      className="p-4 sm:p-6 md:p-8 bg-muted-100/95 dark:bg-muted-900/90 border border-muted-200/95 dark:border-muted-700 rounded-2xl sm:rounded-3xl backdrop-blur-md shadow-[0_2px_10px_rgba(28,25,23,0.08)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.35)] verse-scan-border verse-hover-hud opacity-0"
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
         <div>
@@ -72,7 +72,7 @@ export const ContactForm = () => {
             value={formData.name}
             onChange={handleChange}
             required
-            className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base bg-white dark:bg-muted-800 border border-muted-200 dark:border-muted-700 rounded-lg sm:rounded-xl text-muted-900 dark:text-muted-50 placeholder-muted-400 dark:placeholder-muted-600 focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-500/20 dark:focus:ring-primary-400/20 transition-all duration-300"
+            className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base bg-muted-100 dark:bg-muted-800 border border-muted-200 dark:border-muted-700 rounded-lg sm:rounded-xl text-muted-900 dark:text-muted-50 placeholder-muted-400 dark:placeholder-muted-600 focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-500/20 dark:focus:ring-primary-400/20 transition-all duration-300"
             placeholder="Your name"
           />
         </div>
@@ -87,7 +87,7 @@ export const ContactForm = () => {
             value={formData.email}
             onChange={handleChange}
             required
-            className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base bg-white dark:bg-muted-800 border border-muted-200 dark:border-muted-700 rounded-lg sm:rounded-xl text-muted-900 dark:text-muted-50 placeholder-muted-400 dark:placeholder-muted-600 focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-500/20 dark:focus:ring-primary-400/20 transition-all duration-300"
+            className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base bg-muted-100 dark:bg-muted-800 border border-muted-200 dark:border-muted-700 rounded-lg sm:rounded-xl text-muted-900 dark:text-muted-50 placeholder-muted-400 dark:placeholder-muted-600 focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-500/20 dark:focus:ring-primary-400/20 transition-all duration-300"
             placeholder="your.email@example.com"
           />
         </div>
@@ -104,7 +104,7 @@ export const ContactForm = () => {
           value={formData.subject}
           onChange={handleChange}
           required
-          className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base bg-white dark:bg-muted-800 border border-muted-200 dark:border-muted-700 rounded-lg sm:rounded-xl text-muted-900 dark:text-muted-50 placeholder-muted-400 dark:placeholder-muted-600 focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-500/20 dark:focus:ring-primary-400/20 transition-all duration-300"
+          className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base bg-muted-100 dark:bg-muted-800 border border-muted-200 dark:border-muted-700 rounded-lg sm:rounded-xl text-muted-900 dark:text-muted-50 placeholder-muted-400 dark:placeholder-muted-600 focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-500/20 dark:focus:ring-primary-400/20 transition-all duration-300"
           placeholder="What's this about?"
         />
       </div>
@@ -120,7 +120,7 @@ export const ContactForm = () => {
           onChange={handleChange}
           required
           rows={5}
-          className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base bg-white dark:bg-muted-800 border border-muted-200 dark:border-muted-700 rounded-lg sm:rounded-xl text-muted-900 dark:text-muted-50 placeholder-muted-400 dark:placeholder-muted-600 focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-500/20 dark:focus:ring-primary-400/20 transition-all duration-300 resize-none"
+          className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base bg-muted-100 dark:bg-muted-800 border border-muted-200 dark:border-muted-700 rounded-lg sm:rounded-xl text-muted-900 dark:text-muted-50 placeholder-muted-400 dark:placeholder-muted-600 focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-500/20 dark:focus:ring-primary-400/20 transition-all duration-300 resize-none"
           placeholder="Tell me about your project..."
         />
       </div>
