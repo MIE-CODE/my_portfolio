@@ -1,7 +1,7 @@
 {
-  "name": "Israel Menyaga — Software Engineer Portfolio",
+  "name": "Israel Enyo Menyaga (MIE) — Portfolio",
   "short_name": "MIE Portfolio",
-  "description": "Senior Software Engineer & CTO. Next.js, Nuxt, React, TypeScript, SaaS, fintech, and technical leadership.",
+  "description": "Israel Enyo Menyaga (MIE), Senior Software Engineer & CTO. React, Next.js, TypeScript, AI, fintech, healthcare. Founder of Blivap.",
   "icons": [
     {
       "src": "/icon.svg",
@@ -21,4 +21,3 @@
   "start_url": "/",
   "scope": "/"
 }
-

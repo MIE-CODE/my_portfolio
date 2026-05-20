@@ -89,14 +89,33 @@ export function AboutPageContent() {
       <div className="about-dossier__hero mb-10 sm:mb-16 grid gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-10 items-end border-b border-muted-200/80 dark:border-muted-700/80 pb-8 sm:pb-10">
         <div className="lg:col-span-5">
           <p className="font-mono text-xs uppercase tracking-[0.2em] sm:tracking-[0.28em] text-primary-600 dark:text-primary-400 mb-4">
-            Résumé on file
+            Résumé on file · Also known as MIE
           </p>
-          <h2 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-muted-900 dark:text-muted-50 leading-[0.95]">
-            Menyaga
-            <span className="block text-muted-400 dark:text-muted-500 font-light mt-1">
-              Enyo Israel
+          <h1 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-muted-900 dark:text-muted-50 leading-[0.95]">
+            Israel Enyo Menyaga
+            <span className="block text-primary-600 dark:text-primary-400 text-2xl sm:text-3xl font-mono mt-2">
+              (MIE)
             </span>
-          </h2>
+          </h1>
+          <p className="mt-3 text-sm text-muted-600 dark:text-muted-400">
+            <a
+              href="https://github.com/MIE-CODE"
+              target="_blank"
+              rel="me noopener noreferrer"
+              className="text-primary-600 hover:underline dark:text-primary-400"
+            >
+              MIE-CODE on GitHub
+            </a>
+            {" · "}
+            Founder of{" "}
+            <a
+              href="https://blivap.com"
+              rel="me noopener noreferrer"
+              className="text-primary-600 hover:underline dark:text-primary-400"
+            >
+              Blivap
+            </a>
+          </p>
           <p className="mt-4 text-base sm:text-lg font-medium text-primary-700 dark:text-primary-300">
             {PRIMARY_ROLE}
           </p>

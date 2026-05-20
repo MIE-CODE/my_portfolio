@@ -1,47 +1,55 @@
 import { SITE } from "./site";
 
+/** Person — Google knowledge panel & name/alias mapping */
 export function personJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "Person",
     "@id": `${SITE.url}/#person`,
     name: SITE.person.fullName,
-    alternateName: SITE.person.alternateName,
-    givenName: SITE.person.givenName,
-    familyName: SITE.person.familyName,
-    jobTitle: SITE.person.jobTitle,
-    description: SITE.defaultDescription,
-    email: SITE.email,
-    telephone: SITE.phone,
+    alternateName: [...SITE.person.alternateName],
     url: SITE.url,
-    image: `${SITE.url}${SITE.staticOgImage}`,
-    sameAs: [SITE.linkedIn, SITE.github],
+    email: SITE.email,
+    jobTitle: SITE.person.jobTitle,
+    description:
+      "Senior Software Engineer and CTO with 5+ years building scalable web applications in fintech, healthcare, and AI. Founder of Blivap, a blood donation platform.",
+    sameAs: [SITE.github, SITE.linkedIn, SITE.blivap],
     knowsAbout: [
-      "Next.js",
-      "Nuxt",
       "React",
-      "Vue",
+      "Next.js",
       "TypeScript",
-      "Tailwind CSS",
-      "SaaS",
+      "NestJS",
+      "AI Integration",
       "Fintech",
-      "Paystack",
-      "Performance Optimization",
-      "Core Web Vitals",
-      "Google Analytics",
-      "PostHog",
-      "GSAP",
-      "Technical Leadership",
+      "Healthcare Platforms",
+      "System Design",
+      "Node.js",
+      "GraphQL",
+      "Blood Donation Technology",
+      "Nuxt.js",
     ],
+    worksFor: {
+      "@type": "Organization",
+      name: SITE.organizations.belsoft,
+    },
+    founder: {
+      "@type": "Organization",
+      name: "Blivap",
+      url: SITE.blivap,
+      description:
+        "A blood donation and real-time donor-recipient matching platform",
+    },
   };
 }
 
+/** WebSite — sitelinks & site entity */
 export function webSiteJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "@id": `${SITE.url}/#website`,
-    name: SITE.shortName,
+    name: "Israel Enyo Menyaga — Portfolio",
+    alternateName: "MIE Portfolio",
     url: SITE.url,
     description: SITE.defaultDescription,
     inLanguage: SITE.language,
@@ -49,9 +57,29 @@ export function webSiteJsonLd() {
   };
 }
 
-export function breadcrumbJsonLd(
-  items: { name: string; path: string }[],
-) {
+/** Blivap product — links product searches to Israel */
+export function blivapSoftwareJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "@id": `${SITE.blivap}#application`,
+    name: "Blivap",
+    url: SITE.blivap,
+    applicationCategory: "HealthApplication",
+    operatingSystem: "Web",
+    description:
+      "A real-time blood donation and donor-recipient matching platform built by Israel Enyo Menyaga.",
+    author: {
+      "@type": "Person",
+      "@id": `${SITE.url}/#person`,
+      name: SITE.person.fullName,
+      alternateName: "MIE",
+      url: SITE.url,
+    },
+  };
+}
+
+export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -79,16 +107,8 @@ export function articleJsonLd(post: {
     description: post.excerpt,
     datePublished: new Date(post.date).toISOString(),
     dateModified: new Date(post.date).toISOString(),
-    author: {
-      "@type": "Person",
-      "@id": `${SITE.url}/#person`,
-      name: SITE.person.fullName,
-    },
-    publisher: {
-      "@type": "Person",
-      name: SITE.person.fullName,
-      url: SITE.url,
-    },
+    author: { "@type": "Person", "@id": `${SITE.url}/#person`, name: SITE.person.fullName },
+    publisher: { "@type": "Person", name: SITE.person.fullName, url: SITE.url },
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
     url,
     articleSection: post.category,
@@ -103,9 +123,14 @@ export function professionalServiceJsonLd() {
     name: `${SITE.person.fullName} — Software Engineering`,
     url: `${SITE.url}/services`,
     description:
-      "Full-stack and frontend engineering: Next.js, Nuxt, React, Vue, TypeScript, payments, analytics, and technical leadership.",
+      "Senior software engineering: React, Next.js, TypeScript, NestJS, AI integration, fintech, and healthcare platforms.",
     areaServed: "Worldwide",
     email: SITE.email,
     founder: { "@id": `${SITE.url}/#person` },
   };
+}
+
+/** Injected once in root layout <head> */
+export function rootJsonLdGraph() {
+  return [personJsonLd(), webSiteJsonLd(), blivapSoftwareJsonLd()];
 }

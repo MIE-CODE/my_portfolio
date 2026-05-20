@@ -146,7 +146,7 @@ export const ContactForm = () => {
         <p className="text-xs sm:text-sm text-muted-600 dark:text-muted-400 text-center mb-3 sm:mb-4">Or reach out directly:</p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 text-sm sm:text-base">
           <a
-            href="mailto:israelvictor126@gmail.com"
+            href="mailto:israelmenyaga@gmail.com"
             className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-300"
           >
             israelvictor126@gmail.com

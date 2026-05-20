@@ -13,6 +13,8 @@ type PageHeaderProps = {
   preset?: GsapRevealPreset;
   /** Default center; use start for editorial pages like About. */
   align?: "center" | "start";
+  /** Use h2 when the page already has a dedicated h1 (e.g. About dossier). */
+  headingLevel?: "h1" | "h2";
 };
 
 export function PageHeader({
@@ -22,7 +24,9 @@ export function PageHeader({
   className = "",
   preset,
   align = "center",
+  headingLevel = "h1",
 }: PageHeaderProps) {
+  const HeadingTag = headingLevel;
   const pathname = usePathname();
   const ref = useGsapMount({
     preset: preset ?? getPageHeaderPreset(pathname),
@@ -42,12 +46,12 @@ export function PageHeader({
       className={`${blockAlign} mb-8 sm:mb-12 ${className}`.trim()}
       data-parallax-depth="0.12"
     >
-      <h1
+      <HeadingTag
         data-page-header-part
         className="text-2xl sm:text-3xl font-bold gradient-text font-mono mb-4 sm:mb-6 opacity-0"
       >
         {title}
-      </h1>
+      </HeadingTag>
       {description && (
         <p
           data-page-header-part

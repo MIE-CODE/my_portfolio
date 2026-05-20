@@ -16,6 +16,7 @@ const frontendProjects: Array<{
   githubLink: string;
   category: "Frontend" | "Backend";
   role?: string;
+  detailPath?: string;
 }> = [
   {
     id: 1,
@@ -65,7 +66,8 @@ const frontendProjects: Array<{
     link: "https://blivap.com/",
     githubLink: "#",
     category: "Frontend",
-    role: "Senior software engineer",
+    role: "Founder & engineer · Israel Enyo Menyaga (MIE)",
+    detailPath: "/projects/blivap",
   },
   {
     id: 4,
@@ -219,6 +221,7 @@ const backendProjects: Array<{
   githubLink: string;
   category: "Frontend" | "Backend";
   role?: string;
+  detailPath?: string;
 }> = [
   {
     id: 8,

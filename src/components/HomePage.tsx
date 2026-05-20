@@ -59,18 +59,36 @@ export function HomePage() {
             className="flex flex-col gap-3 sm:gap-4 max-w-3xl rounded-2xl border border-primary-200/40 bg-muted-100/95 px-3 py-2 backdrop-blur-md dark:border-white/12 dark:bg-muted-900/90 verse-scan-border shadow-[0_8px_32px_-8px_rgba(28,25,23,0.12)] dark:shadow-[0_8px_32px_-8px_rgba(0,0,0,0.4)]"
           >
             <div className="flex flex-col gap-2">
-              <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
-                <span className="text-muted-900 dark:text-muted-50">
-                  Software{" "}
+              <h1 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold leading-tight text-muted-900 dark:text-muted-50">
+                Israel Enyo Menyaga{" "}
+                <span className="font-mono text-primary-600 dark:text-primary-400">
+                  (MIE)
                 </span>
-                <span className="gradient-text inline-block">
-                  {text[0]}
+                <span className="block mt-1 text-base sm:text-lg font-semibold text-muted-600 dark:text-muted-300">
+                  Senior Software Engineer &amp; CTO
                 </span>
-                <Cursor cursorBlinking />
+                <span className="block mt-2 text-lg sm:text-xl md:text-2xl">
+                  <span className="text-muted-800 dark:text-muted-200">
+                    Software{" "}
+                  </span>
+                  <span className="gradient-text inline-block">
+                    {text[0]}
+                  </span>
+                  <Cursor cursorBlinking />
+                </span>
               </h1>
               <p className="text-xs sm:text-sm font-mono text-muted-600 dark:text-muted-400 tracking-wide sm:tracking-wider px-2 leading-relaxed">
-                Next.js • Nuxt • React • Vue • TypeScript • Tailwind • SaaS •
-                Payments • Leadership
+                Also known as MIE · MIE-CODE on GitHub · Founder of{" "}
+                <a
+                  href="https://blivap.com"
+                  rel="me"
+                  className="text-primary-600 hover:underline dark:text-primary-400"
+                >
+                  Blivap
+                </a>
+              </p>
+              <p className="text-xs sm:text-sm font-mono text-muted-500 dark:text-muted-500 tracking-wide px-2">
+                React · Next.js · TypeScript · NestJS · AI · Fintech · Healthcare
               </p>
             </div>
             <p className="text-xs sm:text-sm md:text-base text-muted-700 dark:text-muted-300 max-w-6xl mx-auto leading-relaxed px-2">
@@ -91,7 +109,7 @@ export function HomePage() {
             aria-label="Primary actions"
           >
             <a
-              href="mailto:israelvictor126@gmail.com"
+              href="mailto:israelmenyaga@gmail.com"
               className="btn-primary touch-target text-sm verse-hover-hud opacity-0"
               aria-label="Send email to Menya Israel"
             >

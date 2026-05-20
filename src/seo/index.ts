@@ -5,12 +5,19 @@ export {
   buildArticleMetadata,
   buildRootMetadata,
   buildOgImageUrl,
+  generatePageMetadata,
 } from "./buildMetadata";
 export {
   personJsonLd,
   webSiteJsonLd,
+  blivapSoftwareJsonLd,
   breadcrumbJsonLd,
   articleJsonLd,
   professionalServiceJsonLd,
+  rootJsonLdGraph,
 } from "./jsonLd";
-export type { PageSeoConfig, ArticleSeoConfig } from "./types";
+export type {
+  PageSeoConfig,
+  ArticleSeoConfig,
+  GeneratePageMetadataInput,
+} from "./types";

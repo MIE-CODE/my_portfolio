@@ -1,9 +1,9 @@
-/* eslint-disable @next/next/no-page-custom-font */
 import { SiteShell } from "../src/components/SiteShell";
 import { ThemeProviderWrapper } from "../src/components/ThemeProviderWrapper";
 import { JsonLd } from "@/src/components/JsonLd";
+import { inter, jetbrainsMono } from "@/src/lib/fonts";
 import { buildRootMetadata } from "@/src/seo/buildMetadata";
-import { personJsonLd, webSiteJsonLd } from "@/src/seo/jsonLd";
+import { rootJsonLdGraph } from "@/src/seo/jsonLd";
 import { SITE } from "@/src/seo/site";
 import "../src/style/globals.css";
 
@@ -15,7 +15,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang={SITE.language} suppressHydrationWarning>
+    <html
+      lang={SITE.language}
+      className={`${inter.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -37,16 +41,10 @@ export default function RootLayout({
             `,
           }}
         />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
-          rel="stylesheet"
-        />
+        {/* rel=me — social graph ownership (GitHub, LinkedIn, Blivap) */}
+        <link rel="me" href={SITE.github} />
+        <link rel="me" href={SITE.linkedIn} />
+        <link rel="me" href={SITE.blivap} />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="alternate icon" href="/favicon.svg" />
         <link rel="icon" type="image/svg+xml" sizes="any" href="/icon.svg" />
@@ -57,9 +55,9 @@ export default function RootLayout({
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=5"
         />
-        <JsonLd data={[personJsonLd(), webSiteJsonLd()]} />
+        <JsonLd data={rootJsonLdGraph()} />
       </head>
-      <body className="bg-muted-50 dark:bg-muted-900 text-muted-900 dark:text-muted-50 transition-colors duration-300">
+      <body className="min-h-dvh bg-muted-50 font-sans text-muted-900 antialiased transition-colors duration-300 dark:bg-muted-900 dark:text-muted-50">
         <ThemeProviderWrapper>
           <SiteShell>{children}</SiteShell>
         </ThemeProviderWrapper>
