@@ -4,7 +4,10 @@ import gsap from "gsap";
 import { CloseIcon } from "../svg";
 import { NavList } from "./navlist";
 
-export const Modal = (props: {
+export const Modal = ({
+  isOpen,
+  modal,
+}: {
   isOpen: (event: boolean) => void;
   modal: boolean;
 }) => {
@@ -13,7 +16,7 @@ export const Modal = (props: {
   const closeBtnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    if (props.modal) {
+    if (modal) {
       document.body.style.overflow = "hidden";
       closeBtnRef.current?.focus();
     } else {
@@ -22,20 +25,20 @@ export const Modal = (props: {
     return () => {
       document.body.style.overflow = "";
     };
-  }, [props.modal]);
+  }, [modal]);
 
   useEffect(() => {
-    if (!props.modal) return;
+    if (!modal) return;
 
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") props.isOpen(false);
+      if (e.key === "Escape") isOpen(false);
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [props.modal, props.isOpen]);
+  }, [modal, isOpen]);
 
   useEffect(() => {
-    if (!props.modal || !overlayRef.current || !panelRef.current) return;
+    if (!modal || !overlayRef.current || !panelRef.current) return;
 
     const reduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
@@ -56,15 +59,15 @@ export const Modal = (props: {
       { x: "100%" },
       { x: 0, duration: 0.35, ease: "power3.out" },
     );
-  }, [props.modal]);
+  }, [modal]);
 
-  if (!props.modal) return null;
+  if (!modal) return null;
 
   return (
     <div
       ref={overlayRef}
       className="fixed inset-0 z-50 bg-muted-900/50 dark:bg-muted-950/60 backdrop-blur-sm flex items-stretch justify-end opacity-0"
-      onClick={() => props.isOpen(false)}
+      onClick={() => isOpen(false)}
       role="dialog"
       aria-modal="true"
       aria-label="Navigation menu"
@@ -80,7 +83,7 @@ export const Modal = (props: {
           <button
             ref={closeBtnRef}
             type="button"
-            onClick={() => props.isOpen(false)}
+            onClick={() => isOpen(false)}
             className="touch-target rounded-full bg-muted-100/90 dark:bg-muted-800 border border-muted-300/80 dark:border-muted-700 hover:bg-muted-50 dark:hover:bg-muted-700 shadow-[0_2px_10px_rgba(28,25,23,0.06)] transition-all duration-300"
             aria-label="Close navigation menu"
           >
@@ -90,7 +93,7 @@ export const Modal = (props: {
           </button>
         </div>
         <ul className="flex flex-col gap-0.5 px-4 sm:px-6 py-2 flex-1 overflow-y-auto" role="list">
-          <NavList isOpen={props.isOpen} />
+          <NavList isOpen={isOpen} />
         </ul>
       </nav>
     </div>
