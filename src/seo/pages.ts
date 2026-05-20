@@ -1,154 +1,126 @@
 import type { ArticleSeoConfig, PageSeoConfig } from "./types";
+import { SITE } from "./site";
+
+const ROOT_DESC = SITE.defaultDescription;
 
 export const PAGE_SEO = {
   home: {
-    title: "Israel Enyo Menyaga — Senior Software Engineer & CTO",
-    description:
-      "Portfolio of Israel Menyaga: Senior Software Engineer, CTO at Belsoft Systems. Production SaaS with Next.js, Nuxt, React, Vue, and TypeScript—fintech, bill pay, HR tech, and healthcare platforms.",
+    title: SITE.defaultTitle,
+    description: ROOT_DESC,
     path: "/",
     absoluteTitle: true,
     og: {
-      imageTitle: "Israel Enyo Menyaga",
+      title: SITE.defaultTitle,
+      description: ROOT_DESC,
+      imageTitle: "Israel Enyo Menyaga (MIE)",
       imageSubtitle: "Senior Software Engineer & CTO",
-      imageTagline: "Next.js · Nuxt · React · TypeScript · SaaS",
+      imageTagline: SITE.tagline,
     },
   } satisfies PageSeoConfig,
 
   about: {
-    title: "About",
+    title: "About Israel Enyo Menyaga (MIE)",
     description:
-      "About Israel Menyaga—Senior Software Engineer, CTO (Technical Leadership) at Belsoft Systems, senior frontend engineer at True Perk and SparkPay, and senior software engineer at Blivap. Download CV and explore experience.",
+      "About Israel Enyo Menyaga (MIE)—Senior Software Engineer & CTO with 5+ years in React, Next.js, TypeScript, AI, fintech & healthcare. Founder of Blivap. Based in Nigeria, remote worldwide.",
     path: "/about",
-    keywords: [
-      "About Israel Menyaga",
-      "Software Engineer CV",
-      "CTO Belsoft",
-      "True Perk",
-      "SparkPay",
-      "Blivap",
-    ],
+    keywords: ["About MIE developer", "Israel Menyaga biography", "Blivap founder about"],
     og: {
-      imageTitle: "About Israel Menyaga",
-      imageSubtitle: "Senior Software Engineer",
-      imageTagline: "Résumé · Experience · Stack",
+      imageTitle: "About Israel Enyo Menyaga",
+      imageSubtitle: "MIE · MIE-CODE on GitHub",
+      imageTagline: "Senior Engineer & CTO",
     },
   } satisfies PageSeoConfig,
 
   services: {
-    title: "Services",
+    title: "Services — React, Next.js & AI Engineering",
     description:
-      "Engineering services: Next.js and Nuxt SaaS, React and Vue enterprise UIs, payments and auth (Paystack, sessions, REST APIs), performance tuning, analytics (GA, PostHog, HubSpot), GSAP motion, and CTO-style technical leadership.",
+      "Engineering services by Israel Enyo Menyaga (MIE): SaaS with Next.js/Nuxt, AI integration, fintech & healthcare UIs, NestJS APIs, performance, and technical leadership for Belsoft-scale products.",
     path: "/services",
-    keywords: [
-      "Next.js Development Services",
-      "Nuxt Development",
-      "CTO Consulting",
-      "SaaS Engineering",
-      "Paystack Integration",
-      "Performance Optimization",
-      "Figma to Code",
-    ],
     og: {
       imageTitle: "Engineering Services",
-      imageSubtitle: "Product delivery & technical leadership",
-      imageTagline: "Next.js · Nuxt · Payments · Analytics",
+      imageSubtitle: "Israel Enyo Menyaga (MIE)",
+      imageTagline: "React · Next.js · AI · Fintech",
     },
   } satisfies PageSeoConfig,
 
   experience: {
-    title: "Experience",
+    title: "Experience — Israel Enyo Menyaga (MIE)",
     description:
-      "Work history of Israel Menyaga: CTO at Belsoft Systems (BelCore, BelPower, BelAI), Senior Frontend Engineer at True Perk and SparkPay, Senior Software Engineer at Blivap. Timeline aligned with CV.",
+      "Work history: Belsoft Systems (CTO), Truperk Senior Frontend Engineer, SparkPay, Blivap founder & engineer. 5+ years shipping React, Next.js, TypeScript production apps.",
     path: "/experience",
-    keywords: [
-      "Israel Menyaga Experience",
-      "CTO Belsoft Systems",
-      "True Perk Engineer",
-      "SparkPay Frontend",
-      "Blivap Software Engineer",
-    ],
     og: {
       imageTitle: "Work Experience",
-      imageSubtitle: "CTO · Senior Frontend · Full Stack",
-      imageTagline: "Belsoft · True Perk · SparkPay · Blivap",
+      imageSubtitle: "Israel Enyo Menyaga",
+      imageTagline: "Belsoft · Truperk · Blivap",
     },
   } satisfies PageSeoConfig,
 
   projects: {
-    title: "Projects",
+    title: "Projects — Israel Enyo Menyaga (MIE)",
     description:
-      "Selected projects: True Perk (Nuxt), SparkPay (Next.js), Blivap healthcare marketplace, BelCore collaboration, BelPower bill payments, Flyverge, and more—frontend and full-stack case studies.",
+      "Portfolio projects by Israel Enyo Menyaga (MIE): Blivap blood donation platform, BelCore, BelPower, True Perk, SparkPay, and more—React, Next.js, Nuxt, NestJS, TypeScript.",
     path: "/projects",
+    og: {
+      imageTitle: "Projects Portfolio",
+      imageSubtitle: "Built by MIE (Israel Menyaga)",
+      imageTagline: "Healthcare · Fintech · SaaS",
+    },
+  } satisfies PageSeoConfig,
+
+  blivap: {
+    title: "Blivap — Blood Donation Platform | Built by Israel Enyo Menyaga (MIE)",
+    description:
+      "Blivap (blivap.com) by Israel Enyo Menyaga (MIE): real-time donor-recipient blood matching, Next.js & NestJS, AI-driven screening—founded and engineered in Nigeria.",
+    path: "/projects/blivap",
+    absoluteTitle: true,
     keywords: [
-      "Israel Menyaga Projects",
-      "True Perk Nuxt",
-      "BelPower",
-      "BelCore",
-      "SparkPay Next.js",
       "Blivap",
-      "Portfolio Projects",
+      "Blivap Israel Menyaga",
+      "blood donation platform",
+      "blivap.com",
+      "MIE Blivap founder",
     ],
     og: {
-      imageTitle: "Projects & Case Studies",
-      imageSubtitle: "Shipped SaaS & product work",
-      imageTagline: "Fintech · HR · Healthcare · Collaboration",
+      title: "Blivap — Blood Donation Platform | Israel Enyo Menyaga (MIE)",
+      description:
+        "Blivap (blivap.com) by Israel Enyo Menyaga (MIE): real-time donor-recipient matching, Next.js, NestJS & AI screening.",
+      imageTitle: "Blivap",
+      imageSubtitle: "By Israel Enyo Menyaga (MIE)",
+      imageTagline: "Blood donation · Healthcare · Nigeria",
     },
   } satisfies PageSeoConfig,
 
   blog: {
-    title: "Blog",
+    title: "Blog — Israel Enyo Menyaga (MIE)",
     description:
-      "Articles and tutorials on Next.js, React, TypeScript, Nuxt, performance, analytics, GSAP motion, and production web development—from Israel Menyaga.",
+      "Technical articles by Israel Enyo Menyaga (MIE) on Next.js, React, TypeScript, AI integration, performance, and lessons from fintech & healthcare product work.",
     path: "/blog",
-    keywords: [
-      "Web Development Blog",
-      "Next.js Tutorials",
-      "React Articles",
-      "TypeScript Guides",
-      "Performance Optimization",
-    ],
     og: {
-      imageTitle: "Tech Blog",
-      imageSubtitle: "Tutorials & engineering notes",
-      imageTagline: "Next.js · React · TypeScript · UX",
+      imageTitle: "MIE Engineering Blog",
+      imageSubtitle: "Israel Enyo Menyaga",
+      imageTagline: "Next.js · React · TypeScript",
     },
   } satisfies PageSeoConfig,
 
   contact: {
-    title: "Contact",
+    title: "Contact Israel Enyo Menyaga (MIE)",
     description:
-      "Contact Israel Menyaga for freelance projects, technical consulting, or full-stack engineering. Email, phone, and project inquiries welcome.",
+      "Contact Israel Enyo Menyaga (MIE) for engineering work—freelance, contract, or full-stack roles. Email israelmenyaga@gmail.com. React, Next.js, AI, fintech, healthcare.",
     path: "/contact",
-    keywords: [
-      "Hire Israel Menyaga",
-      "Freelance Developer",
-      "Contact Software Engineer",
-      "Next.js Consultant",
-    ],
     og: {
-      imageTitle: "Let's Work Together",
-      imageSubtitle: "Contact Israel Menyaga",
-      imageTagline: "Freelance · Consulting · Full-stack",
+      imageTitle: "Contact MIE",
+      imageSubtitle: "Israel Enyo Menyaga",
+      imageTagline: "Remote · Nigeria · Worldwide",
     },
   } satisfies PageSeoConfig,
 
   notFound: {
     title: "Page Not Found",
-    description:
-      "The page you requested could not be found on Israel Menyaga's portfolio. Return home or explore projects, services, and contact.",
+    description: "Page not found on Israel Enyo Menyaga (MIE) portfolio. Explore projects including Blivap or contact Israel Menyaga.",
     path: "/404",
     noIndex: true,
-    og: {
-      imageTitle: "404 — Page Not Found",
-      imageSubtitle: "Israel Menyaga Portfolio",
-      imageTagline: "Return home or browse projects",
-    },
   } satisfies PageSeoConfig,
 } as const;
-
-export function blogIndexSeo(): PageSeoConfig {
-  return PAGE_SEO.blog;
-}
 
 export function blogPostSeo(post: {
   id: number;
@@ -158,20 +130,20 @@ export function blogPostSeo(post: {
   category: string;
 }): ArticleSeoConfig {
   return {
-    title: post.title,
+    title: `${post.title} | Israel Enyo Menyaga (MIE)`,
     description: post.excerpt,
     path: `/blog/${post.id}`,
     ogType: "article",
-    keywords: [post.category, "Web Development", "Israel Menyaga Blog", post.title],
+    keywords: [post.category, "MIE blog", "Israel Menyaga", post.title],
     og: {
       imageTitle: post.title,
-      imageSubtitle: post.category,
-      imageTagline: "Israel Menyaga · Engineering Blog",
+      imageSubtitle: "By Israel Enyo Menyaga (MIE)",
+      imageTagline: post.category,
     },
     article: {
       publishedTime: new Date(post.date).toISOString(),
       section: post.category,
-      tags: [post.category, "Web Development"],
+      tags: [post.category, "Web Development", "MIE"],
     },
   };
 }

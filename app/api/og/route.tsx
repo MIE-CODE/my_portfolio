@@ -15,9 +15,9 @@ const INTER_REGULAR =
 const INTER_BOLD =
   "https://cdn.jsdelivr.net/fontsource/fonts/inter@5.2.5/latin-700-normal.woff";
 
-const DEFAULT_TITLE = "Israel Enyo Menyaga";
-const DEFAULT_SUBTITLE = "CTO & Full Stack Engineer";
-const DEFAULT_TAGLINE = "Next.js · Nuxt · React · TypeScript · SaaS";
+const DEFAULT_TITLE = "Israel Enyo Menyaga (MIE)";
+const DEFAULT_SUBTITLE = "Senior Software Engineer & CTO";
+const DEFAULT_TAGLINE = "React · Next.js · TypeScript · Blivap Founder";
 
 function safeDecode(value: string): string {
   try {
@@ -228,7 +228,7 @@ export async function GET(request: Request) {
           {/* Footer pills */}
           <div tw="flex flex-row items-center justify-between w-full">
             <div tw="flex flex-row" style={{ gap: 12 }}>
-              {["SaaS", "Fintech", "Leadership"].map((pill) => (
+              {["Blivap", "Fintech", "AI"].map((pill) => (
                 <div
                   key={pill}
                   style={{

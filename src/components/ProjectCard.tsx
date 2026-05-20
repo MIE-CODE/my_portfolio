@@ -1,5 +1,6 @@
 "use client";
 import Image, { StaticImageData } from "next/image";
+import Link from "next/link";
 import { GithubIcon, ApiIcon } from "../svg";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
@@ -15,6 +16,8 @@ type Project = {
   category: "Frontend" | "Backend";
   /** e.g. your role on the project */
   role?: string;
+  /** On-site case study (SEO landing), e.g. /projects/blivap */
+  detailPath?: string;
 };
 
 export const ProjectCard = ({ project }: { project: Project }) => {
@@ -52,7 +55,8 @@ export const ProjectCard = ({ project }: { project: Project }) => {
           ) : (
             <Image
               src={project.img}
-              alt={`${project.title} screenshot`}
+              alt={`${project.title} — project by Israel Enyo Menyaga (MIE)`}
+              loading="lazy"
               fill
               className="object-cover object-top"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -103,16 +107,26 @@ export const ProjectCard = ({ project }: { project: Project }) => {
       </div>
 
       {/* Action Buttons */}
-      <div className="flex items-center justify-between pt-3 border-t border-muted-200 dark:border-muted-700">
-        <a
-          className="touch-target text-xs font-medium text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-300 flex items-center gap-1.5 min-h-11 -ml-2 pl-2"
-          href={project.link || "#"}
-          target={project.link !== "#" ? "_blank" : undefined}
-          rel={project.link !== "#" ? "noopener noreferrer" : undefined}
-        >
-          <span className="w-1.5 h-1.5 rounded-full bg-primary-500 dark:bg-primary-400" />
-          {project.category === "Backend" ? "API Docs" : "Live"}
-        </a>
+      <div className="flex items-center justify-between pt-3 border-t border-muted-200 dark:border-muted-700 gap-2">
+        <div className="flex flex-wrap items-center gap-3">
+          <a
+            className="touch-target text-xs font-medium text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-300 flex items-center gap-1.5 min-h-11 -ml-2 pl-2"
+            href={project.link || "#"}
+            target={project.link !== "#" ? "_blank" : undefined}
+            rel={project.link !== "#" ? "noopener noreferrer" : undefined}
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-primary-500 dark:bg-primary-400" />
+            {project.category === "Backend" ? "API Docs" : "Live site"}
+          </a>
+          {project.detailPath ? (
+            <Link
+              href={project.detailPath}
+              className="text-xs font-medium text-accent-700 hover:text-accent-800 dark:text-accent-300 dark:hover:text-accent-200"
+            >
+              Case study →
+            </Link>
+          ) : null}
+        </div>
         <a
           className="touch-target rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-800 hover:bg-primary-100 dark:hover:bg-primary-900/30 transition-all duration-300"
           href={project.githubLink || "#"}

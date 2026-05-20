@@ -28,7 +28,7 @@ export function ServicesCTA() {
             Get in Touch
           </a>
           <a
-            href="mailto:israelvictor126@gmail.com"
+            href="mailto:israelmenyaga@gmail.com"
             className="btn-secondary text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-3.5 verse-hover-hud"
           >
             Send Email

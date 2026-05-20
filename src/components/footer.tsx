@@ -40,10 +40,10 @@ export const Footer = () => {
         <div data-reveal-item className="mt-6 text-center opacity-0">
           <a 
             className="text-sm font-medium text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-all duration-300"
-            href="mailto:israelvictor126@gmail.com"
-            aria-label="Send email to israelvictor126@gmail.com"
+            href="mailto:israelmenyaga@gmail.com"
+            aria-label="Send email to israelmenyaga@gmail.com"
           >
-            israelvictor126@gmail.com
+            israelmenyaga@gmail.com
           </a>
         </div>
         
@@ -51,7 +51,7 @@ export const Footer = () => {
           <div className="flex items-center justify-center gap-4">
             <FlipIcons>
               <a 
-                href="mailto:israelvictor126@gmail.com"
+                href="mailto:israelmenyaga@gmail.com"
                 className="touch-target rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-800 hover:bg-primary-100 dark:hover:bg-primary-900/30 hover:-translate-y-0.5 transition-all duration-300"
                 aria-label="Send email"
               >
@@ -73,7 +73,7 @@ export const Footer = () => {
             </FlipIcons>
             <FlipIcons>
               <a 
-                href="http://www.linkedin.com/in/israelmenyaga"
+                href="https://linkedin.com/in/israelmenyaga"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="touch-target rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-800 hover:bg-primary-100 dark:hover:bg-primary-900/30 hover:-translate-y-0.5 transition-all duration-300"
