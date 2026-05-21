@@ -53,12 +53,9 @@ export async function GET(request: Request) {
 
     const isDefault = !customTitle && !customSubtitle;
     const title = customTitle ?? SITE.person.fullName;
-    const subtitle = customSubtitle ?? SITE.person.jobTitle;
-    const tagline =
-      customTagline ??
-      (isDefault
-        ? "Next.js · TypeScript  · Node.js · Express.js · PostgreSQL · Docker · AI"
-        : SITE.tagline);
+    const subtitle =
+      customSubtitle ?? (isDefault ? SITE.ogImageSubtitle : SITE.person.jobTitle);
+    const tagline = customTagline ?? SITE.tagline;
     const { bold, extraBold } = await loadFonts();
 
     const response = new ImageResponse(

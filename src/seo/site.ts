@@ -1,4 +1,5 @@
 import { OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH } from "./ogImage";
+import { STACK_TAGLINE } from "./stackSummary";
 
 /**
  * Site-wide SEO constants — single source of truth for metadata, JSON-LD, and sitemap.
@@ -17,9 +18,11 @@ export const SITE = {
   location: "Remote / Nigeria",
   /** ~155 characters — root & OG description */
   defaultDescription:
-    "Israel Enyo Menyaga (MIE), Senior Software Engineer & CTO: React, Next.js, TypeScript, AI integration, fintech & healthcare. Founder of Blivap blood donation platform.",
+    "Israel Enyo Menyaga (MIE), Senior Software Engineer & CTO — full stack developer: React, Next.js, Node, NestJS, PostgreSQL, Docker, AI. Fintech & healthcare. Founder of Blivap.",
   defaultTitle: "Israel Enyo Menyaga (MIE) | Senior Software Engineer & CTO",
-  tagline: "React · Next.js · TypeScript · AI · Fintech · Healthcare",
+  /** Used on OG images and dynamic /api/og cards */
+  tagline: STACK_TAGLINE,
+  ogImageSubtitle: "Full Stack Developer",
   email: "israelmenyaga@gmail.com",
   phone: "+2349137437424",
   twitter: "@israelmenyaga",
@@ -34,7 +37,7 @@ export const SITE = {
   ogImageWidth: OG_IMAGE_WIDTH,
   ogImageHeight: OG_IMAGE_HEIGHT,
   ogImageAlt:
-    "Israel Enyo Menyaga (MIE) — Senior Software Engineer, CTO & Founder of Blivap",
+    "Israel Enyo Menyaga (MIE) — Full Stack Developer, Senior Software Engineer, CTO & Founder of Blivap",
   staticOgImageFallback: "/og-image.svg",
   twitterImage: "/og-image.png",
   themeColor: "#0a1520",

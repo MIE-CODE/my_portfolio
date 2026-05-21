@@ -44,17 +44,17 @@
     font-weight="700"
     fill="#4ee8ff"
     text-anchor="middle"
-  >Senior Software Engineer &amp; CTO</text>
+  >Full Stack Developer</text>
 
   <text
     x="600"
     y="494"
     font-family="system-ui, -apple-system, 'Segoe UI', sans-serif"
-    font-size="20"
+    font-size="18"
     font-weight="700"
     fill="#a8c4d8"
     text-anchor="middle"
-  >React · Next.js · TypeScript · AI</text>
+  >React · Next.js · Node.js · NestJS · PostgreSQL · Docker · AI</text>
 
   <text
     x="600"
