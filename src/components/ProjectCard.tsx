@@ -1,14 +1,13 @@
 "use client";
-import { StaticImageData } from "next/image";
 import Link from "next/link";
-import { SitePreview } from "./SitePreview";
+import { SitePreview, type PreviewImage } from "./SitePreview";
 import { GithubIcon, ApiIcon } from "../svg";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
 type Project = {
   id: number;
-  img: StaticImageData;
+  img: PreviewImage;
   skills: string[];
   title: string;
   description: string;
