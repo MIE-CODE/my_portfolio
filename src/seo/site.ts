@@ -1,3 +1,5 @@
+import { OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH } from "./ogImage";
+
 /**
  * Site-wide SEO constants — single source of truth for metadata, JSON-LD, and sitemap.
  * OG assets: `public/og-image.svg` + `og-image.png` (generated via `yarn og:generate`).
@@ -6,7 +8,10 @@ export const SITE = {
   name: "Israel Enyo Menyaga",
   shortName: "Israel Enyo Menyaga",
   alternateNames: ["Israel Menyaga", "MIE", "MIE-CODE"] as const,
-  url: "https://israelm.site",
+  /** Production site — canonical for sitemap, OG, JSON-LD, Search Console */
+  url: (
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://israelm.site"
+  ).replace(/\/$/, ""),
   locale: "en_US",
   language: "en",
   location: "Remote / Nigeria",
@@ -19,22 +24,26 @@ export const SITE = {
   phone: "+2349137437424",
   twitter: "@israelmenyaga",
   twitterHandle: "israelmenyaga",
-  linkedIn: "https://linkedin.com/in/israelmenyaga",
+  linkedIn: "https://www.linkedin.com/in/israelmenyaga",
   github: "https://github.com/MIE-CODE",
+  twitterUrl: "https://twitter.com/israelmenyaga",
   blivap: "https://blivap.com",
   cvPath: "/cv/Israel_menyaga_cv.pdf",
-  /** Primary static OG asset — create 1200×630 PNG at public/og-image.png */
+  /** Primary static OG asset — 1200×630 PNG at public/og-image.png */
   ogImage: "/og-image.png",
+  ogImageWidth: OG_IMAGE_WIDTH,
+  ogImageHeight: OG_IMAGE_HEIGHT,
   ogImageAlt:
     "Israel Enyo Menyaga (MIE) — Senior Software Engineer, CTO & Founder of Blivap",
   staticOgImageFallback: "/og-image.svg",
   twitterImage: "/og-image.png",
-  themeColor: "#5b82a8",
+  themeColor: "#0a1520",
   person: {
     givenName: "Israel",
+    additionalName: "Enyo",
     familyName: "Menyaga",
     fullName: "Israel Enyo Menyaga",
-    alternateName: ["Israel Menyaga", "MIE", "MIE-CODE"] as const,
+    alternateName: ["Israel Menyaga", "MIE", "MIE-CODE", "israelmenyaga"] as const,
     jobTitle: "Senior Software Engineer & CTO",
     role: "Senior Software Engineer & CTO",
   },

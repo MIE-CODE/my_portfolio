@@ -1,21 +1,19 @@
 import { ImageResponse } from "@vercel/og";
+import { OG_IMAGE_SIZE } from "@/src/seo/ogImage";
 import { SITE } from "@/src/seo/site";
 
 export const runtime = "edge";
 
-const SIZE = { width: 1200, height: 630 };
+const BG = "#0a1520";
+const PANEL = "#141d2b";
+const CYAN = "#4ee8ff";
+const TEXT = "#ffffff";
+const MUTED = "#a8c4d8";
 
-const PRIMARY = "#5b82a8";
-const PRIMARY_DARK = "#3a5c80";
-const BG = "#0c0f14";
-const BG_TOP = "#141820";
-const TEXT = "#e8e4dc";
-const MUTED = "rgba(232, 228, 220, 0.55)";
-
-const INTER_REGULAR =
-  "https://cdn.jsdelivr.net/fontsource/fonts/inter@5.2.5/latin-400-normal.woff";
 const INTER_BOLD =
   "https://cdn.jsdelivr.net/fontsource/fonts/inter@5.2.5/latin-700-normal.woff";
+const INTER_EXTRA_BOLD =
+  "https://cdn.jsdelivr.net/fontsource/fonts/inter@5.2.5/latin-800-normal.woff";
 
 function safeDecode(value: string): string {
   try {
@@ -32,14 +30,14 @@ function clampText(s: string, max: number): string {
 }
 
 async function loadFonts() {
-  const [regular, bold] = await Promise.all([
-    fetch(INTER_REGULAR).then((r) => r.arrayBuffer()),
+  const [bold, extraBold] = await Promise.all([
     fetch(INTER_BOLD).then((r) => r.arrayBuffer()),
+    fetch(INTER_EXTRA_BOLD).then((r) => r.arrayBuffer()),
   ]);
-  return { regular, bold };
+  return { bold, extraBold };
 }
 
-/** Simple logo OG — optional ?title= for blog/page-specific cards */
+/** Simple bold OG — optional ?title= & ?subtitle= & ?tagline= */
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
@@ -49,137 +47,130 @@ export async function GET(request: Request) {
     const customSubtitle = searchParams.get("subtitle")
       ? clampText(safeDecode(searchParams.get("subtitle")!), 56)
       : null;
+    const customTagline = searchParams.get("tagline")
+      ? clampText(safeDecode(searchParams.get("tagline")!), 64)
+      : null;
 
-    const name = customTitle ?? SITE.person.fullName;
-    const role = customSubtitle ?? SITE.person.jobTitle;
-    const showMarkOnly = !customTitle && !customSubtitle;
+    const isDefault = !customTitle && !customSubtitle;
+    const title = customTitle ?? SITE.person.fullName;
+    const subtitle = customSubtitle ?? SITE.person.jobTitle;
+    const tagline =
+      customTagline ??
+      (isDefault
+        ? "Next.js · TypeScript  · Node.js · Express.js · PostgreSQL · Docker · AI"
+        : SITE.tagline);
+    const { bold, extraBold } = await loadFonts();
 
-    const { regular, bold } = await loadFonts();
-
-    return new ImageResponse(
-      (
+    const response = new ImageResponse(
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          background: `linear-gradient(135deg, ${BG} 0%, #0c1826 100%)`,
+          fontFamily: "Inter",
+        }}
+      >
         <div
           style={{
-            width: "100%",
-            height: "100%",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            height: 4,
+            background: `linear-gradient(90deg, ${CYAN} 0%, #1a5a8a 100%)`,
+          }}
+        />
+
+        <div
+          style={{
             display: "flex",
-            flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            background: `linear-gradient(135deg, ${BG_TOP} 0%, ${BG} 100%)`,
-            position: "relative",
+            width: 200,
+            height: 200,
+            borderRadius: 8,
+            background: PANEL,
+            border: `3px solid ${CYAN}`,
+            marginBottom: 36,
           }}
         >
-          {/* Top accent bar */}
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              height: 5,
-              background: `linear-gradient(90deg, ${PRIMARY} 0%, #7eb8e8 50%, #b38256 100%)`,
-            }}
-          />
-
-          {/* Ambient glow */}
-          <div
-            style={{
-              position: "absolute",
-              width: 560,
-              height: 400,
-              borderRadius: "50%",
-              background: `radial-gradient(circle, ${PRIMARY}33 0%, transparent 70%)`,
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -55%)",
-            }}
-          />
-
-          {/* MIE logo mark */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: 200,
-              height: 200,
-              borderRadius: 44,
-              background: `linear-gradient(135deg, ${PRIMARY} 0%, ${PRIMARY_DARK} 100%)`,
-              border: "2px solid rgba(255,255,255,0.18)",
-              boxShadow: `0 0 48px ${PRIMARY}55`,
-              marginBottom: showMarkOnly ? 36 : 28,
-            }}
-          >
-            <span
-              style={{
-                fontFamily: "Inter",
-                fontSize: 72,
-                fontWeight: 700,
-                color: "#faf9f7",
-                letterSpacing: "-0.04em",
-              }}
-            >
-              MIE
-            </span>
-          </div>
-
-          {/* Name + role (default or custom) */}
           <span
             style={{
-              fontFamily: "Inter",
-              fontSize: showMarkOnly ? 28 : 32,
-              fontWeight: 600,
-              color: TEXT,
-              letterSpacing: "0.02em",
-              textAlign: "center",
-              maxWidth: 900,
-              padding: "0 48px",
+              fontSize: 88,
+              fontWeight: 800,
+              color: CYAN,
+              letterSpacing: "-0.04em",
             }}
           >
-            {name}
-          </span>
-          <span
-            style={{
-              fontFamily: "Inter",
-              fontSize: 18,
-              fontWeight: 400,
-              color: MUTED,
-              marginTop: 10,
-              textAlign: "center",
-              maxWidth: 800,
-              padding: "0 48px",
-            }}
-          >
-            {role}
-          </span>
-
-          {/* Domain */}
-          <span
-            style={{
-              position: "absolute",
-              bottom: 28,
-              right: 40,
-              fontFamily: "Inter",
-              fontSize: 14,
-              color: "rgba(232,228,220,0.35)",
-            }}
-          >
-            israelm.site
+            MIE
           </span>
         </div>
-      ),
+
+        <span
+          style={{
+            fontSize: isDefault ? 44 : 48,
+            fontWeight: 800,
+            color: TEXT,
+            textAlign: "center",
+            maxWidth: 1000,
+            padding: "0 48px",
+            lineHeight: 1.15,
+          }}
+        >
+          {title}
+        </span>
+
+        <span
+          style={{
+            fontSize: 26,
+            fontWeight: 700,
+            color: CYAN,
+            marginTop: 16,
+            textAlign: "center",
+            maxWidth: 900,
+            padding: "0 48px",
+          }}
+        >
+          {subtitle}
+        </span>
+
+        <span
+          style={{
+            fontSize: 20,
+            fontWeight: 700,
+            color: MUTED,
+            marginTop: 14,
+            textAlign: "center",
+            maxWidth: 900,
+            padding: "0 48px",
+          }}
+        >
+          {tagline}
+        </span>
+      </div>,
       {
-        ...SIZE,
+        ...OG_IMAGE_SIZE,
         fonts: [
-          { name: "Inter", data: regular, style: "normal", weight: 400 },
           { name: "Inter", data: bold, style: "normal", weight: 700 },
+          { name: "Inter", data: extraBold, style: "normal", weight: 800 },
         ],
       },
     );
+
+    response.headers.set(
+      "Cache-Control",
+      "public, max-age=86400, stale-while-revalidate=604800",
+    );
+    return response;
   } catch (e) {
     const message = e instanceof Error ? e.message : String(e);
     console.error("OG image error:", message);
-    return new Response(`Failed to generate OG image: ${message}`, { status: 500 });
+    return new Response(`Failed to generate OG image: ${message}`, {
+      status: 500,
+    });
   }
 }

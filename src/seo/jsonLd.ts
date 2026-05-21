@@ -1,19 +1,51 @@
+import { absoluteAssetUrl, SEO_IDS, SITE_SAME_AS } from "./identity";
 import { SITE } from "./site";
 
-/** Person — Google knowledge panel & name/alias mapping */
-export function personJsonLd() {
+const PERSON_ID = SEO_IDS.person;
+const WEBSITE_ID = SEO_IDS.website;
+const OG_IMAGE_URL = absoluteAssetUrl(SITE.ogImage);
+
+type SchemaNode = Record<string, unknown>;
+
+function stripContext(node: SchemaNode): SchemaNode {
+  const copy = { ...node };
+  delete copy["@context"];
+  return copy;
+}
+
+/** Wrap nodes in a linked @graph (preferred by Google for entity relationships). */
+export function schemaGraph(nodes: SchemaNode[]): SchemaNode {
+  return {
+    "@context": "https://schema.org",
+    "@graph": nodes.map(stripContext),
+  };
+}
+
+/** Person — knowledge panel, name disambiguation, sameAs identity graph */
+export function personJsonLd(): SchemaNode {
   return {
     "@context": "https://schema.org",
     "@type": "Person",
-    "@id": `${SITE.url}/#person`,
+    "@id": PERSON_ID,
     name: SITE.person.fullName,
-    alternateName: [...SITE.person.alternateName],
+    givenName: SITE.person.givenName,
+    additionalName: SITE.person.additionalName,
+    familyName: SITE.person.familyName,
+    alternateName: [...SITE.alternateNames, ...SITE.person.alternateName],
     url: SITE.url,
-    email: SITE.email,
+    mainEntityOfPage: { "@id": SEO_IDS.profilePage },
+    image: {
+      "@type": "ImageObject",
+      url: OG_IMAGE_URL,
+      width: SITE.ogImageWidth,
+      height: SITE.ogImageHeight,
+      caption: SITE.ogImageAlt,
+    },
+    email: `mailto:${SITE.email}`,
+    telephone: SITE.phone,
     jobTitle: SITE.person.jobTitle,
-    description:
-      "Senior Software Engineer and CTO with 5+ years building scalable web applications in fintech, healthcare, and AI. Founder of Blivap, a blood donation platform.",
-    sameAs: [SITE.github, SITE.linkedIn, SITE.blivap],
+    description: SITE.defaultDescription,
+    sameAs: [...SITE_SAME_AS],
     knowsAbout: [
       "React",
       "Next.js",
@@ -37,6 +69,17 @@ export function personJsonLd() {
       "Blood Donation Technology",
       "Nuxt.js",
     ],
+    hasOccupation: {
+      "@type": "Occupation",
+      name: SITE.person.jobTitle,
+      occupationalCategory: "Software Developer",
+      skills: "React, Next.js, TypeScript, NestJS, AI integration",
+    },
+    homeLocation: {
+      "@type": "Place",
+      name: "Nigeria",
+      description: SITE.location,
+    },
     worksFor: {
       "@type": "Organization",
       name: SITE.organizations.belsoft,
@@ -51,40 +94,80 @@ export function personJsonLd() {
   };
 }
 
-/** WebSite — sitelinks & site entity */
-export function webSiteJsonLd() {
+/** WebSite — sitelinks, publisher, explicit link to the person entity */
+export function webSiteJsonLd(): SchemaNode {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "@id": `${SITE.url}/#website`,
-    name: "Israel Enyo Menyaga — Portfolio",
-    alternateName: "MIE Portfolio",
+    "@id": WEBSITE_ID,
+    name: "Israel Enyo Menyaga (MIE) — Portfolio",
+    alternateName: [...SITE.alternateNames, "MIE Portfolio"],
     url: SITE.url,
     description: SITE.defaultDescription,
     inLanguage: SITE.language,
-    publisher: { "@id": `${SITE.url}/#person` },
+    about: { "@id": PERSON_ID },
+    author: { "@id": PERSON_ID },
+    publisher: { "@id": PERSON_ID },
+    creator: { "@id": PERSON_ID },
+    image: OG_IMAGE_URL,
+  };
+}
+
+/** Homepage — tells crawlers this URL is your primary profile */
+export function profilePageJsonLd(): SchemaNode {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "@id": SEO_IDS.profilePage,
+    url: SITE.url,
+    name: SITE.defaultTitle,
+    description: SITE.defaultDescription,
+    inLanguage: SITE.language,
+    isPartOf: { "@id": WEBSITE_ID },
+    mainEntity: { "@id": PERSON_ID },
+    about: { "@id": PERSON_ID },
+    primaryImageOfPage: {
+      "@type": "ImageObject",
+      url: OG_IMAGE_URL,
+      width: SITE.ogImageWidth,
+      height: SITE.ogImageHeight,
+    },
+  };
+}
+
+const ABOUT_PAGE_DESCRIPTION =
+  "About Israel Enyo Menyaga (MIE)—Senior Software Engineer & CTO with 5+ years in React, Next.js, TypeScript, AI, fintech & healthcare. Founder of Blivap.";
+
+/** About page — biography URL tied to the same Person @id */
+export function aboutPageJsonLd(): SchemaNode {
+  return {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "@id": `${SITE.url}/about#webpage`,
+    url: `${SITE.url}/about`,
+    name: "About Israel Enyo Menyaga (MIE)",
+    description: ABOUT_PAGE_DESCRIPTION,
+    inLanguage: SITE.language,
+    isPartOf: { "@id": WEBSITE_ID },
+    mainEntity: { "@id": PERSON_ID },
+    about: { "@id": PERSON_ID },
   };
 }
 
 /** Blivap product — links product searches to Israel */
-export function blivapSoftwareJsonLd() {
+export function blivapSoftwareJsonLd(): SchemaNode {
   return {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "@id": `${SITE.blivap}#application`,
+    "@id": SEO_IDS.blivapApp,
     name: "Blivap",
     url: SITE.blivap,
     applicationCategory: "HealthApplication",
     operatingSystem: "Web",
     description:
       "A real-time blood donation and donor-recipient matching platform built by Israel Enyo Menyaga.",
-    author: {
-      "@type": "Person",
-      "@id": `${SITE.url}/#person`,
-      name: SITE.person.fullName,
-      alternateName: "MIE",
-      url: SITE.url,
-    },
+    author: { "@id": PERSON_ID },
+    creator: { "@id": PERSON_ID },
   };
 }
 
@@ -116,30 +199,47 @@ export function articleJsonLd(post: {
     description: post.excerpt,
     datePublished: new Date(post.date).toISOString(),
     dateModified: new Date(post.date).toISOString(),
-    author: { "@type": "Person", "@id": `${SITE.url}/#person`, name: SITE.person.fullName },
-    publisher: { "@type": "Person", name: SITE.person.fullName, url: SITE.url },
+    author: { "@type": "Person", "@id": PERSON_ID, name: SITE.person.fullName, url: SITE.url },
+    publisher: {
+      "@type": "Person",
+      "@id": PERSON_ID,
+      name: SITE.person.fullName,
+      url: SITE.url,
+      image: OG_IMAGE_URL,
+    },
+    image: OG_IMAGE_URL,
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
     url,
     articleSection: post.category,
     inLanguage: SITE.language,
+    isPartOf: { "@id": WEBSITE_ID },
   };
 }
 
-export function professionalServiceJsonLd() {
+export function professionalServiceJsonLd(): SchemaNode {
   return {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
+    "@id": `${SITE.url}/services#service`,
     name: `${SITE.person.fullName} — Software Engineering`,
     url: `${SITE.url}/services`,
     description:
       "Senior software engineering: React, Next.js, TypeScript, NestJS, AI integration, fintech, and healthcare platforms.",
     areaServed: "Worldwide",
     email: SITE.email,
-    founder: { "@id": `${SITE.url}/#person` },
+    telephone: SITE.phone,
+    provider: { "@id": PERSON_ID },
+    founder: { "@id": PERSON_ID },
+    image: OG_IMAGE_URL,
   };
 }
 
-/** Injected once in root layout <head> */
-export function rootJsonLdGraph() {
-  return [personJsonLd(), webSiteJsonLd(), blivapSoftwareJsonLd()];
+/** Linked entity graph injected once in root layout */
+export function rootJsonLdGraph(): SchemaNode {
+  return schemaGraph([
+    personJsonLd(),
+    webSiteJsonLd(),
+    profilePageJsonLd(),
+    blivapSoftwareJsonLd(),
+  ]);
 }
