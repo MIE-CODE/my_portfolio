@@ -2,7 +2,7 @@ import { AboutPageContent } from "@/src/components/AboutPageContent";
 import { JsonLd } from "@/src/components/JsonLd";
 import { PageHeader } from "@/src/components/PageHeader";
 import { buildPageMetadata } from "@/src/seo/buildMetadata";
-import { breadcrumbJsonLd } from "@/src/seo/jsonLd";
+import { aboutPageJsonLd, breadcrumbJsonLd } from "@/src/seo/jsonLd";
 import { PAGE_SEO } from "@/src/seo/pages";
 
 export const metadata = buildPageMetadata(PAGE_SEO.about);
@@ -11,10 +11,13 @@ export default function AboutPage() {
   return (
     <>
       <JsonLd
-        data={breadcrumbJsonLd([
-          { name: "Home", path: "/" },
-          { name: "About", path: "/about" },
-        ])}
+        data={[
+          aboutPageJsonLd(),
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "About", path: "/about" },
+          ]),
+        ]}
       />
       <main
         id="main-content"

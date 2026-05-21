@@ -1,0 +1,14 @@
+/* TEAM */
+Developer: Israel Enyo Menyaga (MIE)
+Contact: israelmenyaga@gmail.com
+From: Nigeria (remote worldwide)
+
+/* SITE */
+Standards: HTML5, CSS3, JSON-LD, Open Graph
+Software: Next.js, React, TypeScript
+
+/* IDENTIFY */
+GitHub: https://github.com/MIE-CODE
+LinkedIn: https://www.linkedin.com/in/israelmenyaga
+Twitter: https://twitter.com/israelmenyaga
+Blivap: https://blivap.com

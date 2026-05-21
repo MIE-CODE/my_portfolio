@@ -26,7 +26,7 @@ export const BlogList = ({ posts, isTech = false }: BlogListProps) => {
         <article
           key={post.id}
           data-stream-card
-          className={`stream-card game-card verse-hover-hud opacity-0${isTech ? " verse-scan-border" : ""}`}
+          className={`stream-card game-card verse-hover-hud stream-reveal${isTech ? " verse-scan-border" : ""}`}
         >
           {isTech && (
             <>
@@ -37,7 +37,9 @@ export const BlogList = ({ posts, isTech = false }: BlogListProps) => {
             </>
           )}
 
-          <header className="stream-card__head">
+          <header
+            className={`stream-card__head${isTech ? " stream-card__head--tech" : ""}`}
+          >
             {isTech && (
               <span className="stream-card__index font-mono">
                 {String(index + 1).padStart(2, "0")}

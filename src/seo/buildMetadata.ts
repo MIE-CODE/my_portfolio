@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { buildSiteVerification } from "./identity";
+import { buildOgImageMetadata } from "./ogImage";
 import { SITE } from "./site";
 import type {
   ArticleSeoConfig,
@@ -36,7 +38,7 @@ function resolveTitle(config: PageSeoConfig): Metadata["title"] {
 function resolveOgImages(config: PageSeoConfig, ogTitle: string) {
   const alt = config.ogImageAlt ?? SITE.ogImageAlt;
   if (config.ogImage) {
-    return [{ url: config.ogImage, width: 1200, height: 630, alt }];
+    return [buildOgImageMetadata(config.ogImage, alt, { type: "image/png" })];
   }
   const imageTitle = config.og?.imageTitle;
   const useDynamic =
@@ -50,22 +52,27 @@ function resolveOgImages(config: PageSeoConfig, ogTitle: string) {
       tagline: config.og?.imageTagline ?? SITE.tagline,
     });
     return [
-      { url: dynamic, width: 1200, height: 630, alt },
-      { url: SITE.ogImage, width: 1200, height: 630, alt },
-      { url: SITE.staticOgImageFallback, width: 1200, height: 630, alt, type: "image/svg+xml" },
+      buildOgImageMetadata(dynamic, alt, { type: "image/png" }),
+      buildOgImageMetadata(SITE.ogImage, alt, { type: "image/png" }),
+      buildOgImageMetadata(SITE.staticOgImageFallback, alt, { type: "image/svg+xml" }),
     ];
   }
   return [
-    { url: SITE.ogImage, width: 1200, height: 630, alt },
-    { url: SITE.staticOgImageFallback, width: 1200, height: 630, alt, type: "image/svg+xml" },
+    buildOgImageMetadata(SITE.ogImage, alt, { type: "image/png" }),
+    buildOgImageMetadata(SITE.staticOgImageFallback, alt, { type: "image/svg+xml" }),
   ];
+}
+
+function resolveTwitterImages(config: PageSeoConfig, ogTitle: string) {
+  const images = resolveOgImages(config, ogTitle);
+  return images.map(({ url, width, height, alt }) => ({ url, width, height, alt }));
 }
 
 function buildSharedMetadata(config: PageSeoConfig): Metadata {
   const ogTitle = config.og?.title ?? config.title;
   const ogDescription = config.og?.description ?? config.description;
   const images = resolveOgImages(config, ogTitle);
-  const primaryImage = images[0]?.url ?? SITE.ogImage;
+  const twitterImages = resolveTwitterImages(config, ogTitle);
   const canonicalPath = config.path === "/404" ? undefined : config.path;
 
   return {
@@ -75,6 +82,8 @@ function buildSharedMetadata(config: PageSeoConfig): Metadata {
     authors: [{ name: SITE.person.fullName, url: SITE.url }],
     creator: SITE.person.fullName,
     publisher: SITE.person.fullName,
+    applicationName: "MIE Portfolio",
+    category: "technology",
     alternates: canonicalPath ? { canonical: canonicalPath } : undefined,
     openGraph: {
       type: config.ogType ?? "website",
@@ -91,7 +100,7 @@ function buildSharedMetadata(config: PageSeoConfig): Metadata {
       creator: SITE.twitter,
       title: ogTitle,
       description: ogDescription,
-      images: [primaryImage],
+      images: twitterImages,
     },
     robots: config.noIndex
       ? { index: false, follow: true }
@@ -159,7 +168,12 @@ export function buildRootMetadata(): Metadata {
     authors: [{ name: SITE.person.fullName, url: SITE.url }],
     creator: SITE.person.fullName,
     publisher: SITE.person.fullName,
-    alternates: { canonical: "/" },
+    applicationName: "MIE Portfolio",
+    category: "technology",
+    alternates: {
+      canonical: "/",
+      languages: { "en-US": "/" },
+    },
     openGraph: {
       type: "website",
       locale: SITE.locale,
@@ -168,15 +182,19 @@ export function buildRootMetadata(): Metadata {
       title: SITE.defaultTitle,
       description: SITE.defaultDescription,
       images: [
-        { url: SITE.ogImage, width: 1200, height: 630, alt: SITE.ogImageAlt },
-        { url: SITE.staticOgImageFallback, width: 1200, height: 630, alt: SITE.ogImageAlt, type: "image/svg+xml" },
+        buildOgImageMetadata(SITE.ogImage, SITE.ogImageAlt, { type: "image/png" }),
+        buildOgImageMetadata(SITE.staticOgImageFallback, SITE.ogImageAlt, {
+          type: "image/svg+xml",
+        }),
       ],
     },
     twitter: {
       card: "summary_large_image",
       title: SITE.defaultTitle,
       description: SITE.defaultDescription,
-      images: [SITE.ogImage],
+      images: [
+        buildOgImageMetadata(SITE.ogImage, SITE.ogImageAlt, { type: "image/png" }),
+      ],
       site: SITE.twitter,
       creator: SITE.twitter,
     },
@@ -191,7 +209,7 @@ export function buildRootMetadata(): Metadata {
         "max-snippet": -1,
       },
     },
-    verification: {},
+    verification: buildSiteVerification(),
     icons: {
       icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
       apple: [{ url: "/apple-icon.svg", type: "image/svg+xml", sizes: "180x180" }],

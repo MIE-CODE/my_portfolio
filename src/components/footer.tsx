@@ -73,7 +73,7 @@ export const Footer = () => {
             </FlipIcons>
             <FlipIcons>
               <a 
-                href="https://linkedin.com/in/israelmenyaga"
+                href="https://www.linkedin.com/in/israelmenyaga"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="touch-target rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-800 hover:bg-primary-100 dark:hover:bg-primary-900/30 hover:-translate-y-0.5 transition-all duration-300"

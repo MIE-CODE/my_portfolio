@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { BlivapLivePreview } from "@/src/components/BlivapLivePreview";
 import { JsonLd } from "@/src/components/JsonLd";
 import { buildPageMetadata } from "@/src/seo/buildMetadata";
 import {
@@ -8,8 +8,6 @@ import {
 } from "@/src/seo/jsonLd";
 import { PAGE_SEO } from "@/src/seo/pages";
 import { SITE } from "@/src/seo/site";
-import blivapScreenshot from "@/src/images/flyverge.png";
-
 export const metadata = buildPageMetadata(PAGE_SEO.blivap);
 
 export default function BlivapProjectPage() {
@@ -51,15 +49,8 @@ export default function BlivapProjectPage() {
             </p>
           </header>
 
-          <div className="relative mb-8 aspect-[16/9] w-full overflow-hidden rounded-2xl border border-muted-200 dark:border-muted-700 bg-muted-100 dark:bg-muted-800">
-            <Image
-              src={blivapScreenshot}
-              alt="Blivap blood donation platform screenshot — project by Israel Enyo Menyaga (MIE)"
-              fill
-              priority
-              sizes="(max-width: 896px) 100vw, 896px"
-              className="object-cover object-top"
-            />
+          <div className="mb-8 w-full overflow-hidden rounded-2xl border border-muted-200 dark:border-muted-700 bg-muted-100 dark:bg-muted-900/80 shadow-[0_12px_40px_-16px_rgba(0,0,0,0.2)]">
+            <BlivapLivePreview />
           </div>
 
           <section aria-labelledby="blivap-summary" className="panel-surface p-4 sm:p-6 mb-6 sm:mb-8">

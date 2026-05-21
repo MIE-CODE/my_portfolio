@@ -261,10 +261,10 @@ This project is private and proprietary.
 
 ## 👤 Author
 
-**Menyaga Enyo Israel**
-- Portfolio: [https://mieworks.vercel.app](https://mieworks.vercel.app)
-- Email: israelvictor126@gmail.com
-- LinkedIn: [israelmenyaga](http://www.linkedin.com/in/israelmenyaga)
+**Israel Enyo Menyaga (MIE)**
+- Portfolio: [https://israelm.site](https://israelm.site)
+- Email: israelmenyaga@gmail.com
+- LinkedIn: [israelmenyaga](https://www.linkedin.com/in/israelmenyaga)
 - GitHub: [MIE-CODE](https://github.com/MIE-CODE)
 
 ## 🙏 Acknowledgments
