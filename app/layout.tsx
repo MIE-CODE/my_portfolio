@@ -1,4 +1,5 @@
 import type { Viewport } from "next";
+import { AppSplashBoot } from "@/src/components/AppSplash";
 import { SiteShell } from "../src/components/SiteShell";
 import { ThemeProviderWrapper } from "../src/components/ThemeProviderWrapper";
 import { JsonLd } from "@/src/components/JsonLd";
@@ -50,6 +51,7 @@ export default function RootLayout({
                   localStorage.removeItem('theme');
                   var navLayout = localStorage.getItem('app-nav-layout');
                   document.documentElement.dataset.navDeck = navLayout === 'deck' ? 'open' : '';
+                  document.documentElement.classList.add('splash-pending');
                 } catch (e) {}
               })();
             `,
@@ -59,6 +61,7 @@ export default function RootLayout({
         <JsonLd data={rootJsonLdGraph()} />
       </head>
       <body className="min-h-dvh bg-muted-50 font-sans text-muted-900 antialiased transition-colors duration-300 dark:bg-muted-900 dark:text-muted-50">
+        <AppSplashBoot />
         <ThemeProviderWrapper>
           <SiteShell>{children}</SiteShell>
         </ThemeProviderWrapper>
