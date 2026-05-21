@@ -35,11 +35,7 @@ export const NavList = (props: {
               onClick={handleClick}
               className={
                 isMobileMenu
-                  ? `nav-link-mobile transition-colors duration-300 ${
-                      isActive
-                        ? "text-primary-700 dark:text-primary-400"
-                        : "text-muted-700 dark:text-muted-300 hover:text-primary-700 dark:hover:text-primary-400"
-                    }`
+                  ? `nav-link-mobile${isActive ? " nav-link-mobile--active" : ""}`
                   : `relative whitespace-nowrap pb-1.5 text-xs font-medium transition-all duration-300 lg:text-sm ${
                       isActive
                         ? "text-primary-700 dark:text-primary-400"

@@ -4,6 +4,7 @@ import gsap from "gsap";
 import { ensureDocumentScrollable } from "@/src/lib/ensureScrollable";
 import { lockScroll, unlockScroll } from "@/src/lib/scrollLock";
 import { CloseIcon } from "../svg";
+import { ModeToggle } from "./ModeToggle";
 import { NavList } from "./navlist";
 
 export const Modal = ({
@@ -69,7 +70,7 @@ export const Modal = ({
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-50 bg-muted-900/50 dark:bg-muted-950/60 backdrop-blur-sm flex items-stretch justify-end opacity-0"
+      className="mobile-nav-overlay fixed inset-0 z-50 flex items-stretch justify-end opacity-0"
       onClick={() => isOpen(false)}
       role="dialog"
       aria-modal="true"
@@ -79,24 +80,29 @@ export const Modal = ({
         id="mobile-nav-menu"
         ref={panelRef}
         onClick={(e) => e.stopPropagation()}
-        className="mobile-nav-panel h-full w-[min(17.5rem,78vw)] sm:w-72 sm:max-w-xs shrink-0 bg-muted-100 dark:bg-muted-800/95 backdrop-blur-xl border-l border-muted-200 dark:border-muted-700 flex flex-col pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] shadow-[-8px_0_32px_rgba(28,25,23,0.12)] dark:shadow-[-8px_0_32px_rgba(0,0,0,0.35)]"
+        className="mobile-nav-panel glass-effect flex h-full max-h-dvh w-[min(18rem,88vw)] shrink-0 flex-col overflow-hidden border-l sm:w-72"
         aria-label="Mobile navigation"
       >
-        <div className="flex justify-end p-3 sm:p-5">
-          <button
-            ref={closeBtnRef}
-            type="button"
-            onClick={() => isOpen(false)}
-            className="touch-target rounded-full bg-muted-100/90 dark:bg-muted-800 border border-muted-300/80 dark:border-muted-700 hover:bg-muted-50 dark:hover:bg-muted-700 shadow-[0_2px_10px_rgba(28,25,23,0.06)] transition-all duration-300"
-            aria-label="Close navigation menu"
-          >
-            <div className="text-muted-700 dark:text-muted-300 [&>svg]:w-6 [&>svg]:h-6">
+        <div className="mobile-nav-panel__toolbar flex shrink-0 items-center justify-between gap-3 border-b px-4 py-3 sm:px-5 sm:py-4">
+          <span className="mobile-nav-panel__title text-sm font-semibold">
+            Menu
+          </span>
+          <div className="flex items-center gap-2">
+            <ModeToggle />
+            <button
+              ref={closeBtnRef}
+              type="button"
+              onClick={() => isOpen(false)}
+              className="mobile-nav-close touch-target"
+              aria-label="Close navigation menu"
+            >
               <CloseIcon />
-            </div>
-          </button>
+            </button>
+          </div>
         </div>
+
         <ul
-          className="flex flex-col gap-0.5 px-4 sm:px-6 py-2 flex-1 overflow-y-auto"
+          className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto overscroll-contain px-3 py-4 sm:px-5"
           role="list"
         >
           <NavList isOpen={isOpen} />

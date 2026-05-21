@@ -1,4 +1,5 @@
 export { SITE } from "./site";
+export { STACK_TAGLINE, STACK_TAGLINE_SHORT } from "./stackSummary";
 export { SEO_IDS, SITE_SAME_AS, absoluteAssetUrl, buildSiteVerification } from "./identity";
 export {
   OG_IMAGE_WIDTH,

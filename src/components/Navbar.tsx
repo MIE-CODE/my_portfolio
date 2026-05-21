@@ -6,6 +6,7 @@ import { NavList } from "./navlist";
 import { NavOrbit } from "./NavOrbit";
 import { MenuIcon } from "../svg";
 import { ModeToggle } from "./ModeToggle";
+import { useIsMobileNav } from "@/src/hooks/useIsMobileNav";
 import {
   applyNavLayoutDom,
   persistNavLayout,
@@ -18,6 +19,7 @@ function Navbar(props: {
   menuOpen?: boolean;
 }) {
   const pathname = usePathname();
+  const isMobileNav = useIsMobileNav();
   const [deckOpen, setDeckOpen] = useState(false);
 
   const setNavLayout = useCallback((layout: NavLayout) => {
@@ -27,10 +29,6 @@ function Navbar(props: {
     applyNavLayoutDom(layout);
   }, []);
 
-  useEffect(() => {
-    setNavLayout(readStoredNavLayout());
-  }, [setNavLayout]);
-
   const closeDeck = useCallback(() => setNavLayout("compact"), [setNavLayout]);
   const toggleDeck = useCallback(
     () => setNavLayout(deckOpen ? "compact" : "deck"),
@@ -38,36 +36,56 @@ function Navbar(props: {
   );
 
   useEffect(() => {
-    if (!deckOpen) return;
+    if (isMobileNav) {
+      closeDeck();
+      return;
+    }
+    setNavLayout(readStoredNavLayout());
+  }, [isMobileNav, setNavLayout, closeDeck]);
+
+  useEffect(() => {
+    if (!deckOpen || isMobileNav) return;
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") closeDeck();
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [deckOpen, closeDeck]);
+  }, [deckOpen, closeDeck, isMobileNav]);
 
   const handleContactClick = () => {
     window.open("https://wa.link/ztm32r", "_blank", "noopener,noreferrer");
   };
 
+  const handleBrandClick = () => {
+    if (isMobileNav) {
+      props.isOpen(true);
+      return;
+    }
+    toggleDeck();
+  };
+
   return (
     <>
       <header
-        className={`site-navbar fixed inset-x-0 top-0 z-50${deckOpen ? " site-navbar--orbit" : ""}`}
+        className={`site-navbar fixed inset-x-0 top-0 z-50${deckOpen && !isMobileNav ? " site-navbar--orbit" : ""}`}
         role="banner"
         suppressHydrationWarning
       >
-        {/* Compact top bar */}
         <div
           className="site-navbar__inner glass-effect pointer-events-auto mx-auto flex w-[calc(100%-1.25rem)] max-w-7xl items-center justify-between gap-2 rounded-xl px-3 py-2 sm:w-[calc(100%-2rem)] sm:px-4 sm:py-2.5 lg:px-6 lg:py-3"
-          aria-hidden={deckOpen}
+          aria-hidden={deckOpen && !isMobileNav}
         >
           <button
             type="button"
-            onClick={toggleDeck}
-            className={`site-navbar__brand site-navbar__brand--beacon flex min-h-11 flex-shrink-0 items-center${deckOpen ? "" : " site-navbar__brand--idle"}`}
-            aria-label="Deploy command orbit navigation"
-            aria-expanded={deckOpen}
+            onClick={handleBrandClick}
+            className={`site-navbar__brand site-navbar__brand--beacon flex min-h-11 flex-shrink-0 items-center${deckOpen && !isMobileNav ? "" : " site-navbar__brand--idle"}`}
+            aria-label={
+              isMobileNav
+                ? "Open navigation menu"
+                : "Deploy command orbit navigation"
+            }
+            aria-expanded={isMobileNav ? (props.menuOpen ?? false) : deckOpen}
+            aria-controls={isMobileNav ? "mobile-nav-menu" : undefined}
           >
             <span className="font-mono text-lg font-bold tracking-tight gradient-text sm:text-xl">
               MIE
@@ -97,7 +115,7 @@ function Navbar(props: {
             <button
               type="button"
               onClick={() => props.isOpen(true)}
-              className="touch-target rounded-lg border border-muted-300/80 bg-muted-100/90 shadow-[0_2px_10px_rgba(28,25,23,0.06)] transition-all duration-300 hover:bg-muted-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 dark:border-muted-700 dark:bg-muted-800 dark:hover:bg-muted-700"
+              className="mobile-nav-trigger touch-target"
               aria-label="Open navigation menu"
               aria-expanded={props.menuOpen ?? false}
               aria-controls="mobile-nav-menu"
@@ -107,12 +125,14 @@ function Navbar(props: {
           </div>
         </div>
 
-        <NavOrbit
-          pathname={pathname}
-          open={deckOpen}
-          onToggle={toggleDeck}
-          onContact={handleContactClick}
-        />
+        {!isMobileNav ? (
+          <NavOrbit
+            pathname={pathname}
+            open={deckOpen}
+            onToggle={toggleDeck}
+            onContact={handleContactClick}
+          />
+        ) : null}
       </header>
     </>
   );

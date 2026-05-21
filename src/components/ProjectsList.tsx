@@ -1,18 +1,26 @@
 "use client";
 import { useLayoutEffect, useRef, useState } from "react";
 import { ProjectCard } from "./ProjectCard";
-import { StaticImageData } from "next/image";
 import { useGsapReveal } from "../hooks/useGsapReveal";
 import gsap from "gsap";
+import type { PreviewImage } from "./SitePreview";
 import trueperkImg from "../images/trueperk.png";
 import sparkpayImg from "../images/sparkpay.png";
 import flyvergeImg from "../images/flyverge.png";
 import ecommerceImg from "../images/ecommerce.png";
 
+/** Project screenshots in /public (filename → project). */
+const projectPreviews = {
+  blivap: "/blivap.png",
+  belsoftsystems: "/belsoftsystems.png",
+  belpower: "/belpower.png",
+  solar: "/soloar.png",
+} as const;
+
 // Frontend Projects - Add your projects here
 const frontendProjects: Array<{
   id: number;
-  img: StaticImageData;
+  img: PreviewImage;
   skills: string[];
   title: string;
   description: string;
@@ -55,7 +63,7 @@ const frontendProjects: Array<{
   },
   {
     id: 3,
-    img: flyvergeImg,
+    img: projectPreviews.blivap,
     skills: [
       "Next.js",
       "React 19",
@@ -75,7 +83,7 @@ const frontendProjects: Array<{
   },
   {
     id: 4,
-    img: flyvergeImg,
+    img: projectPreviews.belsoftsystems,
     skills: [
       "Next.js",
       "React",
@@ -94,7 +102,7 @@ const frontendProjects: Array<{
   },
   {
     id: 5,
-    img: sparkpayImg,
+    img: projectPreviews.belpower,
     skills: [
       "Next.js 15",
       "React 19",
@@ -124,7 +132,7 @@ const frontendProjects: Array<{
   },
   {
     id: 7,
-    img: ecommerceImg,
+    img: projectPreviews.solar,
     skills: ["Three.js", "JavaScript", "CSS"],
     title: "Solar System",
     description:
@@ -217,7 +225,7 @@ const upcomingProjects = [
 // Backend Projects - Add your backend projects here
 const backendProjects: Array<{
   id: number;
-  img: StaticImageData;
+  img: PreviewImage;
   skills: string[];
   title: string;
   description: string;

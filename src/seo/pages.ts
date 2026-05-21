@@ -13,7 +13,7 @@ export const PAGE_SEO = {
       title: SITE.defaultTitle,
       description: ROOT_DESC,
       imageTitle: "Israel Enyo Menyaga (MIE)",
-      imageSubtitle: "Senior Software Engineer & CTO",
+      imageSubtitle: "Full Stack Developer",
       imageTagline: SITE.tagline,
     },
   } satisfies PageSeoConfig,

@@ -1,15 +1,23 @@
 "use client";
 
 import Image, { type StaticImageData } from "next/image";
-import { useCallback, useEffect, useRef, useState } from "react";
+
+export type PreviewImage = string | StaticImageData;
+import { useEffect, useRef, useState } from "react";
 
 const PREVIEW_WIDTH = 1280;
 const PREVIEW_HEIGHT = 800;
+const LIVE_FALLBACK_MS = 3000;
+
+/** Hosts that usually allow iframe embeds (e.g. Vercel previews). */
+const EMBED_FRIENDLY_SUFFIXES = [".vercel.app", "localhost", "127.0.0.1"];
+
+type PreviewMode = "static" | "live" | "empty";
 
 type SitePreviewProps = {
   url: string;
   title: string;
-  fallback?: StaticImageData;
+  fallback?: PreviewImage;
   className?: string;
 };
 
@@ -33,6 +41,46 @@ function displayHost(href: string): string {
   }
 }
 
+function hostAllowsEmbed(href: string): boolean {
+  try {
+    const host = new URL(href).hostname.toLowerCase();
+    return EMBED_FRIENDLY_SUFFIXES.some(
+      (suffix) => host === suffix.slice(1) || host.endsWith(suffix),
+    );
+  } catch {
+    return false;
+  }
+}
+
+function resolveInitialMode(href: string | null, fallback?: PreviewImage): PreviewMode {
+  if (!href) return fallback ? "static" : "empty";
+  if (fallback) return "static";
+  if (hostAllowsEmbed(href)) return "live";
+  return "empty";
+}
+
+function PreviewChrome({
+  href,
+  live,
+}: {
+  href: string | null;
+  live?: boolean;
+}) {
+  return (
+    <div className="site-preview__chrome" aria-hidden>
+      <span className="site-preview__traffic">
+        <span className="site-preview__dot site-preview__dot--close" />
+        <span className="site-preview__dot site-preview__dot--min" />
+        <span className="site-preview__dot site-preview__dot--max" />
+      </span>
+      <span className="site-preview__url font-mono">
+        {href ? displayHost(href) : "preview offline"}
+      </span>
+      {live ? <span className="site-preview__live font-mono">LIVE</span> : null}
+    </div>
+  );
+}
+
 export function SitePreview({
   url,
   title,
@@ -41,111 +89,87 @@ export function SitePreview({
 }: SitePreviewProps) {
   const href = normalizeUrl(url);
   const viewportRef = useRef<HTMLDivElement>(null);
-  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const fallbackTimerRef = useRef<number | null>(null);
   const [scale, setScale] = useState(0.25);
-  const [status, setStatus] = useState<"loading" | "ready" | "fallback">(
-    href ? "loading" : "fallback",
+  const [liveReady, setLiveReady] = useState(false);
+  const [mode, setMode] = useState<PreviewMode>(() =>
+    resolveInitialMode(href, fallback),
   );
 
-  const showFallback = useCallback(() => {
-    setStatus("fallback");
-  }, []);
+  useEffect(() => {
+    setMode(resolveInitialMode(href, fallback));
+    setLiveReady(false);
+  }, [href, fallback]);
 
   useEffect(() => {
-    if (!href) {
-      setStatus("fallback");
-      return;
-    }
-    setStatus("loading");
-    const timeout = window.setTimeout(() => {
-      setStatus((current) => (current === "loading" ? "fallback" : current));
-    }, 9000);
-    return () => clearTimeout(timeout);
-  }, [href]);
+    if (mode !== "live" || !href) return;
+
+    fallbackTimerRef.current = window.setTimeout(() => {
+      setMode((current) => (current === "live" ? (fallback ? "static" : "empty") : current));
+    }, LIVE_FALLBACK_MS);
+
+    return () => {
+      if (fallbackTimerRef.current) clearTimeout(fallbackTimerRef.current);
+    };
+  }, [mode, href, fallback]);
 
   useEffect(() => {
     const node = viewportRef.current;
-    if (!node || status === "fallback") return;
+    if (!node || mode !== "live") return;
 
     const updateScale = () => {
       const width = node.clientWidth;
-      if (width > 0) {
-        setScale(width / PREVIEW_WIDTH);
-      }
+      if (width > 0) setScale(width / PREVIEW_WIDTH);
     };
 
     updateScale();
     const observer = new ResizeObserver(updateScale);
     observer.observe(node);
     return () => observer.disconnect();
-  }, [status]);
+  }, [mode]);
 
-  if (!href || status === "fallback") {
-    if (fallback) {
-      return (
-        <div
-          className={`site-preview site-preview--static ${className}`.trim()}
-        >
-          <div className="site-preview__chrome" aria-hidden>
-            <span className="site-preview__traffic">
-              <span className="site-preview__dot site-preview__dot--close" />
-              <span className="site-preview__dot site-preview__dot--min" />
-              <span className="site-preview__dot site-preview__dot--max" />
-            </span>
-            <span className="site-preview__url font-mono">
-              {href ? displayHost(href) : "preview offline"}
-            </span>
-          </div>
-          <div className="site-preview__viewport site-preview__viewport--static">
-            <Image
-              src={fallback}
-              alt={`${title} — preview`}
-              fill
-              className="object-cover object-top"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            />
-          </div>
-        </div>
-      );
-    }
+  const rootClass = `site-preview ${className}`.trim();
 
+  if (mode === "static" && fallback) {
     return (
-      <div
-        className={`site-preview site-preview--empty ${className}`.trim()}
-      >
-        <span className="text-xs font-mono text-muted-500 dark:text-muted-400">
-          Preview unavailable
-        </span>
+      <div className={`${rootClass} site-preview--static`}>
+        <PreviewChrome href={href} />
+        <div className="site-preview__viewport site-preview__viewport--static relative">
+          <Image
+            src={fallback}
+            alt={`${title} — preview`}
+            fill
+            className="object-cover object-top"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
+        </div>
+      </div>
+    );
+  }
+
+  if (mode === "empty" || !href) {
+    return (
+      <div className={`${rootClass} site-preview--empty`}>
+        <PreviewChrome href={href} />
+        <div className="site-preview__viewport site-preview__viewport--static flex items-center justify-center">
+          <span className="text-xs font-mono text-muted-500 dark:text-muted-400">
+            Preview unavailable
+          </span>
+        </div>
       </div>
     );
   }
 
   return (
-    <div
-      className={`site-preview pointer-events-none select-none ${className}`.trim()}
-    >
-      <div className="site-preview__chrome" aria-hidden>
-        <span className="site-preview__traffic">
-          <span className="site-preview__dot site-preview__dot--close" />
-          <span className="site-preview__dot site-preview__dot--min" />
-          <span className="site-preview__dot site-preview__dot--max" />
-        </span>
-        <span className="site-preview__url font-mono">{displayHost(href)}</span>
-        {status === "loading" ? (
-          <span className="site-preview__live font-mono">LIVE</span>
-        ) : null}
-      </div>
-
+    <div className={`${rootClass} site-preview--live pointer-events-none select-none`}>
+      <PreviewChrome href={href} live={liveReady} />
       <div ref={viewportRef} className="site-preview__viewport">
-        {status === "loading" ? (
-          <div className="site-preview__shimmer" aria-hidden />
-        ) : null}
+        {!liveReady ? <div className="site-preview__shimmer" aria-hidden /> : null}
         <iframe
-          ref={iframeRef}
           src={href}
           title={`Live preview of ${title}`}
           className="site-preview__frame"
-          sandbox="allow-scripts allow-same-origin"
+          sandbox="allow-scripts allow-same-origin allow-popups"
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
           tabIndex={-1}
@@ -155,8 +179,11 @@ export function SitePreview({
             height: PREVIEW_HEIGHT,
             transform: `scale(${scale})`,
           }}
-          onLoad={() => setStatus("ready")}
-          onError={showFallback}
+          onLoad={() => {
+            if (fallbackTimerRef.current) clearTimeout(fallbackTimerRef.current);
+            setLiveReady(true);
+          }}
+          onError={() => setMode(fallback ? "static" : "empty")}
         />
         <div className="site-preview__fade" aria-hidden />
       </div>
