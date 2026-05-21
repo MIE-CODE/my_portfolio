@@ -5,8 +5,9 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { VERSE_EASE } from "@/src/config/verseMotion";
 import { NATIVE_SCROLL_ONLY } from "@/src/lib/nativeScroll";
+import { playOnView } from "@/src/lib/playOnView";
 
-if (typeof window !== "undefined") {
+if (typeof window !== "undefined" && !NATIVE_SCROLL_ONLY) {
   gsap.registerPlugin(ScrollTrigger);
 }
 
@@ -182,25 +183,32 @@ export function useGsapReveal(options: GsapRevealOptions = {}) {
     const root = ref.current;
     if (!root) return;
 
-    const ctx = gsap.context(
-      () =>
-        runReveal(
-          root,
-          {
-            preset,
-            duration,
-            delay,
-            stagger,
-            childSelector,
-            start,
-            once,
-            parallax,
-            ease,
-          },
-          true,
-        ),
-      root,
-    );
+    const opts = {
+      preset,
+      duration,
+      delay,
+      stagger,
+      childSelector,
+      start,
+      once,
+      parallax,
+      ease,
+    };
+
+    if (NATIVE_SCROLL_ONLY) {
+      let stopObserve: (() => void) | undefined;
+      const ctx = gsap.context(() => {
+        stopObserve = playOnView(root, () => {
+          runReveal(root, opts, false);
+        });
+      }, root);
+      return () => {
+        stopObserve?.();
+        ctx.revert();
+      };
+    }
+
+    const ctx = gsap.context(() => runReveal(root, opts, true), root);
     return () => ctx.revert();
   }, [preset, duration, delay, stagger, childSelector, start, once, parallax, ease]);
 

@@ -111,7 +111,7 @@ export function runVerseHeroEnter(root: HTMLElement) {
 
   tl.eventCallback("onComplete", () => {
     const visible = root.querySelectorAll(
-      "[data-hero-xp], [data-hero-title], [data-hero-intro], [data-hero-stats], [data-hero-achievements], [data-hero-keyboard], [data-hero-actions] > *, [data-hero-stat], [data-hero-badge], #skills [data-stack-item]",
+      "[data-hero-xp], [data-hero-title], [data-hero-intro], [data-hero-stats], [data-hero-achievements], [data-hero-keyboard], [data-hero-actions] > *, [data-hero-stat], [data-hero-badge], #skills #skills-heading, #skills [data-stack-intro], #skills [data-stack-category], #skills [data-stack-card]",
     );
     gsap.set(visible, { opacity: 1, clearProps: "transform,filter" });
   });

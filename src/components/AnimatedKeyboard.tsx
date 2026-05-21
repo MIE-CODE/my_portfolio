@@ -8,7 +8,7 @@ const codeSnippets = [
   "function buildPortfolio() { return <AmazingWebsite />; }",
   "const api = async () => { return await fetch('/data'); };",
   "import { useState } from 'react'; const [code, setCode] = useState('awesome');",
-  "const stack = ['Frontend', 'Backend', 'Full Stack'];",
+  "const stack = ['Node.js', 'NestJS', 'PostgreSQL', 'Docker'];",
 ];
 
 const keyboardLayout = [

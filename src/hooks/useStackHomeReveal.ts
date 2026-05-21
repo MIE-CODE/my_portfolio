@@ -7,7 +7,7 @@ function prefersReducedMotion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
-/** Homepage stack — fade-only stagger (no vertical slide). */
+/** Homepage stack — quick fade stagger after hero (no long slide delays). */
 export function useStackHomeReveal(
   sectionRef: RefObject<HTMLElement | null>,
   enabled: boolean,
@@ -19,56 +19,72 @@ export function useStackHomeReveal(
     if (!section) return;
 
     const heading = section.querySelector<HTMLElement>("#skills-heading");
-    const cards = section.querySelectorAll<HTMLElement>("[data-stack-item]");
+    const intro = section.querySelector<HTMLElement>("[data-stack-intro]");
+    const categories = section.querySelectorAll<HTMLElement>("[data-stack-category]");
+    const cards = section.querySelectorAll<HTMLElement>(
+      "[data-stack-card], .stack-hud__module",
+    );
 
     if (prefersReducedMotion()) {
-      gsap.set([heading, ...Array.from(cards)].filter(Boolean), {
-        autoAlpha: 1,
-        clearProps: "all",
-      });
+      gsap.set(
+        [heading, intro, ...Array.from(categories), ...Array.from(cards)].filter(Boolean),
+        { autoAlpha: 1, clearProps: "all" },
+      );
       return;
     }
 
     const ctx = gsap.context(() => {
-      const targets = [heading, ...Array.from(cards)].filter(
-        Boolean,
-      ) as HTMLElement[];
+      const headerTargets = [heading, intro].filter(Boolean) as HTMLElement[];
+      const cardTargets = Array.from(cards);
 
-      gsap.set(targets, { autoAlpha: 0 });
+      gsap.set(headerTargets, { autoAlpha: 0, y: 12 });
+      gsap.set(categories, { autoAlpha: 0, y: 10 });
+      gsap.set(cardTargets, { autoAlpha: 0, y: 14 });
 
       const tl = gsap.timeline({
-        delay: 1.28,
-        defaults: {
-          ease: "sine.out",
-          overwrite: "auto",
-        },
+        delay: 0.35,
+        defaults: { ease: "power2.out", overwrite: "auto" },
       });
 
-      if (heading) {
-        tl.to(heading, {
+      if (headerTargets.length > 0) {
+        tl.to(headerTargets, {
           autoAlpha: 1,
-          duration: 1.05,
+          y: 0,
+          duration: 0.45,
+          stagger: 0.04,
         });
       }
 
-      if (cards.length > 0) {
+      if (categories.length > 0) {
         tl.to(
-          cards,
+          categories,
           {
             autoAlpha: 1,
-            duration: 1.2,
-            stagger: {
-              amount: 2.75,
-              from: "start",
-              ease: "sine.inOut",
-            },
+            y: 0,
+            duration: 0.38,
+            stagger: 0.05,
           },
-          heading ? "-=0.65" : 0,
+          headerTargets.length > 0 ? "-=0.2" : 0,
+        );
+      }
+
+      if (cardTargets.length > 0) {
+        tl.to(
+          cardTargets,
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.4,
+            stagger: { each: 0.022, from: "start" },
+          },
+          "-=0.12",
         );
       }
 
       tl.eventCallback("onComplete", () => {
-        gsap.set(targets, { clearProps: "visibility" });
+        gsap.set([...headerTargets, ...Array.from(categories), ...cardTargets], {
+          clearProps: "visibility,y",
+        });
       });
     }, section);
 

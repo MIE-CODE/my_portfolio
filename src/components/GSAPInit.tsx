@@ -1,25 +1,15 @@
 "use client";
 
 import { useEffect } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ensureDocumentScrollable } from "@/src/lib/ensureScrollable";
 import { NATIVE_SCROLL_ONLY } from "@/src/lib/nativeScroll";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-  ScrollTrigger.config({
-    ignoreMobileResize: true,
-    limitCallbacks: true,
-  });
-}
-
-/** Registers GSAP plugins; keeps scroll native (no smooth-scroll on html). */
+/** Keeps document scroll native — no GSAP scroll plugins or smooth-scroll overrides. */
 export const GSAPInit = () => {
   useEffect(() => {
+    ensureDocumentScrollable();
+    if (!NATIVE_SCROLL_ONLY) return;
     document.documentElement.style.scrollBehavior = "auto";
-    if (NATIVE_SCROLL_ONLY) {
-      ScrollTrigger.normalizeScroll(false);
-    }
   }, []);
 
   return null;

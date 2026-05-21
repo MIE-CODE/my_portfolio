@@ -4,6 +4,7 @@ import { Grid, Sparkles, Stars } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { memo, useMemo, useRef } from "react";
 import * as THREE from "three";
+import { useVersePalette } from "@/src/contexts/VersePaletteContext";
 import { VersePhysicsField } from "./VersePhysics";
 import { VerseTechField } from "./VerseTechHUD";
 import type { VerseTarget } from "./verseState";
@@ -53,7 +54,15 @@ function CinematicCamera({
   return null;
 }
 
-function StarDrift({ quality }: { quality: "full" | "low" }) {
+function StarDrift({
+  quality,
+  color,
+  opacity,
+}: {
+  quality: "full" | "low";
+  color: string;
+  opacity: number;
+}) {
   const ref = useRef<THREE.Points>(null);
   const positions = useMemo(() => {
     const n = quality === "full" ? 800 : 250;
@@ -84,9 +93,9 @@ function StarDrift({ quality }: { quality: "full" | "low" }) {
       </bufferGeometry>
       <pointsMaterial
         size={quality === "full" ? 0.12 : 0.08}
-        color="#8eb8e8"
+        color={color}
         transparent
-        opacity={0.55}
+        opacity={opacity}
         sizeAttenuation
         depthWrite={false}
         blending={THREE.AdditiveBlending}
@@ -95,7 +104,6 @@ function StarDrift({ quality }: { quality: "full" | "low" }) {
   );
 }
 
-
 function VerseScene({
   targetRef,
   quality,
@@ -103,17 +111,28 @@ function VerseScene({
   targetRef: React.MutableRefObject<VerseTarget>;
   quality: "full" | "low";
 }) {
+  const { canvas } = useVersePalette();
   const starCount = quality === "full" ? 6000 : 1600;
 
   return (
     <>
-      <color attach="background" args={["#020408"]} />
-      <fog attach="fog" args={["#020408", 45, 320]} />
-      <ambientLight intensity={0.22} />
-      <hemisphereLight args={["#6a9fd4", "#0a0e18", 0.45]} />
-      <pointLight position={[0, 12, 8]} intensity={0.4} color="#5b82a8" />
-      <pointLight position={[-30, 6, -10]} intensity={0.25} color="#8b7ec8" />
-      <pointLight position={[35, 4, -20]} intensity={0.25} color="#b38256" />
+      <color attach="background" args={[canvas.background]} />
+      <fog
+        attach="fog"
+        args={[canvas.fog, canvas.fogNear, canvas.fogFar]}
+      />
+      <ambientLight intensity={canvas.hemiIntensity * 0.5} />
+      <hemisphereLight
+        args={[canvas.hemiSky, canvas.hemiGround, canvas.hemiIntensity]}
+      />
+      {canvas.lights.map((light) => (
+        <pointLight
+          key={`${light.position.join("-")}-${light.color}`}
+          position={light.position}
+          intensity={light.intensity}
+          color={light.color}
+        />
+      ))}
       <CinematicCamera targetRef={targetRef} />
       <Stars
         radius={220}
@@ -124,7 +143,11 @@ function VerseScene({
         fade
         speed={0.2}
       />
-      <StarDrift quality={quality} />
+      <StarDrift
+        quality={quality}
+        color={canvas.starDrift}
+        opacity={canvas.starDriftOpacity}
+      />
       {quality === "full" && (
         <Sparkles
           count={80}
@@ -132,7 +155,7 @@ function VerseScene({
           size={2.5}
           speed={0.25}
           opacity={0.3}
-          color="#4a7094"
+          color={canvas.sparkles}
         />
       )}
       <Grid
@@ -140,10 +163,10 @@ function VerseScene({
         args={[200, 200]}
         cellSize={2}
         cellThickness={0.35}
-        cellColor="#1a2a3a"
+        cellColor={canvas.gridCell}
         sectionSize={10}
         sectionThickness={0.7}
-        sectionColor="#2d4a62"
+        sectionColor={canvas.gridSection}
         fadeDistance={120}
         fadeStrength={1.2}
         infiniteGrid
@@ -175,7 +198,10 @@ export const VerseSpace3D = memo(function VerseSpace3D({
   };
 
   return (
-    <div aria-hidden className="verse-canvas-shell pointer-events-none fixed inset-0 z-0">
+    <div
+      aria-hidden
+      className="verse-canvas-shell pointer-events-none fixed inset-0 z-0"
+    >
       <Canvas
         camera={{ position: [0, 18, 55], fov: 58, near: 0.1, far: 400 }}
         onCreated={handleCreated}

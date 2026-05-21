@@ -14,6 +14,9 @@ type PageHeaderProps = {
   description2Mobile?: string;
   className?: string;
   preset?: GsapRevealPreset;
+  duration?: number;
+  stagger?: number;
+  ease?: string;
   /** Default center; use start for editorial pages like About. */
   align?: "center" | "start";
   /** Use h2 when the page already has a dedicated h1 (e.g. About dossier). */
@@ -28,6 +31,9 @@ export function PageHeader({
   description2Mobile,
   className = "",
   preset,
+  duration = 0.9,
+  stagger = 0.14,
+  ease = "expo.out",
   align = "center",
   headingLevel = "h1",
 }: PageHeaderProps) {
@@ -35,10 +41,10 @@ export function PageHeader({
   const pathname = usePathname();
   const ref = useGsapMount({
     preset: preset ?? getPageHeaderPreset(pathname),
-    duration: 0.9,
-    stagger: 0.14,
+    duration,
+    stagger,
     childSelector: "[data-page-header-part]",
-    ease: "expo.out",
+    ease,
   });
 
   const isStart = align === "start";

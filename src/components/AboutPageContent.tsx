@@ -1,4 +1,8 @@
+"use client";
+
 import Link from "next/link";
+import { AboutTechStackCollapsible } from "@/src/components/AboutTechStackCollapsible";
+import { useAboutPageMotion } from "@/src/hooks/useAboutPageMotion";
 
 const CV_HREF = "/cv/Israel_menyaga_cv.pdf";
 const CV_FILENAME = "Israel_menyaga_cv.pdf";
@@ -53,26 +57,6 @@ const focusAreas = [
   },
 ];
 
-const stack = [
-  "Next.js",
-  "Nuxt",
-  "React",
-  "Vue",
-  "TypeScript",
-  "Tailwind",
-  "Redux Toolkit",
-  "Zustand",
-  "Pinia",
-  "REST",
-  "Paystack",
-  "PostHog",
-  "HubSpot",
-  "Sanity",
-  "Contentful",
-  "Zod",
-  "Redux",
-];
-
 const education = [
   {
     period: "2021 — 2025",
@@ -84,10 +68,18 @@ const education = [
 ];
 
 export function AboutPageContent() {
+  const motionRef = useAboutPageMotion();
+
   return (
-    <div className="about-dossier max-w-5xl mx-auto pb-6 sm:pb-8">
-      <div className="about-dossier__hero mb-8 sm:mb-16 grid gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-10 items-end border-b border-muted-200/80 dark:border-muted-700/80 pb-6 sm:pb-10">
-        <div className="lg:col-span-5">
+    <div
+      ref={motionRef}
+      className="about-dossier max-w-5xl mx-auto pb-6 sm:pb-8"
+    >
+      <div
+        data-about-hero-section
+        className="about-dossier__hero mb-8 sm:mb-16 grid gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-10 items-end border-b border-muted-200/80 dark:border-muted-700/80 pb-6 sm:pb-10"
+      >
+        <div data-about-hero="identity" className="lg:col-span-5 opacity-0">
           <p className="font-mono text-xs uppercase tracking-[0.2em] sm:tracking-[0.28em] text-primary-600 dark:text-primary-400 mb-4">
             Résumé on file · Also known as MIE
           </p>
@@ -132,7 +124,7 @@ export function AboutPageContent() {
             </a>
           </p>
         </div>
-        <div className="lg:col-span-7">
+        <div data-about-hero="bio" className="lg:col-span-7 opacity-0">
           <p className="text-base sm:text-lg text-muted-600 dark:text-muted-300 leading-relaxed max-w-xl lg:max-w-none">
             I help teams and founders turn ideas into products people actually
             use—from first UI and API design through launch, payments,
@@ -176,12 +168,14 @@ export function AboutPageContent() {
 
       <div className="grid gap-10 lg:grid-cols-12 lg:gap-12 mb-16 sm:mb-20">
         <section
+          data-about-timeline
           className="lg:col-span-7"
           aria-labelledby="about-timeline-heading"
         >
           <h3
             id="about-timeline-heading"
-            className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.22em] text-muted-500 dark:text-muted-400 mb-8"
+            data-about-timeline-head
+            className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.22em] text-muted-500 dark:text-muted-400 mb-8 opacity-0"
           >
             Experience
           </h3>
@@ -189,7 +183,8 @@ export function AboutPageContent() {
             {roles.map((r) => (
               <li
                 key={`${r.org}-${r.period}`}
-                className="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-10"
+                data-about-role
+                className="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-10 opacity-0"
               >
                 <time className="font-mono text-xs text-primary-600 dark:text-primary-400 tabular-nums shrink-0 sm:w-28 sm:text-right pt-1">
                   {r.period}
@@ -210,17 +205,22 @@ export function AboutPageContent() {
           </ol>
         </section>
 
-        <aside className="lg:col-span-5 space-y-10">
+        <aside data-about-aside className="lg:col-span-5 space-y-10">
           <section aria-labelledby="about-education-heading">
             <h3
               id="about-education-heading"
-              className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.22em] text-muted-500 dark:text-muted-400 mb-5"
+              data-about-aside-head
+              className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.22em] text-muted-500 dark:text-muted-400 mb-5 opacity-0"
             >
               Education
             </h3>
             <ul className="space-y-6">
               {education.map((e) => (
-                <li key={e.title} className="panel-surface px-4 py-4 sm:px-5">
+                <li
+                  key={e.title}
+                  data-about-panel
+                  className="panel-surface px-4 py-4 sm:px-5 opacity-0"
+                >
                   <p className="font-mono text-xs text-primary-600 dark:text-primary-400">
                     {e.period}
                   </p>
@@ -241,13 +241,18 @@ export function AboutPageContent() {
           <section aria-labelledby="about-focus-heading">
             <h3
               id="about-focus-heading"
-              className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.22em] text-muted-500 dark:text-muted-400 mb-5"
+              data-about-aside-head
+              className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.22em] text-muted-500 dark:text-muted-400 mb-5 opacity-0"
             >
               Strengths
             </h3>
             <ul className="space-y-6">
               {focusAreas.map((f) => (
-                <li key={f.label} className="panel-surface px-4 py-4 sm:px-5">
+                <li
+                  key={f.label}
+                  data-about-panel
+                  className="panel-surface px-4 py-4 sm:px-5 opacity-0"
+                >
                   <p className="text-sm font-semibold text-muted-900 dark:text-muted-100">
                     {f.label}
                   </p>
@@ -259,25 +264,12 @@ export function AboutPageContent() {
             </ul>
           </section>
 
-          <section aria-labelledby="about-stack-heading">
-            <h3
-              id="about-stack-heading"
-              className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.22em] text-muted-500 dark:text-muted-400 mb-4"
-            >
-              Tools & stacks
-            </h3>
-            <ul className="flex flex-wrap gap-2">
-              {stack.map((tag) => (
-                <li key={tag}>
-                  <span className="inline-block rounded-md border border-muted-300/80 dark:border-muted-600/60 bg-muted-100/95 dark:bg-muted-900/85 px-2.5 py-1 text-[11px] sm:text-xs font-mono text-muted-700 dark:text-muted-300">
-                    {tag}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </section>
+          <AboutTechStackCollapsible />
 
-          <div className="rounded-xl border border-primary-300/40 dark:border-primary-600/30 bg-primary-50/30 dark:bg-primary-950/20 px-5 py-5">
+          <div
+            data-about-callout
+            className="rounded-xl border border-primary-300/40 dark:border-primary-600/30 bg-primary-50/30 dark:bg-primary-950/20 px-5 py-5 opacity-0"
+          >
             <p className="text-sm text-muted-700 dark:text-muted-300 leading-relaxed">
               Exploring how wallets, contracts, and decentralized apps
               complement traditional SaaS—alongside core delivery on Next, Nuxt,
@@ -287,7 +279,10 @@ export function AboutPageContent() {
         </aside>
       </div>
 
-      <footer className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-8 border-t border-muted-200/80 dark:border-muted-700/80">
+      <footer
+        data-about-footer
+        className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-8 border-t border-muted-200/80 dark:border-muted-700/80 opacity-0"
+      >
         <p className="text-sm text-muted-500 dark:text-muted-400">
           Full timeline and detail: use the PDF or browse projects.
         </p>

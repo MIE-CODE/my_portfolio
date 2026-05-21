@@ -1,16 +1,24 @@
 "use client";
+
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { useGsapMount } from "../hooks/useGsapReveal";
+import { VERSE_EASE } from "@/src/config/verseMotion";
+import { useTheme } from "@/src/contexts/ThemeContext";
+
+type FieldName = "name" | "email" | "subject" | "message";
+
+const FIELDS: { name: FieldName; label: string; tag: "input" | "textarea"; type?: string; placeholder: string; rows?: number }[] = [
+  { name: "name", label: "PILOT_IDENTITY", tag: "input", type: "text", placeholder: "Tony Stark_" },
+  { name: "email", label: "COMMS_CHANNEL", tag: "input", type: "email", placeholder: "stark@avengers.io" },
+  { name: "subject", label: "MISSION_BRIEF", tag: "input", type: "text", placeholder: "Arc reactor calibration" },
+  { name: "message", label: "LOG_ENTRY", tag: "textarea", placeholder: "Transmit mission parameters…", rows: 5 },
+];
 
 export const ContactForm = () => {
-  const formRef = useGsapMount({
-    preset: "hudPanel",
-    duration: 0.85,
-    parallax: 0.1,
-    ease: "expo.out",
-  });
-  const successRef = useRef<HTMLParagraphElement>(null);
+  const { mode } = useTheme();
+  const isTech = mode === "tech";
+  const panelRef = useRef<HTMLFormElement>(null);
+  const successRef = useRef<HTMLDivElement>(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,34 +27,86 @@ export const ContactForm = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+  const [activeField, setActiveField] = useState<FieldName | null>(null);
+
+  useEffect(() => {
+    const root = panelRef.current;
+    if (!root || !isTech) return;
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) return;
+
+    const fields = root.querySelectorAll<HTMLElement>("[data-comms-field-inner]");
+    const onFocusIn = (e: FocusEvent) => {
+      const wrap = (e.target as HTMLElement).closest("[data-comms-field-inner]");
+      if (!wrap) return;
+      gsap.to(wrap, {
+        boxShadow: "0 0 0 1px rgba(78, 232, 255, 0.45), 0 0 20px rgba(78, 232, 255, 0.12)",
+        duration: 0.35,
+        ease: VERSE_EASE.smooth,
+      });
+    };
+    const onFocusOut = (e: FocusEvent) => {
+      const wrap = (e.target as HTMLElement).closest("[data-comms-field-inner]");
+      if (!wrap) return;
+      gsap.to(wrap, {
+        boxShadow: "0 0 0 1px rgba(78, 232, 255, 0.12), 0 0 0 transparent",
+        duration: 0.45,
+        ease: VERSE_EASE.smooth,
+      });
+    };
+
+    fields.forEach((el) => {
+      el.addEventListener("focusin", onFocusIn);
+      el.addEventListener("focusout", onFocusOut);
+    });
+    return () => {
+      fields.forEach((el) => {
+        el.removeEventListener("focusin", onFocusIn);
+        el.removeEventListener("focusout", onFocusOut);
+      });
+    };
+  }, [isTech]);
 
   useEffect(() => {
     if (submitStatus !== "success" || !successRef.current) return;
     gsap.fromTo(
       successRef.current,
-      { opacity: 0, y: 8 },
-      { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" },
+      { opacity: 0, y: 12, scale: 0.96 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: VERSE_EASE.snap },
     );
   }, [submitStatus]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
+
+    setTimeout(async () => {
       setIsSubmitting(false);
       setSubmitStatus("success");
       setFormData({ name: "", email: "", subject: "", message: "" });
-      
+
+      if (
+        mode === "gamify" &&
+        !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ) {
+        const confetti = (await import("canvas-confetti")).default;
+        confetti({
+          particleCount: 80,
+          spread: 70,
+          origin: { y: 0.65 },
+          colors: ["#9333ea", "#f59e0b", "#c084fc", "#fde68a"],
+        });
+      }
+
       setTimeout(() => {
         setSubmitStatus("idle");
-      }, 3000);
+      }, 4000);
     }, 1000);
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setFormData({
       ...formData,
@@ -54,112 +114,187 @@ export const ContactForm = () => {
     });
   };
 
+  const transmitLabel = isSubmitting
+    ? isTech
+      ? "TRANSMITTING…"
+      : "Sending…"
+    : submitStatus === "success"
+      ? isTech
+        ? "ACK_RECEIVED"
+        : "Sent!"
+      : isTech
+        ? "TRANSMIT"
+        : "Join quest";
+
   return (
     <form
-      ref={formRef as React.RefObject<HTMLFormElement>}
+      ref={panelRef}
       onSubmit={handleSubmit}
-      className="p-4 sm:p-6 md:p-8 bg-muted-100/95 dark:bg-muted-900/90 border border-muted-200/95 dark:border-muted-700 rounded-2xl sm:rounded-3xl backdrop-blur-md shadow-[0_2px_10px_rgba(28,25,23,0.08)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.35)] verse-scan-border verse-hover-hud opacity-0"
+      data-comms-panel
+      className={`comms-panel panel-surface opacity-0${isTech ? " verse-scan-border" : " gamify-form-panel"}`}
+      aria-label="Contact transmission form"
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
-        <div>
-          <label htmlFor="name" className="block text-sm font-medium text-muted-900 dark:text-muted-50 mb-2">
-            Name
-          </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base bg-muted-100 dark:bg-muted-800 border border-muted-200 dark:border-muted-700 rounded-lg sm:rounded-xl text-muted-900 dark:text-muted-50 placeholder-muted-400 dark:placeholder-muted-600 focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-500/20 dark:focus:ring-primary-400/20 transition-all duration-300"
-            placeholder="Your name"
-          />
-        </div>
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium text-muted-900 dark:text-muted-50 mb-2">
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base bg-muted-100 dark:bg-muted-800 border border-muted-200 dark:border-muted-700 rounded-lg sm:rounded-xl text-muted-900 dark:text-muted-50 placeholder-muted-400 dark:placeholder-muted-600 focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-500/20 dark:focus:ring-primary-400/20 transition-all duration-300"
-            placeholder="your.email@example.com"
-          />
-        </div>
-      </div>
-      
-      <div className="mb-4 sm:mb-6">
-        <label htmlFor="subject" className="block text-xs sm:text-sm font-medium text-muted-900 dark:text-muted-50 mb-2">
-          Subject
-        </label>
-        <input
-          type="text"
-          id="subject"
-          name="subject"
-          value={formData.subject}
-          onChange={handleChange}
-          required
-          className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base bg-muted-100 dark:bg-muted-800 border border-muted-200 dark:border-muted-700 rounded-lg sm:rounded-xl text-muted-900 dark:text-muted-50 placeholder-muted-400 dark:placeholder-muted-600 focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-500/20 dark:focus:ring-primary-400/20 transition-all duration-300"
-          placeholder="What's this about?"
-        />
-      </div>
-      
-      <div className="mb-4 sm:mb-6">
-        <label htmlFor="message" className="block text-xs sm:text-sm font-medium text-muted-900 dark:text-muted-50 mb-2">
-          Message
-        </label>
-        <textarea
-          id="message"
-          name="message"
-          value={formData.message}
-          onChange={handleChange}
-          required
-          rows={5}
-          className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base bg-muted-100 dark:bg-muted-800 border border-muted-200 dark:border-muted-700 rounded-lg sm:rounded-xl text-muted-900 dark:text-muted-50 placeholder-muted-400 dark:placeholder-muted-600 focus:outline-none focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-500/20 dark:focus:ring-primary-400/20 transition-all duration-300 resize-none"
-          placeholder="Tell me about your project..."
-        />
-      </div>
-      
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="w-full btn-primary touch-target disabled:opacity-50 disabled:cursor-not-allowed"
-      >
-        {isSubmitting ? "Sending..." : submitStatus === "success" ? "Message Sent!" : "Send Message"}
-      </button>
-      
-      {submitStatus === "success" && (
-        <p
-          ref={successRef}
-          className="mt-4 text-center text-primary-600 dark:text-primary-400 opacity-0"
-        >
-          Thank you! I&apos;ll get back to you soon.
-        </p>
+      {isTech && (
+        <>
+          <span className="comms-panel__corner comms-panel__corner--tl" aria-hidden />
+          <span className="comms-panel__corner comms-panel__corner--tr" aria-hidden />
+          <span className="comms-panel__corner comms-panel__corner--bl" aria-hidden />
+          <span className="comms-panel__corner comms-panel__corner--br" aria-hidden />
+          <span className="comms-panel__scan" aria-hidden />
+        </>
       )}
-      
-      <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-muted-200 dark:border-muted-700">
-        <p className="text-xs sm:text-sm text-muted-600 dark:text-muted-400 text-center mb-3 sm:mb-4">Or reach out directly:</p>
-        <div className="flex flex-col xs:flex-row items-center justify-center gap-2 sm:gap-4 text-sm sm:text-base">
-          <a
-            href="mailto:israelmenyaga@gmail.com"
-            className="touch-target text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-300 break-all xs:break-normal text-center"
-          >
-            israelvictor126@gmail.com
-          </a>
-          <span className="hidden xs:inline text-muted-400 dark:text-muted-600">•</span>
-          <a
-            href="tel:+2349137437424"
-            className="touch-target text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-300"
-          >
-            +234 913 743 7424
-          </a>
+
+      <header className="comms-panel__head">
+        <div>
+          <p className={`comms-panel__tag${isTech ? " font-mono" : " gamify-badge"}`}>
+            {isTech ? "ARC_REACTOR: ONLINE" : "Quest log"}
+          </p>
+          <h2 className="comms-panel__title font-display">
+            {isTech ? "Secure transmission" : "Send a message"}
+          </h2>
         </div>
+        {isTech && (
+          <span className="comms-panel__badge font-mono" aria-live="polite">
+            {activeField ? `FOCUS::${activeField.toUpperCase()}` : "STANDBY"}
+          </span>
+        )}
+      </header>
+
+      <div className="comms-fields">
+        <div className="comms-fields__row">
+          {FIELDS.slice(0, 2).map((field) => (
+            <ContactField
+              key={field.name}
+              field={field}
+              value={formData[field.name]}
+              onChange={handleChange}
+              onFocus={() => setActiveField(field.name)}
+              onBlur={() => setActiveField((c) => (c === field.name ? null : c))}
+              isTech={isTech}
+            />
+          ))}
+        </div>
+
+        {FIELDS.slice(2).map((field) => (
+          <ContactField
+            key={field.name}
+            field={field}
+            value={formData[field.name]}
+            onChange={handleChange}
+            onFocus={() => setActiveField(field.name)}
+            onBlur={() => setActiveField((c) => (c === field.name ? null : c))}
+            fullWidth
+            isTech={isTech}
+          />
+        ))}
+      </div>
+
+      <div data-comms-action className="comms-actions opacity-0">
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className={`comms-transmit touch-target${isTech ? "" : " btn-primary w-full"}`}
+        >
+          {isTech && <span className="comms-transmit__glow" aria-hidden />}
+          <span className={`comms-transmit__label${isTech ? " font-mono" : " font-display"}`}>
+            {transmitLabel}
+          </span>
+        </button>
+
+        {submitStatus === "success" && (
+          <div
+            ref={successRef}
+            className="comms-ack border-success/40 bg-success/10"
+            role="status"
+            aria-live="polite"
+          >
+            <span className="comms-ack__icon text-success" aria-hidden>
+              ✓
+            </span>
+            <div>
+              <p className="comms-ack__title text-success font-display">
+                {isTech ? "TRANSMISSION_ACK" : "Quest submitted!"}
+              </p>
+              <p className="comms-ack__body">
+                {isTech
+                  ? "Packet received. Expect a response within one Earth rotation."
+                  : "+50 XP — I'll reply within 24 hours."}
+              </p>
+            </div>
+          </div>
+        )}
       </div>
     </form>
   );
 };
+
+function ContactField({
+  field,
+  value,
+  onChange,
+  onFocus,
+  onBlur,
+  fullWidth,
+  isTech,
+}: {
+  field: (typeof FIELDS)[number];
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onFocus: () => void;
+  onBlur: () => void;
+  fullWidth?: boolean;
+  isTech: boolean;
+}) {
+  const id = `comms-${field.name}`;
+  const gamifyLabels: Record<FieldName, string> = {
+    name: "Player name",
+    email: "Guild mail",
+    subject: "Quest title",
+    message: "Quest brief",
+  };
+  const sharedClass =
+    "comms-input w-full text-sm sm:text-base text-muted-900 dark:text-muted-100 placeholder:text-muted-400 dark:placeholder:text-muted-500";
+
+  return (
+    <div
+      data-comms-field
+      className={`comms-field opacity-0${fullWidth ? " comms-field--full" : ""}`}
+    >
+      <label
+        htmlFor={id}
+        className={`comms-label type-label${isTech ? " hud-label font-mono" : " font-semibold normal-case tracking-normal"}`}
+      >
+        {isTech ? field.label : gamifyLabels[field.name]}
+      </label>
+      <div data-comms-field-inner className="comms-field__inner">
+        {field.tag === "textarea" ? (
+          <textarea
+            id={id}
+            name={field.name}
+            value={value}
+            onChange={onChange}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            required
+            rows={field.rows ?? 4}
+            className={`${sharedClass} comms-input--area resize-none`}
+            placeholder={field.placeholder}
+          />
+        ) : (
+          <input
+            type={field.type}
+            id={id}
+            name={field.name}
+            value={value}
+            onChange={onChange}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            required
+            className={sharedClass}
+            placeholder={field.placeholder}
+          />
+        )}
+      </div>
+    </div>
+  );
+}

@@ -40,19 +40,19 @@ export const NavList = (props: {
                         ? "text-primary-700 dark:text-primary-400"
                         : "text-muted-700 dark:text-muted-300 hover:text-primary-700 dark:hover:text-primary-400"
                     }`
-                  : `text-xs lg:text-sm font-medium transition-all duration-300 relative pb-1.5 whitespace-nowrap ${
+                  : `relative whitespace-nowrap pb-1.5 text-xs font-medium transition-all duration-300 lg:text-sm ${
                       isActive
                         ? "text-primary-700 dark:text-primary-400"
                         : "text-muted-600 dark:text-muted-400 hover:text-primary-700 dark:hover:text-primary-400"
                     }`
               }
             >
-              {item.label}
+              <span>{item.label}</span>
               {!isMobileMenu && isActive && (
-                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary-500 dark:bg-primary-400 rounded-full" />
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full bg-primary-500 dark:bg-primary-400" />
               )}
               {!isMobileMenu && (
-                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary-500 dark:bg-primary-400 rounded-full scale-x-0 transition-transform duration-300 hover:scale-x-100" />
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 scale-x-0 rounded-full bg-primary-500 transition-transform duration-300 hover:scale-x-100 dark:bg-primary-400" />
               )}
             </Link>
           </li>

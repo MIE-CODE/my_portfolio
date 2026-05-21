@@ -29,7 +29,7 @@ export function HomePage() {
     if (reduced) {
       gsap.set(
         root.querySelectorAll(
-          "[data-hero-xp], [data-hero-title], [data-hero-intro], [data-hero-stats], [data-hero-achievements], [data-hero-keyboard], [data-hero-actions] > *, [data-hero-stat], [data-hero-badge], #skills [data-stack-item]",
+          "[data-hero-xp], [data-hero-title], [data-hero-intro], [data-hero-stats], [data-hero-achievements], [data-hero-keyboard], [data-hero-actions] > *, [data-hero-stat], [data-hero-badge], #skills #skills-heading, #skills [data-stack-intro], #skills [data-stack-category], #skills [data-stack-card]",
         ),
         {
           opacity: 1,
@@ -100,8 +100,7 @@ export function HomePage() {
                 </span>
               </p>
               <p className="text-xs sm:text-sm font-mono text-muted-500 dark:text-muted-500 tracking-wide px-2">
-                React · Next.js · TypeScript · NestJS · AI · Fintech ·
-                Healthcare
+                React · Next.js · Node.js · NestJS · PostgreSQL · Docker · AI
               </p>
             </div>
             <div

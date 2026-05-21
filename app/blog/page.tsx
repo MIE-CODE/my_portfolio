@@ -1,4 +1,4 @@
-import { BlogList } from "@/src/components/BlogList";
+import { BlogPageContent } from "@/src/components/BlogPageContent";
 import { JsonLd } from "@/src/components/JsonLd";
 import { PageHeader } from "@/src/components/PageHeader";
 import { buildPageMetadata } from "@/src/seo/buildMetadata";
@@ -18,16 +18,20 @@ export default function BlogPage() {
       />
       <main
         id="main-content"
-        className="page-shell"
+        className="page-shell stream-page"
         data-parallax-depth="0.1"
       >
-        <div className="container-custom">
+        <div className="container-custom max-w-6xl">
           <PageHeader
-            title="< Blog >"
-            description="Insights, tutorials, and thoughts on modern web development"
-            descriptionMobile="Tutorials and notes on modern web development."
+            title="< DATA_STREAM />"
+            description="Decoded log buffer — tutorials, architecture notes, and field reports from production React, Next.js, and product work."
+            description2="Filter by topic or open a packet for the full transmission."
+            descriptionMobile="Tutorials and field reports on modern web engineering."
+            description2Mobile="Filter by topic or open a full packet."
+            className="mb-8 sm:mb-12"
+            preset="scanLeft"
           />
-          <BlogList />
+          <BlogPageContent />
         </div>
       </main>
     </>

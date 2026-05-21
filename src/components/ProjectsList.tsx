@@ -422,15 +422,15 @@ export const ProjectsList = () => {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         cards,
-        { opacity: 0, y: 48, scale: 0.94, rotateZ: 2 },
+        { opacity: 0, y: 28, scale: 0.97, rotateZ: 1 },
         {
           opacity: 1,
           y: 0,
           scale: 1,
           rotateZ: 0,
-          duration: 0.75,
-          stagger: 0.08,
-          ease: "expo.out",
+          duration: 0.48,
+          stagger: 0.035,
+          ease: "power2.out",
         },
       );
     }, grid);
