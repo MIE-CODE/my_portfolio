@@ -3,7 +3,7 @@ import { SiteShell } from "../src/components/SiteShell";
 import { ThemeProviderWrapper } from "../src/components/ThemeProviderWrapper";
 import { JsonLd } from "@/src/components/JsonLd";
 import { SeoHeadLinks } from "@/src/components/SeoHeadLinks";
-import { inter, jetbrainsMono } from "@/src/lib/fonts";
+import { fontVariables } from "@/src/lib/fonts";
 import { buildRootMetadata } from "@/src/seo/buildMetadata";
 import { rootJsonLdGraph } from "@/src/seo/jsonLd";
 import { SITE } from "@/src/seo/site";
@@ -28,7 +28,8 @@ export default function RootLayout({
   return (
     <html
       lang={SITE.language}
-      className={`${inter.variable} ${jetbrainsMono.variable}`}
+      data-mode="gamify"
+      className={fontVariables}
       suppressHydrationWarning
     >
       <head>
@@ -37,16 +38,18 @@ export default function RootLayout({
             __html: `
               (function() {
                 try {
-                  const savedTheme = localStorage.getItem('theme');
-                  const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                  const resolvedTheme = savedTheme === 'system' || !savedTheme 
-                    ? (systemPrefersDark ? 'dark' : 'light')
-                    : savedTheme;
-                  if (resolvedTheme === 'dark') {
+                  var mode = localStorage.getItem('app-mode');
+                  document.documentElement.dataset.mode =
+                    (mode === 'tech' || mode === 'gamify') ? mode : 'gamify';
+                  /* app-mode — read by getBootAppMode() for splash + theme */
+                  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
                     document.documentElement.classList.add('dark');
                   } else {
                     document.documentElement.classList.remove('dark');
                   }
+                  localStorage.removeItem('theme');
+                  var navLayout = localStorage.getItem('app-nav-layout');
+                  document.documentElement.dataset.navDeck = navLayout === 'deck' ? 'open' : '';
                 } catch (e) {}
               })();
             `,

@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
+import { ensureDocumentScrollable } from "@/src/lib/ensureScrollable";
 import { lockScroll, unlockScroll } from "@/src/lib/scrollLock";
 import { CloseIcon } from "../svg";
 import { NavList } from "./navlist";
@@ -17,10 +18,16 @@ export const Modal = ({
   const closeBtnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    if (!modal) return;
+    if (!modal) {
+      ensureDocumentScrollable();
+      return;
+    }
     lockScroll();
     closeBtnRef.current?.focus();
-    return () => unlockScroll();
+    return () => {
+      unlockScroll();
+      ensureDocumentScrollable();
+    };
   }, [modal]);
 
   useEffect(() => {

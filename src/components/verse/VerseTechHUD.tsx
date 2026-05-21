@@ -7,17 +7,15 @@ import * as THREE from "three";
 import { getTechSnippet } from "@/src/config/verseTechSnippets";
 import type { VerseLandmark } from "@/src/config/verseLandmarks";
 import { VERSE_LANDMARKS } from "@/src/config/verseLandmarks";
+import { useVersePalette } from "@/src/contexts/VersePaletteContext";
 import type { VerseTarget } from "./verseState";
 import { landmarkFocusStrengthFromCamera, verseTargetToWorld } from "./verseState";
 
-const HUD_CYAN = "#4ee8ff";
-const HUD_AMBER = "#ffb347";
-const HUD_OUTLINE = "#0a2030";
-
 function useHudPalette() {
+  const { hud } = useVersePalette();
   return useMemo(
-    () => ({ cyan: HUD_CYAN, amber: HUD_AMBER, outline: HUD_OUTLINE }),
-    [],
+    () => ({ cyan: hud.cyan, amber: hud.amber, outline: hud.outline, panelBg: hud.panelBg }),
+    [hud.amber, hud.cyan, hud.outline, hud.panelBg],
   );
 }
 
@@ -285,6 +283,7 @@ function CodeBillboard({
   hudCyan,
   hudAmber,
   hudOutline,
+  hudPanelBg,
 }: {
   landmark: VerseLandmark;
   energyRef: React.MutableRefObject<number>;
@@ -292,6 +291,7 @@ function CodeBillboard({
   hudCyan: string;
   hudAmber: string;
   hudOutline: string;
+  hudPanelBg: string;
 }) {
   const snippet = useMemo(() => getTechSnippet(landmark.id), [landmark.id]);
   const group = useRef<THREE.Group>(null);
@@ -313,7 +313,7 @@ function CodeBillboard({
         <mesh position={[2.2, -1.4, -0.05]}>
           <planeGeometry args={[4.6, 3.2]} />
           <meshBasicMaterial
-            color="#020810"
+            color={hudPanelBg}
             transparent
             opacity={0.45}
             depthWrite={false}
@@ -409,7 +409,7 @@ function DataTicks({
 }
 
 function TechLandmarkHud({ landmark, targetRef, quality }: HudProps) {
-  const { cyan, amber, outline } = useHudPalette();
+  const { cyan, amber, outline, panelBg } = useHudPalette();
   const energy = useHudFocus(targetRef, landmark.position);
   const s = landmark.scale;
   const shell = useRef<THREE.Group>(null);
@@ -480,6 +480,7 @@ function TechLandmarkHud({ landmark, targetRef, quality }: HudProps) {
           hudCyan={cyan}
           hudAmber={amber}
           hudOutline={outline}
+          hudPanelBg={panelBg}
         />
       </group>
     </group>

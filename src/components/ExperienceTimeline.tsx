@@ -1,7 +1,7 @@
 "use client";
 
 import { ExperienceCard } from "./ExperienceCard";
-import { useExperienceTimelineMotion } from "../hooks/useExperienceTimelineMotion";
+import { useExperienceItemsReveal } from "../hooks/useExperienceItemsReveal";
 import { useGsapReveal } from "../hooks/useGsapReveal";
 
 /** Dates and titles aligned with Israel_menyaga_cv.pdf */
@@ -70,7 +70,7 @@ const education = [
 ];
 
 export function ExperienceTimeline() {
-  const workRef = useExperienceTimelineMotion();
+  const workRef = useExperienceItemsReveal();
   const eduRef = useGsapReveal({
     preset: "smoothRise",
     stagger: 0.1,
@@ -80,7 +80,7 @@ export function ExperienceTimeline() {
 
   return (
     <div className="space-y-14 sm:space-y-16">
-      <section aria-labelledby="work-experience-heading">
+      <section aria-labelledby="work-experience-heading" className="scroll-mt-24">
         <h2
           id="work-experience-heading"
           className="text-xl sm:text-2xl font-semibold text-muted-900 dark:text-muted-50 mb-8 sm:mb-10"
@@ -89,29 +89,27 @@ export function ExperienceTimeline() {
         </h2>
 
         <div
-          ref={workRef}
-          className="experience-timeline relative pl-8 sm:pl-16"
+          ref={workRef as React.RefObject<HTMLDivElement>}
+          className="experience-timeline relative"
         >
-          <div
-            className="experience-timeline__rail"
-            aria-hidden
-          />
+          <div className="experience-timeline__rail" aria-hidden />
 
           <ol className="space-y-8 sm:space-y-10">
             {experiences.map((exp) => (
               <li
                 key={`${exp.company}-${exp.year}`}
                 data-exp-item
-                className="experience-timeline__item relative"
+                className="experience-timeline__item grid grid-cols-[1.375rem_minmax(0,1fr)] gap-x-4 opacity-0 sm:grid-cols-[2rem_minmax(0,1fr)] sm:gap-x-6"
               >
-                <span
-                  className="experience-timeline__dot"
-                  aria-hidden
-                />
-                <time className="experience-timeline__date font-mono text-xs sm:text-sm text-primary-600 dark:text-primary-400 tabular-nums block mb-3">
-                  {exp.year}
-                </time>
-                <ExperienceCard {...exp} hideYear />
+                <div className="experience-timeline__marker flex justify-center pt-1.5 sm:pt-2">
+                  <span className="experience-timeline__dot" aria-hidden />
+                </div>
+                <div className="min-w-0">
+                  <time className="experience-timeline__date font-mono text-xs sm:text-sm text-primary-600 dark:text-primary-400 tabular-nums block mb-3">
+                    {exp.year}
+                  </time>
+                  <ExperienceCard {...exp} hideYear />
+                </div>
               </li>
             ))}
           </ol>

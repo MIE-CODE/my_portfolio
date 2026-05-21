@@ -4,10 +4,16 @@ import {
   createContext,
   useContext,
   useEffect,
+  useLayoutEffect,
   useState,
   type ReactNode,
 } from "react";
-import { resetScrollLock } from "@/src/lib/scrollLock";
+import {
+  DEFAULT_APP_MODE,
+  getBootAppMode,
+  type AppMode,
+} from "@/src/lib/appMode";
+import { ensureDocumentScrollable } from "@/src/lib/ensureScrollable";
 
 type AppLoadContextValue = {
   /** True once the splash is done and the main app tree is mounted. */
@@ -21,23 +27,40 @@ export function useAppReady() {
 }
 
 /**
- * While loading, only the splash is in the DOM. The full app (verse, nav, pages)
- * mounts after window load + a short minimum display, then the splash unmounts.
+ * App mounts immediately under a fixed splash overlay so document height and
+ * native scroll work as soon as the page paints. Splash fades out after load.
  */
 export function AppLoadProvider({ children }: { children: ReactNode }) {
+  const [splashMode, setSplashMode] = useState<AppMode>(DEFAULT_APP_MODE);
+  const [showSplash, setShowSplash] = useState(false);
+  const isTech = splashMode === "tech";
   const [windowLoaded, setWindowLoaded] = useState(false);
   const [minElapsed, setMinElapsed] = useState(false);
   const [exiting, setExiting] = useState(false);
   const [gone, setGone] = useState(false);
 
+  useLayoutEffect(() => {
+    setSplashMode(getBootAppMode());
+    setShowSplash(true);
+  }, []);
+
   useEffect(() => {
-    const onLoad = () => setWindowLoaded(true);
-    if (document.readyState === "complete") {
-      setWindowLoaded(true);
-    } else {
-      window.addEventListener("load", onLoad);
-      return () => window.removeEventListener("load", onLoad);
+    const markLoaded = () => setWindowLoaded(true);
+    if (
+      document.readyState === "complete" ||
+      document.readyState === "interactive"
+    ) {
+      markLoaded();
+      return;
     }
+    window.addEventListener("load", markLoaded, { once: true });
+    document.addEventListener("DOMContentLoaded", markLoaded, { once: true });
+    const t = window.setTimeout(markLoaded, 4000);
+    return () => {
+      window.removeEventListener("load", markLoaded);
+      document.removeEventListener("DOMContentLoaded", markLoaded);
+      clearTimeout(t);
+    };
   }, []);
 
   useEffect(() => {
@@ -63,7 +86,7 @@ export function AppLoadProvider({ children }: { children: ReactNode }) {
       setWindowLoaded(true);
       setMinElapsed(true);
       setExiting(true);
-    }, 14000);
+    }, 8000);
     return () => {
       cancelled = true;
       clearTimeout(t);
@@ -79,38 +102,69 @@ export function AppLoadProvider({ children }: { children: ReactNode }) {
   }, [exiting]);
 
   useEffect(() => {
-    if (gone) resetScrollLock();
+    if (gone) ensureDocumentScrollable();
   }, [gone]);
 
-  if (gone) {
-    return (
-      <AppLoadContext.Provider value={{ appReady: true }}>
-        {children}
-      </AppLoadContext.Provider>
-    );
-  }
-
   return (
-    <AppLoadContext.Provider value={{ appReady: false }}>
-      <div
-        className={`app-splash fixed inset-0 z-[9999] isolate min-h-dvh w-full overflow-hidden${exiting ? " app-splash--exiting" : ""}`}
-        role="progressbar"
-        aria-valuetext="Loading portfolio"
-        aria-busy={!exiting}
-      >
-        <div className="app-splash__inner">
-          <div className="app-splash__mark" aria-hidden>
-            <span className="app-splash__mark-line" />
-            <span className="app-splash__mark-line app-splash__mark-line--delay" />
-          </div>
-          <p className="app-splash__title font-mono text-sm tracking-[0.35em] text-muted-800 dark:text-muted-100">
-            M_I_E_CODE
-          </p>
-          <p className="app-splash__subtitle mt-2 text-xs text-muted-500 dark:text-muted-400">
-            Loading scene & assets…
-          </p>
+    <AppLoadContext.Provider value={{ appReady: gone }}>
+      <div {...(!gone ? { inert: true as const } : {})}>{children}</div>
+      {showSplash && !gone && (
+        <div
+          className={`app-splash app-splash--${splashMode} pointer-events-none fixed inset-0 z-[9999] isolate min-h-dvh w-full overflow-hidden${exiting ? " app-splash--exiting" : ""}`}
+          suppressHydrationWarning
+          role="progressbar"
+          aria-valuetext={isTech ? "Initializing HUD" : "Loading quest"}
+          aria-busy={!exiting}
+        >
+          {isTech ? (
+            <>
+              <span className="app-splash__scan" aria-hidden />
+              <div className="app-splash__frame" aria-hidden>
+                <span className="app-splash__corner app-splash__corner--tl" />
+                <span className="app-splash__corner app-splash__corner--tr" />
+                <span className="app-splash__corner app-splash__corner--bl" />
+                <span className="app-splash__corner app-splash__corner--br" />
+              </div>
+              <div className="app-splash__inner pointer-events-none">
+                <div className="app-splash__mark" aria-hidden>
+                  <span className="app-splash__mark-line" />
+                  <span className="app-splash__mark-line app-splash__mark-line--delay" />
+                </div>
+                <p className="app-splash__tag type-label hud-label font-mono">
+                  BOOT_SEQUENCE
+                </p>
+                <p className="app-splash__title font-mono">M_I_E_CODE</p>
+                <div className="app-splash__loader app-splash__loader--hud" aria-hidden>
+                  {Array.from({ length: 5 }, (_, i) => (
+                    <span
+                      key={i}
+                      className="app-splash__loader-seg"
+                      style={{ animationDelay: `${i * 0.12}s` }}
+                    />
+                  ))}
+                </div>
+              </div>
+            </>
+          ) : (
+            <div className="app-splash__inner pointer-events-none">
+              <span className="app-splash__orb" aria-hidden />
+              <p className="app-splash__title font-display gradient-text">MIE</p>
+              <div className="app-splash__loader app-splash__loader--quest" aria-hidden>
+                {Array.from({ length: 3 }, (_, i) => (
+                  <span
+                    key={i}
+                    className="app-splash__loader-dot"
+                    style={{ animationDelay: `${i * 0.15}s` }}
+                  />
+                ))}
+              </div>
+              <div className="app-splash__xp" aria-hidden>
+                <span className="app-splash__xp-fill" />
+              </div>
+            </div>
+          )}
         </div>
-      </div>
+      )}
     </AppLoadContext.Provider>
   );
 }

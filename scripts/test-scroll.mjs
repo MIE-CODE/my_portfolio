@@ -21,22 +21,26 @@ async function main() {
       htmlOverflow: getComputedStyle(document.documentElement).overflow,
       htmlInline: document.documentElement.style.overflow,
       bodyInline: document.body.style.overflow,
-      scrollLocked: document.documentElement.classList.contains("scroll-locked"),
+      scrollLocked:
+        document.body.classList.contains("scroll-locked") ||
+        document.documentElement.classList.contains("scroll-locked"),
       splash: !!document.querySelector(".app-splash"),
     }));
 
-    if (before.splash) {
-      await page.waitForFunction(() => !document.querySelector(".app-splash"), {
-        timeout: 20000,
-      });
-      await page.waitForTimeout(500);
-    }
+    await page.waitForFunction(
+      () => document.documentElement.scrollHeight > window.innerHeight + 80,
+      { timeout: 45000 },
+    );
+    await page.waitForTimeout(600);
 
     const ready = await page.evaluate(() => ({
       scrollHeight: document.documentElement.scrollHeight,
       clientHeight: document.documentElement.clientHeight,
-      scrollLocked: document.documentElement.classList.contains("scroll-locked"),
+      scrollLocked:
+        document.body.classList.contains("scroll-locked") ||
+        document.documentElement.classList.contains("scroll-locked"),
       bodyInline: document.body.style.overflow,
+      splash: !!document.querySelector(".app-splash"),
     }));
 
     const canScroll = ready.scrollHeight > ready.clientHeight + 80;

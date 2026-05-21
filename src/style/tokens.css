@@ -1,0 +1,235 @@
+/**
+ * Portfolio dual-mode design tokens (Tech MARK VII + Gamify Quest UI).
+ * See docs/STYLE_GUIDE.md for the full reference.
+ */
+
+/* --- Shared (both modes) --- */
+:root {
+  --space-1: 0.25rem; /* 4px */
+  --space-2: 0.5rem; /* 8px */
+  --space-3: 0.75rem; /* 12px */
+  --space-4: 1rem; /* 16px */
+  --space-6: 1.5rem; /* 24px */
+  --space-8: 2rem; /* 32px */
+  --space-12: 3rem; /* 48px */
+
+  --text-display: 2rem; /* 32px */
+  --text-h1: 1.5rem; /* 24px */
+  --text-body: 0.875rem; /* 14px */
+  --text-label: 0.625rem; /* 10px */
+
+  /* Shared semantic (identical meaning in both modes) */
+  --color-success: 34 139 34; /* #228B22 */
+  --color-warning: 255 215 0; /* #FFD700 */
+  --color-error: 178 34 34; /* #B22222 */
+  --color-info: 30 144 255; /* #1E90FF */
+}
+
+/* --- Tech light (Iron Man HUD) --- */
+:root[data-mode="tech"] {
+  --radius-ui: 4px;
+  --radius-sharp: 2px;
+  --radius-field: 4px;
+  --border-ui: 1px;
+
+  --primary-50: 244 247 250;
+  --primary-100: 200 214 227;
+  --primary-200: 168 198 216;
+  --primary-300: 120 160 190;
+  --primary-400: 74 122 158;
+  --primary-500: 26 90 138; /* #1a5a8a */
+  --primary-600: 20 72 110;
+  --primary-700: 16 58 88;
+  --primary-800: 12 44 66;
+  --primary-900: 10 33 50;
+
+  --accent-50: 255 248 235;
+  --accent-100: 255 236 200;
+  --accent-200: 255 220 150;
+  --accent-300: 255 200 100;
+  --accent-400: 255 190 80;
+  --accent-500: 212 144 10; /* gold #d4900a */
+  --accent-600: 180 120 8;
+  --accent-700: 150 100 6;
+  --accent-800: 120 80 5;
+  --accent-900: 90 60 4;
+
+  --muted-50: 244 247 250;
+  --muted-100: 235 242 250;
+  --muted-200: 210 222 235;
+  --muted-300: 168 190 210;
+  --muted-400: 120 145 170;
+  --muted-500: 85 110 140;
+  --muted-600: 60 85 115;
+  --muted-700: 42 61 82;
+  --muted-800: 26 45 68;
+  --muted-900: 10 21 32;
+  --muted-950: 8 16 24;
+
+  --surface-bg: 236 242 248;
+  --surface-card: 228 236 246;
+  --surface-border: 168 190 210;
+  --hud-cyan: 78 232 255;
+  --hud-steel: 42 61 82;
+  --hud-gold: 255 179 71;
+  --hud-danger: 230 57 70;
+
+  --gradient-primary-from: 26 90 138;
+  --gradient-primary-via: 42 61 82;
+  --gradient-primary-to: 78 232 255;
+}
+
+/* --- Tech dark — Navy #0a1520, Arc #4ee8ff --- */
+:root.dark[data-mode="tech"] {
+  --primary-50: 200 230 245;
+  --primary-100: 160 210 235;
+  --primary-200: 120 190 225;
+  --primary-300: 90 170 215;
+  --primary-400: 78 232 255;
+  --primary-500: 78 232 255; /* Arc */
+  --primary-600: 62 186 204;
+  --primary-700: 48 145 160;
+  --primary-800: 36 110 125;
+  --primary-900: 24 75 85;
+
+  --accent-50: 255 248 235;
+  --accent-100: 255 236 200;
+  --accent-200: 255 220 150;
+  --accent-300: 255 200 100;
+  --accent-400: 255 190 80;
+  --accent-500: 255 179 71; /* Gold */
+  --accent-600: 230 160 60;
+  --accent-700: 200 140 50;
+  --accent-800: 170 120 40;
+  --accent-900: 140 100 30;
+
+  --muted-50: 30 48 72;
+  --muted-100: 20 29 43;
+  --muted-200: 30 48 72;
+  --muted-300: 42 61 82;
+  --muted-400: 74 106 133;
+  --muted-500: 120 150 180;
+  --muted-600: 160 190 220;
+  --muted-700: 200 230 245;
+  --muted-800: 220 240 250;
+  --muted-900: 10 21 32;
+  --muted-950: 6 12 18;
+
+  --surface-bg: 10 21 32;
+  --surface-card: 20 29 43;
+  --surface-border: 30 48 72;
+  --hud-cyan: 78 232 255;
+  --hud-steel: 42 61 82;
+  --hud-gold: 255 179 71;
+  --hud-danger: 230 57 70;
+
+  --gradient-primary-from: 24 75 85;
+  --gradient-primary-via: 42 61 82;
+  --gradient-primary-to: 78 232 255;
+}
+
+/* --- Gamify light --- */
+:root[data-mode="gamify"] {
+  --radius-ui: 12px;
+  --radius-sharp: 8px;
+  --radius-field: 8px;
+  --radius-quest: 12px;
+  --border-ui: 2px;
+
+  --primary-50: 250 245 255;
+  --primary-100: 243 232 255;
+  --primary-200: 233 213 255;
+  --primary-300: 216 180 254;
+  --primary-400: 192 132 252;
+  --primary-500: 124 58 237; /* magic #7c3aed */
+  --primary-600: 109 40 217;
+  --primary-700: 91 33 182;
+  --primary-800: 76 29 149;
+  --primary-900: 59 7 100;
+
+  --accent-50: 254 252 232;
+  --accent-100: 254 249 195;
+  --accent-200: 253 230 138;
+  --accent-300: 252 211 77;
+  --accent-400: 251 191 36;
+  --accent-500: 202 138 4; /* gold #ca8a04 */
+  --accent-600: 180 120 6;
+  --accent-700: 150 100 8;
+  --accent-800: 120 80 10;
+  --accent-900: 90 60 12;
+
+  --muted-50: 250 245 255;
+  --muted-100: 255 255 255;
+  --muted-200: 237 233 254;
+  --muted-300: 221 214 254;
+  --muted-400: 180 160 220;
+  --muted-500: 130 110 160;
+  --muted-600: 90 70 120;
+  --muted-700: 59 7 100;
+  --muted-800: 45 5 80;
+  --muted-900: 30 5 60;
+  --muted-950: 20 3 40;
+
+  --surface-bg: 250 245 255;
+  --surface-card: 255 255 255;
+  --surface-border: 221 214 254;
+  --hud-cyan: 124 58 237;
+  --hud-steel: 74 36 116;
+  --hud-gold: 251 191 36;
+  --hud-danger: 178 34 34;
+  --level-up: 34 197 94;
+
+  --gradient-primary-from: 124 58 237;
+  --gradient-primary-via: 109 40 217;
+  --gradient-primary-to: 91 33 182;
+}
+
+/* --- Gamify dark — Void #12082a, Magic #a855f7 --- */
+:root.dark[data-mode="gamify"] {
+  --primary-50: 250 245 255;
+  --primary-100: 243 232 255;
+  --primary-200: 216 180 254;
+  --primary-300: 192 132 252;
+  --primary-400: 168 85 247;
+  --primary-500: 168 85 247; /* Magic */
+  --primary-600: 147 51 234;
+  --primary-700: 126 34 206;
+  --primary-800: 107 33 168;
+  --primary-900: 74 36 116;
+
+  --accent-50: 254 252 232;
+  --accent-100: 254 249 195;
+  --accent-200: 253 230 138;
+  --accent-300: 252 211 77;
+  --accent-400: 251 191 36;
+  --accent-500: 251 191 36; /* XP Gold #fbbf24 */
+  --accent-600: 245 158 11;
+  --accent-700: 217 119 6;
+  --accent-800: 180 98 5;
+  --accent-900: 146 79 4;
+
+  --muted-50: 74 36 116;
+  --muted-100: 42 26 72;
+  --muted-200: 74 36 116;
+  --muted-300: 107 63 170;
+  --muted-400: 160 140 200;
+  --muted-500: 200 180 220;
+  --muted-600: 220 210 235;
+  --muted-700: 233 213 255;
+  --muted-800: 237 225 255;
+  --muted-900: 18 8 42;
+  --muted-950: 12 4 28;
+
+  --surface-bg: 18 8 42;
+  --surface-card: 42 26 72;
+  --surface-border: 107 63 170;
+  --hud-cyan: 192 132 252;
+  --hud-steel: 74 36 116;
+  --hud-gold: 251 191 36;
+  --hud-danger: 230 57 70;
+  --level-up: 34 197 94;
+
+  --gradient-primary-from: 126 34 206;
+  --gradient-primary-via: 147 51 234;
+  --gradient-primary-to: 168 85 247;
+}
