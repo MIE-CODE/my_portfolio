@@ -3,7 +3,20 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { VERSE_EASE } from "@/src/config/verseMotion";
-import { playOnView } from "@/src/lib/playOnView";
+
+function showAll(
+  strip: HTMLElement | null,
+  sidebar: HTMLElement[],
+  cards: HTMLElement[],
+) {
+  gsap.set([strip, ...sidebar, ...cards].filter(Boolean), {
+    opacity: 1,
+    x: 0,
+    y: 0,
+    scale: 1,
+    clearProps: "opacity,transform,filter",
+  });
+}
 
 export function useBlogPageMotion(refreshKey?: string | number) {
   const ref = useRef<HTMLDivElement>(null);
@@ -18,84 +31,56 @@ export function useBlogPageMotion(refreshKey?: string | number) {
     const cards = gsap.utils.toArray<HTMLElement>("[data-stream-card]", root);
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) {
-      gsap.set([strip, ...sidebar, ...cards].filter(Boolean), {
-        opacity: 1,
-        clearProps: "transform,filter",
-      });
-      return;
-    }
-
-    let stopObserve: (() => void) | undefined;
 
     const ctx = gsap.context(() => {
-      if (strip) gsap.set(strip, { opacity: 0, y: -18 });
-      gsap.set(sidebar, { opacity: 0, x: -28 });
-      gsap.set(cards, { opacity: 0, y: 40, scale: 0.94 });
+      showAll(strip, sidebar, cards);
 
-      const play = () => {
-        const tl = gsap.timeline();
+      if (reduced) return;
 
-        if (strip) {
-          tl.to(strip, {
-            opacity: 1,
-            y: 0,
-            duration: 0.5,
-            ease: VERSE_EASE.hud,
-          });
-        }
-
-        tl.to(
-          sidebar,
-          {
-            opacity: 1,
-            x: 0,
-            duration: 0.6,
-            stagger: 0.09,
-            ease: VERSE_EASE.enter,
-          },
-          strip ? "-=0.2" : 0,
-        ).to(
+      if (hasPlayed.current) {
+        gsap.fromTo(
           cards,
+          { opacity: 0, y: 20, scale: 0.97 },
           {
             opacity: 1,
             y: 0,
             scale: 1,
-            duration: 0.7,
-            stagger: 0.08,
+            duration: 0.5,
+            stagger: 0.05,
             ease: VERSE_EASE.enter,
+            overwrite: "auto",
           },
-          "-=0.35",
         );
-      };
-
-      if (hasPlayed.current) {
-        gsap.set(cards, { opacity: 0, y: 24, scale: 0.97 });
-        gsap.to(cards, {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.55,
-          stagger: 0.06,
-          ease: VERSE_EASE.enter,
-        });
         return;
       }
 
-      stopObserve = playOnView(
-        root,
-        () => {
-          hasPlayed.current = true;
-          play();
+      hasPlayed.current = true;
+
+      if (strip) gsap.set(strip, { opacity: 0, y: -14 });
+      gsap.set(cards, { opacity: 0, y: 32, scale: 0.96 });
+
+      const tl = gsap.timeline({
+        defaults: { ease: VERSE_EASE.enter, overwrite: "auto" },
+      });
+
+      if (strip) {
+        tl.to(strip, { opacity: 1, y: 0, duration: 0.45, ease: VERSE_EASE.hud });
+      }
+
+      tl.to(
+        cards,
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.6,
+          stagger: 0.06,
         },
-        { rootMargin: "0px 0px -6% 0px", threshold: 0.04 },
+        strip ? "-=0.15" : 0,
       );
     }, root);
 
-    return () => {
-      stopObserve?.();
-      ctx.revert();
-    };
+    return () => ctx.revert();
   }, [refreshKey]);
 
   return ref;

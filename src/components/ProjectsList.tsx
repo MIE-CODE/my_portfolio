@@ -4,6 +4,10 @@ import { ProjectCard } from "./ProjectCard";
 import { StaticImageData } from "next/image";
 import { useGsapReveal } from "../hooks/useGsapReveal";
 import gsap from "gsap";
+import trueperkImg from "../images/trueperk.png";
+import sparkpayImg from "../images/sparkpay.png";
+import flyvergeImg from "../images/flyverge.png";
+import ecommerceImg from "../images/ecommerce.png";
 
 // Frontend Projects - Add your projects here
 const frontendProjects: Array<{
@@ -20,7 +24,7 @@ const frontendProjects: Array<{
 }> = [
   {
     id: 1,
-    img: require("../images/trueperk.png"),
+    img: trueperkImg,
     skills: [
       "Nuxt 3",
       "Vue 3",
@@ -39,7 +43,7 @@ const frontendProjects: Array<{
   },
   {
     id: 2,
-    img: require("../images/sparkpay.png"),
+    img: sparkpayImg,
     skills: ["Next.js", "React", "TypeScript", "SCSS"],
     title: "SparkPay",
     description:
@@ -51,7 +55,7 @@ const frontendProjects: Array<{
   },
   {
     id: 3,
-    img: require("../images/flyverge.png"),
+    img: flyvergeImg,
     skills: [
       "Next.js",
       "React 19",
@@ -71,7 +75,7 @@ const frontendProjects: Array<{
   },
   {
     id: 4,
-    img: require("../images/flyverge.png"),
+    img: flyvergeImg,
     skills: [
       "Next.js",
       "React",
@@ -90,7 +94,7 @@ const frontendProjects: Array<{
   },
   {
     id: 5,
-    img: require("../images/sparkpay.png"),
+    img: sparkpayImg,
     skills: [
       "Next.js 15",
       "React 19",
@@ -109,7 +113,7 @@ const frontendProjects: Array<{
   },
   {
     id: 6,
-    img: require("../images/flyverge.png"),
+    img: flyvergeImg,
     skills: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
     title: "Flyverge",
     description:
@@ -120,7 +124,7 @@ const frontendProjects: Array<{
   },
   {
     id: 7,
-    img: require("../images/ecommerce.png"),
+    img: ecommerceImg,
     skills: ["Three.js", "JavaScript", "CSS"],
     title: "Solar System",
     description:
@@ -131,7 +135,7 @@ const frontendProjects: Array<{
   },
   {
     id: 8,
-    img: require("../images/ecommerce.png"),
+    img: ecommerceImg,
     skills: ["React", "Tailwind CSS", "GSAP"],
     title: "E-commerce Platform",
     description:
@@ -225,7 +229,7 @@ const backendProjects: Array<{
 }> = [
   {
     id: 8,
-    img: require("../images/ecommerce.png"),
+    img: ecommerceImg,
     skills: ["Node.js", "Express.js", "MongoDB", "REST API"],
     title: "E-commerce API",
     description:
@@ -236,7 +240,7 @@ const backendProjects: Array<{
   },
   {
     id: 9,
-    img: require("../images/ecommerce.png"),
+    img: ecommerceImg,
     skills: ["NestJS", "PostgreSQL", "TypeScript", "GraphQL"],
     title: "Task Management API",
     description:
@@ -247,7 +251,7 @@ const backendProjects: Array<{
   },
   {
     id: 10,
-    img: require("../images/ecommerce.png"),
+    img: ecommerceImg,
     skills: ["Node.js", "Express.js", "MongoDB", "JWT"],
     title: "Authentication Service",
     description:
@@ -258,7 +262,7 @@ const backendProjects: Array<{
   },
   {
     id: 11,
-    img: require("../images/ecommerce.png"),
+    img: ecommerceImg,
     skills: ["Node.js", "Express.js", "Redis", "WebSocket"],
     title: "Real-time Chat API",
     description:
@@ -269,7 +273,7 @@ const backendProjects: Array<{
   },
   {
     id: 12,
-    img: require("../images/ecommerce.png"),
+    img: ecommerceImg,
     skills: ["NestJS", "PostgreSQL", "TypeScript", "Stripe"],
     title: "Payment Processing API",
     description:
@@ -280,7 +284,7 @@ const backendProjects: Array<{
   },
   {
     id: 13,
-    img: require("../images/ecommerce.png"),
+    img: ecommerceImg,
     skills: ["Node.js", "Express.js", "MongoDB", "AWS S3"],
     title: "File Upload Service",
     description:
@@ -291,7 +295,7 @@ const backendProjects: Array<{
   },
   {
     id: 14,
-    img: require("../images/ecommerce.png"),
+    img: ecommerceImg,
     skills: ["NestJS", "PostgreSQL", "TypeScript", "Bull Queue"],
     title: "Email Service API",
     description:
@@ -302,7 +306,7 @@ const backendProjects: Array<{
   },
   {
     id: 15,
-    img: require("../images/ecommerce.png"),
+    img: ecommerceImg,
     skills: ["Node.js", "Express.js", "MongoDB", "Socket.io"],
     title: "Notification Service",
     description:
@@ -313,7 +317,7 @@ const backendProjects: Array<{
   },
   {
     id: 16,
-    img: require("../images/ecommerce.png"),
+    img: ecommerceImg,
     skills: ["NestJS", "PostgreSQL", "TypeScript", "Elasticsearch"],
     title: "Search API",
     description:
@@ -324,7 +328,7 @@ const backendProjects: Array<{
   },
   {
     id: 17,
-    img: require("../images/ecommerce.png"),
+    img: ecommerceImg,
     skills: ["Node.js", "Express.js", "MongoDB", "RabbitMQ"],
     title: "Event-Driven API",
     description:
@@ -335,7 +339,7 @@ const backendProjects: Array<{
   },
   {
     id: 18,
-    img: require("../images/ecommerce.png"),
+    img: ecommerceImg,
     skills: ["NestJS", "PostgreSQL", "TypeScript", "Docker"],
     title: "Analytics API",
     description:
@@ -346,7 +350,7 @@ const backendProjects: Array<{
   },
   {
     id: 19,
-    img: require("../images/ecommerce.png"),
+    img: ecommerceImg,
     skills: ["Node.js", "Express.js", "MongoDB", "Jest"],
     title: "Social Media API",
     description:
@@ -357,7 +361,7 @@ const backendProjects: Array<{
   },
   {
     id: 20,
-    img: require("../images/ecommerce.png"),
+    img: ecommerceImg,
     skills: ["NestJS", "PostgreSQL", "TypeScript", "Kafka"],
     title: "Data Streaming API",
     description:
@@ -368,7 +372,7 @@ const backendProjects: Array<{
   },
   {
     id: 21,
-    img: require("../images/ecommerce.png"),
+    img: ecommerceImg,
     skills: ["Node.js", "Express.js", "MongoDB", "Swagger"],
     title: "API Gateway",
     description:
@@ -379,7 +383,7 @@ const backendProjects: Array<{
   },
   {
     id: 22,
-    img: require("../images/ecommerce.png"),
+    img: ecommerceImg,
     skills: ["NestJS", "PostgreSQL", "TypeScript", "gRPC"],
     title: "Microservices API",
     description:

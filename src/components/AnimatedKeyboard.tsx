@@ -176,14 +176,14 @@ export const AnimatedKeyboard = ({ suppressEntrance = false }: AnimatedKeyboardP
       className="w-full max-w-4xl mx-auto mt-4 sm:mt-6 md:mt-8 px-2 xs:px-3 sm:px-4 overflow-x-clip"
     >
       {/* Code Display */}
-      <div className="mb-3 sm:mb-4 p-3 sm:p-4 bg-muted-800/90 dark:bg-muted-800/50 rounded-lg border border-muted-300 dark:border-primary-500/20 font-mono text-xs sm:text-sm text-muted-900 dark:text-primary-400 min-h-[52px] sm:min-h-[60px] flex items-start sm:items-center overflow-x-auto max-w-full shadow-md dark:shadow-none">
-        <span className="text-primary-500 flex-shrink-0">$</span>
-        <span className="ml-2 text-muted-200 break-words">{currentText}</span>
-        <span className="animate-pulse text-primary-600 dark:text-primary-400 ml-1 flex-shrink-0">|</span>
+      <div className="keyboard-terminal mb-3 sm:mb-4 p-3 sm:p-4 rounded-lg font-mono text-xs sm:text-sm min-h-[52px] sm:min-h-[60px] flex items-start sm:items-center overflow-x-auto max-w-full">
+        <span className="keyboard-terminal__prompt flex-shrink-0">$</span>
+        <span className="keyboard-terminal__text ml-2 break-words">{currentText}</span>
+        <span className="keyboard-terminal__cursor animate-pulse ml-1 flex-shrink-0">|</span>
       </div>
 
       {/* Keyboard */}
-      <div className="keyboard-container bg-muted-800/80 dark:bg-muted-900/80 rounded-lg sm:rounded-xl p-2 xs:p-2.5 sm:p-3 md:p-4 border border-muted-700 shadow-2xl w-full">
+      <div className="keyboard-container keyboard-deck rounded-lg sm:rounded-xl p-2 xs:p-2.5 sm:p-3 md:p-4 w-full">
         {keyboardLayout.map((row, rowIndex) => {
           return (
             <div
@@ -201,26 +201,10 @@ export const AnimatedKeyboard = ({ suppressEntrance = false }: AnimatedKeyboardP
                       flex: `${flexRatio} 1 0%`,
                       minWidth: '0',
                     }}
-                    className={`
-                      h-8 sm:h-9 md:h-10
-                      flex items-center justify-center
-                      rounded sm:rounded-md
-                      text-[10px] xs:text-[11px] sm:text-xs
-                      font-medium
-                      transition-all duration-75 ease-out
-                      ${
-                        isPressed
-                          ? "bg-gradient-to-b from-primary-400 to-primary-600 text-white scale-[0.92] shadow-lg shadow-primary-500/60 translate-y-0.5 border-primary-400"
-                          : "bg-gradient-to-b from-muted-700 to-muted-800 dark:from-muted-800 dark:to-muted-900 text-muted-300 dark:text-muted-400 hover:from-muted-600 hover:to-muted-700 dark:hover:from-muted-700 dark:hover:to-muted-800"
-                      }
-                      border border-muted-600 dark:border-muted-700
-                      select-none
-                      relative
-                      overflow-hidden
-                    `}
+                    className={`keyboard-key h-8 sm:h-9 md:h-10 flex items-center justify-center rounded sm:rounded-md text-[10px] xs:text-[11px] sm:text-xs font-medium transition-all duration-75 ease-out select-none relative overflow-hidden${isPressed ? " keyboard-key--pressed" : ""}`}
                   >
                     {isPressed && (
-                      <div className="absolute inset-0 bg-primary-400/20 animate-pulse" />
+                      <div className="keyboard-key__glow absolute inset-0 animate-pulse" aria-hidden />
                     )}
                     <span className="relative z-10 truncate px-0.5 xs:px-1 text-center w-full">{getKeyDisplay(key)}</span>
                   </div>

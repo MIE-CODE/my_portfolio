@@ -1,6 +1,7 @@
 "use client";
-import Image, { StaticImageData } from "next/image";
+import { StaticImageData } from "next/image";
 import Link from "next/link";
+import { SitePreview } from "./SitePreview";
 import { GithubIcon, ApiIcon } from "../svg";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
@@ -46,24 +47,22 @@ export const ProjectCard = ({ project }: { project: Project }) => {
       role="listitem"
     >
       <div className="flex flex-col gap-3 flex-1">
-        {/* Project Image */}
-        <div className="relative w-full h-40 sm:h-48 rounded-lg overflow-hidden bg-muted-100/80 dark:bg-muted-800 border border-muted-200/95 dark:border-muted-700 flex items-center justify-center">
+        {/* Live site preview (Vercel-style) or backend placeholder */}
+        <div className="relative w-full overflow-hidden rounded-lg border border-muted-200/95 dark:border-muted-700 bg-muted-100/80 dark:bg-muted-900/80">
           {project.category === "Backend" ? (
-            <div className="w-full h-full flex items-center justify-center p-4">
+            <div className="flex h-40 sm:h-48 w-full items-center justify-center p-4">
               <ApiIcon />
             </div>
           ) : (
-            <Image
-              src={project.img}
-              alt={`${project.title} — project by Israel Enyo Menyaga (MIE)`}
-              loading="lazy"
-              fill
-              className="object-cover object-top"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            <SitePreview
+              url={project.link}
+              title={project.title}
+              fallback={project.img}
+              className="h-40 sm:h-48"
             />
           )}
           {/* Category Badge */}
-          <div className="absolute top-2 right-2">
+          <div className="absolute top-10 right-2 z-[2] sm:top-11">
             <span
               className={`px-2 py-1 text-xs font-mono rounded ${
                 project.category === "Frontend"

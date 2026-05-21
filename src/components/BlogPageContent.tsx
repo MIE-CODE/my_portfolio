@@ -44,7 +44,7 @@ export function BlogPageContent() {
     <div ref={motionRef} className="stream-layout">
       <div
         data-stream-strip
-        className={`stream-strip panel-surface opacity-0${isTech ? " verse-scan-border" : ""}`}
+        className={`stream-strip panel-surface stream-reveal${isTech ? " verse-scan-border" : ""}`}
         aria-label="Data stream status"
       >
         <span className="stream-strip__status">
@@ -60,17 +60,22 @@ export function BlogPageContent() {
       </div>
 
       <div className="stream-grid">
+        <section className="stream-main min-w-0" aria-label="Blog posts">
+          <BlogList posts={filtered} isTech={isTech} />
+        </section>
+
         <aside className="stream-sidebar" aria-label="Stream filters and telemetry">
           <p
             data-stream-sidebar-part
-            className={`stream-sidebar__label opacity-0${isTech ? " font-mono" : " font-display"}`}
+            className={`stream-sidebar__label stream-reveal${isTech ? " font-mono" : " font-display"}`}
           >
             {isTech ? "SECTOR_INDEX" : "Topics"}
           </p>
 
           <div
             data-stream-sidebar-part
-            className="stream-filters panel-surface opacity-0"
+            className="stream-filters panel-surface stream-reveal"
+            aria-label="Filter posts by topic"
           >
             <p className={`stream-filters__head${isTech ? " font-mono" : " font-display"}`}>
               {isTech ? "FILTER::TOPIC" : "Filter"}
@@ -114,7 +119,7 @@ export function BlogPageContent() {
 
           <div
             data-stream-sidebar-part
-            className="stream-telemetry panel-surface opacity-0"
+            className="stream-telemetry panel-surface stream-reveal"
             aria-hidden
           >
             <p className={`stream-telemetry__head${isTech ? " font-mono" : " font-display"}`}>
@@ -137,8 +142,6 @@ export function BlogPageContent() {
             )}
           </div>
         </aside>
-
-        <BlogList posts={filtered} isTech={isTech} />
       </div>
     </div>
   );
