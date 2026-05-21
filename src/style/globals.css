@@ -1113,6 +1113,19 @@
 
   .mobile-nav-panel__toolbar {
     border-color: rgb(var(--surface-border) / 0.85);
+    padding-top: max(0.75rem, env(safe-area-inset-top, 0px));
+    padding-right: max(1rem, env(safe-area-inset-right, 0px));
+    padding-bottom: 0.75rem;
+    padding-left: max(1rem, env(safe-area-inset-left, 0px));
+  }
+
+  @media (min-width: 640px) {
+    .mobile-nav-panel__toolbar {
+      padding-top: max(1rem, env(safe-area-inset-top, 0px));
+      padding-right: max(1.25rem, env(safe-area-inset-right, 0px));
+      padding-bottom: 1rem;
+      padding-left: max(1.25rem, env(safe-area-inset-left, 0px));
+    }
   }
 
   .mobile-nav-panel__title {
@@ -1138,17 +1151,9 @@
   }
 
   .mobile-nav-close {
-    @apply rounded-lg border text-muted-700 transition-colors duration-200 dark:text-muted-300;
+    @apply ml-auto rounded-lg border text-muted-700 transition-colors duration-200 dark:text-muted-300;
     border-color: rgb(var(--surface-border) / 0.9);
     background: rgb(var(--surface-card) / 0.9);
-  }
-
-  .mobile-nav-close:hover {
-    background: rgb(var(--muted-100));
-  }
-
-  html.dark .mobile-nav-close:hover {
-    background: rgb(var(--muted-800));
   }
 
   .mobile-nav-close svg {
@@ -1166,7 +1171,7 @@
   }
 
   html.dark .mobile-nav-trigger:hover {
-    background: rgb(var(--muted-800));
+    background: rgb(var(--muted-100));
   }
 
   html[data-mode="tech"] .mobile-nav-close,
@@ -1746,8 +1751,12 @@
   }
 
   .verse-hud-panel {
-    border-color: rgb(var(--verse-hud-border) / var(--verse-hud-border-alpha)) !important;
-    background: rgb(var(--verse-hud-panel-bg) / var(--verse-hud-panel-bg-alpha)) !important;
+    border-color: rgb(
+      var(--verse-hud-border) / var(--verse-hud-border-alpha)
+    ) !important;
+    background: rgb(
+      var(--verse-hud-panel-bg) / var(--verse-hud-panel-bg-alpha)
+    ) !important;
     box-shadow:
       0 0 24px rgb(var(--verse-hud-border) / 0.12),
       inset 0 0 20px rgb(var(--verse-hud-border) / 0.04);
@@ -1772,7 +1781,9 @@
 
   .verse-screen-hud {
     --hud-cyan: rgb(var(--verse-screen-cyan) / var(--verse-screen-cyan-alpha));
-    --hud-amber: rgb(var(--verse-screen-amber) / var(--verse-screen-amber-alpha));
+    --hud-amber: rgb(
+      var(--verse-screen-amber) / var(--verse-screen-amber-alpha)
+    );
   }
 
   .verse-hud-corner {
@@ -1973,7 +1984,8 @@
       180deg,
       rgb(var(--verse-scrim-top) / var(--verse-scrim-alpha-top)) 0%,
       rgb(var(--verse-scrim-mid) / var(--verse-scrim-alpha-mid)) 45%,
-      rgb(var(--verse-scrim-top) / calc(var(--verse-scrim-alpha-top) + 0.03)) 100%
+      rgb(var(--verse-scrim-top) / calc(var(--verse-scrim-alpha-top) + 0.03))
+        100%
     );
   }
 
@@ -2358,7 +2370,9 @@
     box-shadow: none;
   }
 
-  html[data-mode="tech"]:not(.dark) .stack-hud__module--core .stack-hud__pip--lit {
+  html[data-mode="tech"]:not(.dark)
+    .stack-hud__module--core
+    .stack-hud__pip--lit {
     background: rgb(var(--accent-600));
   }
 
@@ -3784,191 +3798,191 @@
   animation: shadow3d 2.5s ease-in-out infinite;
 }
 
-  /* Homepage — animated keyboard (mode-aware) */
-  .keyboard-terminal {
-    @apply border shadow-md dark:shadow-none;
-    border-color: rgb(var(--surface-border) / 0.85);
-    background: rgb(var(--muted-100) / 0.92);
-    color: rgb(var(--muted-800));
-  }
+/* Homepage — animated keyboard (mode-aware) */
+.keyboard-terminal {
+  @apply border shadow-md dark:shadow-none;
+  border-color: rgb(var(--surface-border) / 0.85);
+  background: rgb(var(--muted-100) / 0.92);
+  color: rgb(var(--muted-800));
+}
 
-  html.dark .keyboard-terminal {
-    background: rgb(var(--muted-100) / 0.55);
-    border-color: rgb(var(--primary-500) / 0.22);
-    color: rgb(var(--muted-600));
-  }
+html.dark .keyboard-terminal {
+  background: rgb(var(--muted-100) / 0.55);
+  border-color: rgb(var(--primary-500) / 0.22);
+  color: rgb(var(--muted-600));
+}
 
-  html[data-mode="tech"] .keyboard-terminal {
-    border-radius: var(--radius-field);
-  }
+html[data-mode="tech"] .keyboard-terminal {
+  border-radius: var(--radius-field);
+}
 
-  html.dark[data-mode="tech"] .keyboard-terminal {
-    background: rgb(var(--muted-100) / 0.72);
-    border-color: rgb(var(--hud-cyan) / 0.28);
-    box-shadow:
-      0 0 20px rgb(var(--hud-cyan) / 0.06),
-      inset 0 0 24px rgb(var(--hud-cyan) / 0.03);
-  }
+html.dark[data-mode="tech"] .keyboard-terminal {
+  background: rgb(var(--muted-100) / 0.72);
+  border-color: rgb(var(--hud-cyan) / 0.28);
+  box-shadow:
+    0 0 20px rgb(var(--hud-cyan) / 0.06),
+    inset 0 0 24px rgb(var(--hud-cyan) / 0.03);
+}
 
-  .keyboard-terminal__prompt {
-    color: rgb(var(--primary-600));
-  }
+.keyboard-terminal__prompt {
+  color: rgb(var(--primary-600));
+}
 
-  html.dark[data-mode="tech"] .keyboard-terminal__prompt {
-    color: rgb(var(--hud-cyan) / 0.9);
-  }
+html.dark[data-mode="tech"] .keyboard-terminal__prompt {
+  color: rgb(var(--hud-cyan) / 0.9);
+}
 
-  .keyboard-terminal__text {
-    color: rgb(var(--muted-700));
-  }
+.keyboard-terminal__text {
+  color: rgb(var(--muted-700));
+}
 
-  html.dark .keyboard-terminal__text {
-    color: rgb(var(--muted-600));
-  }
+html.dark .keyboard-terminal__text {
+  color: rgb(var(--muted-600));
+}
 
-  html.dark[data-mode="tech"] .keyboard-terminal__text {
-    color: rgb(var(--muted-500));
-  }
+html.dark[data-mode="tech"] .keyboard-terminal__text {
+  color: rgb(var(--muted-500));
+}
 
-  .keyboard-terminal__cursor {
-    color: rgb(var(--primary-600));
-  }
+.keyboard-terminal__cursor {
+  color: rgb(var(--primary-600));
+}
 
-  html.dark[data-mode="tech"] .keyboard-terminal__cursor {
-    color: rgb(var(--hud-cyan));
-  }
+html.dark[data-mode="tech"] .keyboard-terminal__cursor {
+  color: rgb(var(--hud-cyan));
+}
 
-  .keyboard-deck {
-    @apply border shadow-2xl;
-    border-color: rgb(var(--muted-300) / 0.8);
-    background: rgb(var(--muted-200) / 0.85);
-  }
+.keyboard-deck {
+  @apply border shadow-2xl;
+  border-color: rgb(var(--muted-300) / 0.8);
+  background: rgb(var(--muted-200) / 0.85);
+}
 
-  html.dark .keyboard-deck {
-    border-color: rgb(var(--muted-300) / 0.65);
-    background: rgb(var(--muted-100) / 0.88);
-  }
+html.dark .keyboard-deck {
+  border-color: rgb(var(--muted-300) / 0.65);
+  background: rgb(var(--muted-100) / 0.88);
+}
 
-  html[data-mode="tech"] .keyboard-deck {
-    border-radius: var(--radius-field);
-  }
+html[data-mode="tech"] .keyboard-deck {
+  border-radius: var(--radius-field);
+}
 
-  html.dark[data-mode="tech"] .keyboard-deck {
-    border-color: rgb(var(--hud-steel) / 0.85);
-    background: linear-gradient(
-      180deg,
-      rgb(var(--muted-100) / 0.95) 0%,
-      rgb(var(--muted-950) / 0.98) 100%
-    );
-    box-shadow:
-      0 12px 32px -12px rgba(0, 0, 0, 0.55),
-      0 0 0 1px rgb(var(--hud-cyan) / 0.12),
-      inset 0 1px 0 rgb(var(--hud-cyan) / 0.08);
-  }
+html.dark[data-mode="tech"] .keyboard-deck {
+  border-color: rgb(var(--hud-steel) / 0.85);
+  background: linear-gradient(
+    180deg,
+    rgb(var(--muted-100) / 0.95) 0%,
+    rgb(var(--muted-950) / 0.98) 100%
+  );
+  box-shadow:
+    0 12px 32px -12px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgb(var(--hud-cyan) / 0.12),
+    inset 0 1px 0 rgb(var(--hud-cyan) / 0.08);
+}
 
-  html[data-mode="gamify"] .keyboard-deck {
-    @apply rounded-xl;
-  }
+html[data-mode="gamify"] .keyboard-deck {
+  @apply rounded-xl;
+}
 
-  .keyboard-key {
-    border: 1px solid rgb(var(--muted-300) / 0.9);
-    background: linear-gradient(
-      180deg,
-      rgb(var(--muted-100)) 0%,
-      rgb(var(--muted-200)) 100%
-    );
-    color: rgb(var(--muted-700));
-  }
+.keyboard-key {
+  border: 1px solid rgb(var(--muted-300) / 0.9);
+  background: linear-gradient(
+    180deg,
+    rgb(var(--muted-100)) 0%,
+    rgb(var(--muted-200)) 100%
+  );
+  color: rgb(var(--muted-700));
+}
 
-  .keyboard-key:hover:not(.keyboard-key--pressed) {
-    background: linear-gradient(
-      180deg,
-      rgb(var(--muted-50)) 0%,
-      rgb(var(--muted-200)) 100%
-    );
-  }
+.keyboard-key:hover:not(.keyboard-key--pressed) {
+  background: linear-gradient(
+    180deg,
+    rgb(var(--muted-50)) 0%,
+    rgb(var(--muted-200)) 100%
+  );
+}
 
-  html.dark .keyboard-key {
-    border-color: rgb(var(--muted-300) / 0.75);
-    background: linear-gradient(
-      180deg,
-      rgb(var(--muted-200) / 0.95) 0%,
-      rgb(var(--muted-100)) 100%
-    );
-    color: rgb(var(--muted-500));
-  }
+html.dark .keyboard-key {
+  border-color: rgb(var(--muted-300) / 0.75);
+  background: linear-gradient(
+    180deg,
+    rgb(var(--muted-200) / 0.95) 0%,
+    rgb(var(--muted-100)) 100%
+  );
+  color: rgb(var(--muted-500));
+}
 
-  html.dark .keyboard-key:hover:not(.keyboard-key--pressed) {
-    background: linear-gradient(
-      180deg,
-      rgb(var(--muted-300) / 0.55) 0%,
-      rgb(var(--muted-200)) 100%
-    );
-    color: rgb(var(--muted-600));
-  }
+html.dark .keyboard-key:hover:not(.keyboard-key--pressed) {
+  background: linear-gradient(
+    180deg,
+    rgb(var(--muted-300) / 0.55) 0%,
+    rgb(var(--muted-200)) 100%
+  );
+  color: rgb(var(--muted-600));
+}
 
-  /* Tech dark: steel caps + arc legend (fixes inverted muted-800/900 key gradient) */
-  html.dark[data-mode="tech"] .keyboard-key {
-    border-color: rgb(var(--hud-steel) / 0.9);
-    background: linear-gradient(
-      180deg,
-      rgb(var(--muted-200)) 0%,
-      rgb(var(--muted-100)) 55%,
-      rgb(var(--muted-950)) 100%
-    );
-    color: rgb(var(--muted-500));
-    box-shadow:
-      0 1px 0 rgb(var(--hud-cyan) / 0.12),
-      inset 0 1px 0 rgb(var(--muted-300) / 0.25);
-  }
+/* Tech dark: steel caps + arc legend (fixes inverted muted-800/900 key gradient) */
+html.dark[data-mode="tech"] .keyboard-key {
+  border-color: rgb(var(--hud-steel) / 0.9);
+  background: linear-gradient(
+    180deg,
+    rgb(var(--muted-200)) 0%,
+    rgb(var(--muted-100)) 55%,
+    rgb(var(--muted-950)) 100%
+  );
+  color: rgb(var(--muted-500));
+  box-shadow:
+    0 1px 0 rgb(var(--hud-cyan) / 0.12),
+    inset 0 1px 0 rgb(var(--muted-300) / 0.25);
+}
 
-  html.dark[data-mode="tech"] .keyboard-key:hover:not(.keyboard-key--pressed) {
-    border-color: rgb(var(--hud-cyan) / 0.35);
-    color: rgb(var(--muted-600));
-    background: linear-gradient(
-      180deg,
-      rgb(var(--muted-300) / 0.7) 0%,
-      rgb(var(--muted-200)) 50%,
-      rgb(var(--muted-100)) 100%
-    );
-  }
+html.dark[data-mode="tech"] .keyboard-key:hover:not(.keyboard-key--pressed) {
+  border-color: rgb(var(--hud-cyan) / 0.35);
+  color: rgb(var(--muted-600));
+  background: linear-gradient(
+    180deg,
+    rgb(var(--muted-300) / 0.7) 0%,
+    rgb(var(--muted-200)) 50%,
+    rgb(var(--muted-100)) 100%
+  );
+}
 
-  .keyboard-key--pressed {
-    @apply scale-[0.92] translate-y-0.5;
-    border-color: rgb(var(--primary-500) / 0.65);
-    background: linear-gradient(
-      180deg,
-      rgb(var(--primary-400)) 0%,
-      rgb(var(--primary-600)) 100%
-    );
-    color: rgb(var(--muted-900));
-    box-shadow: 0 0 14px rgb(var(--primary-500) / 0.45);
-  }
+.keyboard-key--pressed {
+  @apply scale-[0.92] translate-y-0.5;
+  border-color: rgb(var(--primary-500) / 0.65);
+  background: linear-gradient(
+    180deg,
+    rgb(var(--primary-400)) 0%,
+    rgb(var(--primary-600)) 100%
+  );
+  color: rgb(var(--muted-900));
+  box-shadow: 0 0 14px rgb(var(--primary-500) / 0.45);
+}
 
-  html.dark[data-mode="tech"] .keyboard-key--pressed {
-    border-color: rgb(var(--hud-cyan) / 0.75);
-    background: linear-gradient(
-      180deg,
-      rgb(var(--hud-cyan) / 0.55) 0%,
-      rgb(var(--primary-700)) 100%
-    );
-    color: rgb(var(--muted-900));
-    box-shadow:
-      0 0 16px rgb(var(--hud-cyan) / 0.5),
-      0 0 0 1px rgb(var(--hud-cyan) / 0.35);
-  }
+html.dark[data-mode="tech"] .keyboard-key--pressed {
+  border-color: rgb(var(--hud-cyan) / 0.75);
+  background: linear-gradient(
+    180deg,
+    rgb(var(--hud-cyan) / 0.55) 0%,
+    rgb(var(--primary-700)) 100%
+  );
+  color: rgb(var(--muted-900));
+  box-shadow:
+    0 0 16px rgb(var(--hud-cyan) / 0.5),
+    0 0 0 1px rgb(var(--hud-cyan) / 0.35);
+}
 
-  .keyboard-key__glow {
-    background: rgb(var(--primary-400) / 0.22);
-  }
+.keyboard-key__glow {
+  background: rgb(var(--primary-400) / 0.22);
+}
 
-  html.dark[data-mode="tech"] .keyboard-key__glow {
-    background: rgb(var(--hud-cyan) / 0.28);
-  }
+html.dark[data-mode="tech"] .keyboard-key__glow {
+  background: rgb(var(--hud-cyan) / 0.28);
+}
 
-  html[data-mode="tech"] .keyboard-key {
-    border-radius: var(--radius-sharp);
-  }
+html[data-mode="tech"] .keyboard-key {
+  border-radius: var(--radius-sharp);
+}
 
 /* Vercel-style live site preview (project cards + case studies) */
 .site-preview {
