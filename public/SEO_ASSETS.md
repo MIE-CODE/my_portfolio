@@ -24,6 +24,14 @@ yarn og:generate
 
 Metadata (`buildMetadata`) emits `og:image:width` / `og:image:height` (1200 / 630) for Open Graph and Twitter on every page.
 
+## PWA / app icons
+
+| File | Purpose |
+|------|---------|
+| `web-app-manifest-192x192.png` | Manifest + metadata icon (192×192) |
+| `web-app-manifest-512x512.png` | Manifest + metadata icon (512×512, maskable) |
+| `site.webmanifest` | Lists SVG + PNG icons (see `SeoHeadLinks`, `buildMetadata`) |
+
 ## Identity (Google & social)
 
 - **JSON-LD `@graph`** in root layout: `Person`, `WebSite`, `ProfilePage`, `Blivap` — linked by `@id`

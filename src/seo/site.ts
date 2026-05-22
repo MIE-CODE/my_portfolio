@@ -41,6 +41,9 @@ export const SITE = {
   staticOgImageFallback: "/og-image.svg",
   twitterImage: "/og-image.png",
   themeColor: "#0a1520",
+  /** PWA / manifest PNG icons in public/ */
+  manifestIcon192: "/web-app-manifest-192x192.png",
+  manifestIcon512: "/web-app-manifest-512x512.png",
   person: {
     givenName: "Israel",
     additionalName: "Enyo",
