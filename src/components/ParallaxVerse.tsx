@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { VersePaletteProvider } from "@/src/contexts/VersePaletteContext";
 import { useTheme } from "@/src/contexts/ThemeContext";
 import { VerseScreenHUD } from "@/src/components/verse/VerseScreenHUD";
@@ -16,7 +16,7 @@ export function ParallaxVerse({ children }: ParallaxVerseProps) {
   const rigRef = useRef<HTMLDivElement>(null);
   const hudPartRef = useRef<HTMLParagraphElement>(null);
   const hudZoneRef = useRef<HTMLParagraphElement>(null);
-  const canvasMountedRef = useRef(false);
+  const [canvasReady, setCanvasReady] = useState(false);
   const { resolvedScheme, ready: themeReady } = useTheme();
   const scheme = themeReady ? resolvedScheme : "dark";
 
@@ -36,20 +36,21 @@ export function ParallaxVerse({ children }: ParallaxVerseProps) {
     hudZone: hudZoneRef,
   });
 
-  if (mounted && use3d) {
-    canvasMountedRef.current = true;
-  }
+  const showCanvas = mounted && use3d;
 
-  const showCssSpace = !canvasMountedRef.current;
+  useEffect(() => {
+    if (!use3d) setCanvasReady(false);
+  }, [use3d]);
 
   return (
     <VersePaletteProvider scheme={scheme}>
-      <div ref={rootRef} className="parallax-verse relative isolate">
-        {canvasMountedRef.current && (
+      <div ref={rootRef} className="parallax-verse relative isolate min-h-dvh w-full">
+        {showCanvas ? (
           <>
             <VerseSpace3D
               targetRef={verseTargetRef}
               quality={verseQuality}
+              onSurfaceReady={() => setCanvasReady(true)}
             />
             <VerseScreenHUD
               active
@@ -57,20 +58,20 @@ export function ParallaxVerse({ children }: ParallaxVerseProps) {
               tagline={cinematicTagline}
             />
           </>
-        )}
+        ) : null}
 
         <div
           aria-hidden
-          className="verse-chrome-layer pointer-events-none fixed inset-0 z-[1] overflow-hidden"
+          className="verse-chrome-layer pointer-events-none fixed inset-0 z-[1] min-h-dvh w-full overflow-hidden"
         >
-          <div ref={rigRef} className="verse-rig absolute inset-0">
-            {showCssSpace && (
-              <>
-                <div className="verse-space-bg absolute inset-0" />
-                <div className="verse-space-glow absolute inset-0" />
-              </>
-            )}
+          <div
+            className={`verse-space-stack absolute inset-0${canvasReady && showCanvas ? " verse-space-stack--dimmed" : ""}`}
+          >
+            <div className="verse-space-bg absolute inset-0" />
+            <div className="verse-space-glow absolute inset-0" />
+          </div>
 
+          <div ref={rigRef} className="verse-rig absolute inset-0">
             <div
               data-depth="0.55"
               className="verse-layer absolute left-[5%] top-[16%] hidden sm:block"
@@ -100,7 +101,7 @@ export function ParallaxVerse({ children }: ParallaxVerseProps) {
 
         <div
           aria-hidden
-          className="verse-content-scrim pointer-events-none fixed inset-0 z-[2]"
+          className="verse-content-scrim pointer-events-none fixed inset-0 z-[2] min-h-dvh w-full"
         />
 
         <p
@@ -108,11 +109,11 @@ export function ParallaxVerse({ children }: ParallaxVerseProps) {
           suppressHydrationWarning
           className="verse-chrome-hint pointer-events-none fixed bottom-5 left-1/2 z-[5] hidden -translate-x-1/2 font-mono text-[9px] uppercase tracking-widest sm:block"
         >
-          {canvasMountedRef.current ? "JARVIS HUD" : null}
+          {canvasReady && showCanvas ? "JARVIS HUD" : null}
         </p>
 
-        <div className="relative z-10">{children}</div>
+        <div className="relative z-10 min-h-dvh w-full">{children}</div>
       </div>
     </VersePaletteProvider>
   );
-}
+};
