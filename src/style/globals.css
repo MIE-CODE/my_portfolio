@@ -1606,6 +1606,41 @@
     @apply inline-flex items-center justify-center w-10 h-10 rounded-full bg-gradient-primary border-2 border-primary-400 dark:border-primary-600 font-bold text-sm text-white;
   }
 
+  /* ParallaxVerse — full viewport; space bg does not pan with route rig */
+  html[data-mode="tech"] .parallax-verse {
+    min-height: 100dvh;
+  }
+
+  html[data-mode="tech"] .page-shell,
+  html[data-mode="tech"] main.page-shell,
+  html[data-mode="tech"] #main-content {
+    background: transparent;
+  }
+
+  .verse-space-stack {
+    pointer-events: none;
+  }
+
+  .verse-space-stack--dimmed {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .verse-canvas-shell,
+  .verse-chrome-layer,
+  .verse-content-scrim {
+    min-height: 100dvh;
+    width: 100%;
+  }
+
+  @media (max-width: 1023px) {
+    .verse-rig {
+      --verse-pan-x: 0vw !important;
+      transform: translate3d(0, calc(var(--verse-depth) * -0.3), 0)
+        scale(var(--verse-scale)) rotate(var(--verse-rot)) !important;
+    }
+  }
+
   /* ParallaxVerse — fixed viewport, CSS-variable driven (GPU-friendly) */
   .verse-rig {
     --verse-pan-x: 0vw;

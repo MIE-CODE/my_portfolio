@@ -121,6 +121,8 @@ export function getVerseTransform(
 export function detectLowPower(): boolean {
   if (typeof window === "undefined") return true;
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return true;
+  /* Phones/tablets: CSS space layer (full-screen); WebGL stays desktop-first */
+  if (window.matchMedia("(max-width: 1023px)").matches) return true;
   const cores = navigator.hardwareConcurrency ?? 4;
   const mem = (navigator as Navigator & { deviceMemory?: number }).deviceMemory;
   if (cores <= 4 || (mem !== undefined && mem < 4)) return true;

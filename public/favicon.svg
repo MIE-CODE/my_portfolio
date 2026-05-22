@@ -1,20 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="MIE">
-  <defs>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="1000"><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/"><rdf:Description><dc:creator>RealFaviconGenerator</dc:creator><dc:source>https://realfavicongenerator.net</dc:source></rdf:Description></rdf:RDF></metadata><style>
+    #light-icon {
+      display: inline;
+    }
+    #dark-icon {
+      display: none;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      #light-icon {
+        display: none;
+      }
+      #dark-icon {
+        display: inline;
+      }
+    }
+  </style><g id="light-icon"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="1000"><g><g transform="matrix(31.25,0,0,31.25,0,0)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="MIE"><defs>
     <linearGradient id="fav-mark" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#5b82a8"/>
-      <stop offset="100%" stop-color="#3a5c80"/>
+      <stop offset="0%" stop-color="#5b82a8"></stop>
+      <stop offset="100%" stop-color="#3a5c80"></stop>
     </linearGradient>
-  </defs>
-  <rect width="32" height="32" rx="7" fill="url(#fav-mark)"/>
-  <rect width="32" height="32" rx="7" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="0.75"/>
-  <text
-    x="16"
-    y="21"
-    font-family="system-ui, -apple-system, 'Segoe UI', sans-serif"
-    font-size="13"
-    font-weight="700"
-    fill="#faf9f7"
-    text-anchor="middle"
-    letter-spacing="-0.06em"
-  >MIE</text>
-</svg>
+  </defs><rect width="32" height="32" rx="7" fill="url(#fav-mark)"></rect><rect width="32" height="32" rx="7" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="0.75"></rect><text x="16" y="21" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="13" font-weight="700" fill="#faf9f7" text-anchor="middle" letter-spacing="-0.06em">MIE</text></svg></g></g></svg></g><g id="dark-icon"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="1000"><g clip-path="url(#SvgjsClipPath1209)"><rect width="1000" height="1000" fill="#221515"></rect><g transform="matrix(25,0,0,25,100,100)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="MIE"><defs>
+    <linearGradient id="fav-mark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5b82a8"></stop>
+      <stop offset="100%" stop-color="#3a5c80"></stop>
+    </linearGradient>
+  <clipPath id="SvgjsClipPath1209"><rect width="1000" height="1000" x="0" y="0" rx="250" ry="250"></rect></clipPath></defs><rect width="32" height="32" rx="7" fill="url(#fav-mark)"></rect><rect width="32" height="32" rx="7" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="0.75"></rect><text x="16" y="21" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="13" font-weight="700" fill="#faf9f7" text-anchor="middle" letter-spacing="-0.06em">MIE</text></svg></g></g></svg></g></svg>
