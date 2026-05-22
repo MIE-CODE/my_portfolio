@@ -1,31 +1,12 @@
 {
-  "id": "/",
-  "name": "Israel Enyo Menyaga (MIE) — Portfolio",
-  "short_name": "MIE Portfolio",
-  "description": "Israel Enyo Menyaga (MIE), Senior Software Engineer & CTO. React, Next.js, TypeScript, AI, fintech, healthcare. Founder of Blivap.",
+  "name": "MIE",
+  "short_name": "MIE",
   "icons": [
-    {
-      "src": "/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/apple-icon.svg",
-      "sizes": "180x180",
-      "type": "image/svg+xml"
-    },
     {
       "src": "/web-app-manifest-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/web-app-manifest-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
+      "purpose": "maskable"
     },
     {
       "src": "/web-app-manifest-512x512.png",
@@ -34,10 +15,7 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#0a1520",
-  "background_color": "#0a1520",
-  "display": "standalone",
-  "start_url": "/",
-  "scope": "/",
-  "lang": "en"
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "display": "standalone"
 }
