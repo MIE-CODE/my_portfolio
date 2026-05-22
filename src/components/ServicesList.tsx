@@ -139,7 +139,7 @@ export const ServicesList = () => {
                 <li
                   key={feature}
                   data-service-tag
-                  className="rounded-md border border-muted-300/70 bg-muted-50/90 px-2 py-1 font-mono text-[10px] text-muted-600 dark:border-muted-600/55 dark:bg-muted-800/35 dark:text-muted-400 sm:text-[11px]"
+                  className="service-card__tag rounded-md border px-2 py-1 font-mono text-[10px] sm:text-[11px]"
                 >
                   {feature}
                 </li>

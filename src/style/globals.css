@@ -1447,6 +1447,45 @@
       0 12px 32px -12px rgba(28, 25, 23, 0.12);
   }
 
+  .service-card__tag {
+    position: relative;
+    z-index: 1;
+    line-height: 1.35;
+    border-color: rgb(var(--surface-border) / 0.75);
+    color: rgb(var(--muted-800));
+    background: rgb(var(--muted-100) / 0.65);
+  }
+
+  html.dark .service-card__tag {
+    color: rgb(var(--muted-700));
+    border-color: rgb(var(--muted-300) / 0.5);
+    background: rgb(var(--muted-100) / 0.45);
+  }
+
+  html[data-mode="tech"]:not(.dark) .service-card__tag {
+    color: rgb(var(--hud-steel));
+    border-color: rgb(var(--primary-500) / 0.35);
+    background: rgb(var(--surface-card) / 0.95);
+  }
+
+  html.dark[data-mode="tech"] .service-card__tag {
+    color: rgb(var(--primary-100));
+    border-color: rgb(var(--hud-cyan) / 0.38);
+    background: rgb(var(--muted-100) / 0.72);
+  }
+
+  html[data-mode="gamify"]:not(.dark) .service-card__tag {
+    color: rgb(var(--primary-800));
+    border-color: rgb(var(--primary-400) / 0.45);
+    background: rgb(var(--primary-50) / 0.9);
+  }
+
+  html.dark[data-mode="gamify"] .service-card__tag {
+    color: rgb(var(--primary-200));
+    border-color: rgb(var(--primary-500) / 0.45);
+    background: rgb(var(--primary-900) / 0.45);
+  }
+
   .service-icon {
     position: relative;
     flex-shrink: 0;
