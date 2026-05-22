@@ -211,7 +211,19 @@ export function buildRootMetadata(): Metadata {
     },
     verification: buildSiteVerification(),
     icons: {
-      icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+      icon: [
+        { url: "/favicon.svg", type: "image/svg+xml" },
+        {
+          url: SITE.manifestIcon192,
+          sizes: "192x192",
+          type: "image/png",
+        },
+        {
+          url: SITE.manifestIcon512,
+          sizes: "512x512",
+          type: "image/png",
+        },
+      ],
       apple: [{ url: "/apple-icon.svg", type: "image/svg+xml", sizes: "180x180" }],
     },
   };

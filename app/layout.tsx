@@ -34,6 +34,8 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <meta name="apple-mobile-web-app-title" content="MIE" />
+
         <script
           dangerouslySetInnerHTML={{
             __html: `
