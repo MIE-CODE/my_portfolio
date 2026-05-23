@@ -210,9 +210,15 @@ export function buildRootMetadata(): Metadata {
       },
     },
     verification: buildSiteVerification(),
+    manifest: "/site.webmanifest",
     icons: {
       icon: [
         { url: "/favicon.svg", type: "image/svg+xml" },
+        {
+          url: "/favicon-96x96.png",
+          sizes: "96x96",
+          type: "image/png",
+        },
         {
           url: SITE.manifestIcon192,
           sizes: "192x192",
@@ -224,7 +230,14 @@ export function buildRootMetadata(): Metadata {
           type: "image/png",
         },
       ],
-      apple: [{ url: "/apple-icon.svg", type: "image/svg+xml", sizes: "180x180" }],
+      shortcut: "/favicon.ico",
+      apple: [
+        {
+          url: SITE.appleTouchIcon,
+          sizes: "180x180",
+          type: "image/png",
+        },
+      ],
     },
   };
 }
