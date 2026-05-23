@@ -44,6 +44,8 @@ export const SITE = {
   /** PWA / manifest PNG icons in public/ */
   manifestIcon192: "/web-app-manifest-192x192.png",
   manifestIcon512: "/web-app-manifest-512x512.png",
+  /** Apple home screen — single 180×180 declaration via buildRootMetadata */
+  appleTouchIcon: "/apple-touch-icon.png",
   person: {
     givenName: "Israel",
     additionalName: "Enyo",
