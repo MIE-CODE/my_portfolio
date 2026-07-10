@@ -1,6 +1,7 @@
 import type { Viewport } from "next";
 import { AppSplashBoot } from "@/src/components/AppSplash";
 import { SiteShell } from "../src/components/SiteShell";
+import { AdminAuthProviderWrapper } from "@/src/components/AdminAuthProviderWrapper";
 import { ThemeProviderWrapper } from "../src/components/ThemeProviderWrapper";
 import { JsonLd } from "@/src/components/JsonLd";
 import { SeoHeadLinks } from "@/src/components/SeoHeadLinks";
@@ -63,9 +64,11 @@ export default function RootLayout({
       </head>
       <body className="min-h-dvh bg-muted-50 font-sans text-muted-900 antialiased transition-colors duration-300 dark:bg-muted-900 dark:text-muted-50">
         <AppSplashBoot />
-        <ThemeProviderWrapper>
-          <SiteShell>{children}</SiteShell>
-        </ThemeProviderWrapper>
+        <AdminAuthProviderWrapper>
+          <ThemeProviderWrapper>
+            <SiteShell>{children}</SiteShell>
+          </ThemeProviderWrapper>
+        </AdminAuthProviderWrapper>
       </body>
     </html>
   );

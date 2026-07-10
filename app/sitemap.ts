@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { blogPosts } from "@/src/data/blogPosts";
 import { SITE } from "@/src/seo/site";
 
+// Admin routes intentionally excluded from sitemap
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = SITE.url;
   const now = new Date();

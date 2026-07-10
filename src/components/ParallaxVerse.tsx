@@ -1,11 +1,18 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { VersePaletteProvider } from "@/src/contexts/VersePaletteContext";
 import { useTheme } from "@/src/contexts/ThemeContext";
 import { VerseScreenHUD } from "@/src/components/verse/VerseScreenHUD";
-import { VerseSpace3D } from "@/src/components/verse/VerseSpace3D";
 import { useParallaxVerse } from "@/src/hooks/useParallaxVerse";
+
+/** Client-only — keeps three/R3F out of the SSR webpack graph (fixes invalid hook / undefined.call). */
+const VerseSpace3D = dynamic(
+  () =>
+    import("@/src/components/verse/VerseSpace3D").then((m) => m.VerseSpace3D),
+  { ssr: false },
+);
 
 type ParallaxVerseProps = {
   children: ReactNode;

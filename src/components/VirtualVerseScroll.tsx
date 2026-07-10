@@ -1,2 +1,2 @@
-/** @deprecated Use ParallaxVerse */
-export { ParallaxVerse, ParallaxVerse as VirtualVerseScroll } from "./ParallaxVerse";
+/** @deprecated Use ParallaxVerse via SiteShell (client-only). Do not import in SSR paths. */
+export {};

@@ -10,9 +10,10 @@ export const SITE = {
   shortName: "Israel Enyo Menyaga",
   alternateNames: ["Israel Menyaga", "MIE", "MIE-CODE"] as const,
   /** Production site — canonical for sitemap, OG, JSON-LD, Search Console */
-  url: (
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://israelm.site"
-  ).replace(/\/$/, ""),
+  url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://israelm.site").replace(
+    /\/$/,
+    "",
+  ),
   locale: "en_US",
   language: "en",
   location: "Remote / Nigeria",
@@ -25,15 +26,17 @@ export const SITE = {
   ogImageSubtitle: "Full Stack Developer",
   email: "israelmenyaga@gmail.com",
   phone: "+2349137437424",
-  twitter: "@israelmenyaga",
-  twitterHandle: "israelmenyaga",
-  linkedIn: "https://www.linkedin.com/in/israelmenyaga",
+  twitter: "@M_I_E_CODE",
+  twitterHandle: "M_I_E_CODE",
+  linkedIn: "https://www.linkedin.com/in/israelmenyaga/",
   github: "https://github.com/MIE-CODE",
-  twitterUrl: "https://twitter.com/israelmenyaga",
+  twitterUrl: "https://x.com/M_I_E_CODE/",
   blivap: "https://blivap.com",
   cvPath: "/cv/Israel_menyaga_cv.pdf",
   /** Primary static OG asset — 1200×630 PNG at public/og-image.png */
   ogImage: "/og-image.png",
+  /** Person schema image — public/me.JPG */
+  personImage: "/me.JPG",
   ogImageWidth: OG_IMAGE_WIDTH,
   ogImageHeight: OG_IMAGE_HEIGHT,
   ogImageAlt:
@@ -51,13 +54,19 @@ export const SITE = {
     additionalName: "Enyo",
     familyName: "Menyaga",
     fullName: "Israel Enyo Menyaga",
-    alternateName: ["Israel Menyaga", "MIE", "MIE-CODE", "israelmenyaga"] as const,
-    jobTitle: "Senior Software Engineer & CTO",
+    alternateName: [
+      "Israel Menyaga",
+      "MIE",
+      "MIE-CODE",
+      "israelmenyaga",
+    ] as const,
+    jobTitle: "Chief Technology Officer",
     role: "Senior Software Engineer & CTO",
   },
   organizations: {
     belsoft: "Belsoft Systems",
     truperk: "Truperk",
+    sparkpay: "Sparkpay",
   },
   keywords: [
     "Israel Enyo Menyaga",

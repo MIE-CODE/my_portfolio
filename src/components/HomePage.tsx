@@ -8,8 +8,19 @@ import { AnimatedKeyboard } from "@/src/components/AnimatedKeyboard";
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { runVerseHeroEnter } from "@/src/lib/verseHeroMotion";
+import type { StackSkillItem } from "@/src/lib/mapPublicData";
+import { VisitTracker } from "@/src/components/VisitTracker";
 
-export function HomePage() {
+const DEFAULT_RESUME_URL =
+  "https://docs.google.com/document/d/17Wq0_KFeW19I54rMaAtq2JQZG5jNki0BuaNH_4wRwEI/edit?usp=sharing";
+
+export function HomePage({
+  resumeUrl,
+  apiSkills,
+}: {
+  resumeUrl?: string | null;
+  apiSkills?: StackSkillItem[];
+}) {
   const text = useTypewriter({
     words: ["Engineer", "Architect", "CTO", "Founder", "Creator"],
     loop: true,
@@ -42,6 +53,8 @@ export function HomePage() {
     const ctx = gsap.context(() => runVerseHeroEnter(root), root);
     return () => ctx.revert();
   }, []);
+
+  const resumeHref = resumeUrl || DEFAULT_RESUME_URL;
 
   return (
     <main
@@ -144,7 +157,7 @@ export function HomePage() {
               📧 Contact Me
             </a>
             <a
-              href="https://docs.google.com/document/d/17Wq0_KFeW19I54rMaAtq2JQZG5jNki0BuaNH_4wRwEI/edit?usp=sharing"
+              href={resumeHref}
               className="btn-secondary touch-target text-sm verse-hover-hud opacity-0"
               target="_blank"
               rel="noopener noreferrer"
@@ -166,8 +179,9 @@ export function HomePage() {
           </div>
         </section>
 
-        <Stack variant="home" />
+        <Stack variant="home" apiSkills={apiSkills} />
       </div>
+      <VisitTracker path="/" />
     </main>
   );
 }

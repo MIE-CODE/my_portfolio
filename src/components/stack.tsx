@@ -6,6 +6,8 @@ import {
   TECH_STACK_CATEGORIES,
   getTechStackByCategory,
 } from "@/src/data/techStack";
+import type { StackSkillItem } from "@/src/lib/mapPublicData";
+import { groupSkillsByCategory } from "@/src/lib/mapPublicData";
 import { TechStackHUD } from "./TechStackHUD";
 import { useGsapReveal } from "../hooks/useGsapReveal";
 import { useStackHomeReveal } from "../hooks/useStackHomeReveal";
@@ -13,10 +15,11 @@ import { useStackHomeReveal } from "../hooks/useStackHomeReveal";
 type StackProps = {
   /** Home: dedicated silk timeline (no scroll trigger). */
   variant?: "scroll" | "home";
+  apiSkills?: StackSkillItem[];
 };
 
 /** Gamify-style quest grid (home + scroll). */
-function StackQuestGrid({ variant }: StackProps) {
+function StackQuestGrid({ variant, apiSkills }: StackProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const isHome = variant === "home";
 
@@ -53,56 +56,97 @@ function StackQuestGrid({ variant }: StackProps) {
       </p>
 
       <div className="space-y-10 sm:space-y-12 text-left">
-        {TECH_STACK_CATEGORIES.map((category) => {
-          const items = getTechStackByCategory(category.id);
-          if (items.length === 0) return null;
-
-          return (
-            <div key={category.id}>
-              <h3
-                {...(isHome ? { "data-stack-category": "" } : { "data-reveal-item": "" })}
-                className={`font-display text-[10px] sm:text-xs uppercase tracking-[0.2em] text-muted-500 dark:text-muted-400 mb-4 text-center${isHome ? "" : " opacity-0"}`}
-              >
-                {category.label}
-              </h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2.5 sm:gap-4">
-                {items.map((stack) => (
-                  <article
-                    key={stack.id}
-                    {...(isHome ? { "data-stack-card": "" } : { "data-reveal-item": "" })}
-                    className={`game-card p-2.5 sm:p-4 text-center hover:border-primary-400 dark:hover:border-primary-600 transition-all duration-300${isHome ? "" : " opacity-0"}`}
-                    role="listitem"
+        {apiSkills && apiSkills.length > 0
+          ? Array.from(groupSkillsByCategory(apiSkills).entries()).map(
+              ([category, items]) => (
+                <div key={category}>
+                  <h3
+                    {...(isHome ? { "data-stack-category": "" } : { "data-reveal-item": "" })}
+                    className={`font-display text-[10px] sm:text-xs uppercase tracking-[0.2em] text-muted-500 dark:text-muted-400 mb-4 text-center${isHome ? "" : " opacity-0"}`}
                   >
-                    <div className="text-primary-600 dark:text-primary-400 mb-2 sm:mb-3 [&>svg]:w-8 [&>svg]:h-10 sm:[&>svg]:w-10 sm:[&>svg]:h-12 mx-auto">
-                      {stack.icon()}
-                    </div>
-                    <div className="flex flex-col gap-1.5">
-                      <h4 className="text-xs sm:text-sm font-semibold text-muted-900 dark:text-muted-50">
-                        {stack.name}
-                      </h4>
-                      <div className="flex items-center justify-center">
-                        <span className="text-[10px] xs:text-xs text-muted-500 dark:text-muted-500 font-mono">
-                          {stack.xp.toLocaleString()} XP
-                        </span>
-                      </div>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </div>
-          );
-        })}
+                    {category}
+                  </h3>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2.5 sm:gap-4">
+                    {items.map((stack) => (
+                      <article
+                        key={stack.id}
+                        {...(isHome ? { "data-stack-card": "" } : { "data-reveal-item": "" })}
+                        className={`game-card p-2.5 sm:p-4 text-center hover:border-primary-400 dark:hover:border-primary-600 transition-all duration-300${isHome ? "" : " opacity-0"}`}
+                        role="listitem"
+                      >
+                        <div className="text-primary-600 dark:text-primary-400 mb-2 sm:mb-3 flex h-10 items-center justify-center font-mono text-lg font-bold sm:h-12">
+                          {stack.name.slice(0, 2).toUpperCase()}
+                        </div>
+                        <div className="flex flex-col gap-1.5">
+                          <h4 className="text-xs sm:text-sm font-semibold text-muted-900 dark:text-muted-50">
+                            {stack.name}
+                          </h4>
+                          <div className="flex items-center justify-center">
+                            <span className="text-[10px] xs:text-xs text-muted-500 dark:text-muted-500 font-mono">
+                              {(stack.xp ?? 1000).toLocaleString()} XP
+                            </span>
+                          </div>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                </div>
+              ),
+            )
+          : TECH_STACK_CATEGORIES.map((category) => {
+              const items = getTechStackByCategory(category.id);
+              if (items.length === 0) return null;
+
+              return (
+                <div key={category.id}>
+                  <h3
+                    {...(isHome ? { "data-stack-category": "" } : { "data-reveal-item": "" })}
+                    className={`font-display text-[10px] sm:text-xs uppercase tracking-[0.2em] text-muted-500 dark:text-muted-400 mb-4 text-center${isHome ? "" : " opacity-0"}`}
+                  >
+                    {category.label}
+                  </h3>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2.5 sm:gap-4">
+                    {items.map((stack) => (
+                      <article
+                        key={stack.id}
+                        {...(isHome ? { "data-stack-card": "" } : { "data-reveal-item": "" })}
+                        className={`game-card p-2.5 sm:p-4 text-center hover:border-primary-400 dark:hover:border-primary-600 transition-all duration-300${isHome ? "" : " opacity-0"}`}
+                        role="listitem"
+                      >
+                        <div className="text-primary-600 dark:text-primary-400 mb-2 sm:mb-3 [&>svg]:w-8 [&>svg]:h-10 sm:[&>svg]:w-10 sm:[&>svg]:h-12 mx-auto">
+                          {stack.icon()}
+                        </div>
+                        <div className="flex flex-col gap-1.5">
+                          <h4 className="text-xs sm:text-sm font-semibold text-muted-900 dark:text-muted-50">
+                            {stack.name}
+                          </h4>
+                          <div className="flex items-center justify-center">
+                            <span className="text-[10px] xs:text-xs text-muted-500 dark:text-muted-500 font-mono">
+                              {stack.xp.toLocaleString()} XP
+                            </span>
+                          </div>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
       </div>
     </section>
   );
 }
 
-export const Stack = ({ variant = "scroll" }: StackProps) => {
+export const Stack = ({ variant = "scroll", apiSkills }: StackProps) => {
   const { mode, ready } = useTheme();
+
+  if (apiSkills && apiSkills.length > 0) {
+    return <StackQuestGrid variant={variant} apiSkills={apiSkills} />;
+  }
 
   if (ready && mode === "tech") {
     return <TechStackHUD variant={variant} />;
   }
 
-  return <StackQuestGrid variant={variant} />;
+  return <StackQuestGrid variant={variant} apiSkills={apiSkills} />;
 };

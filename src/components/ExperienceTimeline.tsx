@@ -1,11 +1,12 @@
 "use client";
 
 import { ExperienceCard } from "./ExperienceCard";
+import type { ExperienceItem } from "@/src/lib/mapPublicData";
 import { useExperienceItemsReveal } from "../hooks/useExperienceItemsReveal";
 import { useGsapReveal } from "../hooks/useGsapReveal";
 
 /** Dates and titles aligned with Israel_menyaga_cv.pdf */
-const experiences = [
+const staticExperiences = [
   {
     year: "Jan 2026 - Present",
     title: "Chief Technology Officer",
@@ -60,7 +61,7 @@ const experiences = [
   },
 ];
 
-const education = [
+const staticEducation = [
   {
     year: "2021 - 2025",
     title: "BSc(Ed) Mathematics",
@@ -69,7 +70,11 @@ const education = [
   },
 ];
 
-export function ExperienceTimeline() {
+export function ExperienceTimeline({
+  items,
+}: {
+  items?: ExperienceItem[];
+}) {
   const workRef = useExperienceItemsReveal();
   const eduRef = useGsapReveal({
     preset: "smoothRise",
@@ -77,6 +82,21 @@ export function ExperienceTimeline() {
     duration: 0.65,
     parallax: 0.06,
   });
+
+  const experiences =
+    items && items.length > 0
+      ? items.filter((e) => e.type !== "education")
+      : staticExperiences;
+  const education =
+    items && items.length > 0
+      ? items
+          .filter((e) => e.type === "education")
+          .map((e) => ({
+            year: e.year,
+            title: e.title,
+            description: e.description,
+          }))
+      : staticEducation;
 
   return (
     <div className="space-y-14 sm:space-y-16">

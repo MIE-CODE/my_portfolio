@@ -3,6 +3,7 @@ import { useLayoutEffect, useRef, useState } from "react";
 import { ProjectCard } from "./ProjectCard";
 import { useGsapReveal } from "../hooks/useGsapReveal";
 import gsap from "gsap";
+import type { ProjectCardData } from "@/src/lib/mapPublicData";
 import type { PreviewImage } from "./SitePreview";
 import trueperkImg from "../images/trueperk.png";
 import sparkpayImg from "../images/sparkpay.png";
@@ -402,7 +403,19 @@ const backendProjects: Array<{
   },
 ];
 
-export const ProjectsList = () => {
+export const ProjectsList = ({
+  projects: projectsProp,
+}: {
+  projects?: ProjectCardData[];
+}) => {
+  const fromApi = projectsProp && projectsProp.length > 0;
+  const frontendSource = fromApi
+    ? projectsProp.filter((p) => p.category === "Frontend")
+    : frontendProjects;
+  const backendSource = fromApi
+    ? projectsProp.filter((p) => p.category === "Backend")
+    : backendProjects;
+
   const [activeTab, setActiveTab] = useState<"frontend" | "backend">(
     "frontend",
   );
@@ -499,22 +512,22 @@ export const ProjectsList = () => {
       >
         {activeTab === "frontend"
           ? (showAllFrontend
-              ? frontendProjects
-              : frontendProjects.slice(0, 6)
+              ? frontendSource
+              : frontendSource.slice(0, 6)
             ).map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))
           : (showAllBackend
-              ? backendProjects
-              : backendProjects.slice(0, 6)
+              ? backendSource
+              : backendSource.slice(0, 6)
             ).map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}
       </div>
 
       {/* See More Button */}
-      {((activeTab === "frontend" && frontendProjects.length > 6) ||
-        (activeTab === "backend" && backendProjects.length > 6)) && (
+      {((activeTab === "frontend" && frontendSource.length > 6) ||
+        (activeTab === "backend" && backendSource.length > 6)) && (
         <div className="flex justify-center mt-6 sm:mt-8">
           <button
             onClick={() => {
@@ -531,9 +544,9 @@ export const ProjectsList = () => {
                 ? "Show Less"
                 : (
                   <>
-                    <span className="sm:hidden">See more ({frontendProjects.length - 6})</span>
+                    <span className="sm:hidden">See more ({frontendSource.length - 6})</span>
                     <span className="hidden sm:inline">
-                      {`See More (${frontendProjects.length - 6} more projects)`}
+                      {`See More (${frontendSource.length - 6} more projects)`}
                     </span>
                   </>
                 )
@@ -541,9 +554,9 @@ export const ProjectsList = () => {
                 ? "Show Less"
                 : (
                   <>
-                    <span className="sm:hidden">See more ({backendProjects.length - 6})</span>
+                    <span className="sm:hidden">See more ({backendSource.length - 6})</span>
                     <span className="hidden sm:inline">
-                      {`See More (${backendProjects.length - 6} more projects)`}
+                      {`See More (${backendSource.length - 6} more projects)`}
                     </span>
                   </>
                 )}
@@ -552,8 +565,8 @@ export const ProjectsList = () => {
       )}
 
       {/* Info Text */}
-      {((activeTab === "frontend" && frontendProjects.length <= 6) ||
-        (activeTab === "backend" && backendProjects.length <= 6)) && (
+      {((activeTab === "frontend" && frontendSource.length <= 6) ||
+        (activeTab === "backend" && backendSource.length <= 6)) && (
         <p
           ref={infoTextRef as React.RefObject<HTMLParagraphElement>}
           className="text-center text-[10px] xs:text-xs text-muted-500 dark:text-muted-500 mt-8 sm:mt-12 font-mono opacity-0"

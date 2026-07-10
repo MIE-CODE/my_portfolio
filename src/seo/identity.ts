@@ -13,12 +13,11 @@ export function absoluteAssetUrl(path: string): string {
   return new URL(normalized, SITE.url).toString();
 }
 
-/** Profiles crawlers use to verify you are the same person across the web. */
+/** Profiles crawlers use to verify you are the same person across the web (Person.sameAs). */
 export const SITE_SAME_AS = [
   SITE.github,
   SITE.linkedIn,
   SITE.twitterUrl,
-  SITE.blivap,
 ] as const;
 
 export function buildSiteVerification(): {

@@ -1,8 +1,14 @@
-"use client";
 import { PageHeader } from "@/src/components/PageHeader";
 import { ProjectsList } from "@/src/components/ProjectsList";
+import { VisitTracker } from "@/src/components/VisitTracker";
+import { safeGetProjects } from "@/src/lib/fetchPublic";
+import { mapApiProjects } from "@/src/lib/mapPublicData";
 
-export default function ProjectsPage() {
+export default async function ProjectsPage() {
+  const projects = await safeGetProjects();
+  const mapped =
+    projects.length > 0 ? mapApiProjects(projects) : undefined;
+
   return (
     <main
       id="main-content"
@@ -19,8 +25,9 @@ export default function ProjectsPage() {
           stagger={0.07}
           ease="power2.out"
         />
-        <ProjectsList />
+        <ProjectsList projects={mapped} />
       </div>
+      <VisitTracker path="/projects" />
     </main>
   );
 }

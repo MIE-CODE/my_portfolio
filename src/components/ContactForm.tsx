@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { VERSE_EASE } from "@/src/config/verseMotion";
 import { useTheme } from "@/src/contexts/ThemeContext";
+import { submitContact } from "@/src/services/contact.service";
 
 type FieldName = "name" | "email" | "subject" | "message";
 
@@ -80,9 +81,10 @@ export const ContactForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitStatus("idle");
 
-    setTimeout(async () => {
-      setIsSubmitting(false);
+    try {
+      await submitContact(formData);
       setSubmitStatus("success");
       setFormData({ name: "", email: "", subject: "", message: "" });
 
@@ -102,7 +104,11 @@ export const ContactForm = () => {
       setTimeout(() => {
         setSubmitStatus("idle");
       }, 4000);
-    }, 1000);
+    } catch {
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (
@@ -221,6 +227,22 @@ export const ContactForm = () => {
                   : "+50 XP — I'll reply within 24 hours."}
               </p>
             </div>
+          </div>
+        )}
+        {submitStatus === "error" && (
+          <div
+            className="comms-ack border-red-400/40 bg-red-500/10"
+            role="alert"
+            aria-live="polite"
+          >
+            <p className="comms-ack__title text-red-600 dark:text-red-400 font-display">
+              {isTech ? "TRANSMISSION_FAILED" : "Could not send"}
+            </p>
+            <p className="comms-ack__body">
+              {isTech
+                ? "Retry transmission or use direct uplink email."
+                : "Please try again in a moment."}
+            </p>
           </div>
         )}
       </div>

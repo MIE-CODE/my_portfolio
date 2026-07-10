@@ -6,7 +6,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
 type Project = {
-  id: number;
+  id: number | string;
   img: PreviewImage;
   skills: string[];
   title: string;
