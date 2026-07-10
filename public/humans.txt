@@ -9,6 +9,6 @@ Software: Next.js, React, TypeScript
 
 /* IDENTIFY */
 GitHub: https://github.com/MIE-CODE
-LinkedIn: https://www.linkedin.com/in/israelmenyaga
-Twitter: https://twitter.com/israelmenyaga
+LinkedIn: https://www.linkedin.com/in/israelmenyaga/
+X: https://x.com/M_I_E_CODE/
 Blivap: https://blivap.com

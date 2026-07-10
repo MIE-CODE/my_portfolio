@@ -4,6 +4,7 @@ import { SITE } from "./site";
 const PERSON_ID = SEO_IDS.person;
 const WEBSITE_ID = SEO_IDS.website;
 const OG_IMAGE_URL = absoluteAssetUrl(SITE.ogImage);
+const PERSON_IMAGE_URL = absoluteAssetUrl(SITE.personImage);
 
 type SchemaNode = Record<string, unknown>;
 
@@ -21,7 +22,10 @@ export function schemaGraph(nodes: SchemaNode[]): SchemaNode {
   };
 }
 
-/** Person — knowledge panel, name disambiguation, sameAs identity graph */
+/**
+ * Person — tells Google who this site belongs to (knowledge panel / sameAs graph).
+ * Core fields match Schema.org Person: name, jobTitle, url, image, sameAs.
+ */
 export function personJsonLd(): SchemaNode {
   return {
     "@context": "https://schema.org",
@@ -32,20 +36,20 @@ export function personJsonLd(): SchemaNode {
     additionalName: SITE.person.additionalName,
     familyName: SITE.person.familyName,
     alternateName: [...SITE.alternateNames, ...SITE.person.alternateName],
+    jobTitle: SITE.person.jobTitle,
     url: SITE.url,
-    mainEntityOfPage: { "@id": SEO_IDS.profilePage },
     image: {
       "@type": "ImageObject",
-      url: OG_IMAGE_URL,
+      url: PERSON_IMAGE_URL,
       width: SITE.ogImageWidth,
       height: SITE.ogImageHeight,
       caption: SITE.ogImageAlt,
     },
+    sameAs: [...SITE_SAME_AS],
+    mainEntityOfPage: { "@id": SEO_IDS.profilePage },
     email: `mailto:${SITE.email}`,
     telephone: SITE.phone,
-    jobTitle: SITE.person.jobTitle,
     description: SITE.defaultDescription,
-    sameAs: [...SITE_SAME_AS],
     knowsAbout: [
       "React",
       "Next.js",

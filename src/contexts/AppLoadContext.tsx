@@ -5,6 +5,7 @@ import {
   useContext,
   useEffect,
   useLayoutEffect,
+  useRef,
   useState,
   type ReactNode,
 } from "react";
@@ -37,6 +38,7 @@ export function AppLoadProvider({ children }: { children: ReactNode }) {
   const [minElapsed, setMinElapsed] = useState(false);
   const [exiting, setExiting] = useState(false);
   const [gone, setGone] = useState(false);
+  const shellRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     document.documentElement.classList.add("splash-pending");
@@ -48,6 +50,12 @@ export function AppLoadProvider({ children }: { children: ReactNode }) {
       tech ? "Initializing HUD" : "Loading quest",
     );
   }, []);
+
+  // React 18 warns on inert={boolean}; set the DOM property instead.
+  useLayoutEffect(() => {
+    const node = shellRef.current;
+    if (node) node.inert = !gone;
+  }, [gone]);
 
   useEffect(() => {
     const markLoaded = () => setWindowLoaded(true);
@@ -104,7 +112,9 @@ export function AppLoadProvider({ children }: { children: ReactNode }) {
     boot?.classList.add("app-splash--exiting");
     boot?.setAttribute("aria-busy", "false");
 
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     const ms = reduced ? 40 : 560;
     const t = window.setTimeout(() => setGone(true), ms);
     return () => clearTimeout(t);
@@ -119,7 +129,7 @@ export function AppLoadProvider({ children }: { children: ReactNode }) {
 
   return (
     <AppLoadContext.Provider value={{ appReady: gone }}>
-      <div {...(!gone ? { inert: true } : {})}>{children}</div>
+      <div ref={shellRef}>{children}</div>
     </AppLoadContext.Provider>
   );
 }

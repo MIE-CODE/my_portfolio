@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+import { useEffect, useState, type ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { ensureDocumentScrollable } from "@/src/lib/ensureScrollable";
 import { useTheme } from "@/src/contexts/ThemeContext";
@@ -10,14 +11,24 @@ import { Modal } from "./modal";
 import { GSAPInit } from "./GSAPInit";
 import { ContentMotionLayer } from "./ContentMotionLayer";
 import { AppLoadProvider } from "@/src/contexts/AppLoadContext";
-import { ParallaxVerse } from "./ParallaxVerse";
 import { GamifyShell } from "./GamifyShell";
 
-/** Persistent app chrome — ParallaxVerse only in tech mode */
-export function SiteShell({ children }: { children: React.ReactNode }) {
+/**
+ * Client-only shell — `ssr: false` keeps ParallaxVerse/three out of the
+ * server bundle (avoids SSG hangs + missing vendor-chunks/three.js).
+ */
+const ParallaxVerse = dynamic(
+  () => import("./ParallaxVerse").then((m) => m.ParallaxVerse),
+  { ssr: false },
+);
+
+/** Persistent app chrome — ParallaxVerse only in tech mode (client-only). */
+export function SiteShell({ children }: { children: ReactNode }) {
   const [modal, setModal] = useState(false);
+  const [techMounted, setTechMounted] = useState(false);
   const pathname = usePathname();
   const { mode, ready: themeReady } = useTheme();
+  const wantTech = themeReady && mode === "tech";
 
   useEffect(() => {
     ensureDocumentScrollable();
@@ -29,8 +40,12 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   }, [pathname, modal]);
 
   useEffect(() => {
-    ensureDocumentScrollable();
-  }, [mode]);
+    setTechMounted(wantTech);
+  }, [wantTech]);
+
+  if (pathname.startsWith("/admin")) {
+    return <>{children}</>;
+  }
 
   const chrome = (
     <>
@@ -42,8 +57,10 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     </>
   );
 
+  // SSR + first paint always use GamifyShell so page HTML is never empty
+  // and three.js is never required on the server.
   const shell =
-    themeReady && mode === "tech" ? (
+    techMounted ? (
       <ParallaxVerse>{chrome}</ParallaxVerse>
     ) : (
       <GamifyShell>{chrome}</GamifyShell>
